@@ -9,51 +9,30 @@
 body {
     background: rgb(2,0,36);
 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+color:white;
 }
 </style>
 </head>
 <body>
-<div id="app">
-        <div style="display:flex;">
-            <div style="
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        ">
-               <h2>Asteroids of the day</h2>
-               <div style="display: flex">
-                <div>
-                    <p>Select one day to update the chart:</p>
-                    <div style="display:flex;">
-                        <button style="border:1px solid green; background:green;">mon</button>
-                        <button style="border:1px solid green; background:transparent;">tue</button>
-                    </div>
-                </div>
-                <div>
-                    <h3>Diameter</h3>
-                    <div style="display: flex; align-items: center;">
-                        <div style="display: flex;align-items: center;">
-                                <div style="display: flex;align-items: center;">
-                                        <div style="
-                                            border:1px solid rgb(63, 119, 63); 
-                                            width:100px; 
-                                            height:100px;
-                                            box-sizing: border-box;
-                                            border-radius: 50%;
-                                            display: flex;
-                                            align-content: center;
-                                            align-items: center;
-                                            justify-content: center;
-                                        ">
-                                            <div style="
-                                                width:10px; 
-                                                height:10px;
-                                                background: green;
-                                            border-radius: 50%;
-                                                "></div>
-                                        </div>
-                                    <span>Min km</span>
-                                </div>
+<div id="app" style="display:flex; width: 100%;">
+    <div style="
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+">
+        <h2>Asteroids of the day</h2>
+        <div style="display: flex">
+        <div>
+            <p>Select one day to update the chart:</p>
+            <div style="display:flex;">
+                <button style="border:1px solid green; background:green;">mon</button>
+                <button style="border:1px solid green; background:transparent;">tue</button>
+            </div>
+        </div>
+        <div>
+            <h3>Diameter</h3>
+            <div style="display: flex; align-items: center;">
+                <div style="display: flex;align-items: center;">
                         <div style="display: flex;align-items: center;">
                                 <div style="
                                     border:1px solid rgb(63, 119, 63); 
@@ -73,16 +52,9 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(
                                     border-radius: 50%;
                                         "></div>
                                 </div>
-                            <span>Max km</span>
+                            <span>Min km</span>
                         </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                <div style="
-                position: relative;
-            ">
-                    <div style="position: absolute; left: 10%; top: 30%;">
+                <div style="display: flex;align-items: center;">
                         <div style="
                             border:1px solid rgb(63, 119, 63); 
                             width:100px; 
@@ -93,8 +65,6 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(
                             align-content: center;
                             align-items: center;
                             justify-content: center;
-                            transform: translate(-50%, -50%);
-                            position: absolute;
                         ">
                             <div style="
                                 width:10px; 
@@ -103,78 +73,144 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(
                             border-radius: 50%;
                                 "></div>
                         </div>
-                        <div style="
-                        border: 1px solid white;
-                        padding:1em;
-                        color: white;
-                        background-color: rgba(0, 0, 0, 0.5);
-                        ">
-                                <div>Name: XXX</div>
-                                <div>Diameter: XXX km</div>
-                        </div>
-                    </div>
-                    <div style="position: absolute; left: 40%; top: 60%;">
-                        <div style="
-                        border:1px solid rgb(63, 119, 63); 
-                        width:100px; 
-                        height:100px;
-                        box-sizing: border-box;
-                        border-radius: 50%;
-                        display: flex;
-                        align-content: center;
-                        align-items: center;
-                        justify-content: center;
-                        transform: translate(-50%, -50%);
-                        position: absolute;
-                    ">
-                            <div style="
-                            width:10px; 
-                            height:10px;
-                            background: green;
-                        border-radius: 50%;
-                            "></div>
-                        </div>
-                        <div style="
-                        border: 1px solid white;
-                        padding:1em;
-                        color: white;
-                        background-color: rgba(0, 0, 0, 0.5);
-                        ">
-                            <div>Name: XXX</div>
-                            <div>Diameter: XXX km</div>
-                        </div>
-                    </div>
+                    <span>Max km</span>
                 </div>
-            </div>
-            <div>
-                <h2>Brightest of the week</h2>
-                <h3>Magnitude <span>(h)</span></h3>
-                <div>
-                    <div style="display: flex; color: white">
-                            <div style="
-                            width: 10px;
-                            height:10px; 
-                            box-sizing: border-box;
-                            transform:rotate(45deg); 
-                            background-color: transparent;
-                            border: 1px solid white;
-                        "></div>
-                        <div>Filled area: magnitude</div>
-                    </div>
-                    <div style="display: flex; color: white">
-                        <div style="
-                            width: 10px;
-                            height:10px; 
-                            box-sizing: border-box;
-                            transform:rotate(45deg); 
-                            background-color: white;
-                            border: 1px solid white;
-                        "></div>
-                        <div>Empty area: brightness</div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
+        <div style="
+        position: relative;
+    ">
+            <div style="position: absolute; left: 10%; top: 30%;">
+                <div style="
+                    border:1px solid rgb(63, 119, 63); 
+                    width:100px; 
+                    height:100px;
+                    box-sizing: border-box;
+                    border-radius: 50%;
+                    display: flex;
+                    align-content: center;
+                    align-items: center;
+                    justify-content: center;
+                    transform: translate(-50%, -50%);
+                    position: absolute;
+                ">
+                    <div style="
+                        width:10px; 
+                        height:10px;
+                        background: green;
+                    border-radius: 50%;
+                        "></div>
+                </div>
+                <div style="
+                border: 1px solid white;
+                padding:1em;
+                color: white;
+                background-color: rgba(0, 0, 0, 0.5);
+                ">
+                        <div>Name: XXX</div>
+                        <div>Diameter: XXX km</div>
+                        <div>Magnitude: XXX h</div>
+                        <div>Distance: XXX au</div>
+                        <div>Velocity: XXX km/h</div>
+                </div>
+            </div>
+            <div style="position: absolute; left: 40%; top: 60%;">
+                <div style="
+                border:1px solid rgb(63, 119, 63); 
+                width:100px; 
+                height:100px;
+                box-sizing: border-box;
+                border-radius: 50%;
+                display: flex;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+                transform: translate(-50%, -50%);
+                position: absolute;
+            ">
+                    <div style="
+                    width:10px; 
+                    height:10px;
+                    background: green;
+                border-radius: 50%;
+                    "></div>
+                </div>
+                <div style="
+                border: 1px solid white;
+                padding:1em;
+                color: white;
+                background-color: rgba(0, 0, 0, 0.5);
+                ">
+                    <div>Name: XXX</div>
+                    <div>Diameter: XXX km</div>
+                    <div>Magnitude: XXX h</div>
+                    <div>Distance: XXX au</div>
+                    <div>Velocity: XXX km/h</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h2>Brightest of the week</h2>
+        <h3>Magnitude <span>(h)</span></h3>
+        <div>
+            <div style="display: flex; color: white">
+                    <div style="
+                    width: 10px;
+                    height:10px; 
+                    box-sizing: border-box;
+                    transform:rotate(45deg); 
+                    background-color: transparent;
+                    border: 1px solid white;
+                "></div>
+                <div>Filled area: magnitude</div>
+            </div>
+            <div style="display: flex; color: white">
+                <div style="
+                    width: 10px;
+                    height:10px; 
+                    box-sizing: border-box;
+                    transform:rotate(45deg); 
+                    background-color: white;
+                    border: 1px solid white;
+                "></div>
+                <div>Empty area: brightness</div>
+            </div>
+        </div>
+        <div>
+            <div style="display: flex;
+            align-items:center;">
+                <div style="
+                width: 100px;
+                height:100px;
+                border:1px solid white;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                transform: rotate(-45deg);
+                box-sizing: border-box;
+                ">
+                    <div style="
+                    width:50px;
+                    height:50px;
+                    background-color: white;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                    ">
+                            <div style="width:5px;height:5px; background-color: black;"></div>
+                    </div>
+                </div>
+                <div style="margin-left: 50px;">
+                    <div>Name: Name</div>
+                    <div>Diameter: NN</div>
+                    <div>Magnitude: NN</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
