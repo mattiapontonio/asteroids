@@ -147,10 +147,34 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(
                 </div>
             </div>
             <div>
-                {{ message }}
+                <h2>Brightest of the week</h2>
+                <h3>Magnitude <span>(h)</span></h3>
+                <div>
+                    <div style="display: flex; color: white">
+                            <div style="
+                            width: 10px;
+                            height:10px; 
+                            box-sizing: border-box;
+                            transform:rotate(45deg); 
+                            background-color: transparent;
+                            border: 1px solid white;
+                        "></div>
+                        <div>Filled area: magnitude</div>
+                    </div>
+                    <div style="display: flex; color: white">
+                        <div style="
+                            width: 10px;
+                            height:10px; 
+                            box-sizing: border-box;
+                            transform:rotate(45deg); 
+                            background-color: white;
+                            border: 1px solid white;
+                        "></div>
+                        <div>Empty area: brightness</div>
+                    </div>
+                </div>
             </div>
         </div>
-  {{ message }}
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
