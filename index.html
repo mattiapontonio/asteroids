@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<style>
+body {
+    background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+</style>
+</head>
+<body>
+<div id="app">
+        <div style="display:flex;">
+            <div>
+               <h2>Asteroids of the day</h2>
+               <div style="display: flex">
+                <div>
+                    <p>Select one day to update the chart:</p>
+                    <div style="display:flex;">
+                        <div style="border:1px solid green; background:green;">mon</div>
+                        <div style="border:1px solid green; background:transparent;">tue</div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Diameter</h3>
+                    <div style="display: flex;">
+                        <div style="display: flex;">
+                            <div style="width:10px;height:10px;background:green;"></div>
+                            <span>Min km</span>
+                        </div>
+                        <div style="display: flex;">
+                            <div style="width:10px;height:10px;background:green;"></div>
+                            <span>Min km</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div>
+                {{ message }}
+            </div>
+        </div>
+  {{ message }}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+});
+</script>
+</body>
+</html>
