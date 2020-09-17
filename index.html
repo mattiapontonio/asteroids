@@ -11,6 +11,14 @@ body {
 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
 color:white;
 }
+input + label {
+    border: 1px solid white;
+    background-color: transparent;
+}
+input:checked + label {
+    border: 1px solid green;
+    background-color: green;
+}
 </style>
 </head>
 <body>
@@ -24,10 +32,7 @@ color:white;
         <div style="display: flex">
         <div>
             <p>Select one day to update the chart:</p>
-            <div style="display:flex;">
-                <button style="border:1px solid green; background:green;">mon</button>
-                <button style="border:1px solid green; background:transparent;">tue</button>
-            </div>
+            <day-selector></day-selector>
         </div>
         <div>
             <h3>Diameter</h3>
@@ -242,6 +247,56 @@ color:white;
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
+    Vue.component('day-selector', {
+  data: function () {
+    return {
+      count: 0,
+      selctedIndex: 0,
+      day: undefined,
+      days: [
+          'mon',
+          'tue',
+          'wed',
+          'thur',
+          'fri',
+          'sat',
+          'sun'
+      ]
+    }
+  },
+  template: `
+    <form style="display:flex;">   
+        <div v-for="(val, name, i) in days">
+            <input 
+                type="radio" 
+                :id="val"
+                v-on:click="count++"
+                v-model="day"
+                name="day"
+                style="
+                    border:1px solid green; 
+                    background:transparent;
+                    visibility:hidden;
+                "
+                v-bind:style="{color: selctedIndex == i ? 'green' : 'transparent' }"
+            />
+            <label 
+                :for="val"
+                style="
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    line-height: 1;
+                    vertical-align: middle;
+                    margin-right:8px;
+                "
+            >{{val}}</label>
+        </div>
+    </form>`
+})
   var app = new Vue({
   el: '#app',
   data: {
