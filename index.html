@@ -190,7 +190,7 @@ input:checked + label {
         <h3>Magnitude <span>(h)</span></h3>
         <div>
             <div style="display: flex; color: white">
-                    <div style="
+                <div style="
                     width: 10px;
                     height:10px; 
                     box-sizing: border-box;
@@ -212,37 +212,7 @@ input:checked + label {
                 <div>Empty area: brightness</div>
             </div>
         </div>
-        <div>
-            <div style="display: flex;
-            align-items:center;">
-                <div style="
-                width: 100px;
-                height:100px;
-                border:1px solid white;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                transform: rotate(-45deg);
-                box-sizing: border-box;
-                ">
-                    <div style="
-                    width:50px;
-                    height:50px;
-                    background-color: white;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                    ">
-                            <div style="width:5px;height:5px; background-color: black;"></div>
-                    </div>
-                </div>
-                <div style="margin-left: 50px;">
-                    <div>Name: Name</div>
-                    <div>Diameter: NN</div>
-                    <div>Magnitude: NN</div>
-                </div>
-            </div>
-        </div>
+        <brightest-of-the-week-asteroids></brightest-of-the-week-asteroids>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -265,7 +235,7 @@ input:checked + label {
     }
   },
   template: `
-    <form style="display:flex;">   
+    <form style="display:flex;">
         <div v-for="(val, name, i) in days">
             <input 
                 type="radio" 
@@ -296,7 +266,58 @@ input:checked + label {
             >{{val}}</label>
         </div>
     </form>`
-})
+});
+Vue.component('brightest-of-the-week-asteroids', {
+  data: function () {
+    return {
+        object: [
+          {},
+          {},
+          {},
+          {},
+          {},
+      ]
+    }
+  },
+  template: `
+    <div>
+        <div 
+            v-for="(val, name, index) in object"
+            style="
+                display: flex;
+                align-items:center;
+                padding: 32px;
+            ">
+                <div style="
+                    width: 64px;
+                    height:64px;
+                    border:1px solid white;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    transform: rotate(-45deg);
+                    box-sizing: border-box;
+                ">
+                    <div style="
+                        width:32px;
+                        height:32px;
+                        background-color: white;
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                    ">
+                            <div style="width:5px;height:5px; background-color: black;"></div>
+                    </div>
+                </div>
+                <div style="margin-left: 50px;">
+                    <div>Name: Name</div>
+                    <div>Diameter: NN</div>
+                    <div>Magnitude: NN</div>
+                </div>
+            </div>
+        </div>
+    `
+});
   var app = new Vue({
   el: '#app',
   data: {
