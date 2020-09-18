@@ -90,15 +90,22 @@ h2 {
 Vue.component('brightest-of-the-week-asteroids', {
   data: function () {
     return {
-        object: [
-          {},
-          {},
-          {},
-          {},
-          {},
-      ]
+        object: []
     }
   },
+    mounted () {
+        axios
+        .get('https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv')
+        .then(response => {
+            this.object = Object.values(response.data.near_earth_objects)
+                .flat(1)
+                .sort(function(a, b) {
+                    return a.absolute_magnitude_h - b.absolute_magnitude_h;
+                })
+                .slice(0,5)
+                .reverse();
+        });
+    },
   template: `
     <div>
         <div 
@@ -130,9 +137,9 @@ Vue.component('brightest-of-the-week-asteroids', {
                     </div>
                 </div>
                 <div style="margin-left: 50px;">
-                    <div>Name: Name</div>
-                    <div>Diameter: NN</div>
-                    <div>Magnitude: NN</div>
+                    <div>Name: {{val.name}}</div>
+                    <div>Diameter: {{val.estimated_diameter.kilometers.estimated_diameter_max}}</div>
+                    <div>Magnitude: {{val.absolute_magnitude_h}}</div>
                 </div>
             </div>
         </div>
@@ -162,7 +169,6 @@ data () {
         .get('https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv')
         .then(response => {
             this.info = response.data.near_earth_objects["2015-09-07"];
-            console.log(response.data);
         });
     }
 });  
@@ -224,7 +230,6 @@ Vue.component('asteroid', {
             this.diameter = response.data.estimated_diameter.kilometers.estimated_diameter_max;
             this.magnitude = response.data.absolute_magnitude_h;
             this.velocity = response.data.close_approach_data.find(e=>e.close_approach_date=='2015-09-07').relative_velocity.kilometers_per_hour;
-            console.log(response.data);
         });
     }
 });  
