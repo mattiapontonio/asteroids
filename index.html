@@ -151,8 +151,8 @@ data () {
     ">
         <asteroid 
             v-for="(val, name, index) in info"
-            :id="val.id"
-            :asteroid-id="val.id"
+            v-bind:id="val.id"
+            v-bind:asteroid-id="val.id"
         >
         </asteroid>
     </div>
