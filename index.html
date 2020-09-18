@@ -34,21 +34,43 @@ h2 {
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    class DateFormatter extends Date {
+        get formatted() {
+            let month = '' + (this.getMonth() + 1);
+            let day = '' + this.getDate();
+            let year = this.getFullYear();
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+            return [year, month, day].join('-');
+        }
+    }
     Vue.component('day-selector', {
+    props: ['date'],
+    computed: {
+        days: function () {
+            var today = new DateFormatter();
+            var weekday = new Array(7);
+            for (let i = 0; i < 7; i++) {
+                let d = new DateFormatter();
+                d.setDate(today.getDate()+(i - today.getDay()));
+                weekday[i] = {
+                    date: d
+                }
+            }
+            weekday[0].label = 'mon';
+            weekday[1].label = 'tue';
+            weekday[2].label = 'wed';
+            weekday[3].label = 'thur';
+            weekday[4].label = 'fri';
+            weekday[5].label = 'sat';
+            weekday[6].label = 'sun';
+            return weekday
+        }
+    },
   data: function () {
     return {
       count: 0,
-      selctedIndex: 0,
-      day: undefined,
-      days: [
-          'mon',
-          'tue',
-          'wed',
-          'thur',
-          'fri',
-          'sat',
-          'sun'
-      ]
+      selctedIndex: 0
     }
   },
   methods: {
@@ -64,19 +86,20 @@ h2 {
         <div v-for="(val, index) in days">
             <input 
                 type="radio" 
-                v-bind:id="'day-' + index"
-                v-model="day"
-                name="day"
+                v-bind:id="'date-' + index"
+                v-model="date"
+                name="date"
                 style="
                     border:1px solid green; 
                     background:transparent;
                     visibility:hidden;
                 "
-                v-bind:checked="val == day"
+                v-bind:checked="val.date.getTime() == (new Date()).getTime() ? 'checked' : 'null'"
+                v-bind:value="val.date.formatted"
                 v-on:change="change"
             />
             <label 
-                v-bind:for="'day-' + index"
+                v-bind:for="'date-' + index"
                 style="
                     width: 32px;
                     height: 32px;
@@ -88,7 +111,7 @@ h2 {
                     vertical-align: middle;
                     margin-right:8px;
                 "
-            >{{val}}</label>
+            >{{val.label}}</label>
         </div>
     </form>`
 });
@@ -115,8 +138,6 @@ Vue.component('brightest-of-the-week-asteroids', {
                     var max = Math.max(...absolute_magnitude_hs);
                     var scale = v => (v - min) / (max - min);
                     e.scale = scale(e.absolute_magnitude_h);
-                    console.log(e)
-                    console.log(scale(e.absolute_magnitude_h))
                     return e;
                 })
         });
@@ -250,7 +271,6 @@ Vue.component('asteroid', {
             </div>
     `,
     mounted () {
-        console.log(this);
         axios
         .get(`https://api.nasa.gov/neo/rest/v1/neo/${this.asteroidId}?api_key=Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv`)
         .then(response => {
@@ -264,13 +284,14 @@ Vue.component('asteroid', {
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue!'
+    message: 'Hello Vue!',
+    date: {
+      type: String,
+      default: (new DateFormatter()).formatted
+    }
   },
   methods: {
-    daychange: function (event) {
-      console.log('daychange');
-      console.log(event);
-    }
+    daychange: function (event) {},
   },
   template: `<div 
     id="app" 
@@ -286,7 +307,7 @@ var app = new Vue({
         <div style="display: flex">
         <div>
             <p>Select one day to update the chart:</p>
-            <day-selector></day-selector>
+            <day-selector v-bind:date="date"></day-selector>
         </div>
         <div>
             <h3>Diameter</h3>
