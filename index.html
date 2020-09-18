@@ -179,6 +179,9 @@ data () {
     <div style="
         position: relative;
         min-height: 400px;
+        width: 100%;
+        background-image: linear-gradient(0deg, #98CD8D 5.56%, rgba(0,0,0,0) 5.56%, rgba(0,0,0,0) 50%, #98CD8D 50%, #98CD8D 55.56%, rgba(0,0,0,0) 55.56%, rgba(0,0,0,0) 100%);
+        background-size: 72.00px 72.00px;
     ">
         <asteroid 
             v-for="(val, name, index) in info"
@@ -247,6 +250,7 @@ Vue.component('asteroid', {
             </div>
     `,
     mounted () {
+        console.log(this);
         axios
         .get(`https://api.nasa.gov/neo/rest/v1/neo/${this.asteroidId}?api_key=Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv`)
         .then(response => {
