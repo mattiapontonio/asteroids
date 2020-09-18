@@ -103,7 +103,17 @@ Vue.component('brightest-of-the-week-asteroids', {
                     return a.absolute_magnitude_h - b.absolute_magnitude_h;
                 })
                 .slice(0,5)
-                .reverse();
+                .reverse()
+                .map((e,i,a) => {
+                    var absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h)
+                    var min = Math.min(...absolute_magnitude_hs);
+                    var max = Math.max(...absolute_magnitude_hs);
+                    var scale = v => (v - min) / (max - min);
+                    e.scale = scale(e.absolute_magnitude_h);
+                    console.log(e)
+                    console.log(scale(e.absolute_magnitude_h))
+                    return e;
+                })
         });
     },
   template: `
@@ -124,22 +134,31 @@ Vue.component('brightest-of-the-week-asteroids', {
                     align-items:center;
                     transform: rotate(-45deg);
                     box-sizing: border-box;
+                    flex-shrink: 0;
                 ">
-                    <div style="
-                        width:32px;
-                        height:32px;
-                        background-color: white;
-                        display:flex;
-                        justify-content:center;
-                        align-items:center;
-                    ">
-                            <div style="width:5px;height:5px; background-color: black;"></div>
+                    <div 
+                        style="
+                            width:0px;
+                            height:0px;
+                            background-color: white;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;
+                        "
+                        v-bind:style="{ 
+                            width: val.scale * 64 + 'px',
+                            height: val.scale * 64 + 'px'
+                        }"
+                    >
+                            <div style="width:4px;height:4px; background-color: black;"></div>
                     </div>
                 </div>
                 <div style="margin-left: 50px;">
+                        {{val.scale}}
                     <div>Name: {{val.name}}</div>
                     <div>Diameter: {{val.estimated_diameter.kilometers.estimated_diameter_max}}</div>
                     <div>Magnitude: {{val.absolute_magnitude_h}}</div>
+                    <div>Magnitude: {{val.absolute_magnitude_h_scale}}</div>
                 </div>
             </div>
         </div>
