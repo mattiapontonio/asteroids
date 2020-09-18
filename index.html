@@ -19,6 +19,9 @@ input:checked + label {
     border: 1px solid green;
     background-color: green;
 }
+h2 {
+    text-decoration: underline;
+}
 </style>
 </head>
 <body>
@@ -84,79 +87,7 @@ input:checked + label {
             </div>
         </div>
     </div>
-        <div style="
-        position: relative;
-        min-height: 400px;
-    ">
-            <div style="position: absolute; left: 10%; top: 30%;">
-                <div style="
-                    border:1px solid rgb(63, 119, 63); 
-                    width:100px; 
-                    height:100px;
-                    box-sizing: border-box;
-                    border-radius: 50%;
-                    display: flex;
-                    align-content: center;
-                    align-items: center;
-                    justify-content: center;
-                    transform: translate(-50%, -50%);
-                    position: absolute;
-                ">
-                    <div style="
-                        width:10px; 
-                        height:10px;
-                        background: green;
-                    border-radius: 50%;
-                        "></div>
-                </div>
-                <div style="
-                border: 1px solid white;
-                padding:1em;
-                color: white;
-                background-color: rgba(0, 0, 0, 0.5);
-                ">
-                        <div>Name: XXX</div>
-                        <div>Diameter: XXX km</div>
-                        <div>Magnitude: XXX h</div>
-                        <div>Distance: XXX au</div>
-                        <div>Velocity: XXX km/h</div>
-                </div>
-            </div>
-            <div style="position: absolute; left: 40%; top: 60%;">
-                <div style="
-                border:1px solid rgb(63, 119, 63); 
-                width:100px; 
-                height:100px;
-                box-sizing: border-box;
-                border-radius: 50%;
-                display: flex;
-                align-content: center;
-                align-items: center;
-                justify-content: center;
-                transform: translate(-50%, -50%);
-                position: absolute;
-            ">
-                    <div style="
-                    width:10px; 
-                    height:10px;
-                    background: green;
-                border-radius: 50%;
-                    "></div>
-                </div>
-                <div style="
-                border: 1px solid white;
-                padding:1em;
-                color: white;
-                background-color: rgba(0, 0, 0, 0.5);
-                ">
-                    <div>Name: XXX</div>
-                    <div>Diameter: XXX km</div>
-                    <div>Magnitude: XXX h</div>
-                    <div>Distance: XXX au</div>
-                    <div>Velocity: XXX km/h</div>
-                </div>
-            </div>
-        </div>
+        <asteroids-of-the-day></asteroids-of-the-day>
         <div>
             <div>
                 <span style="
@@ -216,6 +147,7 @@ input:checked + label {
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     Vue.component('day-selector', {
   data: function () {
@@ -316,9 +248,99 @@ Vue.component('brightest-of-the-week-asteroids', {
                 </div>
             </div>
         </div>
-    `
+    `,
 });
-  var app = new Vue({
+Vue.component('asteroids-of-the-day', {
+data () {
+    return {
+      info: null
+    }
+  },
+  template: `
+    <div style="
+        position: relative;
+        min-height: 400px;
+    ">
+        <asteroid 
+            v-for="(val, name, index) in info"
+            :id="val.id"
+            :asteroid-id="val.id"
+        >
+        </asteroid>
+    </div>
+    `,
+    mounted () {
+        axios
+        .get('https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv')
+        .then(response => {
+            this.info = response.data.near_earth_objects["2015-09-07"];
+            console.log(response.data);
+        });
+    }
+});  
+Vue.component('asteroid', {
+  props: ['asteroidId'],
+  data () {
+    return {
+      name: null,
+      diameter: null,
+      magnitude: null,
+      velocity: null
+    }
+  },
+  template: `
+  <div 
+                style="
+                    position: absolute; 
+                    left: 10%; top: 30%;"
+            >
+                <div style="
+                    border:1px solid rgb(63, 119, 63); 
+                    width:100px; 
+                    height:100px;
+                    box-sizing: border-box;
+                    border-radius: 50%;
+                    display: flex;
+                    align-content: center;
+                    align-items: center;
+                    justify-content: center;
+                    transform: translate(-50%, -50%);
+                    position: absolute;
+                ">
+                    <div style="
+                        width:10px; 
+                        height:10px;
+                        background: green;
+                    border-radius: 50%;
+                        "></div>
+                </div>
+                <div style="
+                border: 1px solid white;
+                padding:1em;
+                color: white;
+                background-color: rgba(0, 0, 0, 0.5);
+                ">
+                        <div>Name: {{ name }}</div>
+                        <div>Diameter: {{ diameter }} km</div>
+                        <div>Magnitude: {{ magnitude }} h</div>
+                        <div>Distance: XXX au</div>
+                        <div>Velocity: {{ velocity }} km/h</div>
+                </div>
+            </div>
+    `,
+    mounted () {
+        axios
+        .get(`https://api.nasa.gov/neo/rest/v1/neo/${this.asteroidId}?api_key=Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv`)
+        .then(response => {
+            this.name = response.data.name;
+            this.diameter = response.data.estimated_diameter.kilometers.estimated_diameter_max;
+            this.magnitude = response.data.absolute_magnitude_h;
+            this.velocity = response.data.close_approach_data.find(e=>e.close_approach_date=='2015-09-07').relative_velocity.kilometers_per_hour;
+            console.log(response.data);
+        });
+    }
+});  
+var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Vue!'
