@@ -168,11 +168,11 @@ h2 {
   },
   template: `
     <form style="display:flex;">
-        <div v-for="(val, name, i) in days">
+        <div v-for="(val, index) in days">
             <input 
                 type="radio" 
-                :id="val"
-                v-on:click="count++"
+                v-bind:id="'day-' + index"
+                @change="$emit('daychange', val)"
                 v-model="day"
                 name="day"
                 style="
@@ -180,10 +180,10 @@ h2 {
                     background:transparent;
                     visibility:hidden;
                 "
-                v-bind:style="{color: selctedIndex == i ? 'green' : 'transparent' }"
+                v-bind:checked="val == day"
             />
             <label 
-                :for="val"
+                v-bind:for="'day-' + index"
                 style="
                     width: 32px;
                     height: 32px;
