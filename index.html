@@ -50,7 +50,8 @@ h2 {
         'id',
         'date',
         'label',
-        'checked'
+        'checked',
+        'onchangedate'
     ],
   data: function () {
     return {
@@ -72,7 +73,7 @@ h2 {
                 v-bind:checked="checked"
                 v-bind:value="date"
                 v-model="date"
-                @change="$emit('date-change', $event.target.value)"
+                v-on:change="onchangedate(date)"
             />
             <label 
                 v-bind:for="id"
@@ -92,7 +93,10 @@ h2 {
     `
 });
     Vue.component('day-selector', {
-    props: ['date'],
+    props: [
+        'date',
+        'onchangedate'
+    ],
     computed: {
         days: function () {
             var today = new DateFormatter();
@@ -133,7 +137,7 @@ h2 {
                 v-bind:date="val.date"
                 v-bind:label="val.label"
                 v-model="date"
-                @dateChange="date = $event"
+                v-bind:onchangedate="onchangedate"
             />
             {{date}}
     </form>`
@@ -313,12 +317,6 @@ var app = new Vue({
       default: (new DateFormatter()).formatted
     }
   },
-  methods: {
-    daychange: function (event) {},
-    lovingVue: function (event) {
-        console.log(event);
-    },
-  },
   template: `<div 
     id="app" 
     style="display:flex; width: 100%;"
@@ -336,6 +334,7 @@ var app = new Vue({
             <day-selector 
                 v-bind:date="date" 
                 v-model="date"
+                v-bind:onchangedate="date => this.date = date"
             />
         </div>
         <div>
