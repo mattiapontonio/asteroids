@@ -395,7 +395,6 @@ var app = new Vue({
         <div style="display: flex">
         <div>
             <p>Select one day to update the chart:</p>
-            {{date}}
             <day-selector 
                 v-bind:date="date"
                 v-bind:onchangedate="date => this.date = date"
