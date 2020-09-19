@@ -235,6 +235,7 @@ Vue.component('asteroids-of-the-day', {
             type: Date,
             default: function () {
                 let date = new Date();
+                let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
                 date.setDate(date.getDate() - date.getDay() + 1);
                 return date;
             }
@@ -243,7 +244,8 @@ Vue.component('asteroids-of-the-day', {
             type: Date,
             default: function () {
                 let date = new Date();
-                date.setDate(date.getDate() + (7 - date.getDay()));
+                let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
+                date.setDate(date.getDate() + (6 - day_of_the_week));
                 return date;
             }
         },
