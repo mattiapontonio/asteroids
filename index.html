@@ -273,8 +273,14 @@ data () {
         />
     </div>
     `,
-    mounted () {
-        let formatted = Vue.filter('formatted');
+    watch: {
+        date: function () {
+            this.getAsteroids()
+        }
+    },
+    methods: {
+        getAsteroids: function () {
+            let formatted = Vue.filter('formatted');
         let url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
         url.searchParams.set('start_date', formatted(this.start_date));
         url.searchParams.set('end_date', formatted(this.end_date));
@@ -309,6 +315,10 @@ data () {
                         }))
                 });
         });
+        }
+    },
+    mounted () {
+        this.getAsteroids();
     }
 });  
 Vue.component('asteroid', {
