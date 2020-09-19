@@ -364,16 +364,6 @@ Vue.component('asteroid', {
                 </div>
             </div>
     `,
-    mounted () {
-        axios
-        .get(`https://api.nasa.gov/neo/rest/v1/neo/${this.asteroidId}?api_key=Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv`)
-        .then(response => {
-            this.name = response.data.name;
-            this.diameter = response.data.estimated_diameter.kilometers.estimated_diameter_max;
-            this.magnitude = response.data.absolute_magnitude_h;
-            this.velocity = response.data.close_approach_data.find(e=>e.close_approach_date=='2015-09-07').relative_velocity.kilometers_per_hour;
-        });
-    }
 });  
 var app = new Vue({
   el: '#app',
