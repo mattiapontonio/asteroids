@@ -101,7 +101,6 @@ h2 {
     `
 });
     Vue.component('day-selector', {
-        
     props: {
         date: {
             type: Date,
@@ -235,11 +234,27 @@ Vue.component('asteroids-of-the-day', {
         date: {
             type: Date,
             default: new Date()
-        }
+        },
+        start_date: {
+            type: Date,
+            default: function () {
+                let date = new Date();
+                date.setDate(date.getDate() - date.getDay() + 1);
+                return date;
+            }
+        },
+        end_date: {
+            type: Date,
+            default: function () {
+                let date = new Date();
+                date.setDate(date.getDate() + (7 - date.getDay()));
+                return date;
+            }
+        },
     },
 data () {
     return {
-      info: null
+        info: null
     }
   },
   template: `
@@ -261,8 +276,8 @@ data () {
     mounted () {
         let formatted = Vue.filter('formatted');
         let url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
-        url.searchParams.set('start_date', formatted(this.date));
-        url.searchParams.set('end_date', formatted(this.date));
+        url.searchParams.set('start_date', formatted(this.start_date));
+        url.searchParams.set('end_date', formatted(this.end_date));
         url.searchParams.set('api_key','Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
         axios
         .get(url)
