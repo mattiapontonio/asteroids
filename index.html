@@ -141,7 +141,8 @@ h2 {
     <form style="display:flex;">
             <day-selector-radio 
                 v-for="(val, i) in days"  
-                v-bind:id="'radio-'+i"  
+                v-bind:id="'radio-'+i" 
+                v-bind:key="'radio-'+i"  
                 v-bind:date="val.date"
                 v-bind:label="val.label"
                 v-model="date"
