@@ -9,7 +9,8 @@
         >
         <style>
             :root {
-                --main-color: green;
+                --main-color: #2af598;
+                --main-color-dark:  #0a1e1a;
             }
 
             body {
@@ -28,8 +29,9 @@
             }
 
             input:checked+label {
-                border: 1px solid green;
-                background-color: green;
+                border: 1px solid var(--main-color);
+                background-color: var(--main-color);
+                color: var(--main-color-dark);
             }
 
             h2 {
@@ -101,7 +103,7 @@
                 v-bind:id="id"
                 name="date"
                 style="
-                    border:1px solid green; 
+                    border:1px solid var(--main-color); 
                     background:transparent;
                     visibility:hidden;
                 "
@@ -333,8 +335,20 @@
             position: relative;
             min-height: 400px;
             width: 100%;
-            background-image: linear-gradient(0deg, #98CD8D 5.56%, rgba(0,0,0,0) 5.56%, rgba(0,0,0,0) 50%, #98CD8D 50%, #98CD8D 55.56%, rgba(0,0,0,0) 55.56%, rgba(0,0,0,0) 100%);
-            background-size: 72.00px 72.00px;
+            background: repeating-linear-gradient( 180deg, transparent, transparent 100px, #133443 100px, #133443 101px);
+        "
+        v-bind:data-velocity-max="velocity_max"
+        v-bind:data-velocity-min="velocity_min"
+        v-bind:data-distance-min="distance_max"
+        v-bind:data-distance-max="distance_min"
+        v-bind:data-diameter-max="diameter_max"
+        v-bind:data-diameter-min="diameter_min"
+    >
+    <div 
+        style="
+            position: relative;
+            min-height: 400px;
+            width: 100%;
         "
         v-bind:data-velocity-max="velocity_max"
         v-bind:data-velocity-min="velocity_min"
@@ -379,7 +393,7 @@
                     <div style="
                         width:10px; 
                         height:10px;
-                        background: green;
+                        background: var(--main-color);
                     border-radius: 50%;
                         "></div>
                 </div>
@@ -426,7 +440,7 @@
                             border: 1px solid white;
                             padding:1em;
                             color: white;
-                            background-color: rgba(0, 0, 0, 0.5);
+                            background-color: rgba(0, 0, 0, 0.75);
                         ">
                         <div>Name: {{ name }}</div>
                         <div>Diameter: {{ diameter }} km</div>
