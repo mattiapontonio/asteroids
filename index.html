@@ -376,20 +376,27 @@
     `
             });
             Vue.component('asteroid-bubble', {
-                props: ['diameter',],
+                props: [
+                    'diameter',
+                    'd'
+                ],
                 template: `
-  <div style="
-                    border:1px solid rgb(63, 119, 63); 
-                    width:100px; 
-                    height:100px;
-                    box-sizing: border-box;
-                    border-radius: 50%;
-                    display: flex;
-                    align-content: center;
-                    align-items: center;
-                    justify-content: center;
-                    flex-shrink: 0;
-                ">
+  <div 
+    style="
+        border:1px solid rgb(63, 119, 63); 
+        box-sizing: border-box;
+        border-radius: 50%;
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    "
+    v-bind:style="{
+        width: d * 100 + 'px',
+        height: d * 100 + 'px',
+    }"
+    >
                     <div style="
                         width:10px; 
                         height:10px;
@@ -410,7 +417,7 @@
                     'distance',
                     'x',
                     'y',
-                    'd'
+                    'd',
                 ],
                 data: function() {
                     return {
@@ -432,6 +439,7 @@
                         transform: 'translate(-50%, -50%)',
                         position: 'absolute'
                     }"
+                    v-bind:d="d"
                 />
                 <transition name="slide-fade">
                     <div 
@@ -530,11 +538,11 @@
             <h3>Diameter</h3>
             <div style="display: flex; align-items: center;">
                 <div style="display: flex;align-items: center;">
-                    <asteroid-bubble />
+                    <asteroid-bubble d="0.15" />
                     <span>Min km</span>
                 </div>
                 <div style="display: flex;align-items: center;">
-                    <asteroid-bubble />
+                    <asteroid-bubble d="1" />
                     <span>Max km</span>
                 </div>
             </div>
