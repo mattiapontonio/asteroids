@@ -1,74 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Page Title</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
-<style>
-    :root {
-  --main-color: green;
-}
-body {
-    background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-color:white;
-font-family: 'Montserrat', sans-serif;
-text-rendering: optimizeLegibility;
-font-smooth: always;
-}
-input + label {
-    border: 1px solid white;
-    background-color: transparent;
-}
-input:checked + label {
-    border: 1px solid green;
-    background-color: green;
-}
-h2 {
-    text-decoration: underline;
-}
-</style>
 
-</head>
-<body>
-<div id="app"></div>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-    Vue.filter('formatted', function (date = new Date()) {
-        if (!date) return ''
-        let month = '' + (date.getMonth() + 1);
-        let day = '' + date.getDate();
-        let year = date.getFullYear();
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
-        return [year, month, day].join('-');
-    });    
-    Vue.component('day-selector-radio', {
-    props: {
-        date: {
-            type: Date,
-            default: new Date()
-        },
-        'id': {
-            type: String
-        },
-        'label': {
-            type: String
-        },
-        'checked': {
-            type: String
-        },
-        'onchangedate': {
-            type: Function
-        }
-    },
-  data: function () {
-    return {
-      count: 0,
-      selctedIndex: 0
-    }
-  },
-  template: `
+    <head>
+        <title>Page Title</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap"
+            rel="stylesheet"
+        >
+        <style>
+            :root {
+                --main-color: green;
+            }
+
+            body {
+                background: rgb(2, 0, 36);
+                background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+                color: white;
+                font-family: 'Montserrat', sans-serif;
+                text-rendering: optimizeLegibility;
+                font-smooth: always;
+            }
+
+            input+label {
+                border: 1px solid white;
+                background-color: transparent;
+            }
+
+            input:checked+label {
+                border: 1px solid green;
+                background-color: green;
+            }
+
+            h2 {
+                text-decoration: underline;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div id="app"></div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            Vue.filter('formatted', function (date = new Date()) {
+                if (!date) return ''
+                let month = '' + (date.getMonth() + 1);
+                let day = '' + date.getDate();
+                let year = date.getFullYear();
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+                return [year, month, day].join('-');
+            });
+            Vue.component('day-selector-radio', {
+                props: {
+                    date: {
+                        type: Date,
+                        default: new Date()
+                    },
+                    'id': {
+                        type: String
+                    },
+                    'label': {
+                        type: String
+                    },
+                    'checked': {
+                        type: String
+                    },
+                    'onchangedate': {
+                        type: Function
+                    }
+                },
+                data: function () {
+                    return {
+                        count: 0,
+                        selctedIndex: 0
+                    }
+                },
+                template: `
         <div>
             <input 
                 type="radio" 
@@ -99,45 +108,45 @@ h2 {
             >{{label}}</label>
         </div>
     `
-});
-    Vue.component('day-selector', {
-    props: {
-        date: {
-            type: Date,
-            default: new Date()
-        },
-        'onchangedate': {
-            type: Function
-        }
-    },
-    computed: {
-        days: function () {
-            var today = new Date();
-            var weekday = new Array(7);
-            for (let i = 0; i < 7; i++) {
-                let date = new Date();
-                date.setDate(today.getDate()+(i - today.getDay()));
-                weekday[i] = {
-                    date
-                }
-            }
-            weekday[0].label = 'mon';
-            weekday[1].label = 'tue';
-            weekday[2].label = 'wed';
-            weekday[3].label = 'thur';
-            weekday[4].label = 'fri';
-            weekday[5].label = 'sat';
-            weekday[6].label = 'sun';
-            return weekday
-        }
-    },
-  data: function () {
-    return {
-      count: 0,
-      selctedIndex: 0
-    }
-  },
-  template: `
+            });
+            Vue.component('day-selector', {
+                props: {
+                    date: {
+                        type: Date,
+                        default: new Date()
+                    },
+                    'onchangedate': {
+                        type: Function
+                    }
+                },
+                computed: {
+                    days: function () {
+                        var today = new Date();
+                        var weekday = new Array(7);
+                        for (let i = 0; i < 7; i++) {
+                            let date = new Date();
+                            date.setDate(today.getDate() + (i - today.getDay()));
+                            weekday[i] = {
+                                date
+                            }
+                        }
+                        weekday[0].label = 'mon';
+                        weekday[1].label = 'tue';
+                        weekday[2].label = 'wed';
+                        weekday[3].label = 'thur';
+                        weekday[4].label = 'fri';
+                        weekday[5].label = 'sat';
+                        weekday[6].label = 'sun';
+                        return weekday
+                    }
+                },
+                data: function () {
+                    return {
+                        count: 0,
+                        selctedIndex: 0
+                    }
+                },
+                template: `
     <form style="display:flex;">
             <day-selector-radio 
                 v-for="(val, i) in days"  
@@ -149,35 +158,28 @@ h2 {
                 v-bind:onchangedate="onchangedate"
             />
     </form>`
-});
-    Vue.component('brightest-of-the-week-asteroids', {
-  data: function () {
-    return {
-        object: []
-    }
-  },
-    mounted () {
-        axios
-        .get('https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv')
-        .then(response => {
-            this.object = Object.values(response.data.near_earth_objects)
-                .flat(1)
-                .sort(function(a, b) {
-                    return a.absolute_magnitude_h - b.absolute_magnitude_h;
-                })
-                .slice(0,5)
-                .reverse()
-                .map((e,i,a) => {
-                    var absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h)
-                    var min = Math.min(...absolute_magnitude_hs);
-                    var max = Math.max(...absolute_magnitude_hs);
-                    var scale = v => (v - min) / (max - min);
-                    e.scale = scale(e.absolute_magnitude_h);
-                    return e;
-                })
-        });
-    },
-  template: `
+            });
+            Vue.component('brightest-of-the-week-asteroids', {
+                data: function () {
+                    return {
+                        object: []
+                    }
+                },
+                mounted() {
+                    axios.get('https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv').then(response => {
+                        this.object = Object.values(response.data.near_earth_objects).flat(1).sort(function (a, b) {
+                            return a.absolute_magnitude_h - b.absolute_magnitude_h;
+                        }).slice(0, 5).reverse().map((e, i, a) => {
+                            var absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h)
+                            var min = Math.min(...absolute_magnitude_hs);
+                            var max = Math.max(...absolute_magnitude_hs);
+                            var scale = v => (v - min) / (max - min);
+                            e.scale = scale(e.absolute_magnitude_h);
+                            return e;
+                        })
+                    });
+                },
+                template: `
     <div>
         <div 
             v-for="(val, i) in object"
@@ -224,57 +226,57 @@ h2 {
             </div>
         </div>
     `,
-});
-    Vue.component('asteroids-of-the-day-graph', {
-    props: {
-        date: {
-            type: Date,
-            default: new Date()
-        },
-        velocity_max: {
-            type: Number,
-            default: function () {
-                return new Number();
-            }
-        },
-        velocity_min: {
-            type: Number,
-            default: function () {
-                return new Number();
-            }
-        },
-        distance_max: {
-            type: Number,
-            default: function () {
-                return new Number();
-            }
-        },
-        distance_min: {
-            type: Number,
-            default: function () {
-                return new Number();
-            }
-        },
-        diameter_max: {
-            type: Number,
-            default: function () {
-                return new Number();
-            }
-        },
-        diameter_min: {
-            type: Number,
-            default: function () {
-                return new Number();
-            }
-        },
-        asteroids: {
-            type: Array,
-            default: function () {
-                return new Array();
-            }
-        }
-    },
-  template: `
+            });
+            Vue.component('asteroids-of-the-day-graph', {
+                props: {
+                    date: {
+                        type: Date,
+                        default: new Date()
+                    },
+                    velocity_max: {
+                        type: Number,
+                        default: function () {
+                            return new Number();
+                        }
+                    },
+                    velocity_min: {
+                        type: Number,
+                        default: function () {
+                            return new Number();
+                        }
+                    },
+                    distance_max: {
+                        type: Number,
+                        default: function () {
+                            return new Number();
+                        }
+                    },
+                    distance_min: {
+                        type: Number,
+                        default: function () {
+                            return new Number();
+                        }
+                    },
+                    diameter_max: {
+                        type: Number,
+                        default: function () {
+                            return new Number();
+                        }
+                    },
+                    diameter_min: {
+                        type: Number,
+                        default: function () {
+                            return new Number();
+                        }
+                    },
+                    asteroids: {
+                        type: Array,
+                        default: function () {
+                            return new Array();
+                        }
+                    }
+                },
+                template: `
     <div 
         style="
             position: relative;
@@ -308,12 +310,10 @@ h2 {
         />
     </div>
     `
-});  
-Vue.component('asteroid-bubble', {
-    props: [
-      'diameter',
-    ],
-  template: `
+            });
+            Vue.component('asteroid-bubble', {
+                props: ['diameter',],
+                template: `
   <div style="
                     border:1px solid rgb(63, 119, 63); 
                     width:100px; 
@@ -334,21 +334,13 @@ Vue.component('asteroid-bubble', {
                         "></div>
                 </div>
                 `
-})
-    Vue.component('asteroid', {
-  props: [
-      'id',
-      'name',
-      'diameter',
-      'magnitude',
-      'velocity_kilometers_per_hour',
-      'velocity_kilometers_per_second',
-      'distance'
-    ],
-  data () {
-    return {}
-  },
-  template: `
+            })
+            Vue.component('asteroid', {
+                props: ['id', 'name', 'diameter', 'magnitude', 'velocity_kilometers_per_hour', 'velocity_kilometers_per_second', 'distance'],
+                data() {
+                    return {}
+                },
+                template: `
   <div>
     <asteroid-bubble
         v-bind:style="{
@@ -370,74 +362,65 @@ Vue.component('asteroid-bubble', {
                 </div>
             </div>
     `,
-});  
-    Vue.component('asteroids-of-the-day', {  
-        
-    watch: {
-        date: function () {
-            this.getAsteroids()
-        }
-    },
-    methods: {
-        getAsteroids: function () {
-            let formatted = Vue.filter('formatted');
-        let url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
-        url.searchParams.set('start_date', formatted(this.start_date));
-        url.searchParams.set('end_date', formatted(this.end_date));
-        url.searchParams.set('api_key','Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
-        axios
-        .get(url)
-        .then(response => {
-            Promise
-                .all(Object.values(response.data.near_earth_objects[formatted(this.date)]).map(e => axios.get(e.links.self)))
-                .then(values => {
-                    let asteroids = new Array();
-                    this.asteroids = values
-                        .map(e=>e.data)
-                        .map((e,i)=> Object.assign(e,asteroids[i]))
-                        .map((e,i,a)=> {
-                            let elements = a.map(e => e.absolute_magnitude_h);
-                            let min = Math.min(...elements);
-                            let max = Math.max(...elements);
-                            let scale = v => (v - min) / (max - min);
-                            e.bottom = scale(e.absolute_magnitude_h);
-                            console.log(e);
-                            return e;
-                        })
-                        .map(e => Object.assign({}, {
-                            id: e.id,
-                            name: e.name,
-                            diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
-                            magnitude: e.absolute_magnitude_h,
-                            velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
-                            velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
-                            distance: e.close_approach_data[0].miss_distance.astronomical,
-                        }));
-                        console.log(asteroids);
-                    this.velocity_max = Math.max(...asteroids.map(e =>e.velocity_kilometers_per_second));
-                    this.velocity_min = Math.min(...asteroids.map(e =>e.velocity_kilometers_per_second));
-                    this.distance_max = Math.max(...asteroids.map(e =>e.distance));
-                    this.distance_min = Math.min(...asteroids.map(e =>e.distance));
-                    this.diameter_max = Math.max(...asteroids.map(e =>e.diameter));
-                    this.diameter_min = Math.min(...asteroids.map(e =>e.diameter));
-                });
-        });
-        }
-    },
-    mounted () {
-        this.getAsteroids();
-    },
-  data: function () {
-        return { 
-            date: new Date(),
-            velocity_max: new Number(),
-            velocity_min: new Number(),
-            distance_max: new Number(),
-            distance_min: new Number(),
-            asteroids: new Array()
-        }
-    },
-  template: `
+            });
+            Vue.component('asteroids-of-the-day', {
+                watch: {
+                    date: function () {
+                        this.getAsteroids()
+                    }
+                },
+                methods: {
+                    getAsteroids: function () {
+                        let formatted = Vue.filter('formatted');
+                        let url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
+                        url.searchParams.set('start_date', formatted(this.start_date));
+                        url.searchParams.set('end_date', formatted(this.end_date));
+                        url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
+                        axios.get(url).then(response => {
+                            Promise.all(Object.values(response.data.near_earth_objects[formatted(this.date)]).map(e => axios.get(e.links.self))).then(values => {
+                                let asteroids = new Array();
+                                this.asteroids = values.map(e => e.data).map((e, i) => Object.assign(e, asteroids[i])).map((e, i, a) => {
+                                    let elements = a.map(e => e.absolute_magnitude_h);
+                                    let min = Math.min(...elements);
+                                    let max = Math.max(...elements);
+                                    let scale = v => (v - min) / (max - min);
+                                    e.bottom = scale(e.absolute_magnitude_h);
+                                    console.log(e);
+                                    return e;
+                                }).map(e => Object.assign({}, {
+                                    id: e.id,
+                                    name: e.name,
+                                    diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
+                                    magnitude: e.absolute_magnitude_h,
+                                    velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
+                                    velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
+                                    distance: e.close_approach_data[0].miss_distance.astronomical,
+                                }));
+                                console.log(asteroids);
+                                this.velocity_max = Math.max(...asteroids.map(e => e.velocity_kilometers_per_second));
+                                this.velocity_min = Math.min(...asteroids.map(e => e.velocity_kilometers_per_second));
+                                this.distance_max = Math.max(...asteroids.map(e => e.distance));
+                                this.distance_min = Math.min(...asteroids.map(e => e.distance));
+                                this.diameter_max = Math.max(...asteroids.map(e => e.diameter));
+                                this.diameter_min = Math.min(...asteroids.map(e => e.diameter));
+                            });
+                        });
+                    }
+                },
+                mounted() {
+                    this.getAsteroids();
+                },
+                data: function () {
+                    return {
+                        date: new Date(),
+                        velocity_max: new Number(),
+                        velocity_min: new Number(),
+                        distance_max: new Number(),
+                        distance_min: new Number(),
+                        asteroids: new Array()
+                    }
+                },
+                template: `
   <div style="
     display: flex;
     flex-direction: column;
@@ -503,9 +486,9 @@ Vue.component('asteroid-bubble', {
         </div>
     </div>
     `
-});
-    Vue.component('brightest-of-the-week', {
-  template: `
+            });
+            Vue.component('brightest-of-the-week', {
+                template: `
   <div>
         <h2>Brightest of the week</h2>
         <h3>Magnitude <span>(h)</span></h3>
@@ -535,30 +518,30 @@ Vue.component('asteroid-bubble', {
         </div>
         <brightest-of-the-week-asteroids></brightest-of-the-week-asteroids>
     </div>`
-})
-var app = new Vue({
-  el: '#app',
-  props: {
-    start_date: {
-            type: Date,
-            default: function () {
-                let date = new Date();
-                let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
-                date.setDate(date.getDate() - date.getDay() + 1);
-                return date;
-            }
-        },
-        end_date: {
-            type: Date,
-            default: function () {
-                let date = new Date();
-                let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
-                date.setDate(date.getDate() + (6 - day_of_the_week));
-                return date;
-            }
-        },
-  },
-  template: `
+            })
+            var app = new Vue({
+                el: '#app',
+                props: {
+                    start_date: {
+                        type: Date,
+                        default: function () {
+                            let date = new Date();
+                            let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
+                            date.setDate(date.getDate() - date.getDay() + 1);
+                            return date;
+                        }
+                    },
+                    end_date: {
+                        type: Date,
+                        default: function () {
+                            let date = new Date();
+                            let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
+                            date.setDate(date.getDate() + (6 - day_of_the_week));
+                            return date;
+                        }
+                    },
+                },
+                template: `
     <div 
         id="app" 
         style="display:flex; width: 100%;"
@@ -573,7 +556,9 @@ var app = new Vue({
         />
     </div>
     `
-});
-</script>
-</body>
+            });
+
+        </script>
+    </body>
+
 </html>
