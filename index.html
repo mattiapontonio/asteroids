@@ -425,33 +425,36 @@
                 },
                 methods: {
                     getAsteroids: function () {
-                        let formatted = Vue.filter('formatted');
-                        let url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
-                        url.searchParams.set('start_date', formatted(this.start_date));
-                        url.searchParams.set('end_date', formatted(this.end_date));
+                        const formatted = Vue.filter('formatted');
+                        const start_date = formatted(this.start_date);
+                        const end_date = formatted(this.end_date);
+                        const date = formatted(this.date);;
+                        const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
+                        url.searchParams.set('start_date', start_date);
+                        url.searchParams.set('end_date', end_date);
                         url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
-                        axios.get(url).then(response => {
-                            Promise.all(Object.values(response.data.near_earth_objects[formatted(this.date)]).map(e => axios.get(e.links.self))).then(values => {
-                                const asteroids = new Array();
-                                this.asteroids = values.map(e => e.data).map((e, i) => Object.assign(e, asteroids[i])).map((e, i, a) => {
-                                    let elements = a.map(e => e.absolute_magnitude_h);
-                                    let min = Math.min(...elements);
-                                    let max = Math.max(...elements);
-                                    let scale = v => (v - min) / (max - min);
-                                    e.bottom = scale(e.absolute_magnitude_h);
-                                    console.log(e);
-                                    return e;
-                                }).map(e => Object.assign({}, {
-                                    id: e.id,
-                                    name: e.name,
-                                    diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
-                                    magnitude: e.absolute_magnitude_h,
-                                    velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
-                                    velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
-                                    distance: e.close_approach_data[0].miss_distance.astronomical,
-                                }));
-                                console.log(asteroids);
-                            });
+                        axios
+                            .get(url)
+                            .then(response => {
+                                const near_earth_objects = response.data.near_earth_objects[date];
+                                const promises = Object
+                                    .values(near_earth_objects)
+                                    .map(e => axios.get(e.links.self));
+                                    Promise.all(promises)
+                                        .then(values => {
+                                        const asteroids = values
+                                            .map(e => e.data)
+                                            .map(e => Object.assign({}, {
+                                                id: e.id,
+                                                name: e.name,
+                                                diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
+                                                magnitude: e.absolute_magnitude_h,
+                                                velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
+                                                velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
+                                                distance: e.close_approach_data[0].miss_distance.astronomical,
+                                            }));
+                                        this.asteroids = asteroids;
+                                });
                         });
                     }
                 },
