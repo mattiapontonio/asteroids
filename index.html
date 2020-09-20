@@ -225,7 +225,7 @@ Vue.component('brightest-of-the-week-asteroids', {
         </div>
     `,
 });
-Vue.component('asteroids-of-the-day', {
+Vue.component('asteroids-of-the-day-graph', {
     props: {
         date: {
             type: Date,
@@ -249,20 +249,64 @@ Vue.component('asteroids-of-the-day', {
                 return date;
             }
         },
+        velocity_max: {
+            type: Number,
+            default: function () {
+                return new Number();
+            }
+        },
+        velocity_min: {
+            type: Number,
+            default: function () {
+                return new Number();
+            }
+        },
+        distance_max: {
+            type: Number,
+            default: function () {
+                return new Number();
+            }
+        },
+        distance_min: {
+            type: Number,
+            default: function () {
+                return new Number();
+            }
+        },
+        diameter_max: {
+            type: Number,
+            default: function () {
+                return new Number();
+            }
+        },
+        diameter_min: {
+            type: Number,
+            default: function () {
+                return new Number();
+            }
+        }
     },
 data () {
     return {
-        asteroids: new Array()
+        asteroids: new Array(),
     }
   },
   template: `
-    <div style="
-        position: relative;
-        min-height: 400px;
-        width: 100%;
-        background-image: linear-gradient(0deg, #98CD8D 5.56%, rgba(0,0,0,0) 5.56%, rgba(0,0,0,0) 50%, #98CD8D 50%, #98CD8D 55.56%, rgba(0,0,0,0) 55.56%, rgba(0,0,0,0) 100%);
-        background-size: 72.00px 72.00px;
-    ">
+    <div 
+        style="
+            position: relative;
+            min-height: 400px;
+            width: 100%;
+            background-image: linear-gradient(0deg, #98CD8D 5.56%, rgba(0,0,0,0) 5.56%, rgba(0,0,0,0) 50%, #98CD8D 50%, #98CD8D 55.56%, rgba(0,0,0,0) 55.56%, rgba(0,0,0,0) 100%);
+            background-size: 72.00px 72.00px;
+        "
+        v-bind:data-velocity-max="velocity_max"
+        v-bind:data-velocity-min="velocity_min"
+        v-bind:data-distance-min="distance_max"
+        v-bind:data-distance-max="distance_min"
+        v-bind:data-diameter-max="diameter_max"
+        v-bind:data-diameter-min="diameter_min"
+    >
         <asteroid 
             v-for="(item, i) in asteroids"
             v-bind:id="item.id"
@@ -273,6 +317,11 @@ data () {
             v-bind:velocity_kilometers_per_hour="item.velocity_kilometers_per_hour"
             v-bind:velocity_kilometers_per_second="item.velocity_kilometers_per_hour"
             v-bind:distance="item.distance"
+            style="position: absolute;"
+            v-bind:style="{ 
+                left: 0.5,
+                bottom: item.velocity_scaled
+            }"
         />
     </div>
     `,
@@ -291,10 +340,10 @@ data () {
         axios
         .get(url)
         .then(response => {
-            let asteroids = response.data.near_earth_objects[formatted(this.date)];
             Promise
-                .all(Object.values(asteroids).map(e => axios.get(e.links.self)))
+                .all(Object.values(response.data.near_earth_objects[formatted(this.date)]).map(e => axios.get(e.links.self)))
                 .then(values => {
+                    let asteroids = new Array();
                     this.asteroids = values
                         .map(e=>e.data)
                         .map((e,i)=> Object.assign(e,asteroids[i]))
@@ -314,8 +363,15 @@ data () {
                             magnitude: e.absolute_magnitude_h,
                             velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
                             velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
-                            distance: e.close_approach_data[0].miss_distance.astronomical
-                        }))
+                            distance: e.close_approach_data[0].miss_distance.astronomical,
+                        }));
+                        console.log(asteroids);
+                    this.velocity_max = Math.max(...asteroids.map(e =>e.velocity_kilometers_per_second));
+                    this.velocity_min = Math.min(...asteroids.map(e =>e.velocity_kilometers_per_second));
+                    this.distance_max = Math.max(...asteroids.map(e =>e.distance));
+                    this.distance_min = Math.min(...asteroids.map(e =>e.distance));
+                    this.diameter_max = Math.max(...asteroids.map(e =>e.diameter));
+                    this.diameter_min = Math.min(...asteroids.map(e =>e.diameter));
                 });
         });
         }
@@ -338,11 +394,7 @@ Vue.component('asteroid', {
     return {}
   },
   template: `
-  <div 
-                style="
-                    position: absolute; 
-                    left: 10%; top: 30%;"
-            >
+  <div>
                 <div style="
                     border:1px solid rgb(63, 119, 63); 
                     width:100px; 
@@ -382,7 +434,13 @@ var app = new Vue({
   el: '#app',
   data: function () {
         return { 
-            date: new Date()
+            date: new Date(),
+        velocity_max: new Number(),
+velocity_min: new Number(),
+distance_max: new Number(),
+distance_min: new Number(),
+diameter_max: new Number(),
+diameter_min: new Number(),
          }
     },
   template: `<div 
@@ -453,9 +511,13 @@ var app = new Vue({
             </div>
         </div>
     </div>
-        <asteroids-of-the-day
+        <asteroids-of-the-day-graph
             v-bind:date="date"
-        ></asteroids-of-the-day>
+            v-bind:velocity_max="velocity_max"
+            v-bind:velocity_min="velocity_min"
+            v-bind:distance_max="distance_max"
+            v-bind:distance_min="distance_min"
+        />
         <div>
             <div>
                 <span style="
