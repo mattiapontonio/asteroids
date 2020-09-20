@@ -52,6 +52,9 @@
                 if (day.length < 2) day = '0' + day;
                 return [year, month, day].join('-');
             });
+            Vue.filter('lun_dom_day', function (date = new Date()) {
+                return date.getDay() == 0 ? date.getDay() - 1 : 6
+            });
             Vue.component('day-selector-radio', {
                 props: {
                     date: {
@@ -117,6 +120,10 @@
                     },
                     'onchangedate': {
                         type: Function
+                    },
+                    selected_index: {
+                        type: Number,
+                        default: 0
                     }
                 },
                 computed: {
@@ -156,6 +163,7 @@
                 v-bind:label="val.label"
                 v-model="date"
                 v-bind:onchangedate="onchangedate"
+                v-bind:checked="selected_index"
             />
     </form>`
             });
@@ -433,6 +441,7 @@
             <day-selector 
                 v-bind:date="date"
                 v-bind:onchangedate="date => this.date = date"
+                v-bind:selected_index="date | lun_dom_day"
             />
         </div>
         <div>
