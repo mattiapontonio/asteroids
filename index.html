@@ -237,10 +237,10 @@
             Vue.component('asteroids-of-the-day-graph', {
                 computed: {
     items: function () {
-        const x = 'velocity';
+        const x = 'velocity_kilometers_per_second';
         const y = 'distance';
         const d = 'diameter';
-        const scale = (v,min,max) => (v - min) / (max - min); // TODO Scale  factory https://thomaswilburn.github.io/viz-book/js-scaling.html
+        const scale = (v, min, max) => (v - min) / (max - min); // TODO Scale  factory https://thomaswilburn.github.io/viz-book/js-scaling.html
         const items = this.asteroids;
         return items
             .map((e,i,a) => {
@@ -391,7 +391,7 @@
                 template: `
   <div
                     v-bind:style="{
-                        bottom: x * 100 + '%',
+                        top: 100 - (x * 100) + '%',
                         left: y * 100 + '%',
                         position: 'absolute'
                     }"
