@@ -242,7 +242,7 @@
         </div>
     `,
             });
-            Vue.component('asteroids-of-the-day-graph', {
+            Vue.component('scatter-plot', {
                 computed: {
                     items: function () {
                         const x = 'velocity_kilometers_per_second';
@@ -465,7 +465,7 @@
             </div>
         </div>
     </div>
-        <asteroids-of-the-day-graph
+        <scatter-plot
             v-bind:date="date"
             v-bind:asteroids="asteroids"
         />
