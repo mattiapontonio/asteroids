@@ -231,24 +231,6 @@ h2 {
             type: Date,
             default: new Date()
         },
-        start_date: {
-            type: Date,
-            default: function () {
-                let date = new Date();
-                let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
-                date.setDate(date.getDate() - date.getDay() + 1);
-                return date;
-            }
-        },
-        end_date: {
-            type: Date,
-            default: function () {
-                let date = new Date();
-                let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
-                date.setDate(date.getDate() + (6 - day_of_the_week));
-                return date;
-            }
-        },
         velocity_max: {
             type: Number,
             default: function () {
@@ -327,6 +309,32 @@ h2 {
     </div>
     `
 });  
+Vue.component('asteroid-bubble', {
+    props: [
+      'diameter',
+    ],
+  template: `
+  <div style="
+                    border:1px solid rgb(63, 119, 63); 
+                    width:100px; 
+                    height:100px;
+                    box-sizing: border-box;
+                    border-radius: 50%;
+                    display: flex;
+                    align-content: center;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                ">
+                    <div style="
+                        width:10px; 
+                        height:10px;
+                        background: green;
+                    border-radius: 50%;
+                        "></div>
+                </div>
+                `
+})
     Vue.component('asteroid', {
   props: [
       'id',
@@ -342,26 +350,12 @@ h2 {
   },
   template: `
   <div>
-                <div style="
-                    border:1px solid rgb(63, 119, 63); 
-                    width:100px; 
-                    height:100px;
-                    box-sizing: border-box;
-                    border-radius: 50%;
-                    display: flex;
-                    align-content: center;
-                    align-items: center;
-                    justify-content: center;
-                    transform: translate(-50%, -50%);
-                    position: absolute;
-                ">
-                    <div style="
-                        width:10px; 
-                        height:10px;
-                        background: green;
-                    border-radius: 50%;
-                        "></div>
-                </div>
+    <asteroid-bubble
+        v-bind:style="{
+            transform: 'translate(-50%, -50%)',
+            position: 'absolute'
+        }"
+    />
                 <div style="
                 border: 1px solid white;
                 padding:1em;
@@ -462,48 +456,12 @@ h2 {
             <h3>Diameter</h3>
             <div style="display: flex; align-items: center;">
                 <div style="display: flex;align-items: center;">
-                        <div style="display: flex;align-items: center;">
-                                <div style="
-                                    border:1px solid rgb(63, 119, 63); 
-                                    width:100px; 
-                                    height:100px;
-                                    box-sizing: border-box;
-                                    border-radius: 50%;
-                                    display: flex;
-                                    align-content: center;
-                                    align-items: center;
-                                    justify-content: center;
-                                ">
-                                    <div style="
-                                        width:10px; 
-                                        height:10px;
-                                        background: green;
-                                    border-radius: 50%;
-                                        "></div>
-                                </div>
-                            <span>Min km</span>
-                        </div>
-                <div style="display: flex;align-items: center;">
-                        <div style="
-                            border:1px solid rgb(63, 119, 63); 
-                            width:100px; 
-                            height:100px;
-                            box-sizing: border-box;
-                            border-radius: 50%;
-                            display: flex;
-                            align-content: center;
-                            align-items: center;
-                            justify-content: center;
-                        ">
-                            <div style="
-                                width:10px; 
-                                height:10px;
-                                background: green;
-                            border-radius: 50%;
-                                "></div>
-                        </div>
-                    <span>Max km</span>
+                    <asteroid-bubble />
+                    <span>Min km</span>
                 </div>
+                <div style="display: flex;align-items: center;">
+                    <asteroid-bubble />
+                    <span>Max km</span>
                 </div>
             </div>
         </div>
@@ -580,13 +538,39 @@ h2 {
 })
 var app = new Vue({
   el: '#app',
+  props: {
+    start_date: {
+            type: Date,
+            default: function () {
+                let date = new Date();
+                let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
+                date.setDate(date.getDate() - date.getDay() + 1);
+                return date;
+            }
+        },
+        end_date: {
+            type: Date,
+            default: function () {
+                let date = new Date();
+                let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
+                date.setDate(date.getDate() + (6 - day_of_the_week));
+                return date;
+            }
+        },
+  },
   template: `
     <div 
         id="app" 
         style="display:flex; width: 100%;"
     >
-        <asteroids-of-the-day />
-        <brightest-of-the-week />
+        <asteroids-of-the-day 
+            v-bind:start_date="start_date"
+            v-bind:end_date="start_date"
+        />
+        <brightest-of-the-week 
+            v-bind:start_date="start_date"
+            v-bind:end_date="start_date"
+        />
     </div>
     `
 });
