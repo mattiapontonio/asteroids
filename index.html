@@ -468,7 +468,9 @@
                         const formatted = Vue.filter('formatted');
                         const start_date = formatted(this.start_date);
                         const end_date = formatted(this.end_date);
-                        const date = formatted(this.date);;
+                        const date = formatted(this.date);
+                        console.log(date,start_date,end_date);
+                        console.assert(date>=start_date&&date<=end_date);
                         const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
                         url.searchParams.set('start_date', start_date);
                         url.searchParams.set('end_date', end_date);
@@ -477,12 +479,10 @@
                             .get(url)
                             .then(response => {
                                 const near_earth_objects = response.data.near_earth_objects;
-                                const near_earth_objects_in_date = Object.values(near_earth_objects)[0];
-                                const promises = Object
-                                    .values(near_earth_objects_in_date)
-                                    .map(e => axios.get(e.links.self));
-                                    Promise.all(promises)
-                                        .then(values => {
+                                const near_earth_objects_in_date = Object.values(near_earth_objects[date]);
+                                const promises = near_earth_objects_in_date.map(e => axios.get(e.links.self));
+                                Promise.all(promises)
+                                    .then(values => {
                                         const asteroids = values
                                             .map(e => e.data)
                                             .map(e => Object.assign({}, {
@@ -519,6 +519,7 @@
     flex-grow: 1;
     padding: 0 16px;
     ">
+    {{date}}
         <h2>Asteroids of the day</h2>
         <div style="display: flex;
     
