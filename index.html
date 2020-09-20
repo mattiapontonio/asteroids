@@ -36,6 +36,19 @@
                 text-decoration: underline;
             }
 
+                /* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
         </style>
     </head>
 
@@ -385,8 +398,10 @@
                     'y',
                     'd'
                 ],
-                data() {
-                    return {}
+                data: function() {
+                    return {
+                        show: false
+                    }
                 },
                 template: `
   <div
@@ -395,6 +410,8 @@
                         left: y * 100 + '%',
                         position: 'absolute'
                     }"
+                    @mouseover="show = true"
+                    @mouseleave="show = false"
   >
                 <asteroid-bubble
                     v-bind:style="{
@@ -402,18 +419,22 @@
                         position: 'absolute'
                     }"
                 />
-                <div style="
-                border: 1px solid white;
-                padding:1em;
-                color: white;
-                background-color: rgba(0, 0, 0, 0.5);
-                ">
+                <transition name="slide-fade">
+                    <div 
+                        v-if="show"
+                        style="
+                            border: 1px solid white;
+                            padding:1em;
+                            color: white;
+                            background-color: rgba(0, 0, 0, 0.5);
+                        ">
                         <div>Name: {{ name }}</div>
                         <div>Diameter: {{ diameter }} km</div>
                         <div>Magnitude: {{ magnitude }} h</div>
                         <div>Distance: {{ distance }} au</div>
                         <div>Velocity: {{ velocity_kilometers_per_hour }} km/h</div>
                 </div>
+                </transition>
             </div>
     `,
             });
@@ -436,9 +457,10 @@
                         axios
                             .get(url)
                             .then(response => {
-                                const near_earth_objects = response.data.near_earth_objects[date];
+                                const near_earth_objects = response.data.near_earth_objects;
+                                const near_earth_objects_in_date = Object.values(near_earth_objects)[0];
                                 const promises = Object
-                                    .values(near_earth_objects)
+                                    .values(near_earth_objects_in_date)
                                     .map(e => axios.get(e.links.self));
                                     Promise.all(promises)
                                         .then(values => {
