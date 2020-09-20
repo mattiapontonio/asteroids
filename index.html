@@ -10,7 +10,7 @@
         <style>
             :root {
                 --main-color: #2af598;
-                --main-color-dark:  #0a1e1a;
+                --main-color-dark: #0a1e1a;
             }
 
             body {
@@ -38,19 +38,25 @@
                 text-decoration: underline;
             }
 
-                /* Enter and leave animations can use different */
-/* durations and timing functions.              */
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
-}
+            /* Enter and leave animations can use different */
+            /* durations and timing functions.              */
+            .slide-fade-enter-active {
+                transition: all .3s ease;
+            }
+
+            .slide-fade-leave-active {
+                transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+            }
+
+            .slide-fade-enter,
+            .slide-fade-leave-to
+
+            /* .slide-fade-leave-active below version 2.1.8 */
+                {
+                transform: translateX(10px);
+                opacity: 0;
+            }
+
         </style>
     </head>
 
@@ -251,36 +257,33 @@
             });
             Vue.component('asteroids-of-the-day-graph', {
                 computed: {
-    items: function () {
-        const x = 'velocity_kilometers_per_second';
-        const y = 'distance';
-        const d = 'diameter';
-        const scale = (v, min, max) => (v - min) / (max - min); // TODO Scale  factory https://thomaswilburn.github.io/viz-book/js-scaling.html
-        const items = this.asteroids;
-        return items
-            .map((e,i,a) => {
-                const elements = a.map(e => e[x]);
-                const min = Math.min(...elements);
-                const max = Math.max(...elements);
-                e.x = scale(e[x],min,max);
-                return e;
-            })
-            .map((e,i,a) => {
-                const elements = a.map(e => e[y]);
-                const min = Math.min(...elements);
-                const max = Math.max(...elements);
-                e.y = scale(e[y],min,max);
-                return e;
-            })
-            .map((e,i,a) => {
-                const elements = a.map(e => e[d]);
-                const min = Math.min(...elements);
-                const max = Math.max(...elements);
-                e.d = scale(e[d],min,max);
-                return e;
-            })
-    }
-},
+                    items: function () {
+                        const x = 'velocity_kilometers_per_second';
+                        const y = 'distance';
+                        const d = 'diameter';
+                        const scale = (v, min, max) => (v - min) / (max - min); // TODO Scale  factory https://thomaswilburn.github.io/viz-book/js-scaling.html
+                        const items = this.asteroids;
+                        return items.map((e, i, a) => {
+                            const elements = a.map(e => e[x]);
+                            const min = Math.min(...elements);
+                            const max = Math.max(...elements);
+                            e.x = scale(e[x], min, max);
+                            return e;
+                        }).map((e, i, a) => {
+                            const elements = a.map(e => e[y]);
+                            const min = Math.min(...elements);
+                            const max = Math.max(...elements);
+                            e.y = scale(e[y], min, max);
+                            return e;
+                        }).map((e, i, a) => {
+                            const elements = a.map(e => e[d]);
+                            const min = Math.min(...elements);
+                            const max = Math.max(...elements);
+                            e.d = scale(e[d], min, max);
+                            return e;
+                        })
+                    }
+                },
                 props: {
                     date: {
                         type: Date,
@@ -376,7 +379,7 @@
                             return 0
                         }
                     }
-  },
+                },
                 template: `
   <div 
     style="
@@ -404,19 +407,8 @@
                 `
             })
             Vue.component('asteroid', {
-                props: [
-                    'id', 
-                    'name', 
-                    'diameter', 
-                    'magnitude', 
-                    'velocity_kilometers_per_hour', 
-                    'velocity_kilometers_per_second', 
-                    'distance',
-                    'x',
-                    'y',
-                    'd',
-                ],
-                data: function() {
+                props: ['id', 'name', 'diameter', 'magnitude', 'velocity_kilometers_per_hour', 'velocity_kilometers_per_second', 'distance', 'x', 'y', 'd', ],
+                data: function () {
                     return {
                         show: false
                     }
@@ -469,33 +461,28 @@
                         const start_date = formatted(this.start_date);
                         const end_date = formatted(this.end_date);
                         const date = formatted(this.date);
-                        console.log(date,start_date,end_date);
-                        console.assert(date>=start_date&&date<=end_date);
+                        console.log(date, start_date, end_date);
+                        console.assert(date >= start_date && date <= end_date);
                         const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
                         url.searchParams.set('start_date', start_date);
                         url.searchParams.set('end_date', end_date);
                         url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
-                        axios
-                            .get(url)
-                            .then(response => {
-                                const near_earth_objects = response.data.near_earth_objects;
-                                const near_earth_objects_in_date = Object.values(near_earth_objects[date]);
-                                const promises = near_earth_objects_in_date.map(e => axios.get(e.links.self));
-                                Promise.all(promises)
-                                    .then(values => {
-                                        const asteroids = values
-                                            .map(e => e.data)
-                                            .map(e => Object.assign({}, {
-                                                id: e.id,
-                                                name: e.name,
-                                                diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
-                                                magnitude: e.absolute_magnitude_h,
-                                                velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
-                                                velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
-                                                distance: e.close_approach_data[0].miss_distance.astronomical,
-                                            }));
-                                        this.asteroids = asteroids;
-                                });
+                        axios.get(url).then(response => {
+                            const near_earth_objects = response.data.near_earth_objects;
+                            const near_earth_objects_in_date = Object.values(near_earth_objects[date]);
+                            const promises = near_earth_objects_in_date.map(e => axios.get(e.links.self));
+                            Promise.all(promises).then(values => {
+                                const asteroids = values.map(e => e.data).map(e => Object.assign({}, {
+                                    id: e.id,
+                                    name: e.name,
+                                    diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
+                                    magnitude: e.absolute_magnitude_h,
+                                    velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
+                                    velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
+                                    distance: e.close_approach_data[0].miss_distance.astronomical,
+                                }));
+                                this.asteroids = asteroids;
+                            });
                         });
                     }
                 },
