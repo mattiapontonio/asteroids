@@ -536,11 +536,21 @@
             <div style="display: flex; align-items: center;">
                 <div style="display: flex;align-items: center;">
                     <asteroid-bubble d="0" />
-                    <span>Min km</span>
+                    <span style="margin-left:16px">Min km</span>
                 </div>
-                <div style="display: flex;align-items: center;">
-                    <asteroid-bubble d="1" />
-                    <span>Max km</span>
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    margin-left:110px;
+                ">
+                    <asteroid-bubble 
+                        d="1" 
+                        v-bind:style="{
+                            position: 'absolute',
+                            transform: 'translateX(-50%)'
+                        }"
+                    />
+                    <span style="margin-left:16px">Max km</span>
                 </div>
             </div>
         </div>
