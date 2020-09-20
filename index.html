@@ -430,28 +430,22 @@ Vue.component('asteroid', {
             </div>
     `,
 });  
-var app = new Vue({
-  el: '#app',
+Vue.component('asteroids-of-the-day', {  
   data: function () {
         return { 
             date: new Date(),
-        velocity_max: new Number(),
-velocity_min: new Number(),
-distance_max: new Number(),
-distance_min: new Number(),
-diameter_max: new Number(),
-diameter_min: new Number(),
-         }
+            velocity_max: new Number(),
+            velocity_min: new Number(),
+            distance_max: new Number(),
+            distance_min: new Number(),
+        }
     },
-  template: `<div 
-    id="app" 
-    style="display:flex; width: 100%;"
-    >
-    <div style="
+  template: `
+  <div style="
     display: flex;
     flex-direction: column;
     height: 100%;
-">
+    ">
         <h2>Asteroids of the day</h2>
         <div style="display: flex">
         <div>
@@ -546,7 +540,11 @@ diameter_min: new Number(),
                     <span>(km/s)</span></div>
         </div>
     </div>
-    <div>
+    `
+});
+Vue.component('brightest-of-the-week', {
+  template: `
+  <div>
         <h2>Brightest of the week</h2>
         <h3>Magnitude <span>(h)</span></h3>
         <div>
@@ -574,8 +572,19 @@ diameter_min: new Number(),
             </div>
         </div>
         <brightest-of-the-week-asteroids></brightest-of-the-week-asteroids>
+    </div>`
+})
+var app = new Vue({
+  el: '#app',
+  template: `
+    <div 
+        id="app" 
+        style="display:flex; width: 100%;"
+    >
+        <asteroids-of-the-day />
+        <brightest-of-the-week />
     </div>
-</div>`
+    `
 });
 </script>
 </body>
