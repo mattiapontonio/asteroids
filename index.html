@@ -68,7 +68,7 @@
                         type: String
                     },
                     'checked': {
-                        type: String
+                        type: Boolean
                     },
                     'onchangedate': {
                         type: Function
@@ -163,7 +163,7 @@
                 v-bind:label="val.label"
                 v-model="date"
                 v-bind:onchangedate="onchangedate"
-                v-bind:checked="selected_index"
+                v-bind:checked="Boolean(selected_index == i)"
             />
     </form>`
             });
@@ -225,7 +225,6 @@
                     </div>
                 </div>
                 <div style="margin-left: 50px;">
-                        {{val.scale}}
                     <div>Name: {{val.name}}</div>
                     <div>Diameter: {{val.estimated_diameter.kilometers.estimated_diameter_max}}</div>
                     <div>Magnitude: {{val.absolute_magnitude_h}}</div>
@@ -236,6 +235,37 @@
     `,
             });
             Vue.component('asteroids-of-the-day-graph', {
+                computed: {
+    items: function () {
+        const x = 'velocity';
+        const y = 'distance';
+        const d = 'diameter';
+        const scale = (v,min,max) => (v - min) / (max - min); // TODO Scale  factory https://thomaswilburn.github.io/viz-book/js-scaling.html
+        const items = this.asteroids;
+        return items
+            .map((e,i,a) => {
+                const elements = a.map(e => e[x]);
+                const min = Math.min(...elements);
+                const max = Math.max(...elements);
+                e.x = scale(e[x],min,max);
+                return e;
+            })
+            .map((e,i,a) => {
+                const elements = a.map(e => e[y]);
+                const min = Math.min(...elements);
+                const max = Math.max(...elements);
+                e.y = scale(e[y],min,max);
+                return e;
+            })
+            .map((e,i,a) => {
+                const elements = a.map(e => e[d]);
+                const min = Math.min(...elements);
+                const max = Math.max(...elements);
+                e.d = scale(e[d],min,max);
+                return e;
+            })
+    }
+},
                 props: {
                     date: {
                         type: Date,
@@ -301,7 +331,7 @@
         v-bind:data-diameter-min="diameter_min"
     >
         <asteroid 
-            v-for="(item, i) in asteroids"
+            v-for="(item, i) in items"
             v-bind:id="item.id"
             v-bind:key="item.id"
             v-bind:name="item.name"
@@ -311,10 +341,9 @@
             v-bind:velocity_kilometers_per_second="item.velocity_kilometers_per_hour"
             v-bind:distance="item.distance"
             style="position: absolute;"
-            v-bind:style="{ 
-                left: 0.5,
-                bottom: item.velocity_scaled
-            }"
+            v-bind:x="item.x"
+            v-bind:y="item.y"
+            v-bind:d="item.d"
         />
     </div>
     `
@@ -344,18 +373,35 @@
                 `
             })
             Vue.component('asteroid', {
-                props: ['id', 'name', 'diameter', 'magnitude', 'velocity_kilometers_per_hour', 'velocity_kilometers_per_second', 'distance'],
+                props: [
+                    'id', 
+                    'name', 
+                    'diameter', 
+                    'magnitude', 
+                    'velocity_kilometers_per_hour', 
+                    'velocity_kilometers_per_second', 
+                    'distance',
+                    'x',
+                    'y',
+                    'd'
+                ],
                 data() {
                     return {}
                 },
                 template: `
-  <div>
-    <asteroid-bubble
-        v-bind:style="{
-            transform: 'translate(-50%, -50%)',
-            position: 'absolute'
-        }"
-    />
+  <div
+                    v-bind:style="{
+                        bottom: x * 100 + '%',
+                        left: y * 100 + '%',
+                        position: 'absolute'
+                    }"
+  >
+                <asteroid-bubble
+                    v-bind:style="{
+                        transform: 'translate(-50%, -50%)',
+                        position: 'absolute'
+                    }"
+                />
                 <div style="
                 border: 1px solid white;
                 padding:1em;
@@ -386,7 +432,7 @@
                         url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
                         axios.get(url).then(response => {
                             Promise.all(Object.values(response.data.near_earth_objects[formatted(this.date)]).map(e => axios.get(e.links.self))).then(values => {
-                                let asteroids = new Array();
+                                const asteroids = new Array();
                                 this.asteroids = values.map(e => e.data).map((e, i) => Object.assign(e, asteroids[i])).map((e, i, a) => {
                                     let elements = a.map(e => e.absolute_magnitude_h);
                                     let min = Math.min(...elements);
@@ -405,12 +451,6 @@
                                     distance: e.close_approach_data[0].miss_distance.astronomical,
                                 }));
                                 console.log(asteroids);
-                                this.velocity_max = Math.max(...asteroids.map(e => e.velocity_kilometers_per_second));
-                                this.velocity_min = Math.min(...asteroids.map(e => e.velocity_kilometers_per_second));
-                                this.distance_max = Math.max(...asteroids.map(e => e.distance));
-                                this.distance_min = Math.min(...asteroids.map(e => e.distance));
-                                this.diameter_max = Math.max(...asteroids.map(e => e.diameter));
-                                this.diameter_min = Math.min(...asteroids.map(e => e.diameter));
                             });
                         });
                     }
