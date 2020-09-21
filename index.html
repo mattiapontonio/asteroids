@@ -176,18 +176,18 @@
                     }
                 },
                 template: `
-    <form style="display:flex;">
-            <day-selector-radio 
-                v-for="(val, i) in days"  
-                v-bind:id="'radio-'+i" 
-                v-bind:key="'radio-'+i"  
-                v-bind:date="val.date"
-                v-bind:label="val.label"
-                v-model="date"
-                v-bind:onchangedate="onchangedate"
-                v-bind:checked="Boolean(selected_index == i)"
-            />
-    </form>`
+                    <form style="display:flex;">
+                            <day-selector-radio 
+                                v-for="(val, i) in days"  
+                                v-bind:id="'radio-'+i" 
+                                v-bind:key="'radio-'+i"  
+                                v-bind:date="val.date"
+                                v-bind:label="val.label"
+                                v-model="date"
+                                v-bind:onchangedate="onchangedate"
+                                v-bind:checked="Boolean(selected_index == i)"
+                            />
+                    </form>`
             });
             Vue.component('brightest-of-the-week-asteroids', {
                 props: {
@@ -392,10 +392,7 @@
     `,
             });
             Vue.component('tooltip', {
-                props: [
-                    'show',
-                    'data'
-                ],
+                props: ['show', 'data'],
                 template: `
                 <transition name="slide-fade">
                     <div 
@@ -615,20 +612,16 @@
                         url.searchParams.set('start_date', date);
                         url.searchParams.set('end_date', date);
                         url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
-                        axios.get(url).then(response => Promise
-                                .all(Object.values(response.data.near_earth_objects[date]).map(e => axios.get(e.links.self)))
-                                .then(values => this.asteroids_of_the_day = values
-                                    .map(e => e.data)
-                                    .map(e => Object.assign({}, {
-                                        id: e.id,
-                                        name: e.name,
-                                        diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
-                                        magnitude: e.absolute_magnitude_h,
-                                        velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
-                                        velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
-                                        distance: e.close_approach_data[0].miss_distance.astronomical,
-                                    }))));
-                },
+                        axios.get(url).then(response => Promise.all(Object.values(response.data.near_earth_objects[date]).map(e => axios.get(e.links.self))).then(values => this.asteroids_of_the_day = values.map(e => e.data).map(e => Object.assign({}, {
+                            id: e.id,
+                            name: e.name,
+                            diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
+                            magnitude: e.absolute_magnitude_h,
+                            velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
+                            velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
+                            distance: e.close_approach_data[0].miss_distance.astronomical,
+                        }))));
+                    },
                 },
                 mounted() {
                     this.get_asteroids_of_the_day();
@@ -663,7 +656,7 @@
                         />
                     </div>
                     `
-                });
+            });
 
         </script>
     </body>
