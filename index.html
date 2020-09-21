@@ -695,31 +695,34 @@
                         })
                         .finally(() => this.loading = false);
                     },
+                    get_brightest_of_the_week() {
+                        const formatted = Vue.filter('formatted');
+                        const start_date = formatted(this.start_date);
+                        const end_date = formatted(this.end_date);
+                        const date = formatted(this.date);
+                        console.log(date, start_date, end_date);
+                        console.assert(date >= start_date && date <= end_date);
+                        const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
+                        url.searchParams.set('start_date', start_date);
+                        url.searchParams.set('end_date', end_date);
+                        url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
+                        this.loading = true;
+                        axios
+                        .get(url)
+                        .then(response => {
+                            this.near_earth_objects = response.data.near_earth_objects;
+                            this.loading = false;
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = false);
+                    }
                 },
                 mounted() {
                     this.get_asteroids_of_the_day();
-                    const formatted = Vue.filter('formatted');
-                    const start_date = formatted(this.start_date);
-                    const end_date = formatted(this.end_date);
-                    const date = formatted(this.date);
-                    console.log(date, start_date, end_date);
-                    console.assert(date >= start_date && date <= end_date);
-                    const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
-                    url.searchParams.set('start_date', start_date);
-                    url.searchParams.set('end_date', end_date);
-                    url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
-                    this.loading = true;
-                    axios
-                    .get(url)
-                    .then(response => {
-                        this.near_earth_objects = response.data.near_earth_objects;
-                        this.loading = false;
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        this.errored = true
-                    })
-                    .finally(() => this.loading = false);
+                    this.get_brightest_of_the_week();
                 },
                 template: `
                     <div 
