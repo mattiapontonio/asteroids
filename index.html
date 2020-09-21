@@ -381,6 +381,22 @@
                     }"
                     v-bind:d="d"
                 />
+                <tooltip v-bind:show="show" v-bind:data="{
+                    name,
+                    diameter,
+                    magnitude,
+                    distance,
+                    velocity_kilometers_per_hour
+                }"/>
+            </div>
+    `,
+            });
+            Vue.component('tooltip', {
+                props: [
+                    'show',
+                    'data'
+                ],
+                template: `
                 <transition name="slide-fade">
                     <div 
                         v-if="show"
@@ -390,14 +406,13 @@
                             color: white;
                             background-color: rgba(0, 0, 0, 0.75);
                         ">
-                        <div>Name: {{ name }}</div>
-                        <div>Diameter: {{ diameter }} km</div>
-                        <div>Magnitude: {{ magnitude }} h</div>
-                        <div>Distance: {{ distance }} au</div>
-                        <div>Velocity: {{ velocity_kilometers_per_hour }} km/h</div>
+                        <div>Name: {{ data.name }}</div>
+                        <div>Diameter: {{ data.diameter }} km</div>
+                        <div>Magnitude: {{ data.magnitude }} h</div>
+                        <div>Distance: {{ data.distance }} au</div>
+                        <div>Velocity: {{ data.velocity_kilometers_per_hour }} km/h</div>
                 </div>
                 </transition>
-            </div>
     `,
             });
             Vue.component('asteroids-of-the-day', {
