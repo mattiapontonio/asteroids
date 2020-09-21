@@ -150,8 +150,8 @@
                 },
                 computed: {
                     days: function () {
-                        var today = new Date();
-                        var weekday = new Array(7);
+                        const today = new Date();
+                        const weekday = new Array(7);
                         for (let i = 0; i < 7; i++) {
                             let date = new Date();
                             date.setDate(today.getDate() + (i - today.getDay()));
@@ -310,7 +310,7 @@
     </div>
     `
             });
-            Vue.component('asteroid-bubble', {
+            Vue.component('bubble', {
                 props: {
                     minD: {
                         type: Number,
@@ -374,7 +374,7 @@
                     @mouseover="show = true"
                     @mouseleave="show = false"
   >
-                <asteroid-bubble
+                <bubble
                     v-bind:style="{
                         transform: 'translate(-50%, -50%)',
                         position: 'absolute'
@@ -445,7 +445,7 @@
             <h3>Diameter</h3>
             <div style="display: flex; align-items: center;">
                 <div style="display: flex;align-items: center;">
-                    <asteroid-bubble v-bind:d="minD" />
+                    <bubble v-bind:d="minD" />
                     <span style="margin-left:16px">Min km</span>
                 </div>
                 <div style="
@@ -453,7 +453,7 @@
                     align-items: center;
                     margin-left:110px;
                 ">
-                    <asteroid-bubble 
+                    <bubble 
                         v-bind:d="maxD" 
                         v-bind:style="{
                             position: 'absolute',
@@ -546,7 +546,7 @@
         <brightest-of-the-week-asteroids v-bind:asteroids="asteroids"></brightest-of-the-week-asteroids>
     </div>`
             })
-            var app = new Vue({
+            const app = new Vue({
                 el: '#app',
                 props: {
                     start_date: {
@@ -571,10 +571,10 @@
                 computed: {
                     brightest_of_the_week: function () {
                         return Object.values(this.near_earth_objects).flat(1).sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h).slice(0, 5).reverse().map((e, i, a) => {
-                            var absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h)
-                            var min = Math.min(...absolute_magnitude_hs);
-                            var max = Math.max(...absolute_magnitude_hs);
-                            var scale = v => (v - min) / (max - min);
+                            const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h)
+                            const min = Math.min(...absolute_magnitude_hs);
+                            const max = Math.max(...absolute_magnitude_hs);
+                            const scale = v => (v - min) / (max - min);
                             e.scale = scale(e.absolute_magnitude_h);
                             return e;
                         });
