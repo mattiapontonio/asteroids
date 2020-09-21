@@ -332,22 +332,39 @@
                         default: function () {
                             return new Array();
                         }
+                    },
+                    loading: {
+                        type: Boolean,
+                        default: function () {
+                            return false
+                        }
+                    },
+                    errored: {
+                        type: Boolean,
+                        default: function () {
+                            return false
+                        }
                     }
                 },
                 template: `
     <div class="scatter-plot">
-        <div class="container">
-            <asteroid 
-            v-for="(item, i) in items"
-            v-bind:data="{
-                ...item
-            }"
-            style="position: absolute;"
-            v-bind:x="item.x"
-            v-bind:y="item.y"
-            v-bind:d="item.d"
-        />
-        </div>
+        <section v-if="errored">
+            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+        </section>
+        <section v-else class="container">
+            <div v-if="loading">Loading...</div>
+            <asteroid
+                v-else
+                v-for="(item, i) in items"
+                v-bind:data="{
+                    ...item
+                }"
+                style="position: absolute;"
+                v-bind:x="item.x"
+                v-bind:y="item.y"
+                v-bind:d="item.d"
+            />
+        </section>
     </div>
     `
             });
@@ -490,6 +507,12 @@
                     },
                     onchangedate: {
                         type: Function
+                    },
+                    loading: {
+                        type: Boolean
+                    },
+                    errored: {
+                        type: Boolean
                     }
                 },
                 template: `
@@ -514,6 +537,8 @@
         <scatter-plot
             v-bind:date="date"
             v-bind:asteroids="asteroids"
+            v-bind:loading="loading"
+            v-bind:errored="errored"
         />
         <div>
             <div>
@@ -636,7 +661,8 @@
                         near_earth_objects: {},
                         date: new Date(),
                         asteroids_of_the_day: new Array(),
-                        loading: false
+                        loading: true,
+                        errored: false
                     }
                 },
                 methods: {
@@ -676,10 +702,16 @@
                     url.searchParams.set('end_date', end_date);
                     url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
                     this.loading = true;
-                    axios.get(url).then(response => {
+                    axios
+                    .get(url)
+                    .then(response => {
                         this.near_earth_objects = response.data.near_earth_objects;
                         this.loading = false;
-                    });
+                    }).catch(error => {
+                        console.log(error)
+                        this.errored = true
+                    })
+                    .finally(() => this.loading = false);
                 },
                 template: `
                     <div 
@@ -693,6 +725,8 @@
                             v-bind:end_date="end_date"
                             v-bind:asteroids="asteroids_of_the_day"
                             v-bind:onchangedate="date => this.date = date"
+                            v-bind:loading="loading"
+                            v-bind:errored="errored"
                         />
                         <brightest-of-the-week 
                             v-bind:start_date="start_date"
