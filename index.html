@@ -57,6 +57,24 @@
                 opacity: 0;
             }
 
+            .bubble {
+                border:1px solid rgb(63, 119, 63); 
+                box-sizing: border-box;
+                border-radius: 50%;
+                display: flex;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .bubble .point {
+                width: 4px; 
+                height: 4px;
+                background: var(--main-color);
+                border-radius: 50%;
+            }
+
         </style>
     </head>
 
@@ -331,34 +349,39 @@
                         }
                     }
                 },
+                computed: {
+                    width: function () {
+                        return this.d * (this.maxD - this.minD) + this.minD;
+                    },
+                    height: function () {
+                        return this.d * (this.maxD - this.minD) + this.minD;
+                    }
+                },
                 template: `
-  <div 
-    style="
-        border:1px solid rgb(63, 119, 63); 
-        box-sizing: border-box;
-        border-radius: 50%;
-        display: flex;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    "
-    v-bind:style="{
-        width: d * (maxD - minD) + minD + 'px',
-        height: d * (maxD - minD) + minD + 'px',
-    }"
-    >
-                    <div style="
-                        width: 4px; 
-                        height: 4px;
-                        background: var(--main-color);
-                    border-radius: 50%;
-                        "></div>
+                    <div 
+                        class="bubble"
+                        v-bind:style="{
+                            width: width + 'px',
+                            height: height + 'px',
+                        }"
+                    >
+                    <div class="point"></div>
                 </div>
                 `
             })
             Vue.component('asteroid', {
-                props: ['id', 'name', 'diameter', 'magnitude', 'velocity_kilometers_per_hour', 'velocity_kilometers_per_second', 'distance', 'x', 'y', 'd', ],
+                props: [
+                    'id', 
+                    'name', 
+                    'diameter', 
+                    'magnitude', 
+                    'velocity_kilometers_per_hour', 
+                    'velocity_kilometers_per_second', 
+                    'distance', 
+                    'x', 
+                    'y', 
+                    'd', 
+                ],
                 data: function () {
                     return {
                         show: false
@@ -413,20 +436,12 @@
     `,
             });
             Vue.component('diameter-max-min', {
-                props: {
-                    min: {
-                        type: Number
-                    },
-                    max: {
-                        type: Number
-                    }
-                },
                 template: `
         <div>
             <h3>Diameter</h3>
             <div style="display: flex; align-items: center;">
                 <div style="display: flex;align-items: center;">
-                    <bubble v-bind:d="min" />
+                    <bubble v-bind:d="0" />
                     <span style="margin-left:16px">Min km</span>
                 </div>
                 <div style="
@@ -435,7 +450,7 @@
                     margin-left:110px;
                 ">
                     <bubble 
-                        v-bind:d="max" 
+                        v-bind:d="1" 
                         v-bind:style="{
                             position: 'absolute',
                             transform: 'translateX(-50%)'
@@ -450,9 +465,11 @@
             Vue.component('asteroids-of-the-day', {
                 computed: {
                     minD: function () {
+                        console.log(this.asteroids);
                         return Math.min(this.asteroids.map(e => e.diameter))
                     },
                     maxD: function () {
+                        console.log(this.asteroids);
                         return Math.max(this.asteroids.map(e => e.diameter))
                     }
                 },
@@ -486,10 +503,7 @@
                     v-bind:selected_index="date | lun_dom_day"
                 />
             </div>
-            <diameter-max-min 
-                v-bind:min="minD"
-                v-bind:max="maxD"
-            />
+            <diameter-max-min />
     </div>
         <scatter-plot
             v-bind:date="date"
