@@ -195,20 +195,15 @@
                 computed: {
                     days: function () {
                         const weekday = new Array(7);
+                        const label = date => ['sun','mon','tue','wed','thur','fri','sat'][date.getDay()]
                         for (let i = 0; i < 7; i++) {
                             let date = new Date();
                             date.setDate(this.date.getDate() + (i - this.date.getDay()));
                             weekday[i] = {
-                                date
+                                date,
+                                label: label(date)
                             }
                         }
-                        weekday[0].label = 'mon';
-                        weekday[1].label = 'tue';
-                        weekday[2].label = 'wed';
-                        weekday[3].label = 'thur';
-                        weekday[4].label = 'fri';
-                        weekday[5].label = 'sat';
-                        weekday[6].label = 'sun';
                         return weekday
                     }
                 },
