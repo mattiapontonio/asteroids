@@ -35,6 +35,13 @@
                 color: var(--main-color-dark);
             }
 
+            .radio {
+                border: 1px solid var(--main-color);
+                background: transparent;
+                visibility: hidden;
+                position: absolute;
+            }
+
             h2 {
                 text-decoration: underline;
             }
@@ -127,16 +134,16 @@
                         type: Date,
                         default: new Date()
                     },
-                    'id': {
+                    id: {
                         type: String
                     },
-                    'label': {
+                    label: {
                         type: String
                     },
-                    'checked': {
+                    checked: {
                         type: Boolean
                     },
-                    'onchangedate': {
+                    onchangedate: {
                         type: Function
                     }
                 },
@@ -152,11 +159,7 @@
                 type="radio" 
                 v-bind:id="id"
                 name="date"
-                style="
-                    border:1px solid var(--main-color); 
-                    background:transparent;
-                    visibility:hidden;
-                "
+                class="radio"
                 v-bind:checked="checked"
                 v-bind:value="date | formatted"
                 v-on:change="onchangedate(date)"
@@ -186,19 +189,14 @@
                     },
                     'onchangedate': {
                         type: Function
-                    },
-                    selected_index: {
-                        type: Number,
-                        default: 0
                     }
                 },
                 computed: {
                     days: function () {
-                        const today = new Date();
                         const weekday = new Array(7);
                         for (let i = 0; i < 7; i++) {
                             let date = new Date();
-                            date.setDate(today.getDate() + (i - today.getDay()));
+                            date.setDate(this.date.getDate() + (i - this.date.getDay()));
                             weekday[i] = {
                                 date
                             }
@@ -213,12 +211,6 @@
                         return weekday
                     }
                 },
-                data: function () {
-                    return {
-                        count: 0,
-                        selctedIndex: 0
-                    }
-                },
                 template: `
                     <form style="display:flex;">
                             <day-selector-radio 
@@ -227,9 +219,8 @@
                                 v-bind:key="'radio-'+i"  
                                 v-bind:date="val.date"
                                 v-bind:label="val.label"
-                                v-model="date"
                                 v-bind:onchangedate="onchangedate"
-                                v-bind:checked="Boolean(selected_index == i)"
+                                v-bind:checked="val.date == date"
                             />
                     </form>`
             });
@@ -718,6 +709,9 @@
                             this.errored = true
                         })
                         .finally(() => this.loading = false);
+                    },
+                    onchangedate(date = new Date()) {
+                        this.date = date;
                     }
                 },
                 mounted() {
@@ -735,7 +729,7 @@
                             v-bind:start_date="start_date"
                             v-bind:end_date="end_date"
                             v-bind:asteroids="asteroids_of_the_day"
-                            v-bind:onchangedate="date => this.date = date"
+                            v-bind:onchangedate="onchangedate"
                             v-bind:loading="loading"
                             v-bind:errored="errored"
                         />
