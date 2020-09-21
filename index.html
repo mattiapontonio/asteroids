@@ -412,6 +412,41 @@
                 </transition>
     `,
             });
+            Vue.component('diameter-max-min', {
+                props: {
+                    min: {
+                        type: Number
+                    },
+                    max: {
+                        type: Number
+                    }
+                },
+                template: `
+        <div>
+            <h3>Diameter</h3>
+            <div style="display: flex; align-items: center;">
+                <div style="display: flex;align-items: center;">
+                    <bubble v-bind:d="min" />
+                    <span style="margin-left:16px">Min km</span>
+                </div>
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    margin-left:110px;
+                ">
+                    <bubble 
+                        v-bind:d="max" 
+                        v-bind:style="{
+                            position: 'absolute',
+                            transform: 'translateX(-50%)'
+                        }"
+                    />
+                    <span style="margin-left:16px">Max km</span>
+                </div>
+            </div>
+        </div>
+    `
+            });
             Vue.component('asteroids-of-the-day', {
                 computed: {
                     minD: function () {
@@ -442,40 +477,19 @@
     padding: 0 16px;
     ">
         <h2>Asteroids of the day</h2>
-        <div style="display: flex;
-    
-">
-        <div style="flex-grow: 1;">
-            <p>Select one day to update the chart:</p>
-            <day-selector 
-                v-bind:date="date"
-                v-bind:onchangedate="onchangedate"
-                v-bind:selected_index="date | lun_dom_day"
-            />
-        </div>
-        <div>
-            <h3>Diameter</h3>
-            <div style="display: flex; align-items: center;">
-                <div style="display: flex;align-items: center;">
-                    <bubble v-bind:d="minD" />
-                    <span style="margin-left:16px">Min km</span>
-                </div>
-                <div style="
-                    display: flex;
-                    align-items: center;
-                    margin-left:110px;
-                ">
-                    <bubble 
-                        v-bind:d="maxD" 
-                        v-bind:style="{
-                            position: 'absolute',
-                            transform: 'translateX(-50%)'
-                        }"
-                    />
-                    <span style="margin-left:16px">Max km</span>
-                </div>
+        <div style="display: flex;">
+            <div style="flex-grow: 1;">
+                <p>Select one day to update the chart:</p>
+                <day-selector 
+                    v-bind:date="date"
+                    v-bind:onchangedate="onchangedate"
+                    v-bind:selected_index="date | lun_dom_day"
+                />
             </div>
-        </div>
+            <diameter-max-min 
+                v-bind:min="minD"
+                v-bind:max="maxD"
+            />
     </div>
         <scatter-plot
             v-bind:date="date"
