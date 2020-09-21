@@ -320,14 +320,9 @@
     >
             <asteroid 
             v-for="(item, i) in items"
-            v-bind:id="item.id"
-            v-bind:key="item.id"
-            v-bind:name="item.name"
-            v-bind:diameter="item.diameter"
-            v-bind:magnitude="item.magnitude"
-            v-bind:velocity_kilometers_per_hour="item.velocity_kilometers_per_hour"
-            v-bind:velocity_kilometers_per_second="item.velocity_kilometers_per_hour"
-            v-bind:distance="item.distance"
+            v-bind:data="{
+                ...item
+            }"
             style="position: absolute;"
             v-bind:x="item.x"
             v-bind:y="item.y"
@@ -379,13 +374,7 @@
             })
             Vue.component('asteroid', {
                 props: [
-                    'id', 
-                    'name', 
-                    'diameter', 
-                    'magnitude', 
-                    'velocity_kilometers_per_hour', 
-                    'velocity_kilometers_per_second', 
-                    'distance', 
+                    'data',
                     'x', 
                     'y', 
                     'd', 
@@ -412,13 +401,7 @@
                     }"
                     v-bind:d="d"
                 />
-                <tooltip v-bind:show="show" v-bind:data="{
-                    name,
-                    diameter,
-                    magnitude,
-                    distance,
-                    velocity_kilometers_per_hour
-                }"/>
+                <tooltip v-bind:show="show" v-bind:data="data"/>
             </div>
     `,
             });
