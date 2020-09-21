@@ -319,12 +319,20 @@
                 template: `
     <div 
         style="
-            position: relative;
-            min-height: 400px;
-            width: 100%;
-            background: repeating-linear-gradient( 180deg, transparent, transparent 100px, #133443 100px, #133443 101px);
-        "
+        position: relative;
+        min-height: 400px;
+        width: 100%;
+        background: repeating-linear-gradient(transparent, transparent 100px, rgb(19, 52, 67) 100px, rgb(19, 52, 67) 101px);
+        padding: 50px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: stretch;
+        align-content: stretch;
+        align-items: stretch;
+            "
     >
+        <div style="position: relative;
+    flex: 1;">
             <asteroid 
             v-for="(item, i) in items"
             v-bind:data="{
@@ -335,6 +343,7 @@
             v-bind:y="item.y"
             v-bind:d="item.d"
         />
+        </div>
     </div>
     `
             });
