@@ -256,8 +256,15 @@
                             height: val.scale * 64 + 'px'
                         }"
                     >
-                            <div style="width:4px;height:4px; background-color: black;"></div>
                     </div>
+                    <div style="
+                        width:4px;
+                        height:4px; 
+                        background-color: black;
+                        margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+                    "></div>
                 </div>
                 <div style="margin-left: 50px;">
                     <div>Name: {{val.name}}</div>
@@ -571,7 +578,7 @@
         </div>
         <brightest-of-the-week-asteroids v-bind:asteroids="asteroids"></brightest-of-the-week-asteroids>
     </div>`
-            })
+            });
             const app = new Vue({
                 el: '#app',
                 props: {
