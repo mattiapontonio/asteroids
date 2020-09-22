@@ -129,6 +129,9 @@
             Vue.filter('lun_dom_day', function (date = new Date()) {
                 return date.getDay() == 0 ? date.getDay() - 1 : 6
             });
+            Vue.filter('scale', function (v = new Number(), min = new Number(), max = new Number()) {
+                return (v - min) / (max - min)
+            });
             Vue.component('day-selector-radio', {
                 props: {
                     date: {
@@ -286,7 +289,7 @@
                         const x = 'velocity_kilometers_per_second';
                         const y = 'distance';
                         const d = 'diameter';
-                        const scale = (v, min, max) => (v - min) / (max - min); // TODO Scale  factory https://thomaswilburn.github.io/viz-book/js-scaling.html
+                        const scale = Vue.filter('scale');
                         const items = this.asteroids;
                         return items.map((e, i, a) => {
                             const elements = a.map(e => e[x]);
@@ -632,8 +635,8 @@
                             const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h)
                             const min = Math.min(...absolute_magnitude_hs);
                             const max = Math.max(...absolute_magnitude_hs);
-                            const scale = v => (v - min) / (max - min);
-                            e.scale = scale(e.absolute_magnitude_h);
+                            const scale = Vue.filter('scale');
+                            e.scale = scale(e.absolute_magnitude_h, min, max);
                             return e;
                         });
                     }
