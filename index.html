@@ -237,22 +237,14 @@
                             />
                     </form>`
             });
-            Vue.component('brightest-of-the-week-asteroids', {
+            Vue.component('square-graph', {
                 props: {
-                    asteroids: {
-                        type: Array,
-                        default: () => new Array()
+                    value: {
+                        type: Number,
+                        default: () => new Number()
                     }
                 },
                 template: `
-    <div>
-        <div 
-            v-for="(val, i) in asteroids"
-            style="
-                display: flex;
-                align-items:center;
-                padding: 32px;
-            ">
                 <div style="
                     width: 40px;
                     height:40px;
@@ -275,8 +267,8 @@
                             align-items:center;
                         "
                         v-bind:style="{ 
-                            width: val.scale * 40 + 'px',
-                            height: val.scale * 40 + 'px'
+                            width: value * 40 + 'px',
+                            height: value * 40 + 'px'
                         }"
                     >
                     </div>
@@ -285,10 +277,32 @@
                         height:4px; 
                         background-color: black;
                         margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
+                        position: absolute;
+                        top: 0; 
+                        left: 0; 
+                        bottom: 0; 
+                        right: 0;
                     "></div>
                 </div>
+    `,
+            });
+            Vue.component('brightest-of-the-week-asteroids', {
+                props: {
+                    asteroids: {
+                        type: Array,
+                        default: () => new Array()
+                    }
+                },
+                template: `
+    <div>
+        <div 
+            v-for="(val, i) in asteroids"
+            style="
+                display: flex;
+                align-items:center;
+                padding: 32px;
+            ">
+                <square-graph v-bind:value="val.scale" />
                 <div style="margin-left: 50px;">
                     <div>Name: {{val.name}}</div>
                     <div>Diameter: {{val.estimated_diameter.kilometers.estimated_diameter_max}}</div>
