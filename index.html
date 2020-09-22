@@ -11,7 +11,7 @@
             :root {
                 --main-color: #2af598;
                 --main-color-dark: #0a1e1a;
-tooltip                 --secondary-color-dark: 25,67,94;
+                --secondary-color-dark: rgb(25,67,94);
             }
 
             body {
@@ -81,7 +81,7 @@ tooltip                 --secondary-color-dark: 25,67,94;
                 align-items: center;
                 justify-content: center;
                 flex-shrink: 0;
-                box-shadow: inset 0 0 16px rgb(var(--secondary-color-dark)),
+                box-shadow: inset 0 0 16px var(--secondary-color-dark),
                 0 0 16px var(--main-color);
                 z-index: 0;
             }
@@ -97,7 +97,7 @@ tooltip                 --secondary-color-dark: 25,67,94;
                 border: 1px solid white;
                 padding: 1.5em;
                 color: white;
-                background-color: rgba(var(--secondary-color-dark), 0.85);
+                background-color: rgba(0,0,0,0.15);
                 line-height: 1.5;
                 white-space: nowrap;
                 z-index: 1;
