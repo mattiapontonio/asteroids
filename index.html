@@ -625,7 +625,9 @@ tooltip                 --secondary-color-dark: 25,67,94;
                 },
                 data: function() {
                     return {
-                        data: new Array()
+                        data: new Array(),
+                        loading: new Boolean(),
+                        errored: new Boolean(),
                     }
                 },
                 computed: {
@@ -653,12 +655,13 @@ tooltip                 --secondary-color-dark: 25,67,94;
                         url.searchParams.set('end_date', end_date);
                         url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
                         this.loading = true;
+                        this.errored = false;
                         axios.get(url).then(response => {
                             this.data = response.data.near_earth_objects;
                             this.loading = false;
                         }).catch(error => {
-                            console.log(error)
-                            this.errored = true
+                            console.error(error);
+                            this.errored = true;
                         }).finally(() => this.loading = false);
                     }
                 },
@@ -702,7 +705,15 @@ tooltip                 --secondary-color-dark: 25,67,94;
                 <div style="margin-left: 8px;">Empty area: brightness</div>
             </div>
         </div>
-        <brightest-of-the-week-asteroids v-bind:asteroids="items"></brightest-of-the-week-asteroids>
+        <section v-if="errored">
+            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+        </section>
+        <section v-else>
+            <div v-if="loading">Loading...</div>
+            <brightest-of-the-week-asteroids 
+                v-else
+                v-bind:asteroids="items" />
+        </section>
     </div>`
             });
             const app = new Vue({
@@ -778,21 +789,19 @@ tooltip                 --secondary-color-dark: 25,67,94;
                         id="app" 
                         style="display:flex; width: 100%;"
                     >
-                    <div v-if="loading">Loading</div>
-                        <asteroids-of-the-day 
-                            v-bind:date="date"
-                            v-bind:start_date="start_date"
-                            v-bind:end_date="end_date"
-                            v-bind:asteroids="asteroids_of_the_day"
-                            v-bind:onchangedate="onchangedate"
-                            v-bind:loading="loading"
-                            v-bind:errored="errored"
-                        />
-                        <brightest-of-the-week 
-                            v-bind:start_date="start_date"
-                            v-bind:end_date="end_date"
-                        />
-                    </div>
+                    <asteroids-of-the-day 
+                        v-bind:date="date"
+                        v-bind:start_date="start_date"
+                        v-bind:end_date="end_date"
+                        v-bind:asteroids="asteroids_of_the_day"
+                        v-bind:onchangedate="onchangedate"
+                        v-bind:loading="loading"
+                        v-bind:errored="errored"
+                    />
+                    <brightest-of-the-week 
+                        v-bind:start_date="start_date"
+                        v-bind:end_date="end_date"
+                    />
                     `
             });
 
