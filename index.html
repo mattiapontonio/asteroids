@@ -254,8 +254,8 @@
                 padding: 32px;
             ">
                 <div style="
-                    width: 64px;
-                    height:64px;
+                    width: 40px;
+                    height:40px;
                     border:1px solid white;
                     display:flex;
                     justify-content:center;
@@ -263,6 +263,7 @@
                     transform: rotate(-45deg);
                     box-sizing: border-box;
                     flex-shrink: 0;
+                    box-shadow: 0 0 16px white;
                 ">
                     <div 
                         style="
@@ -274,8 +275,8 @@
                             align-items:center;
                         "
                         v-bind:style="{ 
-                            width: val.scale * 64 + 'px',
-                            height: val.scale * 64 + 'px'
+                            width: val.scale * 40 + 'px',
+                            height: val.scale * 40 + 'px'
                         }"
                     >
                     </div>
