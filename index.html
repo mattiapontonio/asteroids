@@ -132,6 +132,12 @@
             Vue.filter('scale', function (v = new Number(), min = new Number(), max = new Number()) {
                 return (v - min) / (max - min)
             });
+            Vue.filter('min', function (values = new Array()) {
+                return Math.min(...values);
+            });
+            Vue.filter('max', function (values = new Array()) {
+                return Math.max(...values);
+            });
             Vue.component('day-selector-radio', {
                 props: {
                     date: {
@@ -290,24 +296,20 @@
                         const y = 'distance';
                         const d = 'diameter';
                         const scale = Vue.filter('scale');
+                        const min = Vue.filter('min');
+                        const max = Vue.filter('max');
                         const items = this.asteroids;
                         return items.map((e, i, a) => {
                             const elements = a.map(e => e[x]);
-                            const min = Math.min(...elements);
-                            const max = Math.max(...elements);
-                            e.x = scale(e[x], min, max);
+                            e.x = scale(e[x], min(elements), max(elements));
                             return e;
                         }).map((e, i, a) => {
                             const elements = a.map(e => e[y]);
-                            const min = Math.min(...elements);
-                            const max = Math.max(...elements);
-                            e.y = scale(e[y], min, max);
+                            e.y = scale(e[y], min(elements), max(elements));
                             return e;
                         }).map((e, i, a) => {
                             const elements = a.map(e => e[d]);
-                            const min = Math.min(...elements);
-                            const max = Math.max(...elements);
-                            e.d = scale(e[d], min, max);
+                            e.d = scale(e[d], min(elements), max(elements));
                             return e;
                         })
                     }
@@ -632,11 +634,11 @@
                 computed: {
                     brightest_of_the_week: function () {
                         return Object.values(this.near_earth_objects).flat(1).sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h).slice(0, 5).reverse().map((e, i, a) => {
-                            const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h)
-                            const min = Math.min(...absolute_magnitude_hs);
-                            const max = Math.max(...absolute_magnitude_hs);
+                            const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
                             const scale = Vue.filter('scale');
-                            e.scale = scale(e.absolute_magnitude_h, min, max);
+                            const min = Vue.filter('min');
+                            const max = Vue.filter('max');
+                            e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
                             return e;
                         });
                     }
