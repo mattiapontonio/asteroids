@@ -31,6 +31,11 @@
                 background-color: transparent;
             }
 
+            input+label:hover {
+                border-color: var(--main-color);
+                color: var(--main-color);
+            }
+
             input:checked+label {
                 border: 1px solid var(--main-color);
                 background-color: var(--main-color);
@@ -329,7 +334,7 @@
             style="
                 display: flex;
                 align-items:center;
-                padding: 32px 0;
+                margin: 32px 0px;
             ">
                 <square-graph v-bind:value="val.scale" />
                 <div style="margin-left: 50px;">
