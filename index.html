@@ -244,6 +244,14 @@
                         default: () => new Number()
                     }
                 },
+                computed: {
+                    boxShadow: function () {
+                        return `0 0 ${(1-this.value)*16}px white`;
+                    },
+                    dimension: function () {
+                        return this.value * 40 + 'px';
+                    }
+                },
                 template: `
                 <div style="
                     width: 40px;
@@ -255,8 +263,11 @@
                     transform: rotate(-45deg);
                     box-sizing: border-box;
                     flex-shrink: 0;
-                    box-shadow: 0 0 16px white;
-                ">
+                "
+                v-bind:style="{ 
+                    boxShadow
+                }"
+                >
                     <div 
                         style="
                             width:0px;
@@ -267,8 +278,8 @@
                             align-items:center;
                         "
                         v-bind:style="{ 
-                            width: value * 40 + 'px',
-                            height: value * 40 + 'px'
+                            width: dimension,
+                            height: dimension
                         }"
                     >
                     </div>
