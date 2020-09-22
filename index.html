@@ -249,24 +249,45 @@
                         return `0 0 ${(1-this.value)*16}px white`;
                     },
                     dimension: function () {
-                        return this.value * 40 + 'px';
+                        const unit = 'px';
+                        const outer = 80;
+                        const hypotenuse = outer;
+                        const cathetus = Math.sqrt(Math.pow(hypotenuse, 2) / 2);
+                        return {
+                            outer: hypotenuse + unit, 
+                            inner: cathetus + unit,
+                            innerScaled: this.value * cathetus + unit,
+                        }
                     }
                 },
                 template: `
-                <div style="
-                    width: 40px;
-                    height:40px;
-                    border:1px solid white;
-                    display:flex;
-                    justify-content:center;
-                    align-items:center;
-                    transform: rotate(-45deg);
-                    box-sizing: border-box;
-                    flex-shrink: 0;
-                "
-                v-bind:style="{ 
-                    boxShadow
-                }"
+                <div 
+                    v-bind:style="{
+                        width: dimension.outer,
+                        height: dimension.outer
+                    }"
+                    style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                    "
+                >
+                <div 
+                    v-bind:style="{
+                        width: dimension.inner,
+                        height: dimension.inner,
+                        boxShadow
+                    }"
+                    style="
+                        border: 1px solid white;
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                        transform: rotate(-45deg);
+                        box-sizing: border-box;
+                        flex-shrink: 0;
+                    "
                 >
                     <div 
                         style="
@@ -278,8 +299,8 @@
                             align-items:center;
                         "
                         v-bind:style="{ 
-                            width: dimension,
-                            height: dimension
+                            width: dimension.innerScaled,
+                            height: dimension.innerScaled
                         }"
                     >
                     </div>
@@ -294,6 +315,7 @@
                         bottom: 0; 
                         right: 0;
                     "></div>
+                </div>
                 </div>
     `,
             });
@@ -311,7 +333,7 @@
             style="
                 display: flex;
                 align-items:center;
-                padding: 32px;
+                padding: 32px 0;
             ">
                 <square-graph v-bind:value="val.scale" />
                 <div style="margin-left: 50px;">
