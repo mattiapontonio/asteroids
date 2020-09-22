@@ -216,17 +216,18 @@ tooltip                 --secondary-color-dark: 25,67,94;
                 },
                 computed: {
                     days: function () {
-                        const weekday = new Array(7);
+                        const days = new Array();
                         const label = date => ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'][date.getDay()]
+                        const date = this.date;
                         for (let i = 0; i < 7; i++) {
-                            let date = new Date();
-                            date.setDate(this.date.getDate() + (i - this.date.getDay()));
-                            weekday[i] = {
-                                date,
-                                label: label(date)
-                            }
+                            const d = new Date();
+                            d.setDate(date.getDate() + (i - date.getDay()));
+                            days.push({
+                                date: date.getDate() == d.getDate() ? date : d,
+                                label: label(d)
+                            });
                         }
-                        return weekday
+                        return days
                     }
                 },
                 template: `
