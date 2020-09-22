@@ -616,10 +616,54 @@ tooltip                 --secondary-color-dark: 25,67,94;
             });
             Vue.component('brightest-of-the-week', {
                 props: {
-                    asteroids: {
-                        type: Array,
-                        default: () => new Array()
+                    start_date: {
+                        type: Date
+                    },
+                    end_date: {
+                        type: Date
                     }
+                },
+                data: function() {
+                    return {
+                        data: new Array()
+                    }
+                },
+                computed: {
+                    items: function () {
+                        return Object.values(this.data).flat(1).sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h).slice(0, 5).reverse().map((e, i, a) => {
+                            const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
+                            const scale = Vue.filter('scale');
+                            const min = Vue.filter('min');
+                            const max = Vue.filter('max');
+                            e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
+                            return e;
+                        });
+                    }
+                },
+                methods: {
+                    get() {
+                        const formatted = Vue.filter('formatted');
+                        const start_date = formatted(this.start_date);
+                        const end_date = formatted(this.end_date);
+                        const date = formatted(this.date);
+                        console.log(date, start_date, end_date);
+                        console.assert(date >= start_date && date <= end_date);
+                        const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
+                        url.searchParams.set('start_date', start_date);
+                        url.searchParams.set('end_date', end_date);
+                        url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
+                        this.loading = true;
+                        axios.get(url).then(response => {
+                            this.data = response.data.near_earth_objects;
+                            this.loading = false;
+                        }).catch(error => {
+                            console.log(error)
+                            this.errored = true
+                        }).finally(() => this.loading = false);
+                    }
+                },
+                mounted() {
+                    this.get()
                 },
                 template: `
   <div
@@ -658,7 +702,7 @@ tooltip                 --secondary-color-dark: 25,67,94;
                 <div style="margin-left: 8px;">Empty area: brightness</div>
             </div>
         </div>
-        <brightest-of-the-week-asteroids v-bind:asteroids="asteroids"></brightest-of-the-week-asteroids>
+        <brightest-of-the-week-asteroids v-bind:asteroids="items"></brightest-of-the-week-asteroids>
     </div>`
             });
             const app = new Vue({
@@ -682,18 +726,6 @@ tooltip                 --secondary-color-dark: 25,67,94;
                             return date;
                         }
                     },
-                },
-                computed: {
-                    brightest_of_the_week: function () {
-                        return Object.values(this.near_earth_objects).flat(1).sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h).slice(0, 5).reverse().map((e, i, a) => {
-                            const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
-                            const scale = Vue.filter('scale');
-                            const min = Vue.filter('min');
-                            const max = Vue.filter('max');
-                            e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
-                            return e;
-                        });
-                    }
                 },
                 watch: {
                     date: function (newDate, oldDate) {
@@ -734,33 +766,12 @@ tooltip                 --secondary-color-dark: 25,67,94;
                             this.errored = true
                         }).finally(() => this.loading = false);
                     },
-                    get_brightest_of_the_week() {
-                        const formatted = Vue.filter('formatted');
-                        const start_date = formatted(this.start_date);
-                        const end_date = formatted(this.end_date);
-                        const date = formatted(this.date);
-                        console.log(date, start_date, end_date);
-                        console.assert(date >= start_date && date <= end_date);
-                        const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
-                        url.searchParams.set('start_date', start_date);
-                        url.searchParams.set('end_date', end_date);
-                        url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
-                        this.loading = true;
-                        axios.get(url).then(response => {
-                            this.near_earth_objects = response.data.near_earth_objects;
-                            this.loading = false;
-                        }).catch(error => {
-                            console.log(error)
-                            this.errored = true
-                        }).finally(() => this.loading = false);
-                    },
                     onchangedate(date = new Date()) {
                         this.date = date;
                     }
                 },
                 mounted() {
                     this.get_asteroids_of_the_day();
-                    this.get_brightest_of_the_week();
                 },
                 template: `
                     <div 
@@ -780,7 +791,6 @@ tooltip                 --secondary-color-dark: 25,67,94;
                         <brightest-of-the-week 
                             v-bind:start_date="start_date"
                             v-bind:end_date="end_date"
-                            v-bind:asteroids="brightest_of_the_week"
                         />
                     </div>
                     `
