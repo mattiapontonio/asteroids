@@ -1,5 +1,13 @@
 # asteroids
 
+## Getting started
+```
+git clone https://github.com/mattiapontonio/asteroids.git
+cd asteroids
+npm i
+npm run serve
+```
+
 ## Project setup
 ```
 npm install
