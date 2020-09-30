@@ -2,10 +2,10 @@
 
 A Vue JS based scatter plot and list displaying NASA's [Near Earth Object Web Service](https://api.nasa.gov/) datas.
 
-## Prerequisits
+## Prerequisites
 
 - Node JS and NPM
-- [Vue CLI](https://cli.vuejs.org/) globally insalled
+- [Vue CLI](https://cli.vuejs.org/) globally installed
 
 ## Getting started
 ```
