@@ -1,5 +1,7 @@
 # asteroids
 
+A Vue JS based scatter plot and list displaying NASA's [Near Earth Object Web Service](https://api.nasa.gov/) datas.
+
 ## Getting started
 ```
 git clone https://github.com/mattiapontonio/asteroids.git
