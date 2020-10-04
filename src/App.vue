@@ -45,7 +45,7 @@
         url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
         this.loading = true;
         this.errored = false;
-        axios.get(url).then(response => Promise.all(Object.values(response.data.near_earth_objects[date]).map(e => axios.get(e.links.self))).then(values => {
+        axios.get(url).then(response => Promise.all(Object.values(response.data.near_earth_objects[date]).map(e => axios.get(`https://api.nasa.gov/neo/rest/v1/neo/${e.id}?api_key=${process.env.VUE_APP_API_KEY}`))).then(values => {
           this.asteroids_of_the_day = values.map(e => e.data).map(e => Object.assign({}, {
             id: e.id,
             name: e.name,
