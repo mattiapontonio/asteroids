@@ -42,7 +42,7 @@
         const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
         url.searchParams.set('start_date', date);
         url.searchParams.set('end_date', date);
-        url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
+        url.searchParams.set('api_key', process.env.VUE_APP_API_KEY);
         this.loading = true;
         this.errored = false;
         axios.get(url).then(response => Promise.all(Object.values(response.data.near_earth_objects[date]).map(e => axios.get(`https://api.nasa.gov/neo/rest/v1/neo/${e.id}?api_key=${process.env.VUE_APP_API_KEY}`))).then(values => {

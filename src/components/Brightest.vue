@@ -92,7 +92,7 @@
                 const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
                 url.searchParams.set('start_date', start_date);
                 url.searchParams.set('end_date', end_date);
-                url.searchParams.set('api_key', 'Qum6yuCBnZO67fvlDRveXm4gdkqZsv3OnBbcqWzv');
+                url.searchParams.set('api_key', process.env.VUE_APP_API_KEY);
                 this.loading = true;
                 this.errored = false;
                 axios.get(url).then(response => {
