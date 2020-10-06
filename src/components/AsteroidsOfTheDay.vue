@@ -6,7 +6,7 @@
     padding: 0 16px;
     ">
     <h2>Asteroids of the day</h2>
-    <div style="display: flex;">
+    <div style="display: flex;flex-wrap:wrap;">
       <div style="flex-grow: 1;">
         <p>Select one day to update the chart:</p>
         <selector

@@ -14,11 +14,11 @@
                 <bubble
                     v-bind:d="1"
                     v-bind:style="{
-                            position: 'absolute',
-                            transform: 'translateX(-50%)'
+                            position: 'relative',
+                            transform: 'none'
                         }"
                 />
-                <span style="margin-left:16px">Max km</span>
+                <span style="transform: translateX(calc(16px - (100px/2)));">Max km</span>
             </div>
         </div>
     </div>
