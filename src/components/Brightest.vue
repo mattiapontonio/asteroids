@@ -1,7 +1,5 @@
 <template>
-    <div style="
-                padding: 0 16px;
-    border-left: 2px solid white;">
+    <div class="kuoftalirv">
         <h2>Brightest of the week</h2>
         <h3>Magnitude <span>(h)</span></h3>
         <div>
@@ -110,3 +108,14 @@
     }
 
 </script>
+<style>
+    .kuoftalirv {
+        padding: 0 16px;
+        border-left: 0px solid white;
+    }
+  @media (max-width: 800px) {
+    .kuoftalirv {
+      border-left-width: 0;
+    }
+  }
+</style>

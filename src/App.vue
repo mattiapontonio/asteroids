@@ -1,9 +1,5 @@
 <template>
-  <div
-    id="app"
-    class="app"
-    style="display:flex; width: 100%;"
-  >
+  <div id="app" class="app">
     <asteroids-of-the-day
       v-bind:date="date"
       v-bind:start_date="start_date"
@@ -105,6 +101,17 @@
     --secondary-color-dark: rgb(25, 67, 94);
   }
 
+  .app {
+    display:flex; 
+    width: auto; 
+    flex-wrap: nowrap;
+  }
+  @media (max-width: 800px) {
+  .app {
+    flex-direction: column;
+  }
+}
+
   body {
     background: rgb(2, 0, 36);
     background: linear-gradient(180deg, #0a1e1a 0%, #19435e 100%);
@@ -118,6 +125,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
     margin-top: 0px;
+    max-width:100%;
   }
 
   input+label {
