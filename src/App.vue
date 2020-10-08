@@ -1,18 +1,20 @@
 <template>
   <body id="app" class="app">
-    <asteroids-of-the-day
-      v-bind:date="date"
-      v-bind:start_date="start_date"
-      v-bind:end_date="end_date"
-      v-bind:asteroids="asteroids_of_the_day"
-      v-bind:onchangedate="onchangedate"
-      v-bind:loading="loading"
-      v-bind:errored="errored"
-    />
-    <brightest
-      v-bind:start_date="start_date"
-      v-bind:end_date="end_date"
-    />
+    <main>
+      <asteroids-of-the-day
+        v-bind:date="date"
+        v-bind:start_date="start_date"
+        v-bind:end_date="end_date"
+        v-bind:asteroids="asteroids_of_the_day"
+        v-bind:onchangedate="onchangedate"
+        v-bind:loading="loading"
+        v-bind:errored="errored"
+      />
+      <brightest
+        v-bind:start_date="start_date"
+        v-bind:end_date="end_date"
+      />
+    </main>
     <footer>version: {{version}}</footer>
   </body>
 </template>
@@ -109,13 +111,13 @@
     --secondary-color-dark: rgb(25, 67, 94);
   }
 
-  .app {
+  main {
     display:flex; 
     width: auto; 
     flex-wrap: nowrap;
   }
   @media (max-width: 800px) {
-  .app {
+  main {
     flex-direction: column;
   }
 }
