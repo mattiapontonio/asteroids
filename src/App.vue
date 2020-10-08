@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="app">
+  <body id="app" class="app">
     <asteroids-of-the-day
       v-bind:date="date"
       v-bind:start_date="start_date"
@@ -13,13 +13,16 @@
       v-bind:start_date="start_date"
       v-bind:end_date="end_date"
     />
-  </div>
+    <footer>version: {{version}}</footer>
+  </body>
 </template>
 <script>
   import AsteroidsOfTheDay from './components/AsteroidsOfTheDay.vue';
   import Brightest from './components/Brightest.vue';
   import Vue from 'vue';
   import axios from 'axios';
+  import {version} from '../package.json';
+
   export default {
     name: 'App',
     components: {
@@ -90,6 +93,11 @@
           return date;
         }
       },
+    },
+    computed: {
+      version: function() {
+        return version;
+      }
     }
   }
 
