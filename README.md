@@ -37,7 +37,7 @@ https://api.nasa.gov/
 
 #### Windows
 ```
-export VUE_APP_API_KEY=<api-key>
+export API_KEY=<api-key>
 ```
 
 ##### Esempio

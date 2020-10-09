@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "vue-cli-service build && node index.js"
+    "prestart": "vue-cli-service build",
+    "start": "node index.js"
   },
   "dependencies": {
     "axios": "^0.20.0",
