@@ -85,12 +85,12 @@
                 const start_date = formatted(this.start_date);
                 const end_date = formatted(this.end_date);
                 const date = formatted(this.date);
+                const url = new URL(window.location.origin);
                 console.log(date, start_date, end_date);
                 console.assert(date >= start_date && date <= end_date);
-                const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
+                url.pathname = 'neo/rest/v1/feed';
                 url.searchParams.set('start_date', start_date);
                 url.searchParams.set('end_date', end_date);
-                url.searchParams.set('api_key', process.env.VUE_APP_API_KEY);
                 this.loading = true;
                 this.errored = false;
                 axios.get(url).then(response => {

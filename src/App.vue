@@ -50,13 +50,17 @@
       get_asteroids_of_the_day() {
         const formatted = Vue.filter('formatted');
         const date = formatted(this.date);
-        const url = new URL('https://api.nasa.gov/neo/rest/v1/feed');
+        const url = new URL(window.location.origin);
+        url.pathname = 'neo/rest/v1/feed';
         url.searchParams.set('start_date', date);
         url.searchParams.set('end_date', date);
-        url.searchParams.set('api_key', process.env.VUE_APP_API_KEY);
         this.loading = true;
         this.errored = false;
-        axios.get(url).then(response => Promise.all(Object.values(response.data.near_earth_objects[date]).map(e => axios.get(`https://api.nasa.gov/neo/rest/v1/neo/${e.id}?api_key=${process.env.VUE_APP_API_KEY}`))).then(values => {
+        axios.get(url).then(response => Promise.all(Object.values(response.data.near_earth_objects[date]).map(e => {
+          const url = new URL(window.location.origin);
+          url.pathname = `neo/rest/v1/neo/${e.id}`;
+          return axios.get(url);
+        })).then(values => {
           this.asteroids_of_the_day = values.map(e => e.data).map(e => Object.assign({}, {
             id: e.id,
             name: e.name,
