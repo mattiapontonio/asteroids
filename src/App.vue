@@ -1,5 +1,9 @@
 <template>
-  <body id="app" class="app">
+
+  <body
+    id="app"
+    class="app"
+  >
     <main>
       <asteroids-of-the-day
         v-bind:date="date"
@@ -10,10 +14,13 @@
         v-bind:loading="loading"
         v-bind:errored="errored"
       />
-      <brightest
-        v-bind:start_date="start_date"
-        v-bind:end_date="end_date"
-      />
+      <aside>
+        <brightest
+          v-bind:start_date="start_date"
+          v-bind:end_date="end_date"
+        />
+        <apod />
+      </aside>
     </main>
     <footer>version: {{version}}</footer>
   </body>
@@ -21,15 +28,18 @@
 <script>
   import AsteroidsOfTheDay from './components/AsteroidsOfTheDay.vue';
   import Brightest from './components/Brightest.vue';
+  import Apod from './components/Apod.vue';
   import Vue from 'vue';
   import axios from 'axios';
-  import {version} from '../package.json';
-
+  import {
+    version
+  } from '../package.json';
   export default {
     name: 'App',
     components: {
       Brightest,
-      AsteroidsOfTheDay
+      AsteroidsOfTheDay,
+      Apod
     },
     watch: {
       date: function () {
@@ -97,7 +107,7 @@
       },
     },
     computed: {
-      version: function() {
+      version: function () {
         return version;
       }
     }
@@ -112,15 +122,16 @@
   }
 
   main {
-    display:flex; 
-    width: auto; 
+    display: flex;
+    width: auto;
     flex-wrap: nowrap;
   }
+
   @media (max-width: 800px) {
-  main {
-    flex-direction: column;
+    main {
+      flex-direction: column;
+    }
   }
-}
 
   body {
     background: rgb(2, 0, 36);
@@ -135,7 +146,11 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
     margin-top: 0px;
-    max-width:100%;
+    max-width: 100%;
+  }
+
+  img {
+    max-width: 100%;
   }
 
   input+label {
@@ -182,6 +197,12 @@
     {
     transform: translateX(10px);
     opacity: 0;
+  }
+
+  aside {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: calc(100%/3);
   }
 
   .bubble {
