@@ -19,6 +19,32 @@ npm run serve
 ```
 npm install
 ```
+### Settare la porta
+
+#### Windows
+```
+export PORT=<PORT>
+```
+
+##### Esempio
+
+```
+export PORT=3000
+```
+
+### Settare la API Key
+https://api.nasa.gov/
+
+#### Windows
+```
+export VUE_APP_API_KEY=<api-key>
+```
+
+##### Esempio
+
+```
+export PORT=abcd1234
+```
 
 ### Compiles and hot-reloads for development
 ```
