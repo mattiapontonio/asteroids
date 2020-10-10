@@ -1,65 +1,74 @@
 # asteroids
 
-A Vue JS based scatter plot and list displaying NASA's [Near Earth Object Web Service](https://api.nasa.gov/) datas.
+A [Vue.js](https://vuejs.org) applications of [NASA's API](https://api.nasa.gov).
 
 ## Prerequisites
 
-- Node JS and NPM
-- [Vue CLI](https://cli.vuejs.org/) globally installed
+- [Node.js](https://nodejs.org/en/);
+- [npm](https://www.npmjs.com);
+- [Vue CLI](https://cli.vuejs.org/) globally installed;
+- [Git](https://git-scm.com/);
 
 ## Getting started
-```
+```shell
 git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
 npm i
-npm run serve
+npm run build
+npm start
 ```
 
-## Project setup
+## Lifecycle scripts
+```shell
+npm run
 ```
+
+## Install
+```shell
 npm install
 ```
-### Settare la porta
+### Enviroment
 
 #### Windows
-```
+```shell
 export PORT=<PORT>
 ```
 
 ##### Esempio
 
-```
+```shell
 export PORT=3000
 ```
 
-### Settare la API Key
+### API Key
 https://api.nasa.gov/
 
 #### Windows
-```
+```shell
 export API_KEY=<api-key>
 ```
 
 ##### Esempio
 
-```
+```shell
 export PORT=abcd1234
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+### Develop
+```shell
+npm run build
+npm start
 ```
 
-### Compiles and minifies for production
-```
+### Build
+```shell
 npm run build
 ```
 
 ### Lints and fixes files
-```
+```shell
 npm run lint
 ```
 
-### Customize configuration
+### Vue CLI
 See [Configuration Reference](https://cli.vuejs.org/config/).
