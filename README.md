@@ -6,7 +6,7 @@ A [Vue.js](https://vuejs.org) applications of [NASA's API](https://api.nasa.gov)
 
 - [Node.js](https://nodejs.org/en/);
 - [npm](https://www.npmjs.com);
-- [Vue CLI](https://cli.vuejs.org/) globally installed;
+- [Vue CLI](https://cli.vuejs.org/);
 - [Git](https://git-scm.com/);
 
 ## Getting started
