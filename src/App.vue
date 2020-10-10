@@ -259,4 +259,14 @@
     flex: 1;
   }
 
+  th,
+  td {
+    padding: 0.25em;
+    text-align: left;
+  }
+
+  table {
+    display: block;
+  }
+
 </style>

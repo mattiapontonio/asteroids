@@ -23,33 +23,20 @@
       v-bind:loading="loading"
       v-bind:errored="errored"
     />
-    <div>
-      <div>
-        <span style="
-                width: 25px;
-                display: inline-block;
-                margin-right: 10px;
-                ">⬆</span>
-        <span style="
-                text-transform: uppercase;
-                font-weight: bold;
-                margin-right: 10px;
-                ">Distance</span>
-        <span>(au)</span>
-      </div>
-      <div style="border-top: 1px solid gray;">
-        <span style="
-                    width: 25px;
-                    display: inline-block;
-                    margin-right: 10px;
-                    ">➡</span>
-        <span style="
-                    text-transform: uppercase;
-                    font-weight: bold;
-                    margin-right: 10px;
-                    ">Velocity</span>
-        <span>(km/s)</span></div>
-    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td>⬆</td>
+          <td>Distance</td>
+          <td>(au)</td>
+        </tr>
+        <tr>
+          <td>➡</td>
+          <td>Velocity</td>
+          <td>(km/s)</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 <script>
