@@ -1,5 +1,5 @@
 <template>
-    <div class="kuoftalirv">
+    <article>
         <h2>Brightest of the week</h2>
         <h3>Magnitude <span>(h)</span></h3>
         <table>
@@ -44,7 +44,7 @@
                 v-bind:asteroids="items"
             />
         </section>
-    </div>
+    </article>
 </template>
 <script>
     import Vue from 'vue';
@@ -112,13 +112,13 @@
 
 </script>
 <style>
-    .kuoftalirv {
+    aside {
         padding: 0 16px;
         border-left: 0px solid white;
     }
 
     @media (max-width: 800px) {
-        .kuoftalirv {
+        aside {
             border-left-width: 0;
         }
     }
