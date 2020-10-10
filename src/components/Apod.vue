@@ -1,7 +1,7 @@
 <template>
     <article>
         <h2>Astronomy Picture of the Day</h2>
-        <div v-if="loading">Loading...</div>
+        <div v-if="loading" class="gradient">Loading...</div>
         <div v-else>
             <p>
                 {{(

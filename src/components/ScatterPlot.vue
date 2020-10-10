@@ -3,13 +3,12 @@
         <section v-if="errored">
             <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
         </section>
+        <div v-else-if="loading" class="gradient">Loading...</div>
         <section
             v-else
             class="container"
         >
-            <div v-if="loading">Loading...</div>
             <asteroid
-                v-else
                 v-for="(item, i) in items"
                 v-bind:data="{
                     ...item
@@ -82,3 +81,29 @@
     }
 
 </script>
+<style>
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+.gradient {
+    animation-duration: 1.8s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, 
+    var(--main-color) 8%, 
+    var(--main-color-dark) 38%,
+    var(--main-color) 54%);
+    background-size: 1000px 640px;
+    justify-self: stretch;
+    align-self: stretch;
+    flex-grow: 1;
+}
+</style>
