@@ -6,7 +6,7 @@ A [Vue.js](https://vuejs.org) applications of [NASA's API](https://api.nasa.gov)
 
 - [Node.js](https://nodejs.org/en/);
 - [npm](https://www.npmjs.com);
-- [Vue CLI](https://cli.vuejs.org/) globally installed;
+- [Vue CLI](https://cli.vuejs.org/);
 - [Git](https://git-scm.com/);
 
 ## Getting started
@@ -55,10 +55,10 @@ export PORT=abcd1234
 ```
 
 ### Develop
-```shell
-npm run build
-npm start
-```
+|Terminal|Command|What|
+|-|-|-|
+|1|`npm run build`|build every change|
+|2|`npm start`|running...|
 
 ### Build
 ```shell

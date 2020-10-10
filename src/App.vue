@@ -4,6 +4,7 @@
     id="app"
     class="app"
   >
+    <h1>Aseroids</h1>
     <main>
       <asteroids-of-the-day
         v-bind:date="date"
@@ -22,7 +23,21 @@
         <apod />
       </aside>
     </main>
-    <footer>version: {{version}}</footer>
+    <footer>
+      
+        <table>
+            <tbody>
+                <tr>
+                    <td>GitHub</td>
+                    <td><a href="https://github.com/mattiapontonio/asteroids">https://github.com/mattiapontonio/asteroids</a></td>
+                </tr>
+                <tr>
+                    <td>Version</td>
+                    <td>{{version}}</td>
+                </tr>
+            </tbody>
+        </table>
+      </footer>
   </body>
 </template>
 <script>
@@ -181,7 +196,7 @@
   }
 
   h2 {
-    text-decoration: underline;
+    text-decoration: none;
   }
 
   /* Enter and leave animations can use different */
@@ -252,6 +267,7 @@
     justify-content: stretch;
     align-content: stretch;
     align-items: stretch;
+    justify-items: stretch;
   }
 
   .scatter-plot .container {
@@ -259,4 +275,17 @@
     flex: 1;
   }
 
+  th,
+  td {
+    padding: 0.25em;
+    text-align: left;
+  }
+
+  table {
+    display: block;
+  }
+footer{
+  background: white;
+  color:black;
+}
 </style>
