@@ -4,8 +4,8 @@
     id="app"
     class="app"
   >
+    <h1>Aseroids</h1>
     <main>
-      <h1>Aseroids</h1>
       <asteroids-of-the-day
         v-bind:date="date"
         v-bind:start_date="start_date"
@@ -284,5 +284,8 @@
   table {
     display: block;
   }
-
+footer{
+  background: white;
+  color:black;
+}
 </style>
