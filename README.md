@@ -55,10 +55,10 @@ export PORT=abcd1234
 ```
 
 ### Develop
-```shell
-npm run build
-npm start
-```
+|Terminal|Command|What|
+|-|-|-|
+|1|`npm run build`|build every change|
+|2|`npm start`|running...|
 
 ### Build
 ```shell
