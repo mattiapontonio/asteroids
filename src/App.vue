@@ -5,6 +5,7 @@
     class="app"
   >
     <main>
+      <h1>Aseroids</h1>
       <asteroids-of-the-day
         v-bind:date="date"
         v-bind:start_date="start_date"
