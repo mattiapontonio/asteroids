@@ -2,6 +2,12 @@
 
 A [Vue.js](https://vuejs.org) applications of [NASA's API](https://api.nasa.gov).
 
+![](https://img.shields.io/github/issues/mattiapontonio/asteroids)
+![](https://img.shields.io/github/forks/mattiapontonio/asteroids)
+![](https://img.shields.io/github/stars/mattiapontonio/asteroids)
+![](https://img.shields.io/github/license/mattiapontonio/asteroids)
+![](https://img.shields.io/github/issues/mattiapontonio/asteroids)
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/en/);
