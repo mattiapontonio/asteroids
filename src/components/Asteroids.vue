@@ -10,18 +10,29 @@
             "
         >
             <rhombus v-bind:value="val.scale" />
-            <div style="margin-left: 50px;">
-                <div>Name: {{val.name}}</div>
-                <div>Diameter: {{val.estimated_diameter.kilometers.estimated_diameter_max}}</div>
-                <div>Magnitude: {{val.absolute_magnitude_h}}</div>
-            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{val.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Diameter</td>
+                        <td>{{val.estimated_diameter.kilometers.estimated_diameter_max}}</td>
+                    </tr>
+                    <tr>
+                        <td>Magnitude</td>
+                        <td>{{val.absolute_magnitude_h}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
 <script>
     import Rhombus from './Rhombus.vue';
     export default {
-        name:'asteroids',
+        name: 'asteroids',
         components: {
             Rhombus
         },

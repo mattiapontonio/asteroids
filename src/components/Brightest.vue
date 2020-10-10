@@ -1,12 +1,12 @@
 <template>
-    <div class="kuoftalirv">
+    <article>
         <h2>Brightest of the week</h2>
         <h3>Magnitude <span>(h)</span></h3>
-        <div>
-            <div style="    
-            display: flex;
-            align-items: center;">
-                <div style="
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <div style="
                     width: 10px;
                     height:10px; 
                     box-sizing: border-box;
@@ -14,13 +14,13 @@
                     background-color: transparent;
                     border: 1px solid white;
                 "></div>
-                <div style="margin-left: 8px;">Filled area: magnitude</div>
-            </div>
-            <div style="    
-            display: flex;
-            align-items: center;
-            margin-top:8px;">
-                <div style="
+                    </td>
+                    <td>Filled area</td>
+                    <td>magnitude</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="
                     width: 10px;
                     height:10px; 
                     box-sizing: border-box;
@@ -28,20 +28,23 @@
                     background-color: white;
                     border: 1px solid white;
                 "></div>
-                <div style="margin-left: 8px;">Empty area: brightness</div>
-            </div>
-        </div>
+                    </td>
+                    <td>Empty area</td>
+                    <td>brightness</td>
+                </tr>
+            </tbody>
+        </table>
         <section v-if="errored">
             <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
         </section>
         <section v-else>
-            <div v-if="loading">Loading...</div>
+            <div v-if="loading" class="gradient">Loading...</div>
             <asteroids
                 v-else
                 v-bind:asteroids="items"
             />
         </section>
-    </div>
+    </article>
 </template>
 <script>
     import Vue from 'vue';
@@ -49,7 +52,7 @@
     import Asteroids from './Asteroids.vue';
     export default {
         name: 'brightest',
-        components:{
+        components: {
             Asteroids
         },
         props: {
@@ -109,13 +112,15 @@
 
 </script>
 <style>
-    .kuoftalirv {
+    aside {
         padding: 0 16px;
         border-left: 0px solid white;
     }
-  @media (max-width: 800px) {
-    .kuoftalirv {
-      border-left-width: 0;
+
+    @media (max-width: 800px) {
+        aside {
+            border-left-width: 0;
+        }
     }
-  }
+
 </style>
