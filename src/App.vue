@@ -23,7 +23,21 @@
         <apod />
       </aside>
     </main>
-    <footer>version: {{version}}</footer>
+    <footer>
+      
+        <table>
+            <tbody>
+                <tr>
+                    <td>GitHub</td>
+                    <td><a href="https://github.com/mattiapontonio/asteroids">https://github.com/mattiapontonio/asteroids</a></td>
+                </tr>
+                <tr>
+                    <td>Version</td>
+                    <td>{{version}}</td>
+                </tr>
+            </tbody>
+        </table>
+      </footer>
   </body>
 </template>
 <script>
