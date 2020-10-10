@@ -84,10 +84,10 @@
 <style>
 @keyframes placeHolderShimmer{
     0%{
-        background-position: -468px 0
+        background-position: 0 0
     }
     100%{
-        background-position: 468px 0
+        background-position: 100% 100%
     }
 }
 .gradient {
@@ -97,9 +97,9 @@
     animation-name: placeHolderShimmer;
     animation-timing-function: linear;
     background: #f6f7f8;
-    background: linear-gradient(to right, 
+    background: linear-gradient(-45deg, 
     var(--main-color) 8%, 
-    var(--main-color-dark) 38%,
+    white 38%,
     var(--main-color) 54%);
     background-size: 1000px 640px;
     justify-self: stretch;
