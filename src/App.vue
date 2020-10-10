@@ -181,7 +181,7 @@
   }
 
   h2 {
-    text-decoration: underline;
+    text-decoration: none;
   }
 
   /* Enter and leave animations can use different */
