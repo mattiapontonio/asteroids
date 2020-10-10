@@ -252,6 +252,7 @@
     justify-content: stretch;
     align-content: stretch;
     align-items: stretch;
+    justify-items: stretch;
   }
 
   .scatter-plot .container {
