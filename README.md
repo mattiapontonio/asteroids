@@ -21,7 +21,8 @@ git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
 npm i
 npm run build
-export PORT=3000
+export PORT=<port>
+export API_KEY=<key>
 npm start
 ```
 
