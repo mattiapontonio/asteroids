@@ -3,13 +3,7 @@
         <h2>Astronomy Picture of the Day</h2>
         <div v-if="loading" class="gradient">Loading...</div>
         <div v-else>
-            <p>
-                {{(
-                    date=>{ const d = new Date(date);
-                    const f = (new Intl.DateTimeFormat('it-IT')).format(d);
-                    return f;
-                })(date)}}
-            </p>
+            <p>{{date|DateTimeFormat)}}</p>
             <picture>
                 <source
                     media="(min-width:1680px)"
