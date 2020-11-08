@@ -50,17 +50,24 @@
     import Vue from 'vue';
     import axios from 'axios';
     import Asteroids from './Asteroids.vue';
+    const date = new Date();
     export default {
         name: 'brightest',
         components: {
             Asteroids
         },
         props: {
-            start_date: {
-                type: Date
+            start: {
+                type: Date,
+                default: date
             },
-            end_date: {
-                type: Date
+            end: {
+                type: Date,
+                default: date
+            },
+            date: {
+                type: Date,
+                default: date
             }
         },
         data: function () {
@@ -85,15 +92,16 @@
         methods: {
             get() {
                 const formatted = Vue.filter('formatted');
-                const start_date = formatted(this.start_date);
-                const end_date = formatted(this.end_date);
+                const start = formatted(this.start);
+                const end = formatted(this.end);
                 const date = formatted(this.date);
                 const url = new URL(window.location.origin);
-                console.log(date, start_date, end_date);
-                console.assert(date >= start_date && date <= end_date);
+                console.log(date, start, end);
+                console.assert(this.date >= this.start);
+                console.assert(this.date <= this.end);
                 url.pathname = 'neo/rest/v1/feed';
-                url.searchParams.set('start_date', start_date);
-                url.searchParams.set('end_date', end_date);
+                url.searchParams.set('start', start);
+                url.searchParams.set('end', end);
                 this.loading = true;
                 this.errored = false;
                 axios.get(url).then(response => {
