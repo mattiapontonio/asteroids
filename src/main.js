@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import './registerServiceWorker'
 
 Vue.config.productionTip = false;
 Vue.filter('formatted', function (date = new Date()) {
@@ -22,6 +23,9 @@ Vue.filter('min', function (values = new Array()) {
 });
 Vue.filter('max', function (values = new Array()) {
   return Math.max(...values);
+});
+Vue.filter('DateTimeFormat', function (v = new Date()) {
+  return new Intl.DateTimeFormat('it-IT').format(v);
 });
 new Vue({
   render: h => h(App),
