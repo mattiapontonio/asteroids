@@ -3,7 +3,7 @@
         <section v-if="errored">
             <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
         </section>
-        <div v-else-if="loading" class="gradient">Loading...</div>
+        <div v-else-if="loading" class="loading" style="position:absolute; width:100%; height:100%;"></div>
         <section
             v-else
             class="container"
@@ -82,28 +82,20 @@
 
 </script>
 <style>
-@keyframes placeHolderShimmer{
-    0%{
-        background-position: 0 0
-    }
-    100%{
-        background-position: 100% 100%
-    }
-}
-.gradient {
-    animation-duration: 1.8s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-name: placeHolderShimmer;
-    animation-timing-function: linear;
-    background: #f6f7f8;
-    background: linear-gradient(-45deg, 
-    var(--main-color) 8%, 
-    white 38%,
-    var(--main-color) 54%);
-    background-size: 1000px 640px;
+.loading {
+    background: rgba(var(--main-color-dark),0.5);
+	background-size: 400% 400%;
     justify-self: stretch;
     align-self: stretch;
     flex-grow: 1;
+    left:0;
+    top:0;
+    min-height: 128px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.loading:before{
+    content: 'Loading...';
 }
 </style>
