@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 0 16px;
     ">
     <h2>Asteroids of the day</h2>
     <div style="display: flex;flex-wrap:wrap;">
