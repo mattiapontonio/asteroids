@@ -8,6 +8,13 @@ A [Vue.js](https://vuejs.org) applications of [NASA's API](https://api.nasa.gov)
 ![](https://img.shields.io/github/license/mattiapontonio/asteroids)
 ![](https://img.shields.io/github/issues/mattiapontonio/asteroids)
 
+## Environments
+
+|branch|uri|
+|-|-|
+|develop|https://asteroids-nasa-develop.herokuapp.com/|
+|master|https://asteroids-nasa.herokuapp.com/|
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/en/);
