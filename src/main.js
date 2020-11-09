@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './registerServiceWorker'
 
 Vue.config.productionTip = false;
 Vue.filter('formatted', function (date = new Date()) {
@@ -30,3 +29,15 @@ Vue.filter('DateTimeFormat', function (v = new Date()) {
 new Vue({
   render: h => h(App),
 }).$mount('#app')
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
