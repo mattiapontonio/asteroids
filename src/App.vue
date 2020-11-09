@@ -4,7 +4,7 @@
     id="app"
     class="app"
   >
-    <h1>Aseroids</h1>
+    <h1>Asteroids</h1>
     <main>
       <asteroids-of-the-day
         v-bind:date="date"
@@ -135,9 +135,9 @@
 </script>
 <style>
   :root {
-    --main-color: #2af598;
-    --main-color-dark: #0a1e1a;
-    --secondary-color-dark: rgb(25, 67, 94);
+    --main-color: 42,245,152;
+    --main-color-dark: 10,30,26;
+    --secondary-color-dark: 25, 67, 94;
   }
 
   main {
@@ -166,6 +166,7 @@
     text-align: left;
     margin-top: 0px;
     max-width: 100%;
+    padding: 1em;
   }
 
   img {
@@ -176,20 +177,19 @@
     border: 1px solid white;
     background-color: transparent;
   }
-
   input+label:hover {
-    border-color: var(--main-color);
-    color: var(--main-color);
+    border-color: rgb(var(--main-color));
+    color: rgb(var(--main-color));
   }
 
   input:checked+label {
-    border: 1px solid var(--main-color);
-    background-color: var(--main-color);
-    color: var(--main-color-dark);
+    border: 1px solid rgb(var(--main-color));
+    background-color: rgb(var(--main-color));
+    color: rgb(var(--main-color-dark));
   }
 
   .radio {
-    border: 1px solid var(--main-color);
+    border: 1px solid rgb(var(--main-color));
     background: transparent;
     visibility: hidden;
     position: absolute;
@@ -225,7 +225,7 @@
   }
 
   .bubble {
-    border: 1px solid var(--main-color);
+    border: 1px solid rgb(var(--main-color));
     box-sizing: border-box;
     border-radius: 50%;
     display: flex;
@@ -233,15 +233,15 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: inset 0 0 16px var(--secondary-color-dark),
-      0 0 16px var(--main-color);
+    box-shadow: inset 0 0 16px rgb(var(--secondary-color-dark)),
+      0 0 16px rgb(var(--main-color));
     z-index: 0;
   }
 
   .bubble .point {
     width: 4px;
     height: 4px;
-    background: var(--main-color);
+    background: rgb(var(--main-color));
     border-radius: 50%;
   }
 
@@ -249,7 +249,7 @@
     border: 1px solid white;
     padding: 1.5em;
     color: white;
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.5);
     line-height: 1.5;
     white-space: nowrap;
     z-index: 1;
