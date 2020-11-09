@@ -38,7 +38,7 @@
             <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
         </section>
         <section v-else>
-            <div v-if="loading" class="gradient">Loading...</div>
+            <div v-if="loading" class="loading"></div>
             <asteroids
                 v-else
                 v-bind:asteroids="items"
