@@ -134,12 +134,6 @@
 
 </script>
 <style>
-  :root {
-    --main-color: 42,245,152;
-    --main-color-dark: 10,30,26;
-    --secondary-color-dark: 25, 67, 94;
-  }
-
   main {
     display: flex;
     width: auto;
@@ -178,18 +172,18 @@
     background-color: transparent;
   }
   input+label:hover {
-    border-color: rgb(var(--main-color));
-    color: rgb(var(--main-color));
+    border-color: rgb(42,245,152);
+    color: rgb(42,245,152);
   }
 
   input:checked+label {
-    border: 1px solid rgb(var(--main-color));
-    background-color: rgb(var(--main-color));
-    color: rgb(var(--main-color-dark));
+    border: 1px solid rgb(42,245,152);
+    background-color: rgb(42,245,152);
+    color: rgb(10,30,26);
   }
 
   .radio {
-    border: 1px solid rgb(var(--main-color));
+    border: 1px solid rgb(42,245,152);
     background: transparent;
     visibility: hidden;
     position: absolute;
@@ -225,7 +219,7 @@
   }
 
   .bubble {
-    border: 1px solid rgb(var(--main-color));
+    border: 1px solid rgb(42,245,152);
     box-sizing: border-box;
     border-radius: 50%;
     display: flex;
@@ -233,15 +227,15 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: inset 0 0 16px rgb(var(--secondary-color-dark)),
-      0 0 16px rgb(var(--main-color));
+    box-shadow: inset 0 0 16px rgb(25, 67, 94),
+      0 0 16px rgb(42,245,152);
     z-index: 0;
   }
 
   .bubble .point {
     width: 4px;
     height: 4px;
-    background: rgb(var(--main-color));
+    background: rgb(42,245,152);
     border-radius: 50%;
   }
 

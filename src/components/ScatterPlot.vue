@@ -83,7 +83,7 @@
 </script>
 <style>
 .loading {
-    background: rgba(var(--main-color-dark),0.5);
+    background: rgba(10,30,26,0.5);
 	background-size: 400% 400%;
     justify-self: stretch;
     align-self: stretch;
