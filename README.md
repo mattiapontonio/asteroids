@@ -15,12 +15,12 @@ A [Vue.js](https://vuejs.org) applications of [NASA's API](https://api.nasa.gov)
 |develop|https://asteroids-nasa-develop.herokuapp.com/|
 |master|https://asteroids-nasa.herokuapp.com/|
 
-## Prerequisites
+## Stack
 
-- [Node.js](https://nodejs.org/en/);
-- [npm](https://www.npmjs.com);
-- [Vue CLI](https://cli.vuejs.org/);
-- [Git](https://git-scm.com/);
+- [Node.js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com)
+- [Vue CLI](https://cli.vuejs.org/)
+- [Git](https://git-scm.com/)
 
 ## Getting started
 ```shell
@@ -33,57 +33,10 @@ export API_KEY=<key>
 npm start
 ```
 
-## Lifecycle scripts
+## Scripts
 ```shell
 npm run
 ```
 
-## Install
-```shell
-npm install
-```
-### Enviroment
-
-#### Windows
-```shell
-export PORT=<PORT>
-```
-
-##### Esempio
-
-```shell
-export PORT=3000
-```
-
-### API Key
+### API
 https://api.nasa.gov/
-
-#### Windows
-```shell
-export API_KEY=<api-key>
-```
-
-##### Esempio
-
-```shell
-export PORT=abcd1234
-```
-
-### Develop
-|Terminal|Command|What|
-|-|-|-|
-|1|`npm run build`|build every change|
-|2|`npm start`|running...|
-
-### Build
-```shell
-npm run build
-```
-
-### Lints and fixes files
-```shell
-npm run lint
-```
-
-### Vue CLI
-See [Configuration Reference](https://cli.vuejs.org/config/).
