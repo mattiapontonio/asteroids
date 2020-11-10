@@ -3,7 +3,7 @@
         <h2>Astronomy Picture of the Day</h2>
         <div v-if="loading" class="loading"></div>
         <div v-else>
-            <p>{{date|DateTimeFormat)}}</p>
+            <p>{{date|DateTimeFormat}}</p>
             <picture>
                 <source
                     media="(min-width:1680px)"
@@ -40,18 +40,13 @@
                 loading: false
             }
         },
-        methods: {
-            get() {
-                this.loading = true;
-                this.errored = false;
-                axios.get('/planetary/apod').then(response => Object.assign(this, response.data)).catch(error => {
-                    console.log(error)
-                    this.errored = true
-                }).finally(() => this.loading = false);
-            }
-        },
-        mounted() {
-            this.get();
+        async fetch() {
+            this.loading = true;
+            this.errored = false;
+            await axios.get('/planetary/apod').then(response => Object.assign(this, response.data)).catch(error => {
+                console.log(error)
+                this.errored = true
+            }).finally(() => this.loading = false);
         }
     }
 
