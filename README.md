@@ -8,6 +8,10 @@ A [Vue.js](https://vuejs.org) applications of [NASA's API](https://api.nasa.gov)
 ![](https://img.shields.io/github/license/mattiapontonio/asteroids)
 ![](https://img.shields.io/github/issues/mattiapontonio/asteroids)
 
+![](Screenshot_20201110-042136.png)
+![](Screenshot_20201110-042150.png)
+![](Screenshot_20201110-042209.png)
+
 ## Environments
 
 |branch|uri|
