@@ -41,21 +41,13 @@
   </body>
 </template>
 <script>
-  import AsteroidsOfTheDay from './components/AsteroidsOfTheDay.vue';
-  import Brightest from './components/Brightest.vue';
-  import Apod from './components/Apod.vue';
   import Vue from 'vue';
   import axios from 'axios';
   import {
     version
   } from '../package.json';
   export default {
-    name: 'App',
-    components: {
-      Brightest,
-      AsteroidsOfTheDay,
-      Apod
-    },
+    name: 'app',
     watch: {
       date: function () {
         this.get_asteroids_of_the_day();

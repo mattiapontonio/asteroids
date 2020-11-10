@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
-const app = express()
-const port = process.env.PORT;
+const app = express();
 const https = require('https');
 const querystring = require('querystring');
+const { loadNuxt, build } = require('nuxt');
+const isDev = process.env.NODE_ENV !== 'production'
+const port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get('/planetary/apod', (oreq, ores) => {
     const options = {
@@ -103,6 +105,22 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
         });
     creq.end();
 });
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-});
+async function start() {
+    // We get Nuxt instance
+    const nuxt = await loadNuxt(isDev ? 'dev' : 'start')
+  
+    // Render every route with Nuxt.js
+    app.use(nuxt.render)
+  
+    // Build only in dev mode with hot-reloading
+    if (isDev) {
+      build(nuxt)
+    }
+    // Listen the server
+    app.listen(port, () => {
+        console.log(`Example app listening at http://localhost:${port}`)
+      });
+    console.log('Server listening on `localhost:' + port + '`.')
+  }
+  
+  start()

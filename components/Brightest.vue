@@ -59,15 +59,15 @@
         props: {
             start: {
                 type: Date,
-                default: date
+                default: ()=>date
             },
             end: {
                 type: Date,
-                default: date
+                default: ()=>date
             },
             date: {
                 type: Date,
-                default: date
+                default: ()=>date
             }
         },
         data: function () {
