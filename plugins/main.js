@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import App from './App.vue'
 
 Vue.config.productionTip = false;
 Vue.filter('formatted', function (date = new Date()) {
@@ -26,18 +25,16 @@ Vue.filter('max', function (values = new Array()) {
 Vue.filter('DateTimeFormat', function (v = new Date()) {
   return new Intl.DateTimeFormat('it-IT').format(v);
 });
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
+if (process.client) {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+        // Registration was successful
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, function(err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      });
     });
-  });
+  }
 }
