@@ -1,3 +1,4 @@
 module.exports = {
-    plugins: ['~/plugins/main.js']
+    plugins: ['~/plugins/main.js'],
+    components: true
 }
