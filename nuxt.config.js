@@ -9,5 +9,6 @@ module.exports = {
             cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
         }
     }:undefined)(),
-    target: 'static'
+    target: 'static',
+    ssr: false
 }
