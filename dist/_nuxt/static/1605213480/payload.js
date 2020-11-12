@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/", (function(a){return {data:[{}],fetch:[{date:a,explanation:a,hdurl:a,media_type:a,service_version:a,title:a,url:a,loading:false}],mutations:a}}(void 0)));
