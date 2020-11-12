@@ -29,12 +29,12 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 
 ## Getting started
 ```shell
+export PORT=<port>
+export API_KEY=<key>
 git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
 npm i
-npm run build
-export PORT=<port>
-export API_KEY=<key>
+npm run generate
 npm start
 ```
 
