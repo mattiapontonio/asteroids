@@ -1,0 +1,1 @@
+export default new URL("https://api.nasa.gov");
