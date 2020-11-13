@@ -299,4 +299,25 @@ footer{
   padding: 1em;
   background: red;
 }
+.max[coordinate="x"]{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.min[coordinate="x"]{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.max[coordinate="y"]{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.min[coordinate="y"]{
+  position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(10px);
+}
 </style>

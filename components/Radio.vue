@@ -15,14 +15,16 @@
             id: {
                 type: String
             },
-            label: {
-                type: String
-            },
             checked: {
                 type: Boolean
             },
             onchangedate: {
                 type: Function
+            }
+        },
+        computed: {
+            label: function() {
+                return this.date.toLocaleDateString(undefined, { weekday: 'long' });
             }
         },
         data: function () {
