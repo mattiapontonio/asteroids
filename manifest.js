@@ -13,9 +13,8 @@ const shortcuts = [
     const description = "Asteroids of "+name;
     const slug = short_name.toLocaleLowerCase();
     const url = "/"+slug+"?source=pwa";
-    const src = today.getDay() == i ? "/images/"+slug+".png" : "/images/"+slug+".today.png" ;
     const icon = { 
-        "src": "/images/"+slug+".png", 
+        "src": "/images/icon.png", 
         "sizes": "192x192" 
     };
     const icons = [
