@@ -1,0 +1,80 @@
+{
+  "Apod": {
+    "description": "Auto imported from components/Apod.vue"
+  },
+  "LazyApod": {
+    "description": "Auto imported from components/Apod.vue"
+  },
+  "App": {
+    "description": "Auto imported from components/App.vue"
+  },
+  "LazyApp": {
+    "description": "Auto imported from components/App.vue"
+  },
+  "Asteroid": {
+    "description": "Auto imported from components/Asteroid.vue"
+  },
+  "LazyAsteroid": {
+    "description": "Auto imported from components/Asteroid.vue"
+  },
+  "Asteroids": {
+    "description": "Auto imported from components/Asteroids.vue"
+  },
+  "LazyAsteroids": {
+    "description": "Auto imported from components/Asteroids.vue"
+  },
+  "AsteroidsOfTheDay": {
+    "description": "Auto imported from components/AsteroidsOfTheDay.vue"
+  },
+  "LazyAsteroidsOfTheDay": {
+    "description": "Auto imported from components/AsteroidsOfTheDay.vue"
+  },
+  "Brightest": {
+    "description": "Auto imported from components/Brightest.vue"
+  },
+  "LazyBrightest": {
+    "description": "Auto imported from components/Brightest.vue"
+  },
+  "Bubble": {
+    "description": "Auto imported from components/Bubble.vue"
+  },
+  "LazyBubble": {
+    "description": "Auto imported from components/Bubble.vue"
+  },
+  "MinMax": {
+    "description": "Auto imported from components/MinMax.vue"
+  },
+  "LazyMinMax": {
+    "description": "Auto imported from components/MinMax.vue"
+  },
+  "Radio": {
+    "description": "Auto imported from components/Radio.vue"
+  },
+  "LazyRadio": {
+    "description": "Auto imported from components/Radio.vue"
+  },
+  "Rhombus": {
+    "description": "Auto imported from components/Rhombus.vue"
+  },
+  "LazyRhombus": {
+    "description": "Auto imported from components/Rhombus.vue"
+  },
+  "ScatterPlot": {
+    "description": "Auto imported from components/ScatterPlot.vue"
+  },
+  "LazyScatterPlot": {
+    "description": "Auto imported from components/ScatterPlot.vue"
+  },
+  "Selector": {
+    "description": "Auto imported from components/Selector.vue"
+  },
+  "LazySelector": {
+    "description": "Auto imported from components/Selector.vue"
+  },
+  "Tooltip": {
+    "description": "Auto imported from components/Tooltip.vue"
+  },
+  "LazyTooltip": {
+    "description": "Auto imported from components/Tooltip.vue"
+  }
+}

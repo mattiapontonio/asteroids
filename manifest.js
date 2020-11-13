@@ -35,14 +35,9 @@ fs.writeFileSync('dist/manifest.webmanifest', JSON.stringify({
     "description": "Weather forecast information",
     "icons": [
         {
-        "src": "/images/icons-192.png",
-        "type": "image/png",
-        "sizes": "192x192"
-        },
-        {
-        "src": "/images/icons-512.png",
-        "type": "image/png",
-        "sizes": "512x512"
+            "src": "/asteroid.png",
+            "type": "image/png",
+            "sizes": "512x512"
         }
     ],
     "start_url": "/?source=pwa",
