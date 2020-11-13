@@ -274,4 +274,10 @@ footer{
   background: white;
   color:black;
 }
+.errored {
+  color: white;
+  border: 1px solid red;
+  padding: 1em;
+  background: red;
+}
 </style>
