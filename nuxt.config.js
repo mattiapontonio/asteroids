@@ -22,9 +22,9 @@ module.exports = {
                 content: 'my website description'
             }
         ],
-    },
-    link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'manifest', href: '/manifest.webmanifest' }
-    ]
+        link: [
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            { rel: 'manifest', href: '/manifest.webmanifest' }
+        ]
+    }
 }
