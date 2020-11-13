@@ -26,6 +26,7 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 - [npm](https://www.npmjs.com)
 - [Vue CLI](https://cli.vuejs.org/)
 - [Git](https://git-scm.com/)
+- [Nuxt.js](https://nuxtjs.org/docs/2.x/get-started/installation)
 
 ## Getting started
 ```shell

@@ -29,7 +29,7 @@ const shortcuts = [
         icons
     }
 });
-fs.writeFileSync('dist/manifest.webmanifest', JSON.stringify({
+const manifest = {
     "short_name": "Weather",
     "name": "Weather: Do I need an umbrella?",
     "description": "Weather forecast information",
@@ -46,4 +46,6 @@ fs.writeFileSync('dist/manifest.webmanifest', JSON.stringify({
     "scope": "/",
     "theme_color": "#3367D6",
     shortcuts
-}));
+};
+fs.writeFileSync('dist/manifest.webmanifest', JSON.stringify(manifest));
+console.table(manifest);
