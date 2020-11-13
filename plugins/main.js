@@ -23,7 +23,7 @@ Vue.filter('max', function (values = new Array()) {
   return Math.max(...values);
 });
 Vue.filter('DateTimeFormat', function (v = new Date()) {
-  return new Intl.DateTimeFormat('it-IT').format(v);
+  if(v instanceof Date) return new Intl.DateTimeFormat('it-IT').format(v);
 });
 if (process.client) {
   if ('serviceWorker' in navigator) {
