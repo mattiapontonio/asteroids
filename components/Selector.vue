@@ -1,5 +1,10 @@
 <template>
-    <div style="display:flex;">
+    <div style="
+    display: flex;
+    flex-wrap: nowrap;
+    max-width:100%;
+    overflow-x:scroll;
+">
         <radio
             v-for="(val, i) in days"
             v-bind:id="'radio-'+i"
