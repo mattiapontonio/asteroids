@@ -162,6 +162,25 @@
   input+label {
     border: 1px solid white;
     background-color: transparent;
+    padding:1em;
+  }
+  button {
+    border: 1px solid white;
+    background-color: transparent;
+    padding:1em;
+    color: white;
+  }
+  button:hover {
+    border-color: rgb(42,245,152);
+    color: rgb(42,245,152);
+  }
+  button:active {
+    border-color: rgb(42,245,152);
+    color: rgb(42,245,152);
+  }
+  button[checked] {
+    border-color: rgb(42,245,152);
+    color: rgb(42,245,152);
   }
   input+label:hover {
     border-color: rgb(42,245,152);

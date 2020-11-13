@@ -1,29 +1,8 @@
 <template>
-    <div>
-        <input
-            type="radio"
-            v-bind:id="id"
-            name="date"
-            class="radio"
-            v-bind:checked="checked"
-            v-bind:value="date | formatted"
-            v-on:change="onchangedate(date)"
-        />
-        <label
-            v-bind:for="id"
-            style="
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    line-height: 1;
-                    vertical-align: middle;
-                    margin-right:8px;
-                "
-        >{{label}}</label>
-    </div>
+    <button 
+        v-bind:checked="checked"
+        v-on:click="onchangedate(date)"
+    >{{label}}</button>
 </template>
 <script>
     export default {
