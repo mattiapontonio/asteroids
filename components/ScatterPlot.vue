@@ -1,6 +1,6 @@
 <template>
     <div class="scatter-plot">
-        <section v-if="errored">
+        <section v-if="errored" class="errored">
             <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
         </section>
         <div v-else-if="loading" class="loading" style="position:absolute; width:100%; height:100%;"></div>
@@ -19,18 +19,36 @@
                 v-bind:y="item.y"
                 v-bind:d="item.d"
             />
+            <span class="max" coordinate="x">{{maxX}}</span>
+            <span class="min" coordinate="x">{{minX}}</span>
+            <span class="max" coordinate="y">{{maxY}}</span>
+            <span class="min" coordinate="y">{{minY}}</span>
         </section>
     </div>
 </template>
 <script>
     import Asteroid from './Asteroid.vue';
   import Vue from 'vue';
+  const x = 'velocity_kilometers_per_second';
+  const y = 'distance';
     export default {
         name: 'scatter-plot',
         components: {
             Asteroid
         },
         computed: {
+            maxX: function () {
+                return Vue.filter('max')(this.asteroids.map(e => e[x]))
+            },
+            minX: function () {
+                return Vue.filter('min')(this.asteroids.map(e => e[x]))
+            },
+            maxY: function () {
+                return Vue.filter('max')(this.asteroids.map(e => e[y]))
+            },
+            minY: function () {
+                return Vue.filter('min')(this.asteroids.map(e => e[y]))
+            },
             items: function () {
                 const x = 'velocity_kilometers_per_second';
                 const y = 'distance';

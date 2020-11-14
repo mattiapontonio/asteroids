@@ -26,6 +26,7 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 - [npm](https://www.npmjs.com)
 - [Vue CLI](https://cli.vuejs.org/)
 - [Git](https://git-scm.com/)
+- [Nuxt.js](https://nuxtjs.org/docs/2.x/get-started/installation)
 
 ## Getting started
 ```shell
@@ -33,6 +34,10 @@ export PORT=<port>
 export API_KEY=<key>
 git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
+openssl genrsa -out key.pem
+openssl req -new -key key.pem -out csr.pem
+openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
+rm csr.pem
 npm i
 npm run generate
 npm start

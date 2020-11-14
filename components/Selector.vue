@@ -1,5 +1,10 @@
 <template>
-    <form style="display:flex;">
+    <div style="
+    display: flex;
+    flex-wrap: nowrap;
+    max-width:100%;
+    overflow-x:scroll;
+">
         <radio
             v-for="(val, i) in days"
             v-bind:id="'radio-'+i"
@@ -9,7 +14,7 @@
             v-bind:onchangedate="onchangedate"
             v-bind:checked="val.date == date"
         />
-    </form>
+    </div>
 </template>
 <script>
 import Radio from './Radio';

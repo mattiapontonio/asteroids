@@ -35,6 +35,11 @@
                     <td>Version</td>
                     <td>{{version}}</td>
                 </tr>
+                <tr>
+                    <td>
+                      <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    </td>
+                </tr>
             </tbody>
         </table>
       </footer>
@@ -162,6 +167,25 @@
   input+label {
     border: 1px solid white;
     background-color: transparent;
+    padding:1em;
+  }
+  button {
+    border: 1px solid white;
+    background-color: transparent;
+    padding:1em;
+    color: white;
+  }
+  button:hover {
+    border-color: rgb(42,245,152);
+    color: rgb(42,245,152);
+  }
+  button:active {
+    border-color: rgb(42,245,152);
+    color: rgb(42,245,152);
+  }
+  button[checked] {
+    border-color: rgb(42,245,152);
+    color: rgb(42,245,152);
   }
   input+label:hover {
     border-color: rgb(42,245,152);
@@ -279,5 +303,26 @@ footer{
   border: 1px solid red;
   padding: 1em;
   background: red;
+}
+.max[coordinate="x"]{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.min[coordinate="x"]{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.max[coordinate="y"]{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.min[coordinate="y"]{
+  position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(10px);
 }
 </style>
