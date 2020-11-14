@@ -26,5 +26,9 @@ module.exports = {
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             { rel: 'manifest', href: '/manifest.webmanifest' }
         ]
+    },
+    loading: false,
+    htmlAttrs: {
+        lang: 'en'
     }
 }
