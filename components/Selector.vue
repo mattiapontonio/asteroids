@@ -11,7 +11,6 @@
             v-bind:key="'radio-'+i"
             v-bind:date="val.date"
             v-bind:label="val.label"
-            v-bind:onchangedate="onchangedate"
             v-bind:checked="val.date == date"
         />
     </div>
@@ -27,9 +26,6 @@ import Radio from './Radio';
             date: {
                 type: Date,
                 default: new Date()
-            },
-            onchangedate: {
-                type: Function
             }
         },
         computed: {

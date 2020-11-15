@@ -5,6 +5,7 @@
     >{{label}}</button>
 </template>
 <script>
+  import Vue from 'vue';        
     export default {
         name: 'radio',
         props: {
@@ -17,14 +18,18 @@
             },
             checked: {
                 type: Boolean
-            },
-            onchangedate: {
-                type: Function
             }
         },
         computed: {
             label: function() {
                 return this.date.toLocaleDateString(undefined, { weekday: 'long' });
+            }
+        },
+        methods: {
+            onchangedate() {
+                const url = new URL(window.location);
+                url.searchParams.set('date', Vue.filter('formatted')(this.date));
+                window.history.pushState({}, '', url);
             }
         },
         data: function () {

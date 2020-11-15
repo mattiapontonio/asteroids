@@ -11,7 +11,6 @@
         v-bind:start_date="start_date"
         v-bind:end_date="end_date"
         v-bind:asteroids="asteroids_of_the_day"
-        v-bind:onchangedate="onchangedate"
         v-bind:loading="loading"
         v-bind:errored="errored"
       />
@@ -53,15 +52,10 @@
   } from '../package.json';
   export default {
     name: 'app',
-    watch: {
-      date: function () {
-        this.get();
-      }
-    },
     methods: {
       get() {
         const formatted = Vue.filter('formatted');
-        const date = formatted(this.date);
+        const date = Vue.filter('formatted')(this.date);
         const url = new URL(window.location.origin);
         url.pathname = 'neo/rest/v1/feed';
         url.searchParams.set('start_date', date);
@@ -89,9 +83,6 @@
           this.errored = true
         }).finally(() => this.loading = false);
       },
-      onchangedate(date = new Date()) {
-        this.date = date;
-      }
     },
     data: function () {
       return {
@@ -104,6 +95,9 @@
     },
     mounted() {
       this.get();
+      window.onpopstate = event => {
+        this.get();
+      };
     },
     props: {
       start_date: {
