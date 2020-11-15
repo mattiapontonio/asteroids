@@ -14,7 +14,6 @@
                     ...item
                 }"
                 v-bind:key="i"
-                style="position: absolute;"
                 v-bind:x="item.x"
                 v-bind:y="item.y"
                 v-bind:d="item.d"
@@ -79,9 +78,7 @@
             },
             asteroids: {
                 type: Array,
-                default: function () {
-                    return new Array();
-                }
+                required: true
             },
             loading: {
                 type: Boolean,
