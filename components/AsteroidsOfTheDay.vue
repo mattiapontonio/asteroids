@@ -8,7 +8,6 @@
     <div style="display: flex;flex-wrap:wrap;">
       <selector
         v-bind:date="date"
-        v-bind:onchangedate="onchangedate"
         v-bind:selected_index="date | lun_dom_day"
       />
       <min-max />
@@ -64,9 +63,6 @@
       asteroids: {
         type: Array,
         default: () => new Array()
-      },
-      onchangedate: {
-        type: Function
       },
       loading: {
         type: Boolean
