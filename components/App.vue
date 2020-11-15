@@ -55,11 +55,11 @@
     name: 'app',
     watch: {
       date: function () {
-        this.get_asteroids_of_the_day();
+        this.get();
       }
     },
     methods: {
-      get_asteroids_of_the_day() {
+      get() {
         const formatted = Vue.filter('formatted');
         const date = formatted(this.date);
         const url = new URL(window.location.origin);
@@ -73,7 +73,9 @@
           url.pathname = `neo/rest/v1/neo/${e.id}`;
           return axios.get(url);
         })).then(values => {
-          this.asteroids_of_the_day = values.map(e => e.data).map(e => Object.assign({}, {
+          this.asteroids_of_the_day = values
+          .map(e => e.data)
+          .map(e => Object.assign({}, {
             id: e.id,
             name: e.name,
             diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
@@ -101,7 +103,7 @@
       }
     },
     mounted() {
-      this.get_asteroids_of_the_day();
+      this.get();
     },
     props: {
       start_date: {
