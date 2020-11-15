@@ -70,5 +70,39 @@ app.get('/neo/rest/v1/feed', (oreq, ores) => {
         });
     creq.end();
 });
+app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
+    oreq.query.api_key=process.env.API_KEY;
+    const options = {
+        host: 'api.nasa.gov',
+        path: `/neo/rest/v1/neo/${oreq.params.id}?${querystring.stringify(oreq.query)}`,
+        method: 'GET'
+    };
+    const creq = https
+        .request(options, pres => {
+            pres.setEncoding('utf8');
+            ores.writeHead(pres.statusCode);
+            pres.on('data', chunk => {
+                ores.write(chunk);
+            });
+            pres.on('close', () => {
+                ores.end();
+            });
+            pres.on('end', () => {
+                ores.end();
+            });
+        })
+        .on('error', e => {
+            console.log(e.message);
+            try {
+                ores.writeHead(500);
+                ores.write(e.message);
+            } catch (e) {
+                // ignore
+            }
+            ores.end();
+        });
+    creq.end();
+});
+
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));

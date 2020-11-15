@@ -10,13 +10,14 @@
         >
             <asteroid
                 v-for="(item, i) in items"
-                v-bind:data="{
-                    ...item
-                }"
                 v-bind:key="i"
                 v-bind:x="item.x"
                 v-bind:y="item.y"
                 v-bind:d="item.d"
+                v-bind:maxX="maxX"
+                v-bind:minX="minX"
+                v-bind:maxY="maxY"
+                v-bind:minY="minY"
             />
             <span class="max" coordinate="x">{{maxX}}</span>
             <span class="min" coordinate="x">{{minX}}</span>
@@ -28,8 +29,6 @@
 <script>
     import Asteroid from './Asteroid.vue';
   import Vue from 'vue';
-  const x = 'velocity_kilometers_per_second';
-  const y = 'distance';
     export default {
         name: 'scatter-plot',
         components: {
@@ -37,47 +36,21 @@
         },
         computed: {
             maxX: function () {
-                return Vue.filter('max')(this.asteroids.map(e => e[x]))
+                return Vue.filter('max')(this.asteroids.map(e => e['velocity_kilometers_per_second']))
             },
             minX: function () {
-                return Vue.filter('min')(this.asteroids.map(e => e[x]))
+                return Vue.filter('min')(this.asteroids.map(e => e['velocity_kilometers_per_second']))
             },
             maxY: function () {
-                return Vue.filter('max')(this.asteroids.map(e => e[y]))
+                return Vue.filter('max')(this.asteroids.map(e => e['distance']))
             },
             minY: function () {
-                return Vue.filter('min')(this.asteroids.map(e => e[y]))
-            },
-            items: function () {
-                const x = 'velocity_kilometers_per_second';
-                const y = 'distance';
-                const d = 'diameter';
-                const scale = Vue.filter('scale');
-                const min = Vue.filter('min');
-                const max = Vue.filter('max');
-                const items = this.asteroids;
-                return items.map((e, i, a) => {
-                    const elements = a.map(e => e[x]);
-                    e.x = scale(e[x], min(elements), max(elements));
-                    return e;
-                }).map((e, i, a) => {
-                    const elements = a.map(e => e[y]);
-                    e.y = scale(e[y], min(elements), max(elements));
-                    return e;
-                }).map((e, i, a) => {
-                    const elements = a.map(e => e[d]);
-                    e.d = scale(e[d], min(elements), max(elements));
-                    return e;
-                });
+                return Vue.filter('min')(this.asteroids.map(e => e['distance']))
             }
         },
         props: {
             date: {
                 type: String,
-                required: true
-            },
-            asteroids: {
-                type: Array,
                 required: true
             },
             loading: {
