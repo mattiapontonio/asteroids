@@ -1,11 +1,7 @@
 <template>
-  <div style="
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    ">
+  <div style="asteroids-of-the-day">
     <h2>Asteroids of the day</h2>
-    <h2>{{this.asteroids.length}}</h2>
+    <h2>{{length}}</h2>
     <div style="display: flex;flex-wrap:wrap;">
       <selector
         v-bind:date="date"
@@ -55,13 +51,23 @@
     name: 'asteroids-of-the-day',
     computed: {
       minD: function () {
-        console.log(this.asteroids);
-        return Math.min(this.asteroids.map(e => e.diameter))
+        return Math.min(this.ds)
       },
       maxD: function () {
-        console.log(this.asteroids);
-        return Math.max(this.asteroids.map(e => e.diameter))
-      }
+        return Math.max(this.ds)
+      },
+      xs: function () {
+        return this.asteroids.map(e => e['velocity_kilometers_per_second']);
+      },
+      ys: function () {
+        return this.asteroids.map(e => e['distance']);
+      },
+      ds: function () {
+        return this.asteroids.map(e => e['diameter']);
+      },
+      length:function () {
+        return this.asteroids.length;
+      },
     },
     props: {
       date: {
@@ -75,11 +81,6 @@
       end_date: {
         type: String,
         required: true
-      },
-      asteroids: {
-        type: Array,
-        required: true,
-        default: () => new Array()
       },
       loading: {
         type: Boolean
@@ -100,10 +101,11 @@
         .get(url)
         .then(response => {
           this.asteroids = response.data.near_earth_objects[this.date];
-          this.asteroids.forEach(function(e){
+          this.asteroids.forEach(function(e,i,a){
             const url = new URL(window.location.origin);
-            url.pathname = `neo/rest/v1/neo/${e.id}`;
-            axios.get(url)
+            url.pathname = `/neo/rest/v1/neo/${e.id}`;
+            axios
+            .get(url)
             .then(function(response){
               Object.assign(e, {
                 id: response.data.id,
@@ -119,6 +121,15 @@
         })
         .catch(error => this.errored = true)
         .finally(() => this.loading = false);
+      },
+      scale() {
+        return Vue.filter('scale');
+      },
+      max() {
+        return Vue.filter('max');
+      },
+      min() {
+        return Vue.filter('min');
       }
     },
     mounted() {
@@ -127,3 +138,10 @@
   }
 
 </script>
+<style>
+  .asteroids-of-the-day {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+</style>

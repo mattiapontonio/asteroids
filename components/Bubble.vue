@@ -2,9 +2,9 @@
     <div
         class="bubble"
         v-bind:style="{
-                            width: width + 'px',
-                            height: height + 'px',
-                        }"
+           width,
+           height
+        }"
     >
         <div class="point"></div>
     </div>
@@ -12,34 +12,21 @@
 <script>
     export default {
         name: 'bubble',
-        props: {
-            minD: {
-                type: Number,
-                default: function () {
-                    return 30
-                }
-            },
-            maxD: {
-                type: Number,
-                default: function () {
-                    return 100
-                }
-            },
-            d: {
-                type: Number,
-                default: function () {
-                    return 0
-                }
-            }
-        },
         computed: {
             width: function () {
-                return this.d * (this.maxD - this.minD) + this.minD;
+                return this.d * (this.maxD - this.minD) + this.minD + "px";
             },
             height: function () {
-                return this.d * (this.maxD - this.minD) + this.minD;
+                return this.d * (this.maxD - this.minD) + this.minD + "px";
             }
         }
     }
 
 </script>
+<style>
+    .bubble {
+        width: auto;
+        min-width: 30px;
+        min-height: 30px;
+    }
+</style>

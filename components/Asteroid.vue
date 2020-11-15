@@ -27,12 +27,6 @@
             Bubble,
             Tooltip
         },
-        props: [
-            'id',
-            'x', 
-            'y', 
-            'd'
-        ],
         data: function () {
             return {
                 show: false,
