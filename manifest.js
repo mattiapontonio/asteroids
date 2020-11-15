@@ -1,5 +1,7 @@
 'use strict';
 const fs = require('fs');
+const formatDate = require('./formatDate.js');
+
 const shortcuts = [
     0,1,2,3,4,5,6
 ].map(function(e,i){
@@ -11,8 +13,7 @@ const shortcuts = [
     const name = date.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     const short_name = date.toLocaleDateString(undefined, { weekday: 'long' });
     const description = "Asteroids of "+name;
-    const slug = short_name.toLocaleLowerCase();
-    const url = "/"+slug+"?source=pwa";
+    const url = "/?source=pwa&date="+formatDate(date);
     const icon = { 
         "src": "/images/icon.png", 
         "sizes": "192x192" 
@@ -48,3 +49,4 @@ const manifest = {
 };
 fs.writeFileSync('dist/manifest.webmanifest', JSON.stringify(manifest));
 console.table(manifest);
+console.table(shortcuts);
