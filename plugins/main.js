@@ -1,14 +1,8 @@
-import Vue from 'vue'
-
+import Vue from 'vue';
+import formatDate from '../formatDate.js';
 Vue.config.productionTip = false;
 Vue.filter('formatted', function (date = new Date()) {
-  if (!date) return ''
-  let month = '' + (date.getMonth() + 1);
-  let day = '' + date.getDate();
-  let year = date.getFullYear();
-  if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
-  return [year, month, day].join('-');
+  return formatDate(date);
 });
 Vue.filter('lun_dom_day', function (date = new Date()) {
   return date.getDay() == 0 ? date.getDay() - 1 : 6
