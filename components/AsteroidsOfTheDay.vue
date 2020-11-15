@@ -5,6 +5,7 @@
     flex-grow: 1;
     ">
     <h2>Asteroids of the day</h2>
+    <h2>{{this.asteroids.length}}</h2>
     <div style="display: flex;flex-wrap:wrap;">
       <selector
         v-bind:date="date"
@@ -17,6 +18,12 @@
       v-bind:asteroids="asteroids"
       v-bind:loading="loading"
       v-bind:errored="errored"
+      v-bind:minD="minD"
+      v-bind:maxD="maxD"
+      v-bind:minX="minX"
+      v-bind:maxX="maxX"
+      v-bind:minY="minY"
+      v-bind:maxY="maxY"
     />
     <table>
       <tbody>
@@ -71,6 +78,7 @@
       },
       asteroids: {
         type: Array,
+        required: true,
         default: () => new Array()
       },
       loading: {
@@ -88,27 +96,30 @@
         url.searchParams.set('end_date', this.end_date);
         this.loading = true;
         this.errored = false;
-        axios.get(url).then(response => Promise.all(Object.values(response.data.near_earth_objects[this.date]).map(e => {
-          const url = new URL(window.location.origin);
-          url.pathname = `neo/rest/v1/neo/${e.id}`;
-          return axios.get(url);
-        })).then(values => {
-          this.asteroids_of_the_day = values
-          .map(e => e.data)
-          .map(e => Object.assign({}, {
-            id: e.id,
-            name: e.name,
-            diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
-            magnitude: e.absolute_magnitude_h,
-            velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
-            velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
-            distance: e.close_approach_data[0].miss_distance.astronomical,
-          }));
-        })).catch(error => {
-          console.log(error)
-          this.errored = true
-        }).finally(() => this.loading = false);
-      },
+        axios
+        .get(url)
+        .then(response => {
+          this.asteroids = response.data.near_earth_objects[this.date];
+          this.asteroids.forEach(function(e){
+            const url = new URL(window.location.origin);
+            url.pathname = `neo/rest/v1/neo/${e.id}`;
+            axios.get(url)
+            .then(function(response){
+              Object.assign(e, {
+                id: response.data.id,
+                name: response.data.name,
+                diameter: response.data.estimated_diameter.kilometers.estimated_diameter_max,
+                magnitude: response.data.absolute_magnitude_h,
+                velocity_kilometers_per_hour: response.data.close_approach_data[0].relative_velocity.kilometers_per_hour,
+                velocity_kilometers_per_second: response.data.close_approach_data[0].relative_velocity.kilometers_per_second,
+                distance: response.data.close_approach_data[0].miss_distance.astronomical,
+              });
+            });
+          });
+        })
+        .catch(error => this.errored = true)
+        .finally(() => this.loading = false);
+      }
     },
     mounted() {
       this.get();
