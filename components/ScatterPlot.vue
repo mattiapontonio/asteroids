@@ -28,25 +28,10 @@
 </template>
 <script>
     import Asteroid from './Asteroid.vue';
-  import Vue from 'vue';
     export default {
         name: 'scatter-plot',
         components: {
             Asteroid
-        },
-        computed: {
-            maxX: function () {
-                return Vue.filter('max')(this.asteroids.map(e => e['velocity_kilometers_per_second']))
-            },
-            minX: function () {
-                return Vue.filter('min')(this.asteroids.map(e => e['velocity_kilometers_per_second']))
-            },
-            maxY: function () {
-                return Vue.filter('max')(this.asteroids.map(e => e['distance']))
-            },
-            minY: function () {
-                return Vue.filter('min')(this.asteroids.map(e => e['distance']))
-            }
         },
         props: {
             date: {

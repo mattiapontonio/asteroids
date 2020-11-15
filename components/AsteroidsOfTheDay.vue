@@ -11,7 +11,7 @@
     </div>
     <scatter-plot
       v-bind:date="date"
-      v-bind:asteroids="asteroids"
+      v-bind:items="items"
       v-bind:loading="loading"
       v-bind:errored="errored"
       v-bind:minD="minD"
@@ -42,6 +42,7 @@
   import MinMax from './MinMax';
   import ScatterPlot from './ScatterPlot';
   import axios from 'axios';
+  import Vue from 'vue';
   export default {
     components: {
       Selector,
@@ -51,22 +52,34 @@
     name: 'asteroids-of-the-day',
     computed: {
       minD: function () {
-        return Math.min(this.ds)
+        return this.min(this.ds);
       },
       maxD: function () {
-        return Math.max(this.ds)
+        return this.max(this.ds);
+      },
+      maxX: function () {
+          return this.max(this.xs)
+      },
+      minX: function () {
+          return this.min(this.xs)
+      },
+      maxY: function () {
+          return this.max(this.ys)
+      },
+      minY: function () {
+          return this.min(this.ys);
       },
       xs: function () {
-        return this.asteroids.map(e => e['velocity_kilometers_per_second']);
+        return this.items.map(e => e['velocity_kilometers_per_second']);
       },
       ys: function () {
-        return this.asteroids.map(e => e['distance']);
+        return this.items.map(e => e['distance']);
       },
       ds: function () {
-        return this.asteroids.map(e => e['diameter']);
+        return this.items.map(e => e['diameter']);
       },
-      length:function () {
-        return this.asteroids.length;
+      length: function () {
+        return this.items.length;
       },
     },
     props: {
@@ -100,8 +113,8 @@
         axios
         .get(url)
         .then(response => {
-          this.asteroids = response.data.near_earth_objects[this.date];
-          this.asteroids.forEach(function(e,i,a){
+          this.items = response.data.near_earth_objects[this.date];
+          this.items.forEach(function(e,i,a){
             const url = new URL(window.location.origin);
             url.pathname = `/neo/rest/v1/neo/${e.id}`;
             axios
@@ -135,6 +148,11 @@
     mounted() {
       this.get();
     },
+    data: function () {
+      return {
+          items: []
+      }
+    }
   }
 
 </script>
