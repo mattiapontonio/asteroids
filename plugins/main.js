@@ -4,8 +4,13 @@ Vue.config.productionTip = false;
 Vue.filter('formatted', function (date = new Date()) {
   return formatDate(date);
 });
-Vue.filter('lun_dom_day', function (date = new Date()) {
+Vue.filter('lun_dom_day', function (d) {
+  const date = new Date(d);
   return date.getDay() == 0 ? date.getDay() - 1 : 6
+});
+Vue.filter('DateTimeFormat', function (d) {
+  const date = new Date(d);
+  return new Intl.DateTimeFormat('it-IT').format(date);
 });
 Vue.filter('scale', function (v = new Number(), min = new Number(), max = new Number()) {
   return (v - min) / (max - min)
@@ -15,9 +20,6 @@ Vue.filter('min', function (values = new Array()) {
 });
 Vue.filter('max', function (values = new Array()) {
   return Math.max(...values);
-});
-Vue.filter('DateTimeFormat', function (v = new Date()) {
-  if(v instanceof Date) return new Intl.DateTimeFormat('it-IT').format(v);
 });
 if (process.client) {
   if ('serviceWorker' in navigator) {

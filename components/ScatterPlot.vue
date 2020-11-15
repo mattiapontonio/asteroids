@@ -74,8 +74,8 @@
         },
         props: {
             date: {
-                type: Date,
-                default: new Date()
+                type: String,
+                required: true
             },
             asteroids: {
                 type: Array,

@@ -24,15 +24,15 @@ import Radio from './Radio';
         },
         props: {
             date: {
-                type: Date,
-                default: new Date()
+                type: String,
+                required: true
             }
         },
         computed: {
             days: function () {
                 const days = new Array();
+                const date = new Date(this.date);
                 const label = date => ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'][date.getDay()]
-                const date = this.date;
                 for (let i = 0; i < 7; i++) {
                     const d = new Date();
                     d.setDate(date.getDate() + (i - date.getDay()));

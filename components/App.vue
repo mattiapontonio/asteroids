@@ -8,8 +8,8 @@
     <main>
       <asteroids-of-the-day
         v-bind:date="date"
-        v-bind:start_date="start_date"
-        v-bind:end_date="end_date"
+        v-bind:start_date="date"
+        v-bind:end_date="date"
         v-bind:asteroids="asteroids_of_the_day"
         v-bind:loading="loading"
         v-bind:errored="errored"
@@ -52,51 +52,17 @@
   } from '../package.json';
   export default {
     name: 'app',
-    methods: {
-      get() {
-        const formatted = Vue.filter('formatted');
-        const date = Vue.filter('formatted')(this.date);
-        const url = new URL(window.location.origin);
-        url.pathname = 'neo/rest/v1/feed';
-        url.searchParams.set('start_date', date);
-        url.searchParams.set('end_date', date);
-        this.loading = true;
-        this.errored = false;
-        axios.get(url).then(response => Promise.all(Object.values(response.data.near_earth_objects[date]).map(e => {
-          const url = new URL(window.location.origin);
-          url.pathname = `neo/rest/v1/neo/${e.id}`;
-          return axios.get(url);
-        })).then(values => {
-          this.asteroids_of_the_day = values
-          .map(e => e.data)
-          .map(e => Object.assign({}, {
-            id: e.id,
-            name: e.name,
-            diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
-            magnitude: e.absolute_magnitude_h,
-            velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
-            velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
-            distance: e.close_approach_data[0].miss_distance.astronomical,
-          }));
-        })).catch(error => {
-          console.log(error)
-          this.errored = true
-        }).finally(() => this.loading = false);
-      },
-    },
     data: function () {
       return {
         //near_earth_objects: {},
-        date: new Date(),
         asteroids_of_the_day: new Array(),
         loading: true,
         errored: false
       }
     },
     mounted() {
-      this.get();
       window.onpopstate = event => {
-        this.get();
+        this.$forceUpdate();
       };
     },
     props: {
@@ -121,7 +87,11 @@
     computed: {
       version: function () {
         return version;
-      }
+      },
+      date: function () {
+        const url = new URL(location);
+        return url.searchParams.get('date') || Vue.filter('formatted')(new Date());
+      },
     }
   }
 
