@@ -29,8 +29,8 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 
 ## Getting started
 ```shell
-export PORT=<port>
-export API_KEY=<key>
+export PORT=3000
+export API_KEY=DEMO_KEY
 git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
 openssl genrsa -out key.pem
