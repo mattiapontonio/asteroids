@@ -51,7 +51,7 @@
 </template>
 <script>
     import Vue from 'vue';
-    import axios from 'axios';
+    import get from '../plugins/get.js';
     import Asteroids from './Asteroids.vue';
     const date = new Date();
     export default {
@@ -61,14 +61,21 @@
         },
         data: function () {
             return {
-                data: new Array(),
+                data: {
+                    near_earth_objects: {}
+                },
                 loading: new Boolean(),
                 errored: new Boolean(),
             }
         },
         computed: {
             items: function () {
-                return Object.values(this.data).flat(1).sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h).slice(0, 5).reverse().map((e, i, a) => {
+                return Object.values(this.data.near_earth_objects)
+                .flat(1)
+                .sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h)
+                .slice(0, 5)
+                .reverse()
+                .map((e, i, a) => {
                     const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
                     const scale = Vue.filter('scale');
                     const min = Vue.filter('min');
@@ -94,18 +101,7 @@
             }
         },
         methods: {
-            get() {
-                this.loading = true;
-                this.errored = false;
-                axios
-                .get(this.url)
-                .then(response => {
-                    this.data = response.data.near_earth_objects;
-                    this.loading = false;
-                })
-                .catch(() => this.errored = true)
-                .finally(() => this.loading = false);
-            }
+            get
         },
         mounted() {
             this.get()

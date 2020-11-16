@@ -11,13 +11,10 @@
             <asteroid
                 v-for="(item, i) in items"
                 v-bind:key="i"
+                v-bind:id="item.id"
                 v-bind:x="item.x"
                 v-bind:y="item.y"
                 v-bind:d="item.d"
-                v-bind:maxX="maxX"
-                v-bind:minX="minX"
-                v-bind:maxY="maxY"
-                v-bind:minY="minY"
             />
             <span class="max" coordinate="x">{{maxX}}</span>
             <span class="min" coordinate="x">{{minX}}</span>
@@ -28,28 +25,48 @@
 </template>
 <script>
     import Asteroid from './Asteroid.vue';
+    import get from '../plugins/get.js';
     export default {
         name: 'scatter-plot',
         components: {
             Asteroid
         },
-        props: {
-            date: {
-                type: String,
-                required: true
-            },
-            loading: {
-                type: Boolean,
-                default: function () {
-                    return false
-                }
-            },
-            errored: {
-                type: Boolean,
-                default: function () {
-                    return false
+        data: function () {
+            return {
+                data: {
+                    near_earth_objects: {}
                 }
             }
+        },
+        methods: {
+            get
+        },
+        computed: {
+            url: function() {
+                const url = new URL(window.location.origin);
+                url.pathname = 'neo/rest/v1/feed';
+                url.searchParams.set('start_date', this.start_date);
+                url.searchParams.set('end_date', this.end_date);
+                return url;
+            },
+            date: function () {
+                const url = new URL(location);
+                return url.searchParams.get('date')
+            },
+            start_date: function () {
+                const url = new URL(location);
+                return url.searchParams.get('start_date');
+            },
+            end_date: function () {
+                const url = new URL(location);
+                return url.searchParams.get('end_date');
+            },
+            items: function() {
+                return this.data.near_earth_objects[this.date]
+            }
+        },
+        mounted() {
+            this.get();
         }
     }
 
