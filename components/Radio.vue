@@ -6,7 +6,8 @@
     >{{innerText}}</button>
 </template>
 <script>
-  import Vue from 'vue';        
+  import Vue from 'vue';      
+  import format from '../formatDate.js';  
     export default {
         name: 'radio',
         computed: {
@@ -26,7 +27,7 @@
         methods: {
             onclick() {
                 const url = new URL(location);
-                url.searchParams.set('date', Vue.filter('formatted')(this.date));
+                url.searchParams.set('date', format(this.date));
                 window.history.pushState({}, '', url);
             }
         }
