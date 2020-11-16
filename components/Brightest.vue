@@ -2,6 +2,9 @@
     <article>
         <h2>Brightest of the week</h2>
         <h3>Magnitude <span>(h)</span></h3>
+        <p>{{start_date}}</p>
+        <p>{{end_date}}</p>
+        <p>{{items.length}}</p>
         <table>
             <tbody>
                 <tr>
@@ -56,20 +59,6 @@
         components: {
             Asteroids
         },
-        props: {
-            start: {
-                type: Date,
-                default: ()=>date
-            },
-            end: {
-                type: Date,
-                default: ()=>date
-            },
-            date: {
-                type: Date,
-                default: ()=>date
-            }
-        },
         data: function () {
             return {
                 data: new Array(),
@@ -87,30 +76,35 @@
                     e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
                     return e;
                 });
+            },
+            url: function () {
+                const url = new URL(window.location.origin);
+                url.pathname = 'neo/rest/v1/feed';
+                url.searchParams.set('start_date', this.start_date);
+                url.searchParams.set('end_date', this.end_date);
+                return url;
+            },
+            start_date: function () {
+                const url = new URL(location);
+                return url.searchParams.get('start_date');
+            },
+            end_date: function () {
+                const url = new URL(location);
+                return url.searchParams.get('end_date');
             }
         },
         methods: {
             get() {
-                const formatted = Vue.filter('formatted');
-                const start = formatted(this.start);
-                const end = formatted(this.end);
-                const date = formatted(this.date);
-                const url = new URL(window.location.origin);
-                console.log(date, start, end);
-                console.assert(this.date >= this.start);
-                console.assert(this.date <= this.end);
-                url.pathname = 'neo/rest/v1/feed';
-                url.searchParams.set('start', start);
-                url.searchParams.set('end', end);
                 this.loading = true;
                 this.errored = false;
-                axios.get(url).then(response => {
+                axios
+                .get(this.url)
+                .then(response => {
                     this.data = response.data.near_earth_objects;
                     this.loading = false;
-                }).catch(error => {
-                    console.error(error);
-                    this.errored = true;
-                }).finally(() => this.loading = false);
+                })
+                .catch(() => this.errored = true)
+                .finally(() => this.loading = false);
             }
         },
         mounted() {

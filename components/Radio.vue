@@ -1,41 +1,33 @@
 <template>
     <button 
         v-bind:checked="checked"
-        v-on:click="onchangedate(date)"
-    >{{label}}</button>
+        v-bind:date="date"
+        v-on:click="onclick"
+    >{{innerText}}</button>
 </template>
 <script>
   import Vue from 'vue';        
     export default {
         name: 'radio',
-        props: {
-            date: {
-                type: Date,
-                default: new Date()
-            },
-            id: {
-                type: String
-            },
-            checked: {
-                type: Boolean
-            }
-        },
         computed: {
-            label: function() {
-                return this.date.toLocaleDateString(undefined, { weekday: 'long' });
+            innerText: function() {
+                const date = new Date(this.date);
+                console.log(date);
+                return date.toLocaleDateString(undefined, { weekday: 'long' });
+            },
+            url: function() {
+                return new URL(window.location);
+            },
+            checked: function () {
+                const url = new URL(location);
+                return url.searchParams.get('date') == this.date;
             }
         },
         methods: {
-            onchangedate() {
-                const url = new URL(window.location);
+            onclick() {
+                const url = new URL(location);
                 url.searchParams.set('date', Vue.filter('formatted')(this.date));
                 window.history.pushState({}, '', url);
-            }
-        },
-        data: function () {
-            return {
-                count: 0,
-                selctedIndex: 0
             }
         }
     }

@@ -1,12 +1,12 @@
 <template>
   <div style="asteroids-of-the-day">
     <h2>Asteroids of the day</h2>
-    <h2>{{length}}</h2>
+    <p>{{date}}</p>
+    <p>{{start_date}}</p>
+    <p>{{end_date}}</p>
+    <p>{{items.length}}</p>
     <div style="display: flex;flex-wrap:wrap;">
-      <selector
-        v-bind:date="date"
-        v-bind:selected_index="date | lun_dom_day"
-      />
+      <selector v-bind:date="date"/>
       <min-max />
     </div>
     <scatter-plot
@@ -84,54 +84,48 @@
       length: function () {
         return this.items.length;
       },
-    },
-    props: {
-      date: {
-        type: String,
-        required: true
-      },
-      start_date: {
-        type: String,
-        required: true
-      },
-      end_date: {
-        type: String,
-        required: true
-      },
-      loading: {
-        type: Boolean
-      },
-      errored: {
-        type: Boolean
-      }
-    },
-    methods: {
-      get() {
+      url: function() {
         const url = new URL(window.location.origin);
         url.pathname = 'neo/rest/v1/feed';
         url.searchParams.set('start_date', this.start_date);
         url.searchParams.set('end_date', this.end_date);
+        return url;
+      },
+      start_date: function () {
+        const url = new URL(location);
+        return url.searchParams.get('start_date');
+      },
+      end_date: function () {
+        const url = new URL(location);
+        return url.searchParams.get('end_date');
+      }
+    },
+    methods: {
+      get() {
         this.loading = true;
         this.errored = false;
         this.items=[];
+        console.log(this.url);
         axios
-        .get(url)
+        .get(this.url)
         .then(response => {
           response.data.near_earth_objects[this.date].forEach(function(e,i,a){
             const url = new URL(window.location.origin);
             url.pathname = `/neo/rest/v1/neo/${e.id}`;
             axios
             .get(url)
-            .then(function(response){
+            .then(response => {
               this.items.push({
                 d: response.data.estimated_diameter.kilometers.estimated_diameter_max,
                 x: response.data.close_approach_data[0].relative_velocity.kilometers_per_second,
                 y: response.data.close_approach_data[0].miss_distance.astronomical,
               });
-            });
+            })
+            .catch(() => this.errored = true)
+            .finally(() => this.loading = false);
           });
         })
-        .catch(error => this.errored = true)
+        .catch(() => this.errored = true)
         .finally(() => this.loading = false);
       },
       scale() {

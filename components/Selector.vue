@@ -1,49 +1,55 @@
 <template>
-    <div style="
-    display: flex;
-    flex-wrap: nowrap;
-    max-width:100%;
-    overflow-x:scroll;
-">
+    <div class="selector">
         <radio
-            v-for="(val, i) in days"
+            v-for="(v, i) in dates"
             v-bind:id="'radio-'+i"
             v-bind:key="'radio-'+i"
-            v-bind:date="val.date"
-            v-bind:label="val.label"
-            v-bind:checked="val.date == date"
+            v-bind:date="v"
         />
     </div>
 </template>
 <script>
-import Radio from './Radio';
+    import Vue from 'vue';
+    import Radio from './Radio';
     export default {
         name: 'selector',
         components: {
             Radio
         },
-        props: {
-            date: {
-                type: String,
-                required: true
-            }
-        },
         computed: {
-            days: function () {
+            dates: function () {
                 const days = new Array();
-                const date = new Date(this.date);
                 const label = date => ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'][date.getDay()]
+                const date = new Date(this.date);
                 for (let i = 0; i < 7; i++) {
                     const d = new Date();
                     d.setDate(date.getDate() + (i - date.getDay()));
-                    days.push({
-                        date: date.getDate() == d.getDate() ? date : d,
-                        label: label(d)
-                    });
+                    days.push(Vue.filter('formatted')(date.getDate() == d.getDate() ? date : d));
                 }
                 return days
+            },
+            start_date: function () {
+                const url = new URL(location);
+                return url.searchParams.get('start_date');
+            },
+            end_date: function () {
+                const url = new URL(location);
+                return url.searchParams.get('end_date');
+            },
+            date: function () {
+                const url = new URL(location);
+                return url.searchParams.get('date') || Vue.filter('formatted')(new Date());
             }
         },
     }
 
 </script>
+<style>
+
+    .selector {
+        display: flex;
+        flex-wrap: nowrap;
+        max-width:100%;
+        overflow-x:scroll;
+    }
+</style>
