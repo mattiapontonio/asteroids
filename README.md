@@ -8,11 +8,6 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 ![](https://img.shields.io/github/license/mattiapontonio/asteroids)
 ![](https://img.shields.io/github/issues/mattiapontonio/asteroids)
 
-![](screenshots/Screenshot_20201110-042136.png)
-![](screenshots/Screenshot_20201110-042150.png)
-![](screenshots/Screenshot_20201110-042209.png)
-![](screenshots/Screenshot_20201110-152839.png)
-
 ## Environments
 
 |branch|uri|
@@ -27,6 +22,10 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 - [Vue CLI](https://cli.vuejs.org/)
 - [Git](https://git-scm.com/)
 - [Nuxt.js](https://nuxtjs.org/docs/2.x/get-started/installation)
+
+### API
+- [Generate API Key](https://api.nasa.gov/#apidatagov_signup)
+- [Asteroids - NeoWs](https://api.nasa.gov/#NeoWS)
 
 ## Getting started
 ```shell
@@ -48,5 +47,8 @@ npm start
 npm run
 ```
 
-### API
-https://api.nasa.gov/
+## Screenshots
+![](screenshots/Screenshot_20201110-042136.png)
+![](screenshots/Screenshot_20201110-042150.png)
+![](screenshots/Screenshot_20201110-042209.png)
+![](screenshots/Screenshot_20201110-152839.png)
