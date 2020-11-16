@@ -20,6 +20,9 @@
       v-bind:maxX="maxX"
       v-bind:minY="minY"
       v-bind:maxY="maxY"
+      v-bind:xs="xs"
+      v-bind:ds="ds"
+      v-bind:ys="ys"
     />
     <table>
       <tbody>
@@ -52,31 +55,31 @@
     name: 'asteroids-of-the-day',
     computed: {
       minD: function () {
-        return this.min(this.ds);
+        return Math.min(...this.ds);
       },
       maxD: function () {
-        return this.max(this.ds);
+        return Math.max(...this.ds);
       },
       maxX: function () {
-          return this.max(this.xs)
+          return Math.max(...this.xs)
       },
       minX: function () {
-          return this.min(this.xs)
+          return Math.min(...this.xs)
       },
       maxY: function () {
-          return this.max(this.ys)
+          return Math.max(...this.ys)
       },
       minY: function () {
-          return this.min(this.ys);
+          return Math.min(...this.ys);
       },
       xs: function () {
-        return this.items.map(e => e['velocity_kilometers_per_second']);
+        return this.items.map(e => e['x']);
       },
       ys: function () {
-        return this.items.map(e => e['distance']);
+        return this.items.map(e => e['y']);
       },
       ds: function () {
-        return this.items.map(e => e['diameter']);
+        return this.items.map(e => e['d']);
       },
       length: function () {
         return this.items.length;
@@ -110,24 +113,20 @@
         url.searchParams.set('end_date', this.end_date);
         this.loading = true;
         this.errored = false;
+        this.items=[];
         axios
         .get(url)
         .then(response => {
-          this.items = response.data.near_earth_objects[this.date];
-          this.items.forEach(function(e,i,a){
+          response.data.near_earth_objects[this.date].forEach(function(e,i,a){
             const url = new URL(window.location.origin);
             url.pathname = `/neo/rest/v1/neo/${e.id}`;
             axios
             .get(url)
             .then(function(response){
-              Object.assign(e, {
-                id: response.data.id,
-                name: response.data.name,
-                diameter: response.data.estimated_diameter.kilometers.estimated_diameter_max,
-                magnitude: response.data.absolute_magnitude_h,
-                velocity_kilometers_per_hour: response.data.close_approach_data[0].relative_velocity.kilometers_per_hour,
-                velocity_kilometers_per_second: response.data.close_approach_data[0].relative_velocity.kilometers_per_second,
-                distance: response.data.close_approach_data[0].miss_distance.astronomical,
+              this.items.push({
+                d: response.data.estimated_diameter.kilometers.estimated_diameter_max,
+                x: response.data.close_approach_data[0].relative_velocity.kilometers_per_second,
+                y: response.data.close_approach_data[0].miss_distance.astronomical,
               });
             });
           });
@@ -137,12 +136,6 @@
       },
       scale() {
         return Vue.filter('scale');
-      },
-      max() {
-        return Vue.filter('max');
-      },
-      min() {
-        return Vue.filter('min');
       }
     },
     mounted() {
