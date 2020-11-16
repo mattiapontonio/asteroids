@@ -9,21 +9,7 @@
       <selector v-bind:date="date"/>
       <min-max />
     </div>
-    <scatter-plot
-      v-bind:date="date"
-      v-bind:items="items"
-      v-bind:loading="loading"
-      v-bind:errored="errored"
-      v-bind:minD="minD"
-      v-bind:maxD="maxD"
-      v-bind:minX="minX"
-      v-bind:maxX="maxX"
-      v-bind:minY="minY"
-      v-bind:maxY="maxY"
-      v-bind:xs="xs"
-      v-bind:ds="ds"
-      v-bind:ys="ys"
-    />
+    <scatter-plot />
     <table>
       <tbody>
         <tr>
@@ -101,39 +87,9 @@
       }
     },
     methods: {
-      get() {
-        this.loading = true;
-        this.errored = false;
-        this.items=[];
-        console.log(this.url);
-        axios
-        .get(this.url)
-        .then(response => {
-          response.data.near_earth_objects[this.date].forEach(function(e,i,a){
-            const url = new URL(window.location.origin);
-            url.pathname = `/neo/rest/v1/neo/${e.id}`;
-            axios
-            .get(url)
-            .then(response => {
-              this.items.push({
-                d: response.data.estimated_diameter.kilometers.estimated_diameter_max,
-                x: response.data.close_approach_data[0].relative_velocity.kilometers_per_second,
-                y: response.data.close_approach_data[0].miss_distance.astronomical,
-              });
-            })
-            .catch(() => this.errored = true)
-            .finally(() => this.loading = false);
-          });
-        })
-        .catch(() => this.errored = true)
-        .finally(() => this.loading = false);
-      },
       scale() {
         return Vue.filter('scale');
       }
-    },
-    mounted() {
-      this.get();
     },
     data: function () {
       return {

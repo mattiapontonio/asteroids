@@ -21,6 +21,7 @@
 <script>
     import Bubble from './Bubble.vue';
     import Tooltip from './Tooltip.vue';
+    import get from '../plugins/get.js';
     export default {
         name: 'asteroid',
         components: {
@@ -34,11 +35,7 @@
             }
         },
         methods: {
-            get() {
-                axios
-                .get(this.url)
-                .then(response => this.data = response.data);
-            }
+            get
         },
         computed: {
             url: function(){
