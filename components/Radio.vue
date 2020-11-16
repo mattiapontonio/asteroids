@@ -10,11 +10,16 @@
   import format from '../formatDate.js';  
     export default {
         name: 'radio',
+        props: {
+            date: {
+                type: String,
+                requred: true
+            }
+        },
         computed: {
             innerText: function() {
-                const date = new Date(this.date);
-                console.log(date);
-                return date.toLocaleDateString(undefined, { weekday: 'long' });
+                console.log(this.date);
+                return new Intl.DateTimeFormat('default', { weekday: 'long' }).format(new Date(this.date))
             },
             url: function() {
                 return new URL(window.location);
