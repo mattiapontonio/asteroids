@@ -6,24 +6,13 @@
   >
     <h1>Asteroids</h1>
     <main>
-      <asteroids-of-the-day
-        v-bind:date="date"
-        v-bind:start_date="date"
-        v-bind:end_date="date"
-        v-bind:asteroids="asteroids_of_the_day"
-        v-bind:loading="loading"
-        v-bind:errored="errored"
-      />
+      <asteroids-of-the-day v-bind:date="date"/>
       <aside>
-        <brightest
-          v-bind:start_date="start_date"
-          v-bind:end_date="end_date"
-        />
+        <brightest/>
         <apod />
       </aside>
     </main>
     <footer>
-      
         <table>
             <tbody>
                 <tr>
@@ -52,37 +41,10 @@
   } from '../package.json';
   export default {
     name: 'app',
-    data: function () {
-      return {
-        //near_earth_objects: {},
-        asteroids_of_the_day: new Array(),
-        loading: true,
-        errored: false
-      }
-    },
     mounted() {
       window.onpopstate = event => {
         this.$forceUpdate();
       };
-    },
-    props: {
-      start_date: {
-        type: Date,
-        default: function () {
-          let date = new Date();
-          date.setDate(date.getDate() - date.getDay() + 1);
-          return date;
-        }
-      },
-      end_date: {
-        type: Date,
-        default: function () {
-          let date = new Date();
-          let day_of_the_week = date.getDay() ? date.getDay() - 1 : 6;
-          date.setDate(date.getDate() + (6 - day_of_the_week));
-          return date;
-        }
-      },
     },
     computed: {
       version: function () {
@@ -92,6 +54,14 @@
         const url = new URL(location);
         return url.searchParams.get('date') || Vue.filter('formatted')(new Date());
       },
+      start_date: function () {
+        const url = new URL(location);
+        return url.searchParams.get('start_date');
+      },
+      end_date: function () {
+        const url = new URL(location);
+        return url.searchParams.get('end_date');
+      }
     }
   }
 
