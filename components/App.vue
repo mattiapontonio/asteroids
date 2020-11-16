@@ -1,5 +1,4 @@
 <template>
-
   <body
     id="app"
     class="app"
@@ -36,11 +35,20 @@
 <script>
   import Vue from 'vue';
   import axios from 'axios';
+  import format from '../formatDate.js';
   import {
     version
   } from '../package.json';
   export default {
     name: 'app',
+    created() {
+      const url = new URL(location);
+      const date = new Date;
+      url.searchParams.set('date', format(date));
+      url.searchParams.set('start_date', format(new Date(date.setDate(date.getDate() - date.getDay()))));
+      url.searchParams.set('end_date',   format(new Date(date.setDate(date.getDate() - date.getDay() + 6))));
+      window.history.pushState({}, '', url);
+    },
     mounted() {
       window.onpopstate = event => {
         this.$forceUpdate();
@@ -52,7 +60,7 @@
       },
       date: function () {
         const url = new URL(location);
-        return url.searchParams.get('date') || Vue.filter('formatted')(new Date());
+        return url.searchParams.get('date') || format(new Date());
       },
       start_date: function () {
         const url = new URL(location);

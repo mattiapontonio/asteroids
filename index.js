@@ -104,6 +104,5 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
         });
     creq.end();
 });
-
 app.get('/manifest.webmanifest', (req, res) => res.json(manifest))
 app.listen(port, () => console.log(`http://localhost:${port}`));

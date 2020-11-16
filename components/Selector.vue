@@ -11,6 +11,7 @@
 <script>
     import Vue from 'vue';
     import Radio from './Radio';
+  import format from '../formatDate.js';
     export default {
         name: 'selector',
         components: {
@@ -24,7 +25,7 @@
                 for (let i = 0; i < 7; i++) {
                     const d = new Date();
                     d.setDate(date.getDate() + (i - date.getDay()));
-                    days.push(Vue.filter('formatted')(date.getDate() == d.getDate() ? date : d));
+                    days.push(format(date.getDate() == d.getDate() ? date : d));
                 }
                 return days
             },
@@ -38,7 +39,7 @@
             },
             date: function () {
                 const url = new URL(location);
-                return url.searchParams.get('date') || Vue.filter('formatted')(new Date());
+                return url.searchParams.get('date') || format(new Date());
             }
         },
     }
