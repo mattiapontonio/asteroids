@@ -1,7 +1,5 @@
 'use strict';
-const fs = require('fs');
 const formatDate = require('./formatDate.js');
-
 const shortcuts = [
     0,1,2,3,4,5,6
 ].map(function(e,i){
@@ -47,6 +45,4 @@ const manifest = {
     "theme_color": "#3367D6",
     shortcuts
 };
-fs.writeFileSync('dist/manifest.webmanifest', JSON.stringify(manifest));
-console.table(manifest);
-console.table(shortcuts);
+module.exports = manifest

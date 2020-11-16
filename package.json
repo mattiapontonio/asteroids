@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "dev": "nuxt",
-    "build": "nuxt generate && node manifest.js",
+    "build": "nuxt generate",
     "generate": "nuxt generate",
     "start": "node index.js"
   },

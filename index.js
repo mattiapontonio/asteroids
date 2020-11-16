@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const https = require('https');
 const querystring = require('querystring');
+const manifest = require('./manifest.js');
 const port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get('/planetary/apod', (oreq, ores) => {
@@ -104,5 +105,5 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
     creq.end();
 });
 
-
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+app.get('/manifest.webmanifest', (req, res) => res.json(manifest))
+app.listen(port, () => console.log(`http://localhost:${port}`));
