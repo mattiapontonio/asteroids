@@ -4,7 +4,7 @@ export default async function() {
     try {
         const response = await fetch(this.url)
         const data = await response.json()
-        this.data = data
+        Object.assign(this, data)
     } catch (error){
         this.error = error
     } finally {
