@@ -20,44 +20,10 @@
 <script>
     import Asteroid from './Asteroid.vue';
     import get from '../plugins/get.js';
-    /*
-    
-                .map(function (e, i, a) {
-                    return Object
-                    .assign(e, {
-                        "x": this
-                            .scale(
-                                e.velocity, 
-                                this.min(function (e, i, a) {
-                                    return e.velocity
-                                }), 
-                                this.max(function (e, i, a) {
-                                    return e.velocity
-                                })
-                            ),
-                        "y": this
-                            .scale(
-                                e.distance, 
-                                this.min(function (e, i, a) {
-                                    return e.distance
-                                }), 
-                                this.max(function (e, i, a) {
-                                    return e.distance
-                                })
-                            ),
-                        "d": this
-                            .scale(
-                                e.diameter, 
-                                this.min(function (e, i, a) {
-                                    return e.diameter
-                                }), 
-                                this.max(function (e, i, a) {
-                                    return e.diameter
-                                })
-                            ),
-                    });
-                });
-    */
+    import Vue from 'vue';
+    const scale = Vue.filter('scale')
+    const min=Vue.filter('min')
+    const max=Vue.filter('max')
     export default {
         name: 'scatter-plot',
         components: {
@@ -97,22 +63,45 @@
                 return this.data?.near_earth_objects?.[this.date]
                 ?.map(function (e, i, a) {
                     return Object
-                    .assign(e, {
+                    .assign({}, {
                         "velocity": e?.close_approach_data[0]?.relative_velocity?.kilometers_per_second,
                         "distance": e?.close_approach_data[0]?.miss_distance.astronomical,
                         "diameter": e?.estimated_diameter?.kilometers?.estimated_diameter_max
                     })
                 })
-            },
-            scale: function () {
-                return Vue.filter('scale')
-            },
-            min: function () {
-                return Vue.filter('min')
-            },
-            max: function () {
-                return Vue.filter('max')
-            },
+                .map(function (e, i, a) {
+                    return Object
+                    .assign(e, {
+                        x: scale(...[
+                            e.velocity, 
+                            min(a.map(function (e, i, a) {
+                                return e.velocity
+                            })), 
+                            max(a.map(function (e, i, a) {
+                                return e.velocity
+                            }))
+                        ]),
+                        y: scale(...[
+                            e.distance, 
+                            min(a.map(function (e, i, a) {
+                                return e.distance
+                            })), 
+                            max(a.map(function (e, i, a) {
+                                return e.distance
+                            }))
+                        ]),
+                        d: scale(...[
+                            e.diameter, 
+                            min(a.map(function (e, i, a) {
+                                return e.diameter
+                            })), 
+                            max(a.map(function (e, i, a) {
+                                return e.diameter
+                            }))
+                        ]),
+                    });
+                });
+            }
         },
         mounted() {
             this.get();
