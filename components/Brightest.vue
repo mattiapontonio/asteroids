@@ -61,17 +61,14 @@
         },
         data: function () {
             return {
-                data: {
-                    near_earth_objects: {}
-                },
                 loading: new Boolean(),
                 error: new Boolean(),
             }
         },
         computed: {
             items: function () {
-                if (typeof this?.data?.near_earth_objects === 'object') {
-                    return Object.values(this.data.near_earth_objects)
+                if (typeof this?.near_earth_objects === 'object') {
+                    return Object.values(this.near_earth_objects)
                     .flat(1)
                     .sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h)
                     .slice(0, 5)
