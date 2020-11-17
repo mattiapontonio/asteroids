@@ -1,7 +1,7 @@
 <template>
     <article>
         <h2>Astronomy Picture of the Day</h2>
-        <div v-if="errored" class="errored">{{msg}}</div>
+        <error v-if="error" v-bind="error"></error>
         <div v-else>
             <div v-if="loading" class="loading"></div>
             <div v-else>
@@ -28,9 +28,12 @@
     </article>
 </template>
 <script>
-    import axios from 'axios';
+    import Error from './Error.vue';
     export default {
         name: 'apod',
+        components: {
+            Error
+        },
         data: function () {
             return {
                 "date": undefined,
@@ -45,19 +48,13 @@
             }
         },
         async fetch() {
-            this.loading = true;
-            this.errored = false;
-            await axios
-                .get('/planetary/apod')
-                .then(({data}) => {
-                    Object.assign(this, data);
-                })
-                .catch(error => {
-                    console.error(error);
-                    this.msg = error.response.data.msg;
-                    this.errored = true;
-                })
-                .finally(() => this.loading = false);
+            this.loading = true
+            this.error = undefined
+            fetch('/planetary/apod')
+            .then(response => response.json())
+            .then(data => Object.assign(this, data))
+            .catch(error => this.error = error)
+            .finally(() => this.loading = false);
         }
     }
 

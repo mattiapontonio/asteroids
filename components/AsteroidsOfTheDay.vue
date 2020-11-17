@@ -30,7 +30,6 @@
   import Selector from './Selector';
   import MinMax from './MinMax';
   import ScatterPlot from './ScatterPlot';
-  import axios from 'axios';
   import Vue from 'vue';
   export default {
     components: {

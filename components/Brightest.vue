@@ -37,9 +37,7 @@
                 </tr>
             </tbody>
         </table>
-        <section v-if="errored">
-            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
-        </section>
+        <error v-if="error" v-bind="error"></error>
         <section v-else>
             <div v-if="loading" class="loading"></div>
             <asteroids
@@ -53,11 +51,13 @@
     import Vue from 'vue';
     import get from '../plugins/get.js';
     import Asteroids from './Asteroids.vue';
+    import Error from './Error.vue';
     const date = new Date();
     export default {
         name: 'brightest',
         components: {
-            Asteroids
+            Asteroids,
+            Error
         },
         data: function () {
             return {
@@ -65,24 +65,28 @@
                     near_earth_objects: {}
                 },
                 loading: new Boolean(),
-                errored: new Boolean(),
+                error: new Boolean(),
             }
         },
         computed: {
             items: function () {
-                return Object.values(this.data.near_earth_objects)
-                .flat(1)
-                .sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h)
-                .slice(0, 5)
-                .reverse()
-                .map((e, i, a) => {
-                    const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
-                    const scale = Vue.filter('scale');
-                    const min = Vue.filter('min');
-                    const max = Vue.filter('max');
-                    e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
-                    return e;
-                });
+                if (typeof this?.data?.near_earth_objects === 'object') {
+                    return Object.values(this.data.near_earth_objects)
+                    .flat(1)
+                    .sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h)
+                    .slice(0, 5)
+                    .reverse()
+                    .map((e, i, a) => {
+                        const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
+                        const scale = Vue.filter('scale');
+                        const min = Vue.filter('min');
+                        const max = Vue.filter('max');
+                        e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
+                        return e;
+                    });
+                } else {
+                    return []
+                }
             },
             url: function () {
                 const url = new URL(window.location.origin);
@@ -111,7 +115,6 @@
 </script>
 <style>
     aside {
-        padding: 0 16px;
         border-left: 0px solid white;
     }
 

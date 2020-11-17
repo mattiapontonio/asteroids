@@ -1,12 +1,12 @@
-import axios from 'axios';
 export default async function() {
     this.loading = true
-    this.errored = false
+    this.error = undefined
     try {
-        const response = await axios.get(this.url)
-        this.data = response.data
+        const response = await fetch(this.url)
+        const data = await response.json()
+        this.data = data
     } catch (error){
-        this.errored = true
+        this.error = error
     } finally {
         this.loading = false
     }

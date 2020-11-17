@@ -1,8 +1,6 @@
 <template>
     <div class="scatter-plot">
-        <section v-if="errored" class="errored">
-            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
-        </section>
+        <error v-if="error" v-bind="error"></error>
         <div v-else-if="loading" class="loading" style="position:absolute; width:100%; height:100%;"></div>
         <section v-else class="container">
             <asteroid
@@ -19,6 +17,7 @@
 </template>
 <script>
     import Asteroid from './Asteroid.vue';
+    import Error from './Error.vue';
     import get from '../plugins/get.js';
     import Vue from 'vue';
     const scale = Vue.filter('scale')
@@ -27,7 +26,8 @@
     export default {
         name: 'scatter-plot',
         components: {
-            Asteroid
+            Asteroid,
+            Error
         },
         data: function () {
             return {
