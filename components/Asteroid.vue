@@ -4,8 +4,9 @@
             top,
             left
         }"
-        @mouseover="show = true"
-        @mouseleave="show = false"
+        @focus="show = true"
+        @blur="show = false"
+        tabindex=0
         class="asteroid"
     >
         <bubble
@@ -57,4 +58,7 @@
 
 </script>
 <style>
+    .asteroid:focus .bubble{
+        border-color:red;
+    }
 </style>
