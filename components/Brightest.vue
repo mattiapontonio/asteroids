@@ -9,55 +9,42 @@
             <tbody>
                 <tr>
                     <td>
-                        <div style="
-                    width: 10px;
-                    height:10px; 
-                    box-sizing: border-box;
-                    transform:rotate(45deg); 
-                    background-color: transparent;
-                    border: 1px solid white;
-                "></div>
+                        <div class="rombo-1"></div>
                     </td>
                     <td>Filled area</td>
                     <td>magnitude</td>
                 </tr>
                 <tr>
                     <td>
-                        <div style="
-                    width: 10px;
-                    height:10px; 
-                    box-sizing: border-box;
-                    transform:rotate(45deg); 
-                    background-color: white;
-                    border: 1px solid white;
-                "></div>
+                        <div class="rombo-2"></div>
                     </td>
                     <td>Empty area</td>
                     <td>brightness</td>
                 </tr>
             </tbody>
         </table>
-        <error v-if="error" v-bind="error"></error>
-        <section v-else>
-            <div v-if="loading" class="loading"></div>
-            <asteroids
-                v-else
-                v-bind:asteroids="items"
-            />
+        <error v-bind="error"></error>
+        <section>
+            <loading v-bind="loading"></loading>
+            <asteroids v-bind:asteroids="items"/>
         </section>
     </article>
 </template>
 <script>
     import Vue from 'vue';
-    import get from '../plugins/get.js';
+    import get from '../plugins/methods/get.js';
     import Asteroids from './Asteroids.vue';
     import Error from './Error.vue';
-    const date = new Date();
+    import Loading from './Loading.vue';
+    import datetime from '../plugins/computed/datetime.js';
+    import start_date from '../plugins/computed/start_date.js';
+    import end_date from '../plugins/computed/end_date.js';
     export default {
         name: 'brightest',
         components: {
             Asteroids,
-            Error
+            Error,
+            Loading
         },
         data: function () {
             return {
@@ -67,20 +54,21 @@
         },
         computed: {
             items: function () {
-                if (typeof this?.near_earth_objects === 'object') {
-                    return Object.values(this.near_earth_objects)
-                    .flat(1)
-                    .sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h)
-                    .slice(0, 5)
-                    .reverse()
-                    .map((e, i, a) => {
-                        const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
-                        const scale = Vue.filter('scale');
-                        const min = Vue.filter('min');
-                        const max = Vue.filter('max');
-                        e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
-                        return e;
-                    });
+                if (this.near_earth_objects) {
+                    return Object
+                        .values(this.near_earth_objects)
+                        .flat(1)
+                        .sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h)
+                        .slice(0, 5)
+                        .reverse()
+                        .map((e, i, a) => {
+                            const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
+                            const scale = Vue.filter('scale');
+                            const min = Vue.filter('min');
+                            const max = Vue.filter('max');
+                            e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
+                            return e;
+                        });
                 } else {
                     return []
                 }
@@ -92,14 +80,9 @@
                 url.searchParams.set('end_date', this.end_date);
                 return url;
             },
-            start_date: function () {
-                const url = new URL(location);
-                return url.searchParams.get('start_date');
-            },
-            end_date: function () {
-                const url = new URL(location);
-                return url.searchParams.get('end_date');
-            }
+      datetime,
+      start_date,
+      end_date
         },
         methods: {
             get
@@ -119,6 +102,24 @@
         aside {
             border-left-width: 0;
         }
+    }
+
+    .rombo-1{
+        width: 10px;
+        height:10px; 
+        box-sizing: border-box;
+        transform:rotate(45deg); 
+        background-color: transparent;
+        border: 1px solid white;
+    }
+
+    .rombo-2{
+        width: 10px;
+        height:10px; 
+        box-sizing: border-box;
+        transform:rotate(45deg); 
+        background-color: white;
+        border: 1px solid white;
     }
 
 </style>

@@ -1,10 +1,10 @@
 <template>
     <div class="selector">
         <radio
-            v-for="(v, i) in dates"
+            v-for="(datetime, i) in datetimes"
             v-bind:id="'radio-'+i"
             v-bind:key="'radio-'+i"
-            v-bind:date="v"
+            v-bind:datetime="datetime"
         />
     </div>
 </template>
@@ -12,13 +12,16 @@
     import Vue from 'vue';
     import Radio from './Radio';
   import format from '../formatDate.js';
+  import datetime from '../plugins/computed/datetime.js';
+  import start_date from '../plugins/computed/start_date.js';
+  import end_date from '../plugins/computed/end_date.js';
     export default {
         name: 'selector',
         components: {
             Radio
         },
         computed: {
-            dates: function () {
+            datetimes: function () {
                 const days = new Array();
                 const label = date => ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'][date.getDay()]
                 const date = new Date(this.date);
@@ -29,18 +32,9 @@
                 }
                 return days
             },
-            start_date: function () {
-                const url = new URL(location);
-                return url.searchParams.get('start_date');
-            },
-            end_date: function () {
-                const url = new URL(location);
-                return url.searchParams.get('end_date');
-            },
-            date: function () {
-                const url = new URL(location);
-                return url.searchParams.get('date') || format(new Date());
-            }
+            datetime,
+            start_date,
+            end_date
         },
     }
 

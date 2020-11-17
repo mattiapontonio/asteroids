@@ -8,9 +8,10 @@ Vue.filter('lun_dom_day', function (d) {
   const date = new Date(d);
   return date.getDay() == 0 ? date.getDay() - 1 : 6
 });
-Vue.filter('DateTimeFormat', function (d) {
-  const date = new Date(d);
-  return new Intl.DateTimeFormat('it-IT').format(date);
+Vue.filter('DateTimeFormat', function (datetime = new Date().toISOString()) {
+  const options = { weekday: 'long' };
+  const date = new Date(datetime);
+  return new Intl.DateTimeFormat('default', options).format(date);
 });
 Vue.filter('scale', function (v = new Number(), min = new Number(), max = new Number()) {
   return (v - min) / (max - min)

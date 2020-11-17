@@ -22,7 +22,7 @@
 <script>
     import Bubble from './Bubble.vue';
     import Tooltip from './Tooltip.vue';
-    import get from '../plugins/get.js';
+    import get from '../plugins/methods/get.js';
     export default {
         name: 'asteroid',
         components: {
