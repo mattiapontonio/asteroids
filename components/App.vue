@@ -34,7 +34,6 @@
 </template>
 <script>
   import Vue from 'vue';
-  import axios from 'axios';
   import format from '../formatDate.js';
   import {
     version
@@ -242,7 +241,7 @@ footer{
   background: white;
   color:black;
 }
-.errored {
+.error {
   color: white;
   border: 1px solid red;
   padding: 1em;
