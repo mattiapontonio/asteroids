@@ -1,12 +1,12 @@
 <template>
   <div style="asteroids-of-the-day">
     <h2>Asteroids of the day</h2>
-    <p>{{date}}</p>
+    <p>{{datetime}}</p>
     <p>{{start_date}}</p>
     <p>{{end_date}}</p>
     <p>{{items.length}}</p>
     <div style="display: flex;flex-wrap:wrap;">
-      <selector v-bind:date="date"/>
+      <selector v-bind:datetime="datetime"/>
       <min-max />
     </div>
     <scatter-plot />
@@ -31,6 +31,9 @@
   import MinMax from './MinMax';
   import ScatterPlot from './ScatterPlot';
   import Vue from 'vue';
+  import datetime from '../plugins/computed/datetime.js';
+  import start_date from '../plugins/computed/start_date.js';
+  import end_date from '../plugins/computed/end_date.js';
   export default {
     components: {
       Selector,
@@ -76,14 +79,9 @@
         url.searchParams.set('end_date', this.end_date);
         return url;
       },
-      start_date: function () {
-        const url = new URL(location);
-        return url.searchParams.get('start_date');
-      },
-      end_date: function () {
-        const url = new URL(location);
-        return url.searchParams.get('end_date');
-      }
+      datetime,
+      start_date,
+      end_date
     },
     methods: {
       scale() {

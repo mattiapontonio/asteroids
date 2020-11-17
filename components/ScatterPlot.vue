@@ -1,8 +1,8 @@
 <template>
     <div class="scatter-plot">
-        <error v-if="error" v-bind="error"></error>
-        <div v-else-if="loading" class="loading" style="position:absolute; width:100%; height:100%;"></div>
-        <section v-else class="container">
+        <error v-bind="error"></error>
+        <loading v-bind="loading" style="position:absolute; width:100%; height:100%;"></loading>
+        <section v-bind="near_earth_objects" class="container">
             <asteroid
                 v-for="(item, i) in items"
                 v-bind:key="i"
@@ -18,8 +18,12 @@
 <script>
     import Asteroid from './Asteroid.vue';
     import Error from './Error.vue';
-    import get from '../plugins/get.js';
+    import get from '../plugins/methods/get.js';
     import Vue from 'vue';
+    import Loading from './Loading.vue';
+  import datetime from '../plugins/computed/datetime.js';
+  import start_date from '../plugins/computed/start_date.js';
+  import end_date from '../plugins/computed/end_date.js';
     const scale = Vue.filter('scale')
     const min=Vue.filter('min')
     const max=Vue.filter('max')
@@ -27,14 +31,8 @@
         name: 'scatter-plot',
         components: {
             Asteroid,
-            Error
-        },
-        data: function () {
-            return {
-                data: {
-                    near_earth_objects: {}
-                }
-            }
+            Error,
+            Loading
         },
         methods: {
             get,
@@ -47,20 +45,11 @@
                 url.searchParams.set('end_date', this.end_date);
                 return url;
             },
-            date: function () {
-                const url = new URL(location);
-                return url.searchParams.get('date')
-            },
-            start_date: function () {
-                const url = new URL(location);
-                return url.searchParams.get('start_date');
-            },
-            end_date: function () {
-                const url = new URL(location);
-                return url.searchParams.get('end_date');
-            },
+      datetime,
+      start_date,
+      end_date,
             items: function () {
-                return this.data?.near_earth_objects?.[this.date]
+                return this?.near_earth_objects?.[this.date]
                 ?.map(function (e, i, a) {
                     return Object
                     .assign({}, {
@@ -123,8 +112,5 @@
     align-items: center;
     justify-content: center;
     display: flex;
-}
-.loading:before{
-    content: 'Loading...';
 }
 </style>

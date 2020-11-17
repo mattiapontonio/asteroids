@@ -5,7 +5,7 @@
   >
     <h1>Asteroids</h1>
     <main>
-      <asteroids-of-the-day v-bind:date="date"/>
+      <asteroids-of-the-day v-bind:datetime="datetime"/>
       <aside>
         <brightest/>
         <apod />
@@ -35,6 +35,9 @@
 <script>
   import Vue from 'vue';
   import format from '../formatDate.js';
+  import datetime from '../plugins/computed/datetime.js';
+  import start_date from '../plugins/computed/start_date.js';
+  import end_date from '../plugins/computed/end_date.js';
   import {
     version
   } from '../package.json';
@@ -57,18 +60,9 @@
       version: function () {
         return version;
       },
-      date: function () {
-        const url = new URL(location);
-        return url.searchParams.get('date') || format(new Date());
-      },
-      start_date: function () {
-        const url = new URL(location);
-        return url.searchParams.get('start_date');
-      },
-      end_date: function () {
-        const url = new URL(location);
-        return url.searchParams.get('end_date');
-      }
+      datetime,
+      start_date,
+      end_date
     }
   }
 

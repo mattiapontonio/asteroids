@@ -9,5 +9,6 @@ export default async function() {
         this.error = error
     } finally {
         this.loading = false
+        this.error = undefined
     }
 }
