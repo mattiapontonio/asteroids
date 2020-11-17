@@ -4,17 +4,11 @@
             <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
         </section>
         <div v-else-if="loading" class="loading" style="position:absolute; width:100%; height:100%;"></div>
-        <section
-            v-else
-            class="container"
-        >
+        <section v-else class="container">
             <asteroid
                 v-for="(item, i) in items"
                 v-bind:key="i"
-                v-bind:id="item.id"
-                v-bind:x="item.x"
-                v-bind:y="item.y"
-                v-bind:d="item.d"
+                v-bind="item"
             />
             <span class="max" coordinate="x">{{maxX}}</span>
             <span class="min" coordinate="x">{{minX}}</span>
@@ -26,6 +20,44 @@
 <script>
     import Asteroid from './Asteroid.vue';
     import get from '../plugins/get.js';
+    /*
+    
+                .map(function (e, i, a) {
+                    return Object
+                    .assign(e, {
+                        "x": this
+                            .scale(
+                                e.velocity, 
+                                this.min(function (e, i, a) {
+                                    return e.velocity
+                                }), 
+                                this.max(function (e, i, a) {
+                                    return e.velocity
+                                })
+                            ),
+                        "y": this
+                            .scale(
+                                e.distance, 
+                                this.min(function (e, i, a) {
+                                    return e.distance
+                                }), 
+                                this.max(function (e, i, a) {
+                                    return e.distance
+                                })
+                            ),
+                        "d": this
+                            .scale(
+                                e.diameter, 
+                                this.min(function (e, i, a) {
+                                    return e.diameter
+                                }), 
+                                this.max(function (e, i, a) {
+                                    return e.diameter
+                                })
+                            ),
+                    });
+                });
+    */
     export default {
         name: 'scatter-plot',
         components: {
@@ -39,7 +71,7 @@
             }
         },
         methods: {
-            get
+            get,
         },
         computed: {
             url: function() {
@@ -61,9 +93,26 @@
                 const url = new URL(location);
                 return url.searchParams.get('end_date');
             },
-            items: function() {
-                return this.data.near_earth_objects[this.date]
-            }
+            items: function () {
+                return this.data?.near_earth_objects?.[this.date]
+                ?.map(function (e, i, a) {
+                    return Object
+                    .assign(e, {
+                        "velocity": e?.close_approach_data[0]?.relative_velocity?.kilometers_per_second,
+                        "distance": e?.close_approach_data[0]?.miss_distance.astronomical,
+                        "diameter": e?.estimated_diameter?.kilometers?.estimated_diameter_max
+                    })
+                })
+            },
+            scale: function () {
+                return Vue.filter('scale')
+            },
+            min: function () {
+                return Vue.filter('min')
+            },
+            max: function () {
+                return Vue.filter('max')
+            },
         },
         mounted() {
             this.get();
