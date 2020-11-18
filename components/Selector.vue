@@ -22,15 +22,18 @@
         },
         computed: {
             datetimes: function () {
-                const days = new Array();
-                const label = date => ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'][date.getDay()]
-                const date = new Date(this.date);
+                const datetimes = new Array()
+                const date = new Date(this.datetime)
+                const day = date.getDay()
+                const day_of_the_month = date.getDate()
                 for (let i = 0; i < 7; i++) {
-                    const d = new Date();
-                    d.setDate(date.getDate() + (i - date.getDay()));
-                    days.push(format(date.getDate() == d.getDate() ? date : d));
+                    const date = new Date();
+                    const day_of_the_month_2 = day_of_the_month + (i - day)
+                    date.setDate(day_of_the_month_2)
+                    const datetime = date.toISOString()
+                    datetimes.push(datetime);
                 }
-                return days
+                return datetimes
             },
             datetime,
             start_date,
