@@ -3,6 +3,7 @@ export default async function() {
     this.error = undefined
     try {
         const response = await fetch(this.url)
+        this.response = response
         const data = await response.json()
         Object.assign(this, data)
     } catch (error){
