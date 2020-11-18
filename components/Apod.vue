@@ -1,10 +1,10 @@
 <template>
     <article>
         <h2>Astronomy Picture of the Day</h2>
-        <error v-bind="error"></error>
+        <error v-if="error"></error>
+        <loading v-if="loading"></loading>
+        <div>{{response.statusText}}</div>
         <div>
-            <div>{{response.statusText}}</div>
-            <loading v-bind="loading"></loading>
             <div>
                 <p>{{datetime|DateTimeFormat}}</p>
                 <picture>
