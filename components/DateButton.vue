@@ -3,7 +3,7 @@
 </template>
 <script>
     export default {
-        name: 'radio',
+        name: 'date-button',
         props: {
             datetime: {
                 type: String,
