@@ -4,6 +4,7 @@
         <error v-if="error"></error>
         <loading v-if="loading"></loading>
         <div>{{response.statusText}}</div>
+        <button v-on:click="get">get</button>
         <div>
             <div>
                 <p>{{datetime|DateTimeFormat}}</p>
@@ -44,7 +45,9 @@
                 url: '/api/planetary/apod',
                 date,
                 datetime: new Date(date).toISOString(),
-                response: new Response()
+                response: new Response(),
+                loading: false,
+                error: false
             }
         },
         methods: {

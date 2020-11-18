@@ -17,6 +17,7 @@
             v-bind:show="show"
             v-bind:data="data"
         />
+        <button v-on:click="get">get</button>
     </div>
 </template>
 <script>

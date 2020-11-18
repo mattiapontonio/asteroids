@@ -27,6 +27,7 @@
         <loading v-if="loading"></loading>
         <div>{{response.statusText}}</div>
         <asteroids v-bind:asteroids="items"/>
+        <button v-on:click="get">get</button>
     </article>
 </template>
 <script>
@@ -47,7 +48,9 @@
         },
         data: function () {
             return {
-                response: new Response()
+                response: new Response(),
+                loading: false,
+                error: false
             }
         },
         computed: {
