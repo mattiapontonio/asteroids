@@ -1,5 +1,6 @@
 <template>
     <div class="scatter-plot">
+        <div>{{response.statusText}}</div>
         <error v-bind="error"></error>
         <loading v-bind="loading" style="position:absolute; width:100%; height:100%;"></loading>
         <section v-bind="near_earth_objects" class="container">
@@ -95,6 +96,11 @@
         },
         mounted() {
             this.get();
+        },
+        data: function () {
+            return {
+                response: new Response()
+            }
         }
     }
 

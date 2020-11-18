@@ -3,6 +3,7 @@
         <h2>Astronomy Picture of the Day</h2>
         <error v-bind="error"></error>
         <div>
+            <div>{{response.statusText}}</div>
             <loading v-bind="loading"></loading>
             <div>
                 <p>{{datetime|DateTimeFormat}}</p>
@@ -42,7 +43,8 @@
             return {
                 url: '/api/planetary/apod',
                 date,
-                datetime: new Date(date).toISOString()
+                datetime: new Date(date).toISOString(),
+                response: new Response()
             }
         },
         methods: {

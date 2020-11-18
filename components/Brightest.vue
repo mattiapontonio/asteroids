@@ -28,6 +28,7 @@
             <loading v-bind="loading"></loading>
             <asteroids v-bind:asteroids="items"/>
         </section>
+        <div>{{response.statusText}}</div>
     </article>
 </template>
 <script>
@@ -50,6 +51,7 @@
             return {
                 loading: new Boolean(),
                 error: new Boolean(),
+                response: new Response()
             }
         },
         computed: {
