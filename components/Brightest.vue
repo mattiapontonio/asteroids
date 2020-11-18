@@ -55,25 +55,24 @@
             }
         },
         computed: {
+            near_earth_objects: function () {
+                return this?.body?.near_earth_objects || {}
+            },
             items: function () {
-                if (this.near_earth_objects) {
-                    return Object
-                        .values(this.near_earth_objects)
-                        .flat(1)
-                        .sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h)
-                        .slice(0, 5)
-                        .reverse()
-                        .map((e, i, a) => {
-                            const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
-                            const scale = Vue.filter('scale');
-                            const min = Vue.filter('min');
-                            const max = Vue.filter('max');
-                            e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
-                            return e;
-                        });
-                } else {
-                    return []
-                }
+                return Object
+                    .values(this.near_earth_objects)
+                    .flat(1)
+                    .sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h)
+                    .slice(0, 5)
+                    .reverse()
+                    .map((e, i, a) => {
+                        const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
+                        const scale = Vue.filter('scale');
+                        const min = Vue.filter('min');
+                        const max = Vue.filter('max');
+                        e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
+                        return e;
+                    });
             },
             url: function () {
                 const url = new URL(window.location.origin);
@@ -82,9 +81,9 @@
                 url.searchParams.set('end_date', this.end_date);
                 return url;
             },
-      datetime,
-      start_date,
-      end_date
+            datetime,
+            start_date,
+            end_date
         },
         methods: {
             get
