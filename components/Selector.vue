@@ -1,6 +1,6 @@
 <template>
     <div class="selector">
-        <radio
+        <date-button
             v-for="(datetime, i) in datetimes"
             v-bind:id="'radio-'+i"
             v-bind:key="'radio-'+i"
@@ -10,15 +10,14 @@
 </template>
 <script>
     import Vue from 'vue';
-    import Radio from './Radio';
-  import format from '../formatDate.js';
+    import DateButton from './DateButton';
   import datetime from '../plugins/computed/datetime.js';
   import start_date from '../plugins/computed/start_date.js';
   import end_date from '../plugins/computed/end_date.js';
     export default {
         name: 'selector',
         components: {
-            Radio
+            DateButton
         },
         computed: {
             datetimes: function () {
