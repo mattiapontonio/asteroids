@@ -2,8 +2,6 @@
     <button v-on:click="onclick">{{innerText}}</button>
 </template>
 <script>
-  import Vue from 'vue';      
-  import format from '../formatDate.js';  
     export default {
         name: 'radio',
         props: {
@@ -31,8 +29,11 @@
         methods: {
             onclick() {
                 const url = new URL(location);
-                url.searchParams.set('date', format(this.date));
-                window.history.pushState({}, '', url);
+                const date = this.datetime.substring(0, 10);
+                url.searchParams.set('date', date);
+                history.pushState({
+                    date
+                }, '', url);
             }
         }
     }
