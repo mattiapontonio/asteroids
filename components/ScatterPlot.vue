@@ -3,6 +3,7 @@
         <error v-if="error"></error>
         <loading v-if="loading"></loading>
         <div>{{response.statusText}}</div>
+        <div>{{loading}}</div>
         <div class="scatter-plot">
             <section v-bind="near_earth_objects" class="container">
                 <asteroid
@@ -16,6 +17,7 @@
                 <span class="min" coordinate="y">{{minY}}</span>
             </section>
         </div>
+        <button v-on:click="get">get</button>
     </div>
 </template>
 <script>
@@ -104,7 +106,9 @@
         },
         data: function () {
             return {
-                response: new Response()
+                response: new Response(),
+                loading: false,
+                error: false
             }
         }
     }
