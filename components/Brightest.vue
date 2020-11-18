@@ -23,12 +23,10 @@
                 </tr>
             </tbody>
         </table>
-        <error v-bind="error"></error>
-        <section>
-            <loading v-bind="loading"></loading>
-            <asteroids v-bind:asteroids="items"/>
-        </section>
+        <error v-if="error"></error>
+        <loading v-if="loading"></loading>
         <div>{{response.statusText}}</div>
+        <asteroids v-bind:asteroids="items"/>
     </article>
 </template>
 <script>
@@ -49,8 +47,6 @@
         },
         data: function () {
             return {
-                loading: new Boolean(),
-                error: new Boolean(),
                 response: new Response()
             }
         },

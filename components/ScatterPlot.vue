@@ -1,19 +1,21 @@
 <template>
-    <div class="scatter-plot">
+    <div>
+        <error v-if="error"></error>
+        <loading v-if="loading"></loading>
         <div>{{response.statusText}}</div>
-        <error v-bind="error"></error>
-        <loading v-bind="loading" style="position:absolute; width:100%; height:100%;"></loading>
-        <section v-bind="near_earth_objects" class="container">
-            <asteroid
-                v-for="(item, i) in items"
-                v-bind:key="i"
-                v-bind="item"
-            />
-            <span class="max" coordinate="x">{{maxX}}</span>
-            <span class="min" coordinate="x">{{minX}}</span>
-            <span class="max" coordinate="y">{{maxY}}</span>
-            <span class="min" coordinate="y">{{minY}}</span>
-        </section>
+        <div class="scatter-plot">
+            <section v-bind="near_earth_objects" class="container">
+                <asteroid
+                    v-for="(item, i) in items"
+                    v-bind:key="i"
+                    v-bind="item"
+                />
+                <span class="max" coordinate="x">{{maxX}}</span>
+                <span class="min" coordinate="x">{{minX}}</span>
+                <span class="max" coordinate="y">{{maxY}}</span>
+                <span class="min" coordinate="y">{{minY}}</span>
+            </section>
+        </div>
     </div>
 </template>
 <script>
