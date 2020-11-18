@@ -49,6 +49,9 @@
       datetime,
       start_date,
       end_date,
+            near_earth_objects: function () {
+                return this?.body?.near_earth_objects || {}
+            },
             items: function () {
                 return this?.near_earth_objects?.[this.date]
                 ?.map(function (e, i, a) {
