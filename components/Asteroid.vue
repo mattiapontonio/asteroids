@@ -33,7 +33,10 @@
         data: function () {
             return {
                 show: false,
-                data: {}
+                data: {},
+                x: 0,
+                y: 0,
+                d: 0
             }
         },
         methods: {
@@ -50,10 +53,61 @@
             },
             left: function(){
                 return this.y * 100 + '%';
+            },
+            x: function(){
+                return scale(...[
+                    this.velocity,
+                    min(this.items.map(function (e, i, a) {
+                        return e.velocity
+                    })),
+                    max(this.items.map(function (e, i, a) {
+                        return e.velocity
+                    }))
+                ])
+            },
+            y: function(){
+                return scale(...[
+                    this.distance,
+                    min(a.map(function (e, i, a) {
+                        return e.distance
+                    })),
+                    max(a.map(function (e, i, a) {
+                        return e.distance
+                    }))
+                ])
+            },
+            d: function(){
+                return scale(...[
+                    this.diameter,
+                    min(a.map(function (e, i, a) {
+                        return e.diameter
+                    })),
+                    max(a.map(function (e, i, a) {
+                        return e.diameter
+                    }))
+                ])
             }
         },
         mounted() {
             this.get();
+        },
+        props: {
+            items: {
+                type: Array,
+                required: true
+            },
+            velocity: {
+                type: Number,
+                required: true
+            },
+            distance: {
+                type: Number,
+                required: true
+            },
+            diameter: {
+                type: Number,
+                required: true
+            }
         }
     }
 

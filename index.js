@@ -45,6 +45,7 @@ app.get('/neo/rest/v1/feed', (oreq, ores) => {
         path: `/neo/rest/v1/feed?${querystring.stringify(oreq.query)}`,
         method: 'GET'
     };
+    console.log(options);
     const creq = https
         .request(options, pres => {
             pres.setEncoding('utf8');
@@ -78,6 +79,7 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
         path: `/neo/rest/v1/neo/${oreq.params.id}?${querystring.stringify(oreq.query)}`,
         method: 'GET'
     };
+    console.log(options);
     const creq = https
         .request(options, pres => {
             pres.setEncoding('utf8');
