@@ -8,6 +8,7 @@
         @blur="show = false"
         tabindex=0
         class="asteroid"
+        errored="errored"
     >
         <bubble
             style="{transform: 'translate(-50%, -50%)'}"
@@ -17,7 +18,6 @@
             v-bind:show="show"
             v-bind:data="data"
         />
-        <button v-on:click="get">get</button>
     </div>
 </template>
 <script>
@@ -40,7 +40,25 @@
             }
         },
         methods: {
-            get
+            get: function() {
+                this.loading = true
+                this.error = false
+                fetch(this.url)
+                .then(response => {
+                    this.response = response
+                    return response.json()
+                })
+                .then(data => {
+                    console.dir(data)
+                    this.data = data
+                })
+                .catch(error => {
+                    console.dir(error)
+                    this.errored = true
+                    this.error = error
+                })
+                .finally(() => this.loading = false)
+            }
         },
         computed: {
             url: function(){
@@ -114,6 +132,9 @@
 </script>
 <style>
     .asteroid:focus .bubble{
+        border-color:red;
+    }
+    .asteroid[errored] .bubble{
         border-color:red;
     }
 </style>
