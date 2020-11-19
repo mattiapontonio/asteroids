@@ -40,6 +40,7 @@ rm csr.pem
 npm i
 npm run build
 npm start
+open http://localhost:3000
 ```
 
 ## Scripts
