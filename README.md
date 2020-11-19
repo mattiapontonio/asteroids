@@ -1,6 +1,6 @@
 # asteroids
 
-A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and hydratated by REST microservices uses data from [The National Aeronautics and Space Administration's application programming interface](https://api.nasa.gov).
+A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and hydratated by Representational state transfer microservices uses data from [The National Aeronautics and Space Administration's application programming interface](https://api.nasa.gov).
 
 ![](https://img.shields.io/github/issues/mattiapontonio/asteroids)
 ![](https://img.shields.io/github/forks/mattiapontonio/asteroids)
