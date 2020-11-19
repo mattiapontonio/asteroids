@@ -60,17 +60,36 @@
                 this.error = false
                 fetch(this.url)
                 .then(response => {
-                    console.log(response)
                     this.response = response
-                    this.loading = false
                     return response.json()
                 })
                 .then(body => {
-                    this.body = body
+                    console.dir(body)
+                    const {near_earth_objects} = body
+                    if (body.near_earth_objects) {
+                        console.dir(body.near_earth_objects)
+                        if (body.near_earth_objects[this.date]) {
+                            console.dir(body.near_earth_objects[this.date])
+                            if (Array.isArray(body.near_earth_objects[this.date])) {
+                                console.dir(body.near_earth_objects[this.date])
+                                this.items = near_earth_objects[this.date].map(function (e, i, a) {
+                                    return {
+                                        id: e.id,
+                                        velocity: e?.close_approach_data[0]?.relative_velocity?.kilometers_per_second,
+                                        distance: e?.close_approach_data[0]?.miss_distance.astronomical,
+                                        diameter: e?.estimated_diameter?.kilometers?.estimated_diameter_max
+                                    }
+                                })
+                            }
+                        }
+                    }
                 })
                 .catch(error => {
+                    console.dir(error)
+                    this.errored = true
                     this.error = error
                 })
+                .finally(() => this.loading = false)
             }
         },
         computed: {
@@ -84,44 +103,12 @@
                 url.searchParams.set('end_date', this.end_date)
                 return url
             },
-            response: {
-                set: function (response) {
-                    console.log(response)
-                    const {ok,bodyUsed}=response
-                    if (ok) {
-                        if (bodyUsed) {
-                            response.json().then(body => {
-                                this.body = body
-                            })
-                        }
-                    }
-                }
-            },
-            body: {
-                set: function (body) {
-                    const {near_earth_objects} = this.body
-                    if (near_earth_objects) {
-                        if (items) {
-                            if (Array.isArray(items)) {
-                                this.near_earth_objects_of_today = near_earth_objects[this.date]
-                            }
-                        }
-                    }
-                }
-            },
             length: function() {
                 return this.items.length
             },
-            items: function() {
-                return this.near_earth_objects_of_today.map(function (e, i, a) {
-                    return {
-                        id: e.id,
-                        velocity: e?.close_approach_data[0]?.relative_velocity?.kilometers_per_second,
-                        distance: e?.close_approach_data[0]?.miss_distance.astronomical,
-                        diameter: e?.estimated_diameter?.kilometers?.estimated_diameter_max
-                    }
-                })
-            },
+            date: function() {
+                return this.datetime.substring(0, 10)
+            }
         },
         mounted() {
             this.get()
@@ -132,8 +119,7 @@
                 body: {},
                 loading: false,
                 error: false,
-                items: [],
-                near_earth_objects_of_today: []
+                items: []
             }
         }
     }
