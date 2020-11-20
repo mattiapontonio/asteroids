@@ -5,7 +5,11 @@
         tabindex=0
         class="asteroid"
     >
-        <bubble v-bind:d="d"/>
+        <bubble 
+            v-bind:x="x"
+            v-bind:y="y"
+            v-bind:d="d"
+        />
         <tooltip
             v-bind:show="show"
             v-bind:data="data"
