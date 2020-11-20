@@ -19,7 +19,6 @@
                         v-for="(item, i) in items"
                         v-bind:key="i"
                         v-bind="item"
-                        v-bind="items"
                     />
                 </section>
                 <span class="max" coordinate="x">{{maxX}}</span>
@@ -72,14 +71,50 @@
                             console.dir(body.near_earth_objects[this.date])
                             if (Array.isArray(body.near_earth_objects[this.date])) {
                                 console.dir(body.near_earth_objects[this.date])
-                                this.items = near_earth_objects[this.date].map(function (e, i, a) {
+                                this.items = near_earth_objects[this.date]
+                                .map(function (e, i, a) {
+                                    const velocity = e?.close_approach_data[0]?.relative_velocity?.kilometers_per_second
+                                    const distance = e?.close_approach_data[0]?.miss_distance.astronomical
+                                    const diameter = e?.estimated_diameter?.kilometers?.estimated_diameter_max
+                                    const id = e.id;
                                     return {
-                                        id: e.id,
-                                        velocity: e?.close_approach_data[0]?.relative_velocity?.kilometers_per_second,
-                                        distance: e?.close_approach_data[0]?.miss_distance.astronomical,
-                                        diameter: e?.estimated_diameter?.kilometers?.estimated_diameter_max
+                                        id
                                     }
                                 })
+                                .map(function (e, i, a) {
+                                    const x = scale(...[
+                                        e.velocity,
+                                        min(a.map(function (e) {
+                                            return e.velocity
+                                        })),
+                                        max(a.map(function (e) {
+                                            return e.velocity
+                                        }))
+                                    ]);
+                                    const y = scale(...[
+                                        e.distance,
+                                        min(a.map(function (e) {
+                                            return e.distance
+                                        })),
+                                        max(a.map(function (e) {
+                                            return e.distance
+                                        }))
+                                    ]);
+                                    const d = scale(...[
+                                        e.diameter,
+                                        min(a.map(function (e) {
+                                            return e.diameter
+                                        })),
+                                        max(a.map(function (e) {
+                                            return e.diameter
+                                        }))
+                                    ]);
+                                    return {
+                                        x,
+                                        y,
+                                        d
+                                    }
+                                });
                             }
                         }
                     }

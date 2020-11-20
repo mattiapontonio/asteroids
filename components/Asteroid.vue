@@ -12,7 +12,9 @@
     >
         <bubble
             style="{transform: 'translate(-50%, -50%)'}"
-            v-bind:data="data"
+            v-bind:style="{
+                transform
+            }"
         />
         <tooltip
             v-bind:show="show"
@@ -33,10 +35,7 @@
         data: function () {
             return {
                 show: false,
-                data: {},
-                x: 0,
-                y: 0,
-                d: 0
+                data: {}
             }
         },
         methods: {
@@ -72,57 +71,23 @@
             left: function(){
                 return this.y * 100 + '%';
             },
-            x: function(){
-                return scale(...[
-                    this.velocity,
-                    min(this.items.map(function (e, i, a) {
-                        return e.velocity
-                    })),
-                    max(this.items.map(function (e, i, a) {
-                        return e.velocity
-                    }))
-                ])
-            },
-            y: function(){
-                return scale(...[
-                    this.distance,
-                    min(a.map(function (e, i, a) {
-                        return e.distance
-                    })),
-                    max(a.map(function (e, i, a) {
-                        return e.distance
-                    }))
-                ])
-            },
-            d: function(){
-                return scale(...[
-                    this.diameter,
-                    min(a.map(function (e, i, a) {
-                        return e.diameter
-                    })),
-                    max(a.map(function (e, i, a) {
-                        return e.diameter
-                    }))
-                ])
+            transform: function() {
+                return `translateX(${100 - (this.x * 100) + '%'}) translateY(${this.y * 100 + '%'}) scale(${this.d})`
             }
         },
         mounted() {
             this.get();
         },
         props: {
-            items: {
-                type: Array,
-                required: true
-            },
-            velocity: {
+            x: {
                 type: Number,
                 required: true
             },
-            distance: {
+            y: {
                 type: Number,
                 required: true
             },
-            diameter: {
+            d: {
                 type: Number,
                 required: true
             }
