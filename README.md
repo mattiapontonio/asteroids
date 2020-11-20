@@ -2,18 +2,18 @@
 
 A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and hydratated by Representational state transfer microservices uses data from [The National Aeronautics and Space Administration's application programming interface](https://api.nasa.gov).
 
-![](https://img.shields.io/github/issues/mattiapontonio/asteroids)
-![](https://img.shields.io/github/forks/mattiapontonio/asteroids)
-![](https://img.shields.io/github/stars/mattiapontonio/asteroids)
-![](https://img.shields.io/github/license/mattiapontonio/asteroids)
-![](https://img.shields.io/github/issues/mattiapontonio/asteroids)
+![alt](https://img.shields.io/github/issues/mattiapontonio/asteroids)
+![alt](https://img.shields.io/github/forks/mattiapontonio/asteroids)
+![alt](https://img.shields.io/github/stars/mattiapontonio/asteroids)
+![alt](https://img.shields.io/github/license/mattiapontonio/asteroids)
+![alt](https://img.shields.io/github/issues/mattiapontonio/asteroids)
 
 ## Environments
 
 |branch|uri|
 |-|-|
-|develop|https://asteroids-nasa-develop.herokuapp.com/|
-|master|https://asteroids-nasa.herokuapp.com/|
+|develop|<https://asteroids-nasa-develop.herokuapp.com/>|
+|master|<https://asteroids-nasa.herokuapp.com/>|
 
 ## Stack
 
@@ -24,10 +24,12 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 - [Nuxt.js](https://nuxtjs.org/docs/2.x/get-started/installation)
 
 ### API
+
 - [Generate API Key](https://api.nasa.gov/#apidatagov_signup)
 - [Asteroids - NeoWs](https://api.nasa.gov/#NeoWS)
 
 ## Getting started
+
 ```shell
 export PORT=3000
 export API_KEY=DEMO_KEY
@@ -44,12 +46,14 @@ open http://localhost:3000
 ```
 
 ## Scripts
+
 ```shell
 npm run
 ```
 
 ## Screenshots
-![](screenshots/Screenshot_20201123-225935.png)
-![](screenshots/Screenshot_20201110-042150.png)
-![](screenshots/Screenshot_20201110-042209.png)
-![](screenshots/Screenshot_20201110-152839.png)
+
+![alt](screenshots/Screenshot_20201110-042136.png)
+![alt](screenshots/Screenshot_20201110-042150.png)
+![alt](screenshots/Screenshot_20201110-042209.png)
+![alt](screenshots/Screenshot_20201110-152839.png)
