@@ -1,17 +1,5 @@
 <template>
     <div>
-        <error v-if="error"></error>
-        <loading v-if="loading"></loading>
-        <table>
-            <tr>
-                <th>Loading</th>
-                <th>Length</th>
-            </tr>
-            <tr>
-                <td>{{loading}}</td>
-                <div>{{length}}</div>
-            </tr>
-        </table>
         <div v-if="response.ok">
             <div class="scatter-plot">
                 <section class="container">
@@ -23,16 +11,37 @@
                         }"
                     />
                 </section>
-                <span class="max" coordinate="x">{{maxX}}</span>
-                <span class="min" coordinate="x">{{minX}}</span>
-                <span class="max" coordinate="y">{{maxY}}</span>
-                <span class="min" coordinate="y">{{minY}}</span>
             </div>
         </div>
         <div v-else>
             <div>{{response.status}}</div>
             <div>{{response.statusText}}</div>
         </div>
+        <table>
+            <tr>
+                <th>Coordinate</th>
+                <th>Max</th>
+                <th>Min</th>
+                <th>unit of measure</th>
+            </tr>
+            <tr v-for="(row, i) in rows">
+                <td>{{row.coordinate}}</td>
+                <td>{{row.max}}</td>
+                <td>{{row.min}}</td>
+            </tr>
+        </table>
+        <error v-if="error"></error>
+        <table>
+            <tr>
+                <th>Loading</th>
+                <th>Length</th>
+            </tr>
+            <tr>
+                <td>{{loading}}</td>
+                <div>{{length}}</div>
+            </tr>
+        </table>
+        <loader v-if="loading"></loader>
         <button v-on:click="get">get</button>
     </div>
 </template>
@@ -49,6 +58,7 @@
     const scale = Vue.filter('scale')
     const min=Vue.filter('min')
     const max=Vue.filter('max')
+    //new (Date.bind(null, 2011, 11, 24))
     export default {
         name: 'scatter-plot',
         components: {
@@ -92,6 +102,23 @@
                                         d: scale(e.d,min(a.map(e=>e.d)),max(a.map(e=>e.d)))
                                     }
                                 });
+                                this.rows = [
+                                    {
+                                        coordinate: 'x',
+                                        min: Math.min.apply(null, near_earth_objects[this.date].map(e=>e.close_approach_data[0].relative_velocity.kilometers_per_second)),
+                                        max:  Math.max.apply(null, near_earth_objects[this.date].map(e=>e.close_approach_data[0].relative_velocity.kilometers_per_second))
+                                    },
+                                    {
+                                        coordinate: 'y',
+                                        min: Math.min.apply(null, near_earth_objects[this.date].map(e=>e.close_approach_data[0].miss_distance.kilometers)),
+                                        max:  Math.max.apply(null, near_earth_objects[this.date].map(e=>e.close_approach_data[0].miss_distance.kilometers))
+                                    },
+                                    {
+                                        coordinate: 'd',                                        
+                                        min: Math.min.apply(null, near_earth_objects[this.date].map(e=>e.estimated_diameter.kilometers.estimated_diameter_max)),
+                                        max:  Math.max.apply(null, near_earth_objects[this.date].map(e=>e.estimated_diameter.kilometers.estimated_diameter_max))
+                                    }
+                                ];
                             }
                         }
                     }
@@ -131,7 +158,8 @@
                 body: {},
                 loading: false,
                 error: false,
-                items: []
+                items: [],
+                rows: []
             }
         }
     }
