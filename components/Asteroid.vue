@@ -75,10 +75,11 @@
                 return `translateX(${100 - (this.x * 100) + '%'}) translateY(${this.y * 100 + '%'}) scale(${this.d})`
             }
         },
-        mounted() {
-            this.get();
-        },
         props: {
+            id: {
+                type: String,
+                required: true
+            },
             x: {
                 type: Number,
                 required: true

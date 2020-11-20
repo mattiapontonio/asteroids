@@ -18,7 +18,10 @@
                     <asteroid
                         v-for="(item, i) in items"
                         v-bind:key="i"
-                        v-bind="item"
+                        v-bind="item.id"
+                        v-bind="item.x"
+                        v-bind="item.y"
+                        v-bind="item.d"
                     />
                 </section>
                 <span class="max" coordinate="x">{{maxX}}</span>
@@ -77,6 +80,7 @@
                                     const distance = e?.close_approach_data[0]?.miss_distance.astronomical
                                     const diameter = e?.estimated_diameter?.kilometers?.estimated_diameter_max
                                     const id = e.id;
+                                    console.log(e)
                                     return {
                                         id
                                     }
