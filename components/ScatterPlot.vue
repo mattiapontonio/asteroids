@@ -15,10 +15,12 @@
         <div v-if="response.ok">
             <div class="scatter-plot">
                 <section class="container">
-                    <asteroid
+                    <bubble
                         v-for="(item, i) in items"
                         v-bind:key="i"
-                        v-bind="item"
+                        v-bind:style="{ 
+                            transform: `translate(${item.x},${item.y}) scale(${item.d})`
+                        }"
                     />
                 </section>
                 <span class="max" coordinate="x">{{maxX}}</span>
@@ -37,6 +39,7 @@
 <script>
     import Asteroid from './Asteroid.vue'
     import Error from './Error.vue'
+    import Bubble from './Bubble.vue'
     import get from '../plugins/methods/get.js'
     import Vue from 'vue'
     import Loading from './Loading.vue'
@@ -51,7 +54,8 @@
         components: {
             Asteroid,
             Error,
-            Loading
+            Loading,
+            Bubble
         },
         methods: {
             get: function() {
@@ -83,8 +87,8 @@
                                 .map(function (e, i, a) {
                                     return {
                                         id: e.id,
-                                        x: scale(e.x,min(a.map(e=>e.x)),max(a.map(e=>e.x))),
-                                        y: scale(e.y,min(a.map(e=>e.y)),max(a.map(e=>e.y))),
+                                        x: scale(e.x,min(a.map(e=>e.x)),max(a.map(e=>e.x)))*100+"%",
+                                        y: scale(e.y,min(a.map(e=>e.y)),max(a.map(e=>e.y)))*100+"%",
                                         d: scale(e.d,min(a.map(e=>e.d)),max(a.map(e=>e.d)))
                                     }
                                 });
@@ -147,4 +151,10 @@
     justify-content: center;
     display: flex;
 }
+
+    .bubble {
+        width: 100px;
+        height: 100px;
+        transform-origin: center center;
+    }
 </style>
