@@ -18,10 +18,7 @@
                     <asteroid
                         v-for="(item, i) in items"
                         v-bind:key="i"
-                        v-bind="item.id"
-                        v-bind="item.x"
-                        v-bind="item.y"
-                        v-bind="item.d"
+                        v-bind="item"
                     />
                 </section>
                 <span class="max" coordinate="x">{{maxX}}</span>
@@ -76,47 +73,19 @@
                                 console.dir(body.near_earth_objects[this.date])
                                 this.items = near_earth_objects[this.date]
                                 .map(function (e, i, a) {
-                                    const velocity = e?.close_approach_data[0]?.relative_velocity?.kilometers_per_second
-                                    const distance = e?.close_approach_data[0]?.miss_distance.astronomical
-                                    const diameter = e?.estimated_diameter?.kilometers?.estimated_diameter_max
-                                    const id = e.id;
-                                    console.log(e)
                                     return {
-                                        id
+                                        id: e.id,
+                                        x: e.close_approach_data[0].relative_velocity.kilometers_per_second,
+                                        y: e.close_approach_data[0].miss_distance.kilometers,
+                                        d: e.estimated_diameter.kilometers.estimated_diameter_max
                                     }
                                 })
                                 .map(function (e, i, a) {
-                                    const x = scale(...[
-                                        e.velocity,
-                                        min(a.map(function (e) {
-                                            return e.velocity
-                                        })),
-                                        max(a.map(function (e) {
-                                            return e.velocity
-                                        }))
-                                    ]);
-                                    const y = scale(...[
-                                        e.distance,
-                                        min(a.map(function (e) {
-                                            return e.distance
-                                        })),
-                                        max(a.map(function (e) {
-                                            return e.distance
-                                        }))
-                                    ]);
-                                    const d = scale(...[
-                                        e.diameter,
-                                        min(a.map(function (e) {
-                                            return e.diameter
-                                        })),
-                                        max(a.map(function (e) {
-                                            return e.diameter
-                                        }))
-                                    ]);
                                     return {
-                                        x,
-                                        y,
-                                        d
+                                        id: e.id,
+                                        x: scale(e.x,min(a.map(e=>e.x)),max(a.map(e=>e.x))),
+                                        y: scale(e.y,min(a.map(e=>e.y)),max(a.map(e=>e.y))),
+                                        d: scale(e.d,min(a.map(e=>e.d)),max(a.map(e=>e.d)))
                                     }
                                 });
                             }
