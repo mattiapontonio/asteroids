@@ -62,8 +62,17 @@
             </section>
         </div>
         <div v-else>
-            <div>{{response.status}}</div>
-            <div>{{response.statusText}}</div>
+            <div v-if="response.status === 403">
+                <form method="get">
+                    <label for="api_key">api_key</label>
+                    <input type="text" id="api_key" name="api_key" required>
+                    <button type="submit" value="Submit">Submit</button>
+                </form>
+            </div>
+            <div v-else>
+                <div>{{response.status}}</div>
+                <div>{{response.statusText}}</div>
+            </div>
         </div>
         <loader v-if="loading"></loader>
         <button v-on:click="get">get</button>
