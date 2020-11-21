@@ -1,7 +1,7 @@
 <template>
-    <div class="bubble">
+    <button class="bubble">
         <div class="point"></div>
-    </div>
+    </button>
 </template>
 <script>
     export default {

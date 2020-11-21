@@ -1,8 +1,56 @@
 <template>
     <div>
+        <table>
+            <tr>
+                <th>datetime</th>
+                <th>start_date</th>
+                <th>end_date</th>
+            </tr>
+            <tr>
+                <td>{{datetime}}</td>
+                <td>{{start_date}}</td>
+                <td>{{end_date}}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Coordinate</th>
+                <th>Value</th>
+                <th>Max</th>
+                <th>Min</th>
+                <th>unit of measure</th>
+                <th>Direction</th>
+            </tr>
+            <tr v-for="(row, i) in rows">
+                <td>{{row.coordinate}}</td>
+                <td>{{row.value}}</td>
+                <td>{{row.max}}</td>
+                <td>{{row.min}}</td>
+                <td>{{row.uom}}</td>
+                <td>{{row.dir}}</td>
+            </tr>
+        </table>
+        <error v-if="error"></error>
+        <table>
+            <tr>
+                <th>Loading</th>
+            </tr>
+            <tr>
+                <td>{{loading}}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Length</th>
+            </tr>
+            <tr>
+                <div>{{length}}</div>
+            </tr>
+        </table>
         <div v-if="response.ok">
-            <div class="scatter-plot">
-                <section class="container">
+            <section class="scatter-plot">
+                <h3>Scatter plot</h3>
+                <div class="container">
                     <bubble
                         v-for="(item, i) in items"
                         v-bind:key="i"
@@ -10,37 +58,13 @@
                             transform: `translate(${item.x},${item.y}) scale(${item.d})`
                         }"
                     />
-                </section>
-            </div>
+                </div>
+            </section>
         </div>
         <div v-else>
             <div>{{response.status}}</div>
             <div>{{response.statusText}}</div>
         </div>
-        <table>
-            <tr>
-                <th>Coordinate</th>
-                <th>Max</th>
-                <th>Min</th>
-                <th>unit of measure</th>
-            </tr>
-            <tr v-for="(row, i) in rows">
-                <td>{{row.coordinate}}</td>
-                <td>{{row.max}}</td>
-                <td>{{row.min}}</td>
-            </tr>
-        </table>
-        <error v-if="error"></error>
-        <table>
-            <tr>
-                <th>Loading</th>
-                <th>Length</th>
-            </tr>
-            <tr>
-                <td>{{loading}}</td>
-                <div>{{length}}</div>
-            </tr>
-        </table>
         <loader v-if="loading"></loader>
         <button v-on:click="get">get</button>
     </div>
@@ -85,6 +109,7 @@
                             console.dir(body.near_earth_objects[this.date])
                             if (Array.isArray(body.near_earth_objects[this.date])) {
                                 console.dir(body.near_earth_objects[this.date])
+                                console.log(near_earth_objects[this.date])
                                 this.items = near_earth_objects[this.date]
                                 .map(function (e, i, a) {
                                     return {
@@ -105,13 +130,19 @@
                                 this.rows = [
                                     {
                                         coordinate: 'x',
+                                        value: 'Relative velocity',
                                         min: Math.min.apply(null, near_earth_objects[this.date].map(e=>e.close_approach_data[0].relative_velocity.kilometers_per_second)),
-                                        max:  Math.max.apply(null, near_earth_objects[this.date].map(e=>e.close_approach_data[0].relative_velocity.kilometers_per_second))
+                                        max:  Math.max.apply(null, near_earth_objects[this.date].map(e=>e.close_approach_data[0].relative_velocity.kilometers_per_second)),
+                                        uom: 'km/s',
+                                        dir: '➡'
                                     },
                                     {
                                         coordinate: 'y',
+                                        value: 'Miss distance',
                                         min: Math.min.apply(null, near_earth_objects[this.date].map(e=>e.close_approach_data[0].miss_distance.kilometers)),
-                                        max:  Math.max.apply(null, near_earth_objects[this.date].map(e=>e.close_approach_data[0].miss_distance.kilometers))
+                                        max:  Math.max.apply(null, near_earth_objects[this.date].map(e=>e.close_approach_data[0].miss_distance.kilometers)),
+                                        uom: 'au',
+                                        dir: '⬆'
                                     },
                                     {
                                         coordinate: 'd',                                        
