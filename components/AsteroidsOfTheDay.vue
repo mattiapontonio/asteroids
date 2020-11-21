@@ -1,29 +1,11 @@
 <template>
   <div style="asteroids-of-the-day">
     <h2>Asteroids of the day</h2>
-    <p>{{datetime}}</p>
-    <p>{{start_date}}</p>
-    <p>{{end_date}}</p>
-    <p>{{items.length}}</p>
+    <selector v-bind:datetime="datetime"/>
     <div style="display: flex;flex-wrap:wrap;">
-      <selector v-bind:datetime="datetime"/>
       <min-max />
     </div>
     <scatter-plot />
-    <table>
-      <tbody>
-        <tr>
-          <td>⬆</td>
-          <td>Distance</td>
-          <td>(au)</td>
-        </tr>
-        <tr>
-          <td>➡</td>
-          <td>Velocity</td>
-          <td>(km/s)</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </template>
 <script>
