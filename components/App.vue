@@ -208,7 +208,6 @@
     min-height: 400px;
     width: 100%;
     background: repeating-linear-gradient(transparent, transparent 100px, rgb(19, 52, 67) 100px, rgb(19, 52, 67) 101px);
-    padding: 50px;
     box-sizing: border-box;
     display: flex;
     justify-content: stretch;
@@ -220,6 +219,7 @@
   .scatter-plot .container {
     position: relative;
     flex: 1;
+    padding: 50px;
   }
 
   th,
