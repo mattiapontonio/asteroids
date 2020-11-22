@@ -58,7 +58,7 @@
         },
         computed: {
             url: function(){
-                const url = new URL(window.location.origin);
+                const url = new URL(location);
                 url.pathname = `neo/rest/v1/neo/${this.id}`;
                 return url;
             },
