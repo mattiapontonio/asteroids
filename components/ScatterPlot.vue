@@ -63,7 +63,7 @@
         </div>
         <div v-else>
             <div v-if="response.status === 403">
-                <form method="get">
+                <form action="/" method="get">
                     <label for="api_key">api_key</label>
                     <input type="text" id="api_key" name="api_key" required>
                     <button type="submit" value="Submit">Submit</button>
@@ -176,10 +176,8 @@
             start_date,
             end_date,
             url: function() {
-                const url = new URL(window.location.origin)
+                const url = new URL(location)
                 url.pathname = 'neo/rest/v1/feed'
-                url.searchParams.set('start_date', this.start_date)
-                url.searchParams.set('end_date', this.end_date)
                 return url
             },
             length: function() {

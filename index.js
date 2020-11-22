@@ -39,7 +39,6 @@ app.get('/planetary/apod', (oreq, ores) => {
     creq.end();
 });
 app.get('/neo/rest/v1/feed', (oreq, ores) => {
-    oreq.query.api_key=process.env.API_KEY;
     const options = {
         host: 'api.nasa.gov',
         path: `/neo/rest/v1/feed?${querystring.stringify(oreq.query)}`,
@@ -73,7 +72,6 @@ app.get('/neo/rest/v1/feed', (oreq, ores) => {
     creq.end();
 });
 app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
-    oreq.query.api_key=process.env.API_KEY;
     const options = {
         host: 'api.nasa.gov',
         path: `/neo/rest/v1/neo/${oreq.params.id}?${querystring.stringify(oreq.query)}`,

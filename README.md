@@ -28,11 +28,14 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 - [Generate API Key](https://api.nasa.gov/#apidatagov_signup)
 - [Asteroids - NeoWs](https://api.nasa.gov/#NeoWS)
 
+#### Demo
+
+apy_key: DEMO_KEY
+
 ## Getting started
 
 ```shell
 export PORT=3000
-export API_KEY=DEMO_KEY
 git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
 openssl genrsa -out key.pem
