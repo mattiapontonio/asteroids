@@ -35,10 +35,3 @@
         name: 'loader'
     }
 </script>
-<style>
-    .loader{
-        height: 20vmin;
-        padding: 3vmin 20vmin;
-        vertical-align: top;
-    }
-</style>

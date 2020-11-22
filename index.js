@@ -27,7 +27,6 @@ app.get('/planetary/apod', (oreq, ores) => {
             });
         })
         .on('error', e => {
-            console.log(e.message);
             try {
                 ores.writeHead(500);
                 ores.write(e.message);
@@ -44,7 +43,6 @@ app.get('/neo/rest/v1/feed', (oreq, ores) => {
         path: `/neo/rest/v1/feed?${querystring.stringify(oreq.query)}`,
         method: 'GET'
     };
-    console.log(options);
     const creq = https
         .request(options, pres => {
             pres.setEncoding('utf8');
@@ -60,7 +58,6 @@ app.get('/neo/rest/v1/feed', (oreq, ores) => {
             });
         })
         .on('error', e => {
-            console.log(e.message);
             try {
                 ores.writeHead(500);
                 ores.write(e.message);
@@ -77,7 +74,6 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
         path: `/neo/rest/v1/neo/${oreq.params.id}?${querystring.stringify(oreq.query)}`,
         method: 'GET'
     };
-    console.log(options);
     const creq = https
         .request(options, pres => {
             pres.setEncoding('utf8');
@@ -93,7 +89,6 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
             });
         })
         .on('error', e => {
-            console.log(e.message);
             try {
                 ores.writeHead(500);
                 ores.write(e.message);

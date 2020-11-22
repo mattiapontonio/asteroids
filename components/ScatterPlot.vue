@@ -1,5 +1,6 @@
 <template>
     <div>
+        <loader v-if="loading"></loader>
         <table>
             <tr>
                 <th>datetime</th>
@@ -54,9 +55,7 @@
                     <bubble
                         v-for="(item, i) in items"
                         v-bind:key="i"
-                        v-bind:style="{ 
-                            transform: `translate(${item.x},${item.y}) scale(${item.d})`
-                        }"
+                        v-bind:style="item.style"
                     />
                 </div>
             </section>
@@ -74,8 +73,6 @@
                 <div>{{response.statusText}}</div>
             </div>
         </div>
-        <loader v-if="loading"></loader>
-        <button v-on:click="get">get</button>
     </div>
 </template>
 <script>
@@ -118,7 +115,6 @@
                             console.dir(body.near_earth_objects[this.date])
                             if (Array.isArray(body.near_earth_objects[this.date])) {
                                 console.dir(body.near_earth_objects[this.date])
-                                console.log(near_earth_objects[this.date])
                                 this.items = near_earth_objects[this.date]
                                 .map(function (e, i, a) {
                                     return {
@@ -131,9 +127,12 @@
                                 .map(function (e, i, a) {
                                     return {
                                         id: e.id,
-                                        x: scale(e.x,min(a.map(e=>e.x)),max(a.map(e=>e.x)))*100+"%",
-                                        y: scale(e.y,min(a.map(e=>e.y)),max(a.map(e=>e.y)))*100+"%",
-                                        d: scale(e.d,min(a.map(e=>e.d)),max(a.map(e=>e.d)))
+                                        style: {
+                                            left: scale(e.x,min(a.map(e=>e.x)),max(a.map(e=>e.x)))*100+"%",
+                                            bottom: scale(e.y,min(a.map(e=>e.y)),max(a.map(e=>e.y)))*100+"%",
+                                            width: scale(e.d,min(a.map(e=>e.d)),max(a.map(e=>e.d)))*100+"px",
+                                            height: scale(e.d,min(a.map(e=>e.d)),max(a.map(e=>e.d)))*100+"px"
+                                        }
                                     }
                                 });
                                 this.rows = [
@@ -218,9 +217,7 @@
     display: flex;
 }
 
-    .bubble {
-        width: 100px;
-        height: 100px;
-        transform-origin: center center;
-    }
+.scatter-plot .bubble {
+    position: absolute;
+}
 </style>
