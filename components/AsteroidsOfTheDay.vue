@@ -1,12 +1,13 @@
 <template>
   <div style="asteroids-of-the-day">
     <h2>Asteroids of the day</h2>
-    <selector 
-      v-bind:datetime="datetime"
-      v-bind:date="date"
-      v-bind:start_date="start_date"
-      v-bind:end_date="end_date"
-    />
+    <form action="/" method="get">
+        <label for="api_key">api_key</label>
+        <input type="text" id="api_key" name="api_key" :value="api_key" required>
+        <label for="date">date</label>
+        <input id="date" type="date" :value="date" name="date" required>
+        <button type="submit" value="Submit">Submit</button>
+    </form>
     <div style="display: flex;flex-wrap:wrap;">
       <min-max />
     </div>

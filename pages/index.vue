@@ -3,6 +3,7 @@
     v-bind:date="date"
     v-bind:start_date="start_date"
     v-bind:end_date="end_date"
+    v-bind:api_key="api_key"
   ></app>
 </template>
 <script>
@@ -11,12 +12,14 @@ export default {
     query: {
       date,
       start_date,
-      end_date 
+      end_date,
+      api_key
     }}) {
     return {
       date,
       start_date,
-      end_date 
+      end_date,
+      api_key
     }
   }
 }
