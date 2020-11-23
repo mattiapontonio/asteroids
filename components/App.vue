@@ -4,17 +4,11 @@
   <button onclick="history.forward()">forward</button>
     <h1>Asteroids</h1>
     <main>
-      <asteroids-of-the-day 
-        v-bind:datetime="datetime"
-        v-bind:date="date"
-        v-bind:start_date="start_date"
-        v-bind:end_date="end_date"
-        v-bind:api_key="api_key"
-      />
-      <aside>
-        <brightest/>
-        <apod />
-      </aside>
+      <nav>
+        <NuxtLink to="/asteroids-of-the-day">asteroids-of-the-day</NuxtLink>
+        <NuxtLink to="/brightest of-the-week">brightest of-the-week</NuxtLink>
+        <NuxtLink to="/astronomy-picture-of-the-day">astronomy-picture-of-the-day</NuxtLink>
+      </nav>
     </main>
     <footer>
         <table>
