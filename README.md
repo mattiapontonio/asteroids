@@ -48,7 +48,7 @@ npm run
 ```
 
 ## Screenshots
-![](screenshots/Screenshot_20201110-042136.png)
+![](screenshots/Screenshot_20201123-225935.png)
 ![](screenshots/Screenshot_20201110-042150.png)
 ![](screenshots/Screenshot_20201110-042209.png)
 ![](screenshots/Screenshot_20201110-152839.png)
