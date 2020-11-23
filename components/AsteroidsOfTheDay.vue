@@ -1,7 +1,7 @@
 <template>
   <div style="asteroids-of-the-day">
     <h2>Asteroids of the day</h2>
-    <form action="/" method="get">
+    <form>
         <label for="api_key">api_key</label>
         <input type="text" id="api_key" name="api_key" :value="api_key" required>
         <label for="date">date</label>

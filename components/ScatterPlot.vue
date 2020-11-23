@@ -58,7 +58,7 @@
         </div>
         <div v-else>
             <div v-if="response.status === 403">
-                <form action="/" method="get">
+                <form>
                     <label for="api_key">api_key</label>
                     <input type="text" id="api_key" name="api_key" required>
                     <label for="date">date</label>
