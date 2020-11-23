@@ -1,11 +1,20 @@
 <template>
   <div style="asteroids-of-the-day">
     <h2>Asteroids of the day</h2>
-    <selector v-bind:datetime="datetime"/>
+    <selector 
+      v-bind:datetime="datetime"
+      v-bind:date="date"
+      v-bind:start_date="start_date"
+      v-bind:end_date="end_date"
+    />
     <div style="display: flex;flex-wrap:wrap;">
       <min-max />
     </div>
-    <scatter-plot />
+    <scatter-plot 
+        v-bind:date="date"
+        v-bind:start_date="start_date"
+        v-bind:end_date="end_date"
+    />
   </div>
 </template>
 <script>
@@ -23,6 +32,11 @@
       ScatterPlot
     },
     name: 'asteroids-of-the-day',
+    props: [
+      "date",
+      "start_date",
+      "end_date"
+    ],
     computed: {
       minD: function () {
         return Math.min(...this.ds);
@@ -61,9 +75,7 @@
         url.searchParams.set('end_date', this.end_date);
         return url;
       },
-      datetime,
-      start_date,
-      end_date
+      datetime
     },
     methods: {
       scale() {

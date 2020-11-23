@@ -3,12 +3,12 @@
         <loader v-if="loading"></loader>
         <table>
             <tr>
-                <th>datetime</th>
+                <th>date</th>
                 <th>start_date</th>
                 <th>end_date</th>
             </tr>
             <tr>
-                <td>{{datetime}}</td>
+                <td>{{date}}</td>
                 <td>{{start_date}}</td>
                 <td>{{end_date}}</td>
             </tr>
@@ -65,6 +65,8 @@
                 <form action="/" method="get">
                     <label for="api_key">api_key</label>
                     <input type="text" id="api_key" name="api_key" required>
+                    <label for="date">date</label>
+                    <input id="date" type="date" :value="date" name="date">
                     <button type="submit" value="Submit">Submit</button>
                 </form>
             </div>
@@ -82,9 +84,6 @@
     import get from '../plugins/methods/get.js'
     import Vue from 'vue'
     import Loading from './Loading.vue'
-  import datetime from '../plugins/computed/datetime.js'
-  import start_date from '../plugins/computed/start_date.js'
-  import end_date from '../plugins/computed/end_date.js'
     const scale = Vue.filter('scale')
     const min=Vue.filter('min')
     const max=Vue.filter('max')
@@ -171,9 +170,6 @@
             }
         },
         computed: {
-            datetime,
-            start_date,
-            end_date,
             url: function() {
                 const url = new URL(location)
                 url.pathname = 'neo/rest/v1/feed'
@@ -181,9 +177,6 @@
             },
             length: function() {
                 return this.items.length
-            },
-            date: function() {
-                return this.datetime.substring(0, 10)
             }
         },
         mounted() {
@@ -198,7 +191,12 @@
                 items: [],
                 rows: []
             }
-        }
+        },
+        props: [
+            "date",
+            "start_date",
+            "end_date"
+        ],
     }
 
 </script>
