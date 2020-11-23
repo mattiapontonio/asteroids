@@ -3,11 +3,19 @@
   <button onclick="history.back()">back</button>
   <button onclick="history.forward()">forward</button>
     <h1>Asteroids</h1>
-    <main>
-      <nav>
-        <NuxtLink to="/asteroids-of-the-day">asteroids-of-the-day</NuxtLink>
-        <NuxtLink to="/brightest of-the-week">brightest of-the-week</NuxtLink>
-        <NuxtLink to="/astronomy-picture-of-the-day">astronomy-picture-of-the-day</NuxtLink>
+    <main
+      <nav class="menu">
+        <ul>
+          <li>
+            <NuxtLink to="/asteroids-of-the-day">asteroids-of-the-day</NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/brightest of-the-week">brightest of-the-week</NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/astronomy-picture-of-the-day">astronomy-picture-of-the-day</NuxtLink>
+          </li>
+        </ul>
       </nav>
     </main>
     <footer>
