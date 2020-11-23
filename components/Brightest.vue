@@ -36,9 +36,6 @@
     import Asteroids from './Asteroids.vue';
     import Error from './Error.vue';
     import Loading from './Loading.vue';
-    import datetime from '../plugins/computed/datetime.js';
-    import start_date from '../plugins/computed/start_date.js';
-    import end_date from '../plugins/computed/end_date.js';
     export default {
         name: 'brightest',
         components: {
@@ -48,7 +45,7 @@
         },
         data: function () {
             return {
-                response: new Response(),
+                response: {},
                 loading: false,
                 error: false
             }
@@ -80,9 +77,6 @@
                 url.searchParams.set('end_date', this.end_date);
                 return url;
             },
-            datetime,
-            start_date,
-            end_date
         },
         methods: {
             get

@@ -45,7 +45,7 @@
                 url: '/api/planetary/apod',
                 date,
                 datetime: new Date(date).toISOString(),
-                response: new Response(),
+                response: {},
                 loading: false,
                 error: false
             }

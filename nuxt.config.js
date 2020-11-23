@@ -10,7 +10,7 @@ module.exports = {
         }
     }:undefined)(),
     target: 'static',
-    ssr: false,
+    ssr: true,
     head: {
         title: 'asteroids',
         meta: [
@@ -30,5 +30,9 @@ module.exports = {
     loading: false,
     htmlAttrs: {
         lang: 'en'
+    },
+    cli: {
+        badgeMessages: ['Hello World!'],
+        bannerColor: 'yellow'
     }
 }

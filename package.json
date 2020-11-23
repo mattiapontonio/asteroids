@@ -6,8 +6,9 @@
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "dev": "nuxt",
-    "build": "nuxt generate",
+    "build": "nuxt build",
     "generate": "nuxt generate",
+    "prestart": "npm run build",
     "start": "node index.js"
   },
   "dependencies": {
