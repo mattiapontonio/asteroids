@@ -1,11 +1,15 @@
 <template>
-  <body
-    id="app"
-    class="app"
-  >
+  <body id="app" class="app">
+  <button onclick="history.back()">back</button>
+  <button onclick="history.forward()">forward</button>
     <h1>Asteroids</h1>
     <main>
-      <asteroids-of-the-day v-bind:datetime="datetime"/>
+      <asteroids-of-the-day 
+        v-bind:datetime="datetime"
+        v-bind:date="date"
+        v-bind:start_date="start_date"
+        v-bind:end_date="end_date"
+      />
       <aside>
         <brightest/>
         <apod />
@@ -35,35 +39,21 @@
 <script>
   import Vue from 'vue';
   import format from '../formatDate.js';
-  import datetime from '../plugins/computed/datetime.js';
-  import start_date from '../plugins/computed/start_date.js';
-  import end_date from '../plugins/computed/end_date.js';
   import {
     version
   } from '../package.json';
   export default {
     name: 'app',
-    created() {
-      const url = new URL(location);
-      const date = new Date;
-      url.searchParams.set('date', format(date));
-      url.searchParams.set('start_date', format(new Date(date.setDate(date.getDate() - date.getDay()))));
-      url.searchParams.set('end_date',   format(new Date(date.setDate(date.getDate() - date.getDay() + 6))));
-      window.history.pushState({}, '', url);
-    },
-    mounted() {
-      window.onpopstate = event => {
-        this.$forceUpdate();
-      };
-    },
     computed: {
       version: function () {
         return version;
-      },
-      datetime,
-      start_date,
-      end_date
-    }
+      }
+    },
+    props: [
+      "date",
+      "start_date",
+      "end_date"
+    ]
   }
 
 </script>
