@@ -1,9 +1,9 @@
 <template>
   <div style="asteroids-of-the-day">
-    <h2>Asteroids of the day</h2>
+    <h1>Asteroids of the day</h1>
     <form>
         <label for="api_key">api_key</label>
-        <input type="text" id="api_key" name="api_key" :value="api_key" required>
+        <input type="text" id="api_key" name="api_key" :value="apiKey" required>
         <label for="date">date</label>
         <input id="date" type="date" :value="date" name="date" required>
         <button type="submit" value="Submit">Submit</button>
@@ -32,7 +32,7 @@
       "date",
       "items",
       "response",
-      "api_key"
+      "apiKey"
     ]
   }
 
