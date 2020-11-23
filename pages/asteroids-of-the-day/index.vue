@@ -4,6 +4,7 @@
             v-bind:date="date"
             v-bind:items="items"
             v-bind:response="response"
+            v-bind:api_key="api_key"
         />
         <div>{{response.status}}</div>
         <div>{{response.statusText}}</div>
@@ -14,7 +15,12 @@ export default {
     data: function () {
         return {
             response: {},
-            date: ''
+        }
+    },
+    async asyncData(context) {
+        return { 
+            date: context.query.date,
+            api_key: context.query.api_key
         }
     },
     async fetch(context) { 

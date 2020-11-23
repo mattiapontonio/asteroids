@@ -31,7 +31,8 @@
     props: [
       "date",
       "items",
-      "response"
+      "response",
+      "api_key"
     ]
   }
 

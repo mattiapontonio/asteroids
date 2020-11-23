@@ -34,5 +34,8 @@ module.exports = {
     cli: {
         badgeMessages: ['Hello World!'],
         bannerColor: 'yellow'
-    }
+    },
+    css: [
+        '~/assets/css/main.css',
+    ]
 }
