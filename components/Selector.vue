@@ -11,14 +11,17 @@
 <script>
     import Vue from 'vue';
     import DateButton from './DateButton';
-  import datetime from '../plugins/computed/datetime.js';
-  import start_date from '../plugins/computed/start_date.js';
-  import end_date from '../plugins/computed/end_date.js';
     export default {
         name: 'selector',
         components: {
             DateButton
         },
+        props: [
+        "date",
+        "start_date",
+        "end_date",
+        "api_key"
+        ],
         computed: {
             datetimes: function () {
                 const datetimes = new Array()
@@ -33,10 +36,7 @@
                     datetimes.push(datetime);
                 }
                 return datetimes
-            },
-            datetime,
-            start_date,
-            end_date
+            }
         },
     }
 

@@ -36,6 +36,7 @@ apy_key: DEMO_KEY
 
 ```shell
 export PORT=3000
+export DEBUG=express:*
 git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
 openssl genrsa -out key.pem
@@ -43,7 +44,6 @@ openssl req -new -key key.pem -out csr.pem
 openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
 rm csr.pem
 npm i
-npm run build
 npm start
 open http://localhost:3000
 ```
