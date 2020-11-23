@@ -8,7 +8,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "prestart": "npm run build",
+    "prestart": "nuxt generate",
     "start": "node index.js"
   },
   "dependencies": {

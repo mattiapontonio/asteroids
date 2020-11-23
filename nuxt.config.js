@@ -10,7 +10,7 @@ module.exports = {
         }
     }:undefined)(),
     target: 'static',
-    ssr: true,
+    ssr: false,
     head: {
         title: 'asteroids',
         meta: [
@@ -27,7 +27,7 @@ module.exports = {
             { rel: 'manifest', href: '/manifest.webmanifest' }
         ]
     },
-    loading: false,
+    loading: '~/components/loading.vue',
     htmlAttrs: {
         lang: 'en'
     },
