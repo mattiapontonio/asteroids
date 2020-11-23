@@ -4,13 +4,9 @@
         <table>
             <tr>
                 <th>date</th>
-                <th>start_date</th>
-                <th>end_date</th>
             </tr>
             <tr>
                 <td>{{date}}</td>
-                <td>{{start_date}}</td>
-                <td>{{end_date}}</td>
             </tr>
         </table>
         <table>
