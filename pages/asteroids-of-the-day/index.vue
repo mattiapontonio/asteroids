@@ -1,13 +1,22 @@
 <template>
     <div>
-        <asteroids-of-the-day
-            v-bind:date="date"
-            v-bind:items="items"
-            v-bind:response="response"
-            v-bind:api-key="apiKey"
-        />
-        <div>{{response.status}}</div>
-        <div>{{response.statusText}}</div>
+        <div v-if="response.ok">
+            <asteroids-of-the-day
+                v-bind:date="date"
+                v-bind:items="items"
+            />
+        </div>
+        <div v-else>
+            <div>{{response.status}}</div>
+            <div>{{response.statusText}}</div>
+            <form>
+                <label for="api_key">api_key</label>
+                <input type="text" id="api_key" name="api_key" :value="apiKey" required>
+                <label for="date">date</label>
+                <input id="date" type="date" :value="date" name="date" required>
+                <button type="submit" value="Submit">Submit</button>
+            </form>
+        </div>
     </div>
 </template>
 <script>
@@ -23,8 +32,12 @@ export default {
             apiKey: context.query.api_key
         }
     },
-    async fetch(context) { 
-        this.response = await fetch(`https://http://localhost:3000/neo/rest/v1/feed?date=${context.query.date}&api_key=${context.query.api_key}`)
+    async fetch(context) {
+        const url = new URL(window.location);
+        url.pathname = 'neo/rest/v1/feed';
+        url.searchParams.set('date', context.query.date);
+        url.searchParams.set('api_key', context.query.api_key);
+        this.response = await fetch(url)
         .then(body => {
             console.dir(body)
             const {near_earth_objects} = body

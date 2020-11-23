@@ -1,8 +1,6 @@
 <template>
     <article>
         <h2>Astronomy Picture of the Day</h2>
-        <error v-if="error"></error>
-        <loading v-if="loading"></loading>
         <div>{{response.statusText}}</div>
         <button v-on:click="get">get</button>
         <div>
@@ -30,15 +28,9 @@
     </article>
 </template>
 <script>
-    import Error from './Error.vue';
-    import Loading from './Loading.vue';
     import get from '../plugins/methods/get.js';
     export default {
         name: 'apod',
-        components: {
-            Error,
-            Loading
-        },
         data: function () {
             const date = new Date().toISOString().substring(0, 10);
             return {

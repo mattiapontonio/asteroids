@@ -23,8 +23,6 @@
                 </tr>
             </tbody>
         </table>
-        <error v-if="error"></error>
-        <loading v-if="loading"></loading>
         <div>{{response.statusText}}</div>
         <asteroids v-bind:asteroids="items"/>
         <button v-on:click="get">get</button>
@@ -34,14 +32,10 @@
     import Vue from 'vue';
     import get from '../plugins/methods/get.js';
     import Asteroids from './Asteroids.vue';
-    import Error from './Error.vue';
-    import Loading from './Loading.vue';
     export default {
         name: 'brightest',
         components: {
-            Asteroids,
-            Error,
-            Loading
+            Asteroids
         },
         data: function () {
             return {

@@ -27,7 +27,6 @@
                 <td>{{row.dir}}</td>
             </tr>
         </table>
-        <error v-if="error"></error>
         <table>
             <tr>
                 <th>Loading</th>
@@ -44,42 +43,23 @@
                 <div>{{length}}</div>
             </tr>
         </table>
-        <div v-if="response.ok">
-            <section class="scatter-plot">
-                <h3>Scatter plot</h3>
-                <div class="container">
-                    <bubble
-                        v-for="(item, i) in items"
-                        v-bind:key="i"
-                        v-bind:style="item.style"
-                    />
-                </div>
-            </section>
-        </div>
-        <div v-else>
-            <div v-if="response.status === 403">
-                <form>
-                    <label for="api_key">api_key</label>
-                    <input type="text" id="api_key" name="api_key" required>
-                    <label for="date">date</label>
-                    <input id="date" type="date" :value="date" name="date">
-                    <button type="submit" value="Submit">Submit</button>
-                </form>
+        <section class="scatter-plot">
+            <h3>Scatter plot</h3>
+            <div class="container">
+                <bubble
+                    v-for="(item, i) in items"
+                    v-bind:key="i"
+                    v-bind:style="item.style"
+                />
             </div>
-            <div v-else>
-                <div>{{response.status}}</div>
-                <div>{{response.statusText}}</div>
-            </div>
-        </div>
+        </section>
     </div>
 </template>
 <script>
     import Asteroid from './Asteroid.vue'
-    import Error from './Error.vue'
     import Bubble from './Bubble.vue'
     import get from '../plugins/methods/get.js'
     import Vue from 'vue'
-    import Loading from './Loading.vue'
     const scale = Vue.filter('scale')
     const min=Vue.filter('min')
     const max=Vue.filter('max')
@@ -88,8 +68,6 @@
         name: 'scatter-plot',
         components: {
             Asteroid,
-            Error,
-            Loading,
             Bubble
         },
         computed: {
