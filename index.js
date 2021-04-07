@@ -6,6 +6,10 @@ const querystring = require('querystring');
 const manifest = require('./manifest.js');
 const fs = require('fs');
 const port = process.env.PORT || 3000;
+const options = process.env.NODE_ENV !== 'production' ? {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+} : undefined;
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get('/planetary/apod', (oreq, ores) => {
     const options = {
@@ -102,8 +106,5 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
 });
 app.get('/manifest.webmanifest', (req, res) => res.json(manifest))
 https
-.createServer(process.env.NODE_ENV !== 'production' ? {
-    key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
-    cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
-}:undefined, app)
-.listen(port, () => console.log(`https://localhost:${port}`));
+.createServer(options, app)
+.listen(port, console.log);
