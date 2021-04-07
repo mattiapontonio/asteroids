@@ -4,6 +4,7 @@ const app = express();
 const https = require('https');
 const querystring = require('querystring');
 const manifest = require('./manifest.js');
+const fs = require('fs');
 const port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get('/planetary/apod', (oreq, ores) => {
@@ -100,4 +101,9 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
     creq.end();
 });
 app.get('/manifest.webmanifest', (req, res) => res.json(manifest))
-app.listen(port, () => console.log(`https://localhost:${port}`));
+https
+.createServer({
+    key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
+    cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
+}, app)
+.listen(port, () => console.log(`https://localhost:${port}`));
