@@ -38,6 +38,7 @@ apy_key: DEMO_KEY
 export PORT=3000
 export DEBUG=express:*
 export NODE_ENV=development
+export NODE_TLS_REJECT_UNAUTHORIZED=0
 git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
 openssl genrsa -out key.pem
