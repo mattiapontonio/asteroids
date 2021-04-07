@@ -48,7 +48,7 @@ npm i
 npm start
 ```
 
-open https://localhost:3000
+open <https://localhost:3000>
 
 ## Scripts
 
