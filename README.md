@@ -37,6 +37,7 @@ apy_key: DEMO_KEY
 ```shell
 export PORT=3000
 export DEBUG=express:*
+export NODE_ENV=development
 git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
 openssl genrsa -out key.pem
@@ -45,8 +46,9 @@ openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
 rm csr.pem
 npm i
 npm start
-open https://localhost:3000
 ```
+
+open https://localhost:3000
 
 ## Scripts
 
@@ -60,3 +62,7 @@ npm run
 ![alt](screenshots/Screenshot_20201110-042150.png)
 ![alt](screenshots/Screenshot_20201110-042209.png)
 ![alt](screenshots/Screenshot_20201110-152839.png)
+
+## Resources
+
+- <https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/>

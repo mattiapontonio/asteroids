@@ -102,8 +102,8 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
 });
 app.get('/manifest.webmanifest', (req, res) => res.json(manifest))
 https
-.createServer({
+.createServer(process.env.NODE_ENV !== 'production' ? {
     key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
     cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
-}, app)
+}:undefined, app)
 .listen(port, () => console.log(`https://localhost:${port}`));
