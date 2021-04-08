@@ -49,7 +49,9 @@ npm i
 npm start
 ```
 
-open <https://localhost:3000>
+```shell
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://localhost:3000 --user-data-dir=C:\tmp
+```
 
 ## Scripts
 
