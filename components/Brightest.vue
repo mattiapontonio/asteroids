@@ -82,32 +82,5 @@
 
 </script>
 <style>
-    aside {
-        border-left: 0px solid white;
-    }
-
-    @media (max-width: 800px) {
-        aside {
-            border-left-width: 0;
-        }
-    }
-
-    .rombo-1{
-        width: 10px;
-        height:10px; 
-        box-sizing: border-box;
-        transform:rotate(45deg); 
-        background-color: transparent;
-        border: 1px solid white;
-    }
-
-    .rombo-2{
-        width: 10px;
-        height:10px; 
-        box-sizing: border-box;
-        transform:rotate(45deg); 
-        background-color: white;
-        border: 1px solid white;
-    }
 
 </style>

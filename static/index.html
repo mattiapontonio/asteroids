@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<!-- saved from url=(0023)https://localhost:3000/ -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>asteroids</title><meta data-n-head="1" data-hid="description" name="description" content="A Vue.js Progressive Web App with Server Side Rendering and hydratated by REST microservices uses data from The National Aeronautics and Space Administration&#39;s application programming interface."><link data-n-head="1" rel="icon" type="image/x-icon" href="https://localhost:3000/favicon.ico"><link data-n-head="1" rel="manifest" href="https://localhost:3000/manifest.webmanifest"><link rel="preload" href="./index_files/b4478bf.js.download" as="script"><link rel="preload" href="./index_files/0543e30.js.download" as="script"><link rel="preload" href="./index_files/5105757.js.download" as="script"><link rel="preload" href="./index_files/ba15dc7.js.download" as="script">
-  <style type="text/css">.__nuxt-error-page{padding:1rem;background:#f7f8fb;color:#47494e;text-align:center;display:flex;justify-content:center;align-items:center;flex-direction:column;font-family:sans-serif;font-weight:100!important;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;position:absolute;top:0;left:0;right:0;bottom:0}.__nuxt-error-page .error{max-width:450px}.__nuxt-error-page .title{font-size:1.5rem;margin-top:15px;color:#47494e;margin-bottom:8px}.__nuxt-error-page .description{color:#7f828b;line-height:21px;margin-bottom:10px}.__nuxt-error-page a{color:#7f828b!important;text-decoration:none}.__nuxt-error-page .logo{position:fixed;left:12px;bottom:12px}</style><style type="text/css">.loading-page[data-v-47c6f492]{position:fixed;top:0;left:0;width:100%;height:100%;background:hsla(0,0%,100%,.8);text-align:center;padding-top:200px;font-size:30px;font-family:sans-serif}</style><style type="text/css">main{display:flex;width:auto;flex-wrap:nowrap}@media (max-width:800px){main{flex-direction:column}}body{background:#020024;background:linear-gradient(180deg,#0a1e1a,#19435e);color:#fff;font-family:"Montserrat",sans-serif;text-rendering:optimizeLegibility;font-size:12px;font-weight:400;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-align:left;margin-top:0;padding:1em}body,img{max-width:100%}button,input+label{border:1px solid #fff;background-color:transparent;padding:1em}button{color:#fff}button:active,button:hover,button[checked],input+label:hover{border-color:#2af598;color:#2af598}input:checked+label{border:1px solid #2af598;background-color:#2af598;color:#0a1e1a}.radio{border:1px solid #2af598;background:transparent;visibility:hidden;position:absolute}h2{text-decoration:none}.slide-fade-enter-active{transition:all .3s ease}.slide-fade-leave-active{transition:all .8s cubic-bezier(1,.5,.8,1)}.slide-fade-enter,.slide-fade-leave-to{transform:translateX(10px);opacity:0}aside{flex-grow:0;flex-shrink:1;flex-basis:33.33333%}.bubble{border:1px solid #2af598;box-sizing:border-box;border-radius:50%;display:flex;align-content:center;align-items:center;justify-content:center;flex-shrink:0;box-shadow:inset 0 0 16px #19435e,0 0 16px #2af598;z-index:0}.bubble .point{width:4px;height:4px;background:#2af598;border-radius:50%}.tooltip{border:1px solid #fff;padding:1.5em;color:#fff;background-color:rgba(0,0,0,.5);line-height:1.5;white-space:nowrap;z-index:1;position:absolute}.scatter-plot{position:relative;min-height:400px;width:100%;background:repeating-linear-gradient(transparent,transparent 100px,#133443 0,#133443 101px);box-sizing:border-box;display:flex;justify-content:stretch;align-content:stretch;align-items:stretch;justify-items:stretch}.scatter-plot .container{position:relative;flex:1;padding:50px}td,th{padding:.25em;text-align:left}table{display:block}footer{background:#fff;color:#000}.error{color:#fff;border:1px solid red;padding:1em;background:red}.max[coordinate=x]{position:absolute;left:0;top:0}.min[coordinate=x]{position:absolute;left:0;bottom:0}.max[coordinate=y]{position:absolute;right:0;bottom:0}.min[coordinate=y]{position:absolute;left:0;bottom:0;transform:translateY(10px)}</style><script charset="utf-8" src="./index_files/7bd51e4.js.download"></script><meta data-n-head="1" name="viewport" content="width=device-width, initial-scale=1"><script charset="utf-8" src="./index_files/b5a927e.js.download"></script><script charset="utf-8" src="./index_files/39eaa71.js.download"></script><script charset="utf-8" src="./index_files/e659d9c.js.download"></script><script charset="utf-8" src="./index_files/2376d5a.js.download"></script><style type="text/css">.asteroid:focus .bubble,.asteroid[errored] .bubble{border-color:red}</style><style type="text/css">.loading{background:rgba(10,30,26,.5);background-size:400% 400%;justify-self:stretch;align-self:stretch;flex-grow:1;left:0;top:0;min-height:128px;align-items:center;justify-content:center;display:flex}.scatter-plot .bubble{position:absolute}</style><style type="text/css">.asteroids-of-the-day{display:flex;flex-direction:column;flex-grow:1}</style><style type="text/css">aside{border-left:0 solid #fff}@media (max-width:800px){aside{border-left-width:0}}.rombo-1{background-color:transparent}.rombo-1,.rombo-2{width:10px;height:10px;box-sizing:border-box;transform:rotate(45deg);border:1px solid #fff}.rombo-2{background-color:#fff}</style></head>
-  <body>
-    <div id="__nuxt"><!----><div id="__layout"><body id="app" class="app"><button onclick="history.back()">back</button> <button onclick="history.forward()">forward</button> <h1>Asteroids</h1> <nav class="menu"><ul><li><a href="https://localhost:3000/asteroids-of-the-day" class="">asteroids-of-the-day</a></li> <li><a href="https://localhost:3000/brightest%20of-the-week" class="">brightest of-the-week</a></li> <li><a href="https://localhost:3000/astronomy-picture-of-the-day" class="">astronomy-picture-of-the-day</a></li></ul></nav> <footer><table><tbody><tr><td>GitHub</td> <td><a href="https://github.com/mattiapontonio/asteroids">https://github.com/mattiapontonio/asteroids</a></td></tr> <tr><td>Version</td> <td>0.0.6</td></tr> <tr><td><div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></td></tr></tbody></table></footer></body></div></div><script>window.__NUXT__={config:{},staticAssetsBase:void 0}</script>
-  <script src="./index_files/b4478bf.js.download"></script><script src="./index_files/0543e30.js.download"></script><script src="./index_files/5105757.js.download"></script><script src="./index_files/ba15dc7.js.download"></script>
-
-</body></html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+				<title>asteroids</title>
+				<meta data-n-head="1" data-hid="description" name="description" content="A Vue.js Progressive Web App with Server Side Rendering and hydratated by REST microservices uses data from The National Aeronautics and Space Administration&#39;s application programming interface.">
+					<link data-n-head="1" rel="icon" type="image/x-icon" href="https://localhost:3000/favicon.ico">
+						<link data-n-head="1" rel="manifest" href="https://localhost:3000/manifest.webmanifest">
+							<meta data-n-head="1" name="viewport" content="width=device-width, initial-scale=1">
+              <script>
+                if ('serviceWorker' in navigator) {
+                  navigator.serviceWorker.register('service-worker.js')
+                  .then(console.log)
+                  .catch(console.log);
+                }
+              </script>
+							</head>
+							<body>
+								<header>
+									<button onclick="history.back()">back</button>
+									<button onclick="history.forward()">forward</button>
+								</header>
+								<h1>Asteroids</h1>
+								<nav class="menu">
+									<ul>
+										<li>
+											<a href="https://localhost:3000/asteroids-of-the-day" class="">asteroids-of-the-day</a>
+										</li>
+										<li>
+											<a href="https://localhost:3000/brightest%20of-the-week" class="">brightest of-the-week</a>
+										</li>
+										<li>
+											<a href="https://localhost:3000/astronomy-picture-of-the-day" class="">astronomy-picture-of-the-day</a>
+										</li>
+									</ul>
+								</nav>
+								<footer>
+									<table>
+										<tbody>
+											<tr>
+												<td>GitHub</td>
+												<td>
+													<a href="https://github.com/mattiapontonio/asteroids">https://github.com/mattiapontonio/asteroids</a>
+												</td>
+											</tr>
+											<tr>
+												<td>Version</td>
+												<td>0.0.6</td>
+											</tr>
+											<tr>
+												<td>
+													<div>Icons made by 
+                                    
+														<a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from 
+                                    
+														<a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</footer>
+							</body>
+						</html>

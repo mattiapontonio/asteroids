@@ -42,10 +42,4 @@
 
 </script>
 <style>
-    .asteroid:focus .bubble{
-        border-color:red;
-    }
-    .asteroid[errored] .bubble{
-        border-color:red;
-    }
 </style>
