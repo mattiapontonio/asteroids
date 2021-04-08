@@ -6,7 +6,6 @@ const https = require('https');
 const querystring = require('querystring');
 const manifest = require('./manifest.js');
 const port = process.env.PORT || 3000;
-app.use(express.static(path.join(__dirname, 'dist')));
 app.get('/planetary/apod', (oreq, ores) => {
     const options = {
         host: 'api.nasa.gov',
@@ -101,6 +100,37 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
     creq.end();
 });
 app.get('/manifest.webmanifest', (req, res) => res.json(manifest))
+app.get('/asteroids-of-the-day', (req, res) => {
+    res.send(`
+    <script src="scatter-plot.js"></script>
+            <form>
+                <label for="api_key">api_key</label>
+                <input 
+                    type="text" 
+                    id="api_key" 
+                    name="api_key"
+                    value=${req.query.api_key}
+                    required>
+                <label for="start_date">start_date</label>
+                <input 
+                    id="start_date" 
+                    type="date"
+                    name="start_date"
+                    value=${req.query.start_date}
+                    required>
+                <label for="end_date">start_date</label>
+                <input 
+                    id="end_date" 
+                    type="date"
+                    name="end_date"
+                    value=${req.query.end_date}
+                    required>
+                <button type="submit" value="Submit">Submit</button>
+            </form>
+            <scatter-plot></scatter-plot>
+    `);
+})
+app.use(express.static(path.join(__dirname, 'static')));
 https
 .createServer(process.env.NODE_ENV !== 'production' ? {
     key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
