@@ -11,9 +11,26 @@
             <div>{{response.statusText}}</div>
             <form>
                 <label for="api_key">api_key</label>
-                <input type="text" id="api_key" name="api_key" :value="apiKey" required>
-                <label for="date">date</label>
-                <input id="date" type="date" :value="date" name="date" required>
+                <input 
+                    type="text" 
+                    id="api_key" 
+                    name="api_key"
+                    value="DEMO_KEY" 
+                    required>
+                <label for="start_date">start_date</label>
+                <input 
+                    id="start_date" 
+                    type="date"
+                    name="start_date" 
+                    value="2021-04-25"
+                    required>
+                <label for="start_date">start_date</label>
+                <input 
+                    id="end_date" 
+                    type="date"
+                    name="end_date" 
+                    value="2021-04-25"
+                    required>
                 <button type="submit" value="Submit">Submit</button>
             </form>
         </div>
@@ -37,7 +54,11 @@ export default {
         url.pathname = 'neo/rest/v1/feed';
         url.searchParams.set('date', context.query.date);
         url.searchParams.set('api_key', context.query.api_key);
-        this.response = await fetch(url)
+        fetch(url)
+        .then(response => {
+            this.response = response;
+            return response.json()
+        })
         .then(body => {
             console.dir(body)
             const {near_earth_objects} = body
