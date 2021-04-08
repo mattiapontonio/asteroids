@@ -27,3 +27,4 @@ key.pem
 dist
 .nuxt
 .env
+tmp
