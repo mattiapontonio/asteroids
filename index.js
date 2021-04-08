@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 const https = require('https');
 const querystring = require('querystring');
@@ -101,5 +102,8 @@ app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
 });
 app.get('/manifest.webmanifest', (req, res) => res.json(manifest))
 https
-.createServer(undefined, app)
+.createServer(process.env.NODE_ENV !== 'production' ? {
+    key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
+    cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
+}:undefined, app)
 .listen(port, console.log);
