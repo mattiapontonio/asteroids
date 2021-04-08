@@ -5,7 +5,6 @@ const app = express();
 const https = require('https');
 const querystring = require('querystring');
 const manifest = require('./manifest.js');
-const port = process.env.PORT || 3000;
 app.get('/planetary/apod', (oreq, ores) => {
     const options = {
         host: 'api.nasa.gov',
@@ -175,4 +174,4 @@ https
     key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
     cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
 }:undefined, app)
-.listen(port, console.log);
+.listen(process.env.PORT);
