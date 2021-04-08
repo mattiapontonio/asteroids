@@ -8,7 +8,6 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "prestart": "nuxt generate",
     "start": "node index.js"
   },
   "dependencies": {
