@@ -42,11 +42,4 @@
 
 </script>
 <style>
-
-    .selector {
-        display: flex;
-        flex-wrap: nowrap;
-        max-width:100%;
-        overflow-x:scroll;
-    }
 </style>

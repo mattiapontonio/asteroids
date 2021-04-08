@@ -112,21 +112,4 @@
 
 </script>
 <style>
-.loading {
-    background: rgba(10,30,26,0.5);
-	background-size: 400% 400%;
-    justify-self: stretch;
-    align-self: stretch;
-    flex-grow: 1;
-    left:0;
-    top:0;
-    min-height: 128px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
-
-.scatter-plot .bubble {
-    position: absolute;
-}
 </style>
