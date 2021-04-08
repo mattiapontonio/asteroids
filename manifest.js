@@ -10,7 +10,7 @@ module.exports = {
             "sizes": "512x512"
         }
     ],
-    "start_url": "/?source=pwa",
+    "start_url": "/",
     "background_color": "#3367D6",
     "display": "standalone",
     "scope": "/",
