@@ -78,7 +78,7 @@ aside {
 }
 
 main {
-	display: flex;
+	display: initial;
 	width: auto;
 	flex-wrap: nowrap
 }
@@ -109,15 +109,13 @@ body,
 img {
 	max-width: 100%
 }
-
-button,
-input+label {
-	border: 1px solid #fff;
-	background-color: transparent;
-	padding: 1em
+svg{
+	max-height: 300px;
 }
-
 button {
+	border: 1px solid #fff;
+	border-radius: 2px;
+	background-color: transparent;
 	color: #fff
 }
 
