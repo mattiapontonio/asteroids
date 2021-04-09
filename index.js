@@ -127,6 +127,8 @@ app.get('/asteroids-of-the-day', (req, res) => {
                     type="date"
                     name="start_date"
                     value=${req.query.start_date}
+                    min="2020-01-01"
+                    max="2020-01-08"
                     required>
 							<label for="end_date">start_date</label>
 							<input 
@@ -134,13 +136,15 @@ app.get('/asteroids-of-the-day', (req, res) => {
                     type="date"
                     name="end_date"
                     value=${req.query.end_date}
+                    min="2020-01-01"
+                    max="2020-01-08"
                     required>
 								<button type="submit" value="Submit">Submit</button>
 							</form>
 							<scatter-plot
-                                value=${req.query.api_key}
-                                value=${req.query.start_date}
-                                value=${req.query.end_date}
+                            api_key=${req.query.api_key}
+                            start_date=${req.query.start_date}
+                            end_date=${req.query.end_date}
                             ></scatter-plot>
 						</main>
                         <footer>
