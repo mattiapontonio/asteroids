@@ -39,21 +39,37 @@ customElements.define('scatter-plot', class extends HTMLElement {
                                 ${Array.from({length:10}).map((e,i,a) => `<line x1=${i*10} y1="0" x2=${i*10} y2="100" />`).join('')}
                                 ${Array.from({length:10}).map((e,i,a) => `<line x1="0" y1=${i*10} x2="100" y2=${i*10} />`).join('')}
                             </g>
-                            ${o.map((e,i,a) => `<circle 
-                                stroke="black" 
-                                stroke-width="1" 
-                                fill="red" 
-                                cx=${(()=>{
-                                    const g = a.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second);
-                                    return `${100*(g[i]-Math.min(...g))/(Math.max(...g)-Math.min(...g))}%`;
-                                })()}
-                                cy=${(()=>{
-                                    const g = a.map(z=>z.close_approach_data[0].miss_distance.kilometers);
-                                    return `${100*(g[i]-Math.min(...g))/(Math.max(...g)-Math.min(...g))}%`;
-                                })()}
-                                r="4%"/>`).join('')}
                         </svg>
                     `;
+                    o.forEach((e,i,a) => {
+                        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                        circle.setAttributeNS(null, "cx", (()=>{
+                            const g = a.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second);
+                            return `${100*(g[i]-Math.min(...g))/(Math.max(...g)-Math.min(...g))}%`;
+                        })());
+                        circle.setAttributeNS(null, "cy", (()=>{
+                            const g = a.map(z=>z.close_approach_data[0].miss_distance.kilometers);
+                            return `${100*(g[i]-Math.min(...g))/(Math.max(...g)-Math.min(...g))}%`;
+                        })());
+                        circle.setAttributeNS(null, "r", 10);
+                        circle.onclick=function(){
+                            const foreignObject = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+                            foreignObject.setAttributeNS(null, "x", this.cx.baseVal.valueInSpecifiedUnits);
+                            foreignObject.setAttributeNS(null, "y", this.cy.baseVal.valueInSpecifiedUnits);
+                            svg.appendChild(foreignObject);
+                            foreignObject.innerHTML=`
+                                <div xmlns="http://www.w3.org/1999/xhtml">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Sed mollis mollis mi ut ultricies. Nullam magna ipsum,
+                                    porta vel dui convallis, rutrum imperdiet eros. Aliquam
+                                    erat volutpat.
+                                </div>
+                            `;
+                            foreignObject.focus();
+                            foreignObject.onblur=foreignObject.remove;
+                        }
+                        svg.appendChild(circle);
+                    });
                 })
             } else {
                 response.json().then(body => {

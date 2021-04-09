@@ -157,7 +157,11 @@ h2 {
 	transform: translateX(10px);
 	opacity: 0
 }
-
+circle {
+	stroke:black; 
+	stroke-width:1; 
+	fill:red;
+}
 aside {
 	flex-grow: 0;
 	flex-shrink: 1;
