@@ -6,7 +6,6 @@ customElements.define('scatter-plot', class extends HTMLElement {
                 response.json().then(body => {
                     const d = this.getAttribute("start_date");
                     const o = body.near_earth_objects[d];
-                    console.table(body)
                     this.innerHTML=`
                         <div>${body.element_count}</div>
                         <fieldset>
@@ -36,9 +35,13 @@ customElements.define('scatter-plot', class extends HTMLElement {
                             style="
                                 display: block;
                                 height: auto;">
+                            <g stroke="black" stroke-width="1">
+                                ${Array.from({length:10}).map((e,i,a) => `<line x1=${i*10} y1="0" x2=${i*10} y2="100" />`).join('')}
+                                ${Array.from({length:10}).map((e,i,a) => `<line x1="0" y1=${i*10} x2="100" y2=${i*10} />`).join('')}
+                            </g>
                             ${o.map((e,i,a) => `<circle 
                                 stroke="black" 
-                                stroke-width="2%" 
+                                stroke-width="1" 
                                 fill="red" 
                                 cx=${(()=>{
                                     const g = a.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second);
