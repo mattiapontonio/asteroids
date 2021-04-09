@@ -5,14 +5,7 @@ customElements.define('scatter-plot', class extends HTMLElement {
             if(response.ok) {
                 response.json().then(body => {
                     const d = this.getAttribute("start_date");
-                    const o = body.near_earth_objects[d]
-                    .map(function(e, i, a) {
-                        return {
-                            ...e,
-                            x: e.close_approach_data[0].relative_velocity.kilometers_per_second,
-                            y: e.close_approach_data[0].miss_distance.kilometers
-                        }
-                    });
+                    const o = body.near_earth_objects[d];
                     console.table(body)
                     this.innerHTML=`
                         <div>${body.element_count}</div>
@@ -29,12 +22,11 @@ customElements.define('scatter-plot', class extends HTMLElement {
                         </fieldset>
                         <svg 
                             id="svg"
-                            e='${JSON.stringify(body)}'
                             viewBox=${[
                                 0,
                                 0,
-                                Math.max(...o.map(e => e.x)),
-                                Math.max(...o.map(e => e.y))
+                                100,
+                                100
                             ]} 
                             height="100" 
                             width="100%" 
@@ -44,22 +36,28 @@ customElements.define('scatter-plot', class extends HTMLElement {
                             style="
                                 display: block;
                                 height: auto;">
-                            ${o.map(e => `<circle 
+                            ${o.map((e,i,a) => `<circle 
                                 stroke="black" 
                                 stroke-width="2%" 
                                 fill="red" 
-                                cx=${e.x}
-                                cy=${e.y}  
-                                e='${JSON.stringify(e)}'
-                                r="4%"/>`).join('')}        
+                                cx=${(()=>{
+                                    const g = a.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second);
+                                    return `${100*(g[i]-Math.min(...g))/(Math.max(...g)-Math.min(...g))}%`;
+                                })()}
+                                cy=${(()=>{
+                                    const g = a.map(z=>z.close_approach_data[0].miss_distance.kilometers);
+                                    return `${100*(g[i]-Math.min(...g))/(Math.max(...g)-Math.min(...g))}%`;
+                                })()}
+                                r="4%"/>`).join('')}
                         </svg>
                     `;
                 })
             } else {
                 response.json().then(body => {
                     this.innerHTML=`
-                        <div>${Object.values(body).map(e => `<div>${e}</div>`).join('')}</div>
-                        <div>${Object.values(response).map(e => `<div>${e}</div>`).join('')}</div>
+                        <pre>${JSON.stringify(body)}</pre>
+                        <pre>${response.status}</pre>
+                        <pre>${response.statusText}</pre>
                     `
                 })
             };
