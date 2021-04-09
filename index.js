@@ -137,7 +137,11 @@ app.get('/asteroids-of-the-day', (req, res) => {
                     required>
 								<button type="submit" value="Submit">Submit</button>
 							</form>
-							<scatter-plot></scatter-plot>
+							<scatter-plot
+                                value=${req.query.api_key}
+                                value=${req.query.start_date}
+                                value=${req.query.end_date}
+                            ></scatter-plot>
 						</main>
                         <footer>
 									<table>
