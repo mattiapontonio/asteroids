@@ -167,6 +167,74 @@ app.get('/asteroids-of-the-day', (req, res) => {
 								</footer>
 					</body>
     `);
+});
+app.get('/', (req, res) => {
+    res.send(`
+    <!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+				<title>asteroids</title>
+				<meta data-n-head="1" data-hid="description" name="description" content="A Vue.js Progressive Web App with Server Side Rendering and hydratated by REST microservices uses data from The National Aeronautics and Space Administration&#39;s application programming interface.">
+					<link data-n-head="1" rel="icon" type="image/x-icon" href="https://localhost:3000/favicon.ico">
+						<link data-n-head="1" rel="manifest" href="https://localhost:3000/manifest.webmanifest">
+							<meta data-n-head="1" name="viewport" content="width=device-width, initial-scale=1">
+              <script>
+                if ('serviceWorker' in navigator) {
+                  navigator.serviceWorker.register('service-worker.js')
+                  .then(console.log)
+                  .catch(console.log);
+                }
+              </script>
+							</head>
+							<body>
+								<header>
+									<button onclick="history.back()">back</button>
+									<button onclick="history.forward()">forward</button>
+								</header>
+								<h1>Asteroids</h1>
+								<nav class="menu">
+									<ul>
+										<li>
+											<a href="https://localhost:3000/asteroids-of-the-day" class="">asteroids-of-the-day</a>
+										</li>
+										<li>
+											<a href="https://localhost:3000/brightest%20of-the-week" class="">brightest of-the-week</a>
+										</li>
+										<li>
+											<a href="https://localhost:3000/astronomy-picture-of-the-day" class="">astronomy-picture-of-the-day</a>
+										</li>
+									</ul>
+								</nav>
+								<footer>
+									<table>
+										<tbody>
+											<tr>
+												<td>GitHub</td>
+												<td>
+													<a href="https://github.com/mattiapontonio/asteroids">https://github.com/mattiapontonio/asteroids</a>
+												</td>
+											</tr>
+											<tr>
+												<td>Version</td>
+												<td>0.0.6</td>
+											</tr>
+											<tr>
+												<td>
+													<div>Icons made by 
+                                    
+														<a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from 
+                                    
+														<a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</footer>
+							</body>
+						</html>`);
 })
 app.use(express.static(path.join(__dirname, 'static')));
 https
