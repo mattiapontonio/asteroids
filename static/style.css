@@ -92,7 +92,7 @@ main {
 body {
 	background: #020024;
 	background: linear-gradient(180deg, #0a1e1a, #19435e);
-	color: #fff;
+	color: white;
 	font-family: "Montserrat", sans-serif;
 	text-rendering: optimizeLegibility;
 	font-size: 12px;
@@ -113,7 +113,7 @@ svg{
 	max-height: 300px;
 }
 button {
-	border: 1px solid #fff;
+	border: 1px solid white;
 	border-radius: 2px;
 	background-color: transparent;
 	color: #fff
@@ -185,9 +185,9 @@ aside {
 }
 
 .tooltip {
-	border: 1px solid #fff;
+	border: 1px solid white;
 	padding: 1.5em;
-	color: #fff;
+	color: white;
 	background-color: rgba(0, 0, 0, .5);
 	line-height: 1.5;
 	white-space: nowrap;
@@ -221,16 +221,17 @@ th {
 }
 
 table {
-	display: block
+	display: block;
+	color: black;
 }
 
 footer {
-	background: #fff;
-	color: #000
+	background: white;
+	color: black;
 }
 
 .error {
-	color: #fff;
+	color: white;
 	border: 1px solid red;
 	padding: 1em;
 	background: red
@@ -315,51 +316,4 @@ aside {
 
 .rombo-2 {
 	background-color: #fff
-}
-
-.__nuxt-error-page {
-	padding: 1rem;
-	background: #f7f8fb;
-	color: #47494e;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	font-family: sans-serif;
-	font-weight: 100!important;
-	-webkit-font-smoothing: antialiased;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0
-}
-
-.__nuxt-error-page .error {
-	max-width: 450px
-}
-
-.__nuxt-error-page .title {
-	font-size: 1.5rem;
-	margin-top: 15px;
-	color: #47494e;
-	margin-bottom: 8px
-}
-
-.__nuxt-error-page .description {
-	color: #7f828b;
-	line-height: 21px;
-	margin-bottom: 10px
-}
-
-.__nuxt-error-page a {
-	color: #7f828b!important;
-	text-decoration: none
-}
-
-.__nuxt-error-page .logo {
-	position: fixed;
-	left: 12px;
-	bottom: 12px
 }

@@ -1,20 +1,35 @@
 customElements.define('scatter-plot', class extends HTMLElement {
-    constructor() {
-      super();
-      fetch("https://api.nasa.gov/neo/rest/v1/feed?start_date=2021-04-01&end_date=2021-04-01&api_key=DEMO_KEY")
+    connectedCallback() {
+      fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${this.getAttribute("start_date")}&end_date=${this.getAttribute("end_date")}&api_key=${this.getAttribute("api_key")}`)
         .then(response => {
             if(response.ok) {
                 response.json().then(body => {
-                    const o = body.near_earth_objects["2021-04-01"]
+                    const d = this.getAttribute("start_date");
+                    const o = body.near_earth_objects[d]
                     .map(function(e, i, a) {
                         return {
+                            ...e,
                             x: e.close_approach_data[0].relative_velocity.kilometers_per_second,
                             y: e.close_approach_data[0].miss_distance.kilometers
                         }
                     });
+                    console.table(body)
                     this.innerHTML=`
-                        <div>${response.statusText}</div>
+                        <div>${body.element_count}</div>
+                        <fieldset>
+                        <legend>Date</legend>
+                        ${Object.keys(body.near_earth_objects).map(e => `
+                        <input 
+                            type="radio" 
+                            id=${e} 
+                            name="date" 
+                            value=${e}
+                            >
+                        <label for=${e}>${e}</label>`).join('')}
+                        </fieldset>
                         <svg 
+                            id="svg"
+                            e='${JSON.stringify(body)}'
                             viewBox=${[
                                 0,
                                 0,
@@ -26,23 +41,28 @@ customElements.define('scatter-plot', class extends HTMLElement {
                             stroke="red" 
                             fill="grey" 
                             preserveAspectRatio="xMidYMid meet" 
-                            style="display: block;
-                            height: auto;">
+                            style="
+                                display: block;
+                                height: auto;">
                             ${o.map(e => `<circle 
                                 stroke="black" 
                                 stroke-width="2%" 
                                 fill="red" 
                                 cx=${e.x}
                                 cy=${e.y}  
-                                r="4%">
-                            </circle>`)}        
+                                e='${JSON.stringify(e)}'
+                                r="4%"/>`).join('')}        
                         </svg>
                     `;
                 })
             } else {
-                this.innerHTML=response.statusText
+                response.json().then(body => {
+                    this.innerHTML=`
+                        <div>${Object.values(body).map(e => `<div>${e}</div>`).join('')}</div>
+                        <div>${Object.values(response).map(e => `<div>${e}</div>`).join('')}</div>
+                    `
+                })
             };
-            console.table(response);
         })
         .catch(e=> this.innerHTML=e)
     }
