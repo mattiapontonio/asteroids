@@ -69,25 +69,26 @@
         url.searchParams.set('api_key', "DEMO_KEY");
         this.loading = true;
         this.errored = false;
-        axios.get(url).then(response => Promise.all(Object.values(response.data.near_earth_objects[date]).map(e => {
-          const url = new URL("https://api.nasa.gov");
-          url.pathname = `neo/rest/v1/neo/${e.id}`;
-          url.searchParams.set('api_key', "DEMO_KEY");
-          return axios.get(url);
-        })).then(values => {
-          this.asteroids_of_the_day = values.map(e => e.data).map(e => Object.assign({}, {
-            id: e.id,
-            name: e.name,
-            diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
-            magnitude: e.absolute_magnitude_h,
-            velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
-            velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
-            distance: e.close_approach_data[0].miss_distance.astronomical,
-          }));
-        })).catch(error => {
+        axios
+        .get(url)
+        .then(response => {
+          this.asteroids_of_the_day = response.data.near_earth_objects[date].map(e => {
+            return {
+              id: e.id,
+              name: e.name,
+              diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
+              magnitude: e.absolute_magnitude_h,
+              velocity_kilometers_per_hour: e.close_approach_data[0].relative_velocity.kilometers_per_hour,
+              velocity_kilometers_per_second: e.close_approach_data[0].relative_velocity.kilometers_per_second,
+              distance: e.close_approach_data[0].miss_distance.astronomical
+            };
+          });
+        })
+        .catch(error => {
           console.log(error)
           this.errored = true
-        }).finally(() => this.loading = false);
+        })
+        .finally(() => this.loading = false);
       },
       onchangedate(date = new Date()) {
         this.date = date;
