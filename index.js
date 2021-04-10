@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const https = require('https');
+const fs = require('fs');
 const querystring = require('querystring');
 const port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -70,5 +71,7 @@ app.get('/neo/rest/v1/feed', (oreq, ores) => {
         });
     creq.end();
 });
-
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+https.createServer({
+    key: fs.readFileSync(path.resolve(__dirname, 'key.pem')),
+    cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
+}, app).listen(port, () => console.log(`Example app listening at https://localhost:${port}`));
