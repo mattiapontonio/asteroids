@@ -35,7 +35,7 @@
             </tbody>
         </table>
         <section v-if="errored">
-            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+            <p>{{error}}</p>
         </section>
         <section v-else>
             <div v-if="loading" class="loading"></div>
@@ -84,13 +84,14 @@
                 const start = formatted(this.start);
                 const end = formatted(this.end);
                 const date = formatted(this.date);
-                const url = new URL(window.location.origin);
+                const url = new URL("https://api.nasa.gov");
                 console.log(date, start, end);
                 console.assert(this.date >= this.start);
                 console.assert(this.date <= this.end);
                 url.pathname = 'neo/rest/v1/feed';
-                url.searchParams.set('start', start);
-                url.searchParams.set('end', end);
+                url.searchParams.set('start_date', date);
+                url.searchParams.set('end_date', date);
+                url.searchParams.set('api_key', "DEMO_KEY");
                 this.loading = true;
                 this.errored = false;
                 axios
@@ -116,6 +117,7 @@
                 .catch(error => {
                     console.error(error);
                     this.errored = true;
+                    this.error = error;
                 })
                 .finally(() => this.loading = false);
             }
