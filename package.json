@@ -3,12 +3,10 @@
   "version": "0.0.6",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "lint": "vue-cli-service lint",
     "dev": "nuxt",
-    "build": "nuxt generate && node manifest.js",
-    "generate": "nuxt generate",
-    "start": "node index.js"
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "axios": "^0.20.0",

@@ -52,3 +52,7 @@ npm run
 ![](screenshots/Screenshot_20201110-042150.png)
 ![](screenshots/Screenshot_20201110-042209.png)
 ![](screenshots/Screenshot_20201110-152839.png)
+
+## Related
+
+- <https://nuxtjs.org/docs/2.x/deployment/heroku-deployment>
