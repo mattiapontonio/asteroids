@@ -1,0 +1,103 @@
+{
+    "short_name": "Asteroids",
+    "name": "Asteroids",
+    "description": "A Vue.js Progressive Web App with Server Side Rendering and hydratated by REST microservices uses data from The National Aeronautics and Space Administration's application programming interface.",
+    "icons": [
+      {
+        "src": "/asteroid.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#3367D6",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#3367D6",
+    "shortcuts": [
+      {
+        "name": "domenica 4 aprile 2021",
+        "short_name": "domenica",
+        "description": "Asteroids of domenica 4 aprile 2021",
+        "url": "/domenica",
+        "icons": [
+          {
+            "src": "/images/icon.png",
+            "sizes": "192x192"
+          }
+        ]
+      },
+      {
+        "name": "lunedì 5 aprile 2021",
+        "short_name": "lunedì",
+        "description": "Asteroids of lunedì 5 aprile 2021",
+        "url": "/lunedì",
+        "icons": [
+          {
+            "src": "/images/icon.png",
+            "sizes": "192x192"
+          }
+        ]
+      },
+      {
+        "name": "martedì 6 aprile 2021",
+        "short_name": "martedì",
+        "description": "Asteroids of martedì 6 aprile 2021",
+        "url": "/martedì",
+        "icons": [
+          {
+            "src": "/images/icon.png",
+            "sizes": "192x192"
+          }
+        ]
+      },
+      {
+        "name": "mercoledì 7 aprile 2021",
+        "short_name": "mercoledì",
+        "description": "Asteroids of mercoledì 7 aprile 2021",
+        "url": "/mercoledì",
+        "icons": [
+          {
+            "src": "/images/icon.png",
+            "sizes": "192x192"
+          }
+        ]
+      },
+      {
+        "name": "giovedì 8 aprile 2021",
+        "short_name": "giovedì",
+        "description": "Asteroids of giovedì 8 aprile 2021",
+        "url": "/giovedì",
+        "icons": [
+          {
+            "src": "/images/icon.png",
+            "sizes": "192x192"
+          }
+        ]
+      },
+      {
+        "name": "venerdì 9 aprile 2021",
+        "short_name": "venerdì",
+        "description": "Asteroids of venerdì 9 aprile 2021",
+        "url": "/venerdì",
+        "icons": [
+          {
+            "src": "/images/icon.png",
+            "sizes": "192x192"
+          }
+        ]
+      },
+      {
+        "name": "sabato 10 aprile 2021",
+        "short_name": "sabato",
+        "description": "Asteroids of sabato 10 aprile 2021",
+        "url": "/sabato",
+        "icons": [
+          {
+            "src": "/images/icon.png",
+            "sizes": "192x192"
+          }
+        ]
+      }
+    ]
+  }

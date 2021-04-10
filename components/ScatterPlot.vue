@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div>
         <loader v-if="loading"></loader>
         <table>
@@ -52,6 +53,32 @@
                     v-bind:style="item.style"
                 />
             </div>
+=======
+    <div class="scatter-plot">
+        <section v-if="errored" class="errored">
+            <p>{{error}}</p>
+        </section>
+        <div v-else-if="loading" class="loading" style="position:absolute; width:100%; height:100%;"></div>
+        <section
+            v-else
+            class="container"
+        >
+            <asteroid
+                v-for="(item, i) in items"
+                v-bind:data="{
+                    ...item
+                }"
+                v-bind:key="i"
+                style="position: absolute;"
+                v-bind:x="item.x"
+                v-bind:y="item.y"
+                v-bind:d="item.d"
+            />
+            <span class="max" coordinate="x">{{maxX}}</span>
+            <span class="min" coordinate="x">{{minX}}</span>
+            <span class="max" coordinate="y">{{maxY}}</span>
+            <span class="min" coordinate="y">{{minY}}</span>
+>>>>>>> develop-3
         </section>
     </div>
 </template>
@@ -106,6 +133,9 @@
                 default: function () {
                     return {}
                 }
+            },
+            error: {
+                type: String
             }
         }
     }

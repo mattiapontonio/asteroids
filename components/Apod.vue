@@ -1,11 +1,19 @@
 <template>
     <article>
         <h2>Astronomy Picture of the Day</h2>
+<<<<<<< HEAD
         <div>{{response.statusText}}</div>
         <button v-on:click="get">get</button>
         <div>
             <div>
                 <p>{{datetime|DateTimeFormat}}</p>
+=======
+        <div v-if="errored" class="errored">{{error}}</div>
+        <div v-else>
+            <div v-if="loading" class="loading"></div>
+            <div v-else>
+                <p>{{date|DateTimeFormat}}</p>
+>>>>>>> develop-3
                 <picture>
                     <source
                         media="(min-width:1680px)"
@@ -42,11 +50,32 @@
                 error: false
             }
         },
+<<<<<<< HEAD
         methods: {
             get
         },
         mounted() {
             this.get()
+=======
+        mounted() {
+            this.fetch();
+        },
+        methods: {
+            fetch() {
+                this.loading = true;
+                this.errored = false;
+                axios
+                .get(`https://api.nasa.gov/planetary/apod?api_key=${api_key.value}`)
+                .then(({data}) => {
+                    Object.assign(this, data);
+                    this.loading = false;
+                })
+                .catch(error => {
+                    this.errored = true;
+                    this.error = error;
+                });
+            }
+>>>>>>> develop-3
         }
     }
 

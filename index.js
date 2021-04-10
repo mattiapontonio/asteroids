@@ -4,7 +4,13 @@ const fs = require('fs');
 const app = express();
 const https = require('https');
 const querystring = require('querystring');
+<<<<<<< HEAD
 const manifest = require('./manifest.js');
+=======
+const fs = require('fs');
+const port = process.env.PORT || 3000;
+app.use(express.static(path.join(__dirname, 'dist')));
+>>>>>>> develop-3
 app.get('/planetary/apod', (oreq, ores) => {
     const options = {
         host: 'api.nasa.gov',
@@ -67,6 +73,7 @@ app.get('/neo/rest/v1/feed', (oreq, ores) => {
         });
     creq.end();
 });
+<<<<<<< HEAD
 app.get('/neo/rest/v1/neo/:id', (oreq, ores) => {
     const options = {
         host: 'api.nasa.gov',
@@ -251,3 +258,11 @@ https
     cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
 }:undefined, app)
 .listen(process.env.PORT);
+=======
+https
+.createServer({
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+}, app)
+.listen(port, () => console.log(`https://localhost:${port}`));
+>>>>>>> develop-3
