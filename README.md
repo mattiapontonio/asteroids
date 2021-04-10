@@ -12,9 +12,9 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 
 |branch|uri|
 |-|-|
-|develop|https://asteroids-nasa-develop.herokuapp.com/|
-|master|https://asteroids-nasa.herokuapp.com/|
-|develop-3|https://aqueous-fortress-96371.herokuapp.com/|
+|develop|<https://asteroids-nasa-develop.herokuapp.com/>|
+|develop-3|<https://aqueous-fortress-96371.herokuapp.com/>|
+|master|<https://asteroids-nasa.herokuapp.com/>|
 
 ## Stack
 
@@ -29,17 +29,23 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 - [Generate API Key](https://api.nasa.gov/#apidatagov_signup)
 - [Asteroids - NeoWs](https://api.nasa.gov/#NeoWS)
 
-## Getting started
+## Start
+
+### Node
 
 ```shell
 export PORT=<port>
 export API_KEY=<key>
 ```
 
+### Git
+
 ```shell
 git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
 ```
+
+### SSL
 
 ```shell
 openssl genrsa -out key.pem
@@ -48,13 +54,15 @@ openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
 rm csr.pem
 ```
 
+### npm
+
 ```shell
 npm i
 npm run generate
 npm start
 ```
 
-## Scripts
+#### Scripts
 
 ```shell
 npm run
@@ -62,10 +70,7 @@ npm run
 
 ## Screenshots
 
-![alt](screenshots/Screenshot_20201110-042136.png)
-![alt](screenshots/Screenshot_20201110-042150.png)
-![alt](screenshots/Screenshot_20201110-042209.png)
-![alt](screenshots/Screenshot_20201110-152839.png)
+[Screenshots](/screenshots/screenshots.md)
 
 ## Related
 
