@@ -5,8 +5,11 @@
     class="app"
   >
     <h1>Asteroids</h1>
-    <label for="api_key">api_key</label>
-    <input type="text" id="api_key" name="api_key" required value="DEMO_KEY">
+    <form>
+      <label for="api_key">api_key</label>
+      <input type="text" id="api_key" name="api_key" required :value="this.$route.query.api_key">
+      <input type="submit" value="Send Request">
+    </form>
     <main>
       <asteroids-of-the-day
         v-bind:date="date"
