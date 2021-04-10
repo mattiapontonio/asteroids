@@ -321,3 +321,10 @@ aside {
 .rombo-2 {
 	background-color: #fff
 }
+foreignObject {
+    fill: black;
+    width: 100px;
+    height: 100px;
+    background: black;
+    font-size: 4px;
+}
