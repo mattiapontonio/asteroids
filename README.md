@@ -14,6 +14,7 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 |-|-|
 |develop|https://asteroids-nasa-develop.herokuapp.com/|
 |master|https://asteroids-nasa.herokuapp.com/|
+|develop-3|https://aqueous-fortress-96371.herokuapp.com/|
 
 ## Stack
 

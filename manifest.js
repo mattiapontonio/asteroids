@@ -47,4 +47,3 @@ const manifest = {
     shortcuts
 };
 fs.writeFileSync('dist/manifest.webmanifest', JSON.stringify(manifest));
-console.table(manifest);
