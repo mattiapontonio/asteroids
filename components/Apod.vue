@@ -1,7 +1,7 @@
 <template>
     <article>
         <h2>Astronomy Picture of the Day</h2>
-        <div v-if="errored" class="errored">{{msg}}</div>
+        <div v-if="errored" class="errored">{{error}}</div>
         <div v-else>
             <div v-if="loading" class="loading"></div>
             <div v-else>
@@ -44,21 +44,24 @@
                 msg: ""
             }
         },
-        async fetch() {
-            this.loading = true;
-            this.errored = false;
-            await axios
-                .get('/planetary/apod')
+        mounted() {
+            this.fetch();
+        },
+        methods: {
+            fetch() {
+                this.loading = true;
+                this.errored = false;
+                axios
+                .get(`https://api.nasa.gov/planetary/apod?api_key=${api_key.value}`)
                 .then(({data}) => {
                     Object.assign(this, data);
+                    this.loading = false;
                 })
                 .catch(error => {
-                    console.error(error);
-                    this.msg = error.response.data.msg;
                     this.errored = true;
                     this.error = error;
-                })
-                .finally(() => this.loading = false);
+                });
+            }
         }
     }
 
