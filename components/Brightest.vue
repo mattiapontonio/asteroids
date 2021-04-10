@@ -73,20 +73,9 @@
         data: function () {
             return {
                 data: new Array(),
+                items: new Array(),
                 loading: new Boolean(),
                 errored: new Boolean(),
-            }
-        },
-        computed: {
-            items: function () {
-                return Object.values(this.data).flat(1).sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h).slice(0, 5).reverse().map((e, i, a) => {
-                    const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
-                    const scale = Vue.filter('scale');
-                    const min = Vue.filter('min');
-                    const max = Vue.filter('max');
-                    e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
-                    return e;
-                });
             }
         },
         methods: {
@@ -104,13 +93,31 @@
                 url.searchParams.set('end', end);
                 this.loading = true;
                 this.errored = false;
-                axios.get(url).then(response => {
-                    this.data = response.data.near_earth_objects;
+                axios
+                .get(url)
+                .then(response => {
+                    if(response.status==200){
+                        this.items = Object.values(response.data.near_earth_objects)
+                        .flat(1)
+                        .sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h)
+                        .slice(0, 5)
+                        .reverse()
+                        .map((e, i, a) => {
+                            const absolute_magnitude_hs = a.map(e => e.absolute_magnitude_h);
+                            const scale = Vue.filter('scale');
+                            const min = Vue.filter('min');
+                            const max = Vue.filter('max');
+                            e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
+                            return e;
+                        });
+                    };
                     this.loading = false;
-                }).catch(error => {
+                })
+                .catch(error => {
                     console.error(error);
                     this.errored = true;
-                }).finally(() => this.loading = false);
+                })
+                .finally(() => this.loading = false);
             }
         },
         mounted() {
