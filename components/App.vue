@@ -5,6 +5,8 @@
     class="app"
   >
     <h1>Asteroids</h1>
+    <label for="api_key">api_key</label>
+    <input type="text" id="api_key" name="api_key" required value="DEMO_KEY">
     <main>
       <asteroids-of-the-day
         v-bind:date="date"
@@ -14,6 +16,7 @@
         v-bind:onchangedate="onchangedate"
         v-bind:loading="loading"
         v-bind:errored="errored"
+        v-bind:error="error"
       />
       <aside>
         <brightest
@@ -66,7 +69,7 @@
         url.pathname = 'neo/rest/v1/feed';
         url.searchParams.set('start_date', date);
         url.searchParams.set('end_date', date);
-        url.searchParams.set('api_key', "DEMO_KEY");
+        url.searchParams.set('api_key', api_key.value);
         this.loading = true;
         this.errored = false;
         axios
@@ -87,6 +90,7 @@
         .catch(error => {
           console.log(error)
           this.errored = true
+          this.error = error;
         })
         .finally(() => this.loading = false);
       },

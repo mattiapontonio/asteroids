@@ -56,6 +56,7 @@
                     console.error(error);
                     this.msg = error.response.data.msg;
                     this.errored = true;
+                    this.error = error;
                 })
                 .finally(() => this.loading = false);
         }

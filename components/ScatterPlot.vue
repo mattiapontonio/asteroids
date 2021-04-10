@@ -1,7 +1,7 @@
 <template>
     <div class="scatter-plot">
         <section v-if="errored" class="errored">
-            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+            <p>{{error}}</p>
         </section>
         <div v-else-if="loading" class="loading" style="position:absolute; width:100%; height:100%;"></div>
         <section
@@ -94,6 +94,9 @@
                 default: function () {
                     return false
                 }
+            },
+            error: {
+                type: String
             }
         }
     }

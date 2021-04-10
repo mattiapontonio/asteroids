@@ -34,7 +34,7 @@
                 </tr>
             </tbody>
         </table>
-        <section v-if="errored">
+        <section v-if="errored" class="errored">
             <p>{{error}}</p>
         </section>
         <section v-else>
@@ -91,7 +91,7 @@
                 url.pathname = 'neo/rest/v1/feed';
                 url.searchParams.set('start_date', date);
                 url.searchParams.set('end_date', date);
-                url.searchParams.set('api_key', "DEMO_KEY");
+                url.searchParams.set('api_key', api_key.value);
                 this.loading = true;
                 this.errored = false;
                 axios

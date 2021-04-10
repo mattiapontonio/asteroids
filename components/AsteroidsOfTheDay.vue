@@ -18,6 +18,7 @@
       v-bind:asteroids="asteroids"
       v-bind:loading="loading"
       v-bind:errored="errored"
+      v-bind:error="error"
     />
     <table>
       <tbody>
@@ -72,6 +73,9 @@
         type: Boolean
       },
       errored: {
+        type: Boolean
+      },
+      error: {
         type: Boolean
       }
     }
