@@ -1,5 +1,5 @@
 <template>
-    <div
+    <circle
         @focus="show = true"
         @blur="show = false"
         tabindex=0
@@ -14,12 +14,11 @@
             v-bind:show="show"
             v-bind:data="data"
         />
-    </div>
+    </circle>
 </template>
 <script>
     import Bubble from './Bubble.vue';
     import Tooltip from './Tooltip.vue';
-    import get from '../plugins/methods/get.js';
     export default {
         name: 'asteroid',
         components: {

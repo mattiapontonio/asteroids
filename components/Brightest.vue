@@ -24,21 +24,18 @@
                 </tr>
             </tbody>
         </table>
-        <section v-if="errored" class="errored">
-            <p>{{error}}</p>
-        </section>
+        <p v-if="errored" class="errored" v-text="error"></p>
         <section v-else>
             <div v-if="loading" class="loading"></div>
             <asteroids
                 v-else
-                v-bind:asteroids="items"
+                v-bind:items="items"
             />
         </section>
     </article>
 </template>
 <script>
     import Vue from 'vue';
-    import get from '../plugins/methods/get.js';
     import Asteroids from './Asteroids.vue';
     export default {
         name: 'brightest',

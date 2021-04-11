@@ -4,13 +4,12 @@
     flex-direction: column;
     flex-grow: 1;
     ">
-    <h2>Asteroids of the day</h2>
     <div style="display: flex;flex-wrap:wrap;">
       <min-max />
     </div>
     <scatter-plot
       v-bind:date="date"
-      v-bind:asteroids="asteroids"
+      v-bind:items="items"
       v-bind:loading="loading"
       v-bind:errored="errored"
       v-bind:error="error"
@@ -34,7 +33,6 @@
 <script>
   import MinMax from './MinMax';
   import ScatterPlot from './ScatterPlot';
-  import Vue from 'vue';
   export default {
     components: {
       MinMax,
@@ -43,12 +41,10 @@
     name: 'asteroids-of-the-day',
     computed: {
       minD: function () {
-        console.log(this.asteroids);
-        return Math.min(this.asteroids.map(e => e.diameter))
+        return Math.min(this.items.map(e => e.diameter))
       },
       maxD: function () {
-        console.log(this.asteroids);
-        return Math.max(this.asteroids.map(e => e.diameter))
+        return Math.max(this.items.map(e => e.diameter))
       }
     },
     props: {
@@ -56,7 +52,7 @@
         type: Date,
         required: true
       },
-      asteroids: {
+      items: {
         type: Array,
         default: () => new Array()
       },

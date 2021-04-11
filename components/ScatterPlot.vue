@@ -1,40 +1,38 @@
 <template>
-    <div class="scatter-plot">
-        <section v-if="errored" class="errored">
-            <p>{{error}}</p>
-        </section>
-        <div v-else-if="loading" class="loading" style="position:absolute; width:100%; height:100%;"></div>
-        <section
-            v-else
-            class="container"
+        <svg
+            class="scatter-plot"
+            viewBox="0 0 200 100"
+            preserveAspectRatio="xMidYMid meet" 
         >
-            <asteroid
-                v-for="(item, i) in items"
-                v-bind:data="{
-                    ...item
-                }"
-                v-bind:key="i"
-                style="position: absolute;"
-                v-bind:x="item.x"
-                v-bind:y="item.y"
-                v-bind:d="item.d"
+        <g>
+            <line v-for="i in 10" :key="i" :x1="i*10" y1="0" :x2="i*10" y2="100%" />
+            <line v-for="i in 10" :key="i" x1="0" :y1="i*10" x2="100%" :y2="i*10" />
+        </g>
+        <g v-for="(item, i) in items" v-bind:key="i">
+            <circle
+                :id="'circle'+i"
+                :cx="(()=>{
+                    const g = items.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second);
+                    return `${100*(g[i]-Math.min(...g))/(Math.max(...g)-Math.min(...g))}%`;
+                })()"
+                :cy="(()=>{
+                    const g = items.map(z=>z.close_approach_data[0].miss_distance.kilometers);
+                    return `${100*(g[i]-Math.min(...g))/(Math.max(...g)-Math.min(...g))}%`;
+                })()"
+                :r="10"
+                class="bubble"
             />
-            <span class="max" coordinate="x">{{maxX}}</span>
-            <span class="min" coordinate="x">{{minX}}</span>
-            <span class="max" coordinate="y">{{maxY}}</span>
-            <span class="min" coordinate="y">{{minY}}</span>
-        </section>
-    </div>
+            <use :href="'#circle'+i" r="1" />
+        </g>
+        </svg>
 </template>
 <script>
     import Asteroid from './Asteroid.vue'
     import Bubble from './Bubble.vue'
-    import get from '../plugins/methods/get.js'
     import Vue from 'vue'
     const scale = Vue.filter('scale')
     const min=Vue.filter('min')
     const max=Vue.filter('max')
-    //new (Date.bind(null, 2011, 11, 24))
     export default {
         name: 'scatter-plot',
         components: {

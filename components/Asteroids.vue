@@ -1,7 +1,7 @@
 <template>
     <div>
         <div
-            v-for="(val, i) in asteroids"
+            v-for="(val, i) in items"
             v-bind:key="i"
             style="
                 display: flex;
@@ -37,7 +37,7 @@
             Rhombus
         },
         props: {
-            asteroids: {
+            items: {
                 type: Array,
                 default: () => new Array()
             }
