@@ -1,11 +1,12 @@
 <template>
     <article>
+        <loader v-if="loading" class="loading"></loader>
+        <p v-if="errored" class="errored" v-text="error"></p>
         <h2>Brightest of the week</h2>
         <h3>Magnitude <span>(h)</span></h3>
         <p>{{start_date}}</p>
         <p>{{end_date}}</p>
         <p>{{items.length}}</p>
-        <response v-bind="response"></response>
         <table>
             <tbody>
                 <tr>
@@ -23,24 +24,35 @@
                     <td>brightness</td>
                 </tr>
             </tbody>
+            <tbody v-for="(e, i) in items" v-bind:key="i">
+                <tr>
+                    <td rowspan="3">
+                        <rhombus v-bind:value="e.scale" />
+                    </td>
+                    <th>Name</th>
+                    <td>{{e.name}}</td>
+                </tr>
+                <tr>
+                    <th>Diameter</th>
+                    <td>{{e.estimated_diameter.kilometers.estimated_diameter_max}}</td>
+                </tr>
+                <tr>
+                    <th>Magnitude</th>
+                    <td>{{e.absolute_magnitude_h}}</td>
+                </tr>
+            </tbody>
         </table>
-        <p v-if="errored" class="errored" v-text="error"></p>
-        <section v-else>
-            <div v-if="loading" class="loading"></div>
-            <asteroids
-                v-else
-                v-bind:items="items"
-            />
-        </section>
     </article>
 </template>
 <script>
     import Vue from 'vue';
-    import Asteroids from './Asteroids.vue';
+    import Loader from './Loader.vue';
+    import Rhombus from './Rhombus.vue';
     export default {
         name: 'brightest',
         components: {
-            Asteroids
+            Loader,
+            Rhombus
         },
         data: function () {
             return {

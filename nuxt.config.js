@@ -27,7 +27,7 @@ module.exports = {
             { rel: 'manifest', href: '/manifest.webmanifest' }
         ]
     },
-    loading: '~/components/Loading.vue',
+    loading: '~/components/Loader.vue',
     htmlAttrs: {
         lang: 'en'
     },

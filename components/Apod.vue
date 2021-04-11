@@ -1,11 +1,10 @@
 <template>
     <article>
+        <loader v-if="loading" class="loading"></loader>
         <h2>Astronomy Picture of the Day</h2>
-        <response v-bind="response"></response>
         <div v-if="errored" class="errored">{{error}}</div>
         <div v-else>
-            <div v-if="loading" class="loading"></div>
-            <div v-else>
+            <div>
                 <p>{{date}}</p>
                 <picture>
                     <source
@@ -29,9 +28,12 @@
     </article>
 </template>
 <script>
-    import get from '../plugins/methods/get.js';
+    import Loader from './Loader.vue';
     export default {
         name: 'apod',
+        components:{
+            Loader
+        },
         data: function () {
             const date = new Date();
             return {

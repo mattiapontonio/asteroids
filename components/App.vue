@@ -1,32 +1,32 @@
 <template>
   <body id="app" class="app">
     <header>
-    <h1>Asteroids</h1>
-    <button onclick="history.back()">back</button>
-    <button onclick="history.forward()">forward</button>
-    <form onchange="this.submit()">
-      <fieldset>
-        <legend>Legend</legend>
-        <label for="api_key">api_key</label>
-        <input type="text" id="api_key" name="api_key" required :value="this.$route.query.api_key">
-        <label for="start_date">start_date</label>
-        <input type="date" :value="this.$route.query.start_date" name="start_date" id="start_date">
-        <label for="end_date">end_date</label>
-        <input type="date" :value="this.$route.query.end_date" name="end_date" id="end_date">
-      </fieldset>
-      <fieldset>
-        <legend>Date</legend>
-        <div v-for="(e, i) in Object.keys(near_earth_objects)" v-bind:key="i">
-          <input type="radio" :id="e" name="date" :value="e" :checked="$route.query.date==e"/>
-          <label :for="e">{{e}}</label>
-        </div>
-      </fieldset>
-      <input type="submit" value="Send Request">
-    </form>
+      <img src="images/icon.png" alt="Icon">
+      <h1>Asteroids</h1>
+      <button onclick="history.back()">back</button>
+      <button onclick="history.forward()">forward</button>
+      <form onchange="this.submit()">
+        <fieldset>
+          <legend>Legend</legend>
+          <label for="api_key">api_key</label>
+          <input type="text" id="api_key" name="api_key" required :value="this.$route.query.api_key">
+          <label for="start_date">start_date</label>
+          <input type="date" :value="this.$route.query.start_date" name="start_date" id="start_date">
+          <label for="end_date">end_date</label>
+          <input type="date" :value="this.$route.query.end_date" name="end_date" id="end_date">
+        </fieldset>
+        <fieldset>
+          <legend>Date</legend>
+          <div v-for="(e, i) in Object.keys(near_earth_objects)" v-bind:key="i">
+            <input type="radio" :id="e" name="date" :value="e" :checked="$route.query.date==e"/>
+            <label :for="e">{{e}}</label>
+          </div>
+        </fieldset>
+        <input type="submit" value="Send Request">
+      </form>
     </header>
     <main>
       <h2>Asteroids of the day</h2>
-      <response v-bind="response"></response>
       <p v-if="error_message" v-text="error_message"></p>
       <p v-text="element_count"></p>
       <div v-if="links">
@@ -40,15 +40,9 @@
         v-bind:end_date="end_date"
         v-bind:items="items"
         v-bind:onchangedate="onchangedate"
-        v-bind:loading="loading"
         v-bind:errored="errored"
         v-bind:error="error"
       />
-        <brightest
-          v-bind:start_date="start_date"
-          v-bind:end_date="end_date"
-        />
-        <apod />
     </main>
     <aside>
       <brightest

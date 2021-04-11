@@ -14,8 +14,7 @@
         <div
             v-bind:style="{
                         width: dimension.inner,
-                        height: dimension.inner,
-                        boxShadow
+                        height: dimension.inner
                     }"
             style="
                         border: 1px solid white;
@@ -62,9 +61,6 @@
             }
         },
         computed: {
-            boxShadow: function () {
-                return `0 0 ${(1-this.value)*16}px white`;
-            },
             dimension: function () {
                 const unit = 'px';
                 const outer = 80;

@@ -1,12 +1,14 @@
 <template>
-        <svg
-            class="scatter-plot"
-            viewBox="0 0 200 100"
-            preserveAspectRatio="xMidYMid meet" 
-        >
+    <svg
+        class="scatter-plot"
+        viewBox="0 0 200 100"
+        preserveAspectRatio="xMidYMid meet" 
+    >
         <g>
-            <line v-for="i in 10" :key="i" :x1="i*10" y1="0" :x2="i*10" y2="100%" />
-            <line v-for="i in 10" :key="i" x1="0" :y1="i*10" x2="100%" :y2="i*10" />
+            <line x1="0" y1="0" x2="0" y2="100%" stroke-width=".5" />
+            <line x1="0" y1="0" x2="100%" y2="0" stroke-width=".5" />
+            <line v-for="i in 10" :key="i" :x1="i*10+'%'" y1="0" :x2="i*10+'%'" y2="100%" />
+            <line v-for="i in 10" :key="i" x1="0" :y1="i*10+'%'" x2="100%" :y2="i*10+'%'" />
         </g>
         <g v-for="(item, i) in items" v-bind:key="i">
             <circle
@@ -24,64 +26,17 @@
             />
             <use :href="'#circle'+i" r="1" />
         </g>
-        </svg>
+    </svg>
 </template>
 <script>
-    import Asteroid from './Asteroid.vue'
-    import Bubble from './Bubble.vue'
-    import Vue from 'vue'
-    const scale = Vue.filter('scale')
-    const min=Vue.filter('min')
-    const max=Vue.filter('max')
     export default {
         name: 'scatter-plot',
-        components: {
-            Asteroid,
-            Bubble
-        },
-        computed: {
-            url: function() {
-                const url = new URL(location)
-                url.pathname = 'neo/rest/v1/feed'
-                return url
-            },
-            length: function() {
-                return this.items.length
-            }
-        },
-        data: function () {
-            return {
-                body: {},
-                loading: false,
-                error: false,
-                rows: []
-            }
-        },
         props: {
-            "date": {
-                type: String,
-                required: true
-            },
-            "items": {
-                type: Array,
-                required: true,
-                default: function () {
-                    return []
-                }
-            },
-            "response": {
-                type: Object,
-                required: true,
-                default: function () {
-                    return {}
-                }
-            },
-            error: {
-                type: String
+            items: {
+                type: Array
             }
         }
     }
-
 </script>
 <style>
 </style>

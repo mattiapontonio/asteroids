@@ -10,7 +10,6 @@
     <scatter-plot
       v-bind:date="date"
       v-bind:items="items"
-      v-bind:loading="loading"
       v-bind:errored="errored"
       v-bind:error="error"
     />
