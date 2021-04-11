@@ -6,18 +6,13 @@
             <th>statusText</th>
         </tr>
         <tr>
-            <td>{{response.status}}</td>
-            <td>{{response.statusText}}</td>
+            <td>{{status}}</td>
+            <td>{{statusText}}</td>
         </tr>
-        </table>
+    </table>
 </template>
 <script>
     export default {
-        name: 'response',
-        props: {
-            response: {
-                type: Response,
-            }
-        }     
+        name: 'response'
     }
 </script>

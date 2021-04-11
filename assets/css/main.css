@@ -1,6 +1,6 @@
 
   main {
-    display: flex;
+    display: initial;
     width: auto;
     flex-wrap: nowrap;
   }
@@ -35,7 +35,7 @@
   input+label {
     border: 1px solid white;
     background-color: transparent;
-    padding:1em;
+    padding:initial;
   }
   button {
     border: 1px solid white;

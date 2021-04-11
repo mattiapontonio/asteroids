@@ -6,11 +6,6 @@
     ">
     <h2>Asteroids of the day</h2>
     <div style="display: flex;flex-wrap:wrap;">
-      <selector
-        v-bind:date="date"
-        v-bind:onchangedate="onchangedate"
-        v-bind:selected_index="date | lun_dom_day"
-      />
       <min-max />
     </div>
     <scatter-plot

@@ -5,7 +5,7 @@
         <p>{{start_date}}</p>
         <p>{{end_date}}</p>
         <p>{{items.length}}</p>
-        <response :response="response"></response>
+        <response v-bind="response"></response>
         <table>
             <tbody>
                 <tr>

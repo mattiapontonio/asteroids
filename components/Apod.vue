@@ -1,7 +1,7 @@
 <template>
     <article>
         <h2>Astronomy Picture of the Day</h2>
-        <response :response="response"></response>
+        <response v-bind="response"></response>
         <div v-if="errored" class="errored">{{error}}</div>
         <div v-else>
             <div v-if="loading" class="loading"></div>

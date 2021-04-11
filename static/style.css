@@ -78,7 +78,7 @@ aside {
 }
 
 main {
-	display: initial;
+    display: initial;
 	width: auto;
 	flex-wrap: nowrap
 }
