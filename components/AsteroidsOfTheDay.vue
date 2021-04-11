@@ -1,17 +1,4 @@
 <template>
-<<<<<<< HEAD
-      <div style="asteroids-of-the-day">
-        <h1>Asteroids of the day</h1>
-        <div style="display: flex;flex-wrap:wrap;">
-          <min-max />
-        </div>
-        <scatter-plot 
-            v-bind:date="date"
-            v-bind:items="items"
-            v-bind:response="response"
-        />
-      </div>
-=======
   <div style="
     display: flex;
     flex-direction: column;
@@ -48,7 +35,6 @@
       </tbody>
     </table>
   </div>
->>>>>>> develop-3
 </template>
 <script>
   import MinMax from './MinMax';
@@ -60,14 +46,6 @@
       ScatterPlot
     },
     name: 'asteroids-of-the-day',
-<<<<<<< HEAD
-    props: [
-      "date",
-      "items",
-      "response",
-      "apiKey"
-    ]
-=======
     computed: {
       minD: function () {
         console.log(this.asteroids);
@@ -100,7 +78,6 @@
         type: Boolean
       }
     }
->>>>>>> develop-3
   }
 
 </script>

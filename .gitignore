@@ -21,13 +21,4 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-<<<<<<< HEAD
-cert.pem
-key.pem
-
-dist
-.nuxt
-.env
-=======
->>>>>>> develop-3
 tmp

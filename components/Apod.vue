@@ -1,19 +1,11 @@
 <template>
     <article>
         <h2>Astronomy Picture of the Day</h2>
-<<<<<<< HEAD
-        <div>{{response.statusText}}</div>
-        <button v-on:click="get">get</button>
-        <div>
-            <div>
-                <p>{{datetime|DateTimeFormat}}</p>
-=======
         <div v-if="errored" class="errored">{{error}}</div>
         <div v-else>
             <div v-if="loading" class="loading"></div>
             <div v-else>
-                <p>{{date|DateTimeFormat}}</p>
->>>>>>> develop-3
+                <p>{{date}}</p>
                 <picture>
                     <source
                         media="(min-width:1680px)"
@@ -40,23 +32,15 @@
     export default {
         name: 'apod',
         data: function () {
-            const date = new Date().toISOString().substring(0, 10);
+            const date = new Date();
             return {
                 url: '/api/planetary/apod',
                 date,
-                datetime: new Date(date).toISOString(),
                 response: {},
                 loading: false,
                 error: false
             }
         },
-<<<<<<< HEAD
-        methods: {
-            get
-        },
-        mounted() {
-            this.get()
-=======
         mounted() {
             this.fetch();
         },
@@ -64,9 +48,9 @@
             fetch() {
                 this.loading = true;
                 this.errored = false;
-                axios
-                .get(`https://api.nasa.gov/planetary/apod?api_key=${api_key.value}`)
-                .then(({data}) => {
+                fetch(`https://api.nasa.gov/planetary/apod?api_key=${api_key.value}`)
+                .then(response => response.json())
+                .then(data => {
                     Object.assign(this, data);
                     this.loading = false;
                 })
@@ -75,7 +59,6 @@
                     this.error = error;
                 });
             }
->>>>>>> develop-3
         }
     }
 

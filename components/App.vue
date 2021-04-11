@@ -3,22 +3,6 @@
   <button onclick="history.back()">back</button>
   <button onclick="history.forward()">forward</button>
     <h1>Asteroids</h1>
-<<<<<<< HEAD
-    <main
-      <nav class="menu">
-        <ul>
-          <li>
-            <NuxtLink to="/asteroids-of-the-day">asteroids-of-the-day</NuxtLink>
-          </li>
-          <li>
-            <NuxtLink to="/brightest of-the-week">brightest of-the-week</NuxtLink>
-          </li>
-          <li>
-            <NuxtLink to="/astronomy-picture-of-the-day">astronomy-picture-of-the-day</NuxtLink>
-          </li>
-        </ul>
-      </nav>
-=======
     <form>
       <label for="api_key">api_key</label>
       <input type="text" id="api_key" name="api_key" required :value="this.$route.query.api_key">
@@ -42,7 +26,6 @@
         />
         <apod />
       </aside>
->>>>>>> develop-3
     </main>
     <footer>
         <table>
@@ -73,8 +56,6 @@
   } from '../package.json';
   export default {
     name: 'app',
-<<<<<<< HEAD
-=======
     watch: {
       date: function () {
         this.get_asteroids_of_the_day();
@@ -91,10 +72,10 @@
         url.searchParams.set('api_key', api_key.value);
         this.loading = true;
         this.errored = false;
-        axios
-        .get(url)
-        .then(response => {
-          this.asteroids_of_the_day = response.data.near_earth_objects[date].map(e => {
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          this.asteroids_of_the_day = data.near_earth_objects[date].map(e => {
             return {
               id: e.id,
               name: e.name,
@@ -148,7 +129,6 @@
         }
       },
     },
->>>>>>> develop-3
     computed: {
       version: function () {
         return version;

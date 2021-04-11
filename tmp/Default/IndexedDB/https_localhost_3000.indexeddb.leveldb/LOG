@@ -1,5 +1,0 @@
-2021/04/08-19:46:59.992 16c8 Reusing MANIFEST C:\xampp\htdocs\_play\asteroids\tmp\Default\IndexedDB\https_localhost_3000.indexeddb.leveldb/MANIFEST-000001
-2021/04/08-19:47:03.072 2c68 Level-0 table #5: started
-2021/04/08-19:47:03.158 2c68 Level-0 table #5: 217 bytes OK
-2021/04/08-19:47:03.202 2c68 Delete type=0 #3
-2021/04/08-19:47:03.204 2c68 Manual compaction at level-0 from (begin) .. (end); will stop at (end)

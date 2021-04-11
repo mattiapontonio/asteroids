@@ -19,11 +19,7 @@ module.exports = {
             {
                 hid: 'description',
                 name: 'description',
-<<<<<<< HEAD
-                content: "A Vue.js Progressive Web App with Server Side Rendering and hydratated by REST microservices uses data from The National Aeronautics and Space Administration's application programming interface."
-=======
                 content: 'A Vue.js Progressive Web App with Server Side Rendering and hydratated by REST microservices uses data from The National Aeronautics and Space Administration\'s application programming interface.'
->>>>>>> develop-3
             }
         ],
         link: [

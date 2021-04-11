@@ -9,7 +9,6 @@
     </div>
 </template>
 <script>
-    import Vue from 'vue';
     import DateButton from './DateButton';
     export default {
         name: 'selector',
@@ -32,8 +31,7 @@
                     const date = new Date();
                     const day_of_the_month_2 = day_of_the_month + (i - day)
                     date.setDate(day_of_the_month_2)
-                    const datetime = date.toISOString()
-                    datetimes.push(datetime);
+                    datetimes.push(date);
                 }
                 return datetimes
             }

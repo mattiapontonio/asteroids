@@ -1,59 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <div>
-        <loader v-if="loading"></loader>
-        <table>
-            <tr>
-                <th>date</th>
-            </tr>
-            <tr>
-                <td>{{date}}</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <th>Coordinate</th>
-                <th>Value</th>
-                <th>Max</th>
-                <th>Min</th>
-                <th>unit of measure</th>
-                <th>Direction</th>
-            </tr>
-            <tr v-for="(row, i) in rows">
-                <td>{{row.coordinate}}</td>
-                <td>{{row.value}}</td>
-                <td>{{row.max}}</td>
-                <td>{{row.min}}</td>
-                <td>{{row.uom}}</td>
-                <td>{{row.dir}}</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <th>Loading</th>
-            </tr>
-            <tr>
-                <td>{{loading}}</td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <th>Length</th>
-            </tr>
-            <tr>
-                <div>{{length}}</div>
-            </tr>
-        </table>
-        <section class="scatter-plot">
-            <h3>Scatter plot</h3>
-            <div class="container">
-                <bubble
-                    v-for="(item, i) in items"
-                    v-bind:key="i"
-                    v-bind:style="item.style"
-                />
-            </div>
-=======
     <div class="scatter-plot">
         <section v-if="errored" class="errored">
             <p>{{error}}</p>
@@ -78,7 +23,6 @@
             <span class="min" coordinate="x">{{minX}}</span>
             <span class="max" coordinate="y">{{maxY}}</span>
             <span class="min" coordinate="y">{{minY}}</span>
->>>>>>> develop-3
         </section>
     </div>
 </template>
