@@ -5,6 +5,7 @@
         <p>{{start_date}}</p>
         <p>{{end_date}}</p>
         <p>{{items.length}}</p>
+        <response :response="response"></response>
         <table>
             <tbody>
                 <tr>
@@ -68,6 +69,8 @@
                 this.errored = false;
                 fetch(url)
                 .then(response => {
+                    this.response = response;
+                    this.loading = false;
                     if(response.status==200){
                         response.json().then(data => {
                             this.items = Object.values(data.near_earth_objects)
@@ -85,7 +88,6 @@
                             });
                         })
                     };
-                    this.loading = false;
                 })
                 .catch(error => {
                     console.error(error);

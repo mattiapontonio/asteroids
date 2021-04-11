@@ -1,14 +1,19 @@
 <template>
   <body id="app" class="app">
-  <button onclick="history.back()">back</button>
-  <button onclick="history.forward()">forward</button>
     <h1>Asteroids</h1>
+    <button onclick="history.back()">back</button>
+    <button onclick="history.forward()">forward</button>
     <form>
       <label for="api_key">api_key</label>
       <input type="text" id="api_key" name="api_key" required :value="this.$route.query.api_key">
+      <label for="start_date">start_date</label>
+      <input type="date" :value="this.$route.query.start_date" name="start_date">
+      <label for="end_date">end_date</label>
+      <input type="date" :value="this.$route.query.end_date" name="end_date">
       <input type="submit" value="Send Request">
     </form>
     <main>
+      <response :response="response"></response>
       <asteroids-of-the-day
         v-bind:date="date"
         v-bind:start_date="start_date"
@@ -73,7 +78,10 @@
         this.loading = true;
         this.errored = false;
         fetch(url)
-        .then(response => response.json())
+        .then(response => {
+            this.response = response;
+            return response.json();
+        })
         .then(data => {
           this.asteroids_of_the_day = data.near_earth_objects[date].map(e => {
             return {

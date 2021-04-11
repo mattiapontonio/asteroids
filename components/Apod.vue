@@ -1,6 +1,7 @@
 <template>
     <article>
         <h2>Astronomy Picture of the Day</h2>
+        <response :response="response"></response>
         <div v-if="errored" class="errored">{{error}}</div>
         <div v-else>
             <div v-if="loading" class="loading"></div>
@@ -49,7 +50,10 @@
                 this.loading = true;
                 this.errored = false;
                 fetch(`https://api.nasa.gov/planetary/apod?api_key=${api_key.value}`)
-                .then(response => response.json())
+                .then(response => {
+                    this.response = response;
+                    return response.json();
+                })
                 .then(data => {
                     Object.assign(this, data);
                     this.loading = false;

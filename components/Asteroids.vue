@@ -13,15 +13,15 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>Name</td>
+                        <th>Name</th>
                         <td>{{val.name}}</td>
                     </tr>
                     <tr>
-                        <td>Diameter</td>
+                        <th>Diameter</th>
                         <td>{{val.estimated_diameter.kilometers.estimated_diameter_max}}</td>
                     </tr>
                     <tr>
-                        <td>Magnitude</td>
+                        <th>Magnitude</th>
                         <td>{{val.absolute_magnitude_h}}</td>
                     </tr>
                 </tbody>
