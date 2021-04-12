@@ -120,7 +120,8 @@
         date: new Date(),
         items: new Array(),
         loading: true,
-        near_earth_objects: {}
+        near_earth_objects: {},
+        error: undefined
       }
     },
     mounted() {
