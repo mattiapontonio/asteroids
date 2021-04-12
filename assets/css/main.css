@@ -169,8 +169,9 @@ footer{
 .error {
   color: white;
   border: 1px solid red;
+  border-radius: 4px;
   padding: 1em;
-  background: red;
+  background: FireBrick;
 }
 .max[coordinate="x"]{
   position: absolute;

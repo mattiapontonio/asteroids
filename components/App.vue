@@ -5,43 +5,38 @@
       <h1>Asteroids</h1>
       <button onclick="history.back()">back</button>
       <button onclick="history.forward()">forward</button>
-      <form onchange="this.submit()">
+      <form>
         <fieldset>
           <legend>Legend</legend>
-          <label for="api_key">api_key</label>
+          <label for="api_key">API key</label>
           <input type="text" id="api_key" name="api_key" required :value="this.$route.query.api_key">
           <label for="start_date">start_date</label>
           <input type="date" :value="this.$route.query.start_date" name="start_date" id="start_date">
           <label for="end_date">end_date</label>
           <input type="date" :value="this.$route.query.end_date" name="end_date" id="end_date">
         </fieldset>
-        <fieldset>
+        <fieldset v-if="near_earth_objects">
           <legend>Date</legend>
           <div v-for="(e, i) in Object.keys(near_earth_objects)" v-bind:key="i">
             <input type="radio" :id="e" name="date" :value="e" :checked="$route.query.date==e"/>
             <label :for="e">{{e}}</label>
           </div>
         </fieldset>
-        <input type="submit" value="Send Request">
+        <input type="submit" value="Submit">
       </form>
     </header>
     <main>
       <h2>Asteroids of the day</h2>
-      <p v-if="error_message" v-text="error_message"></p>
-      <p v-text="element_count"></p>
+      <p class="error" v-if="error" v-text="error.message"></p>
+      <p v-if="element_count" v-text="element_count"></p>
       <div v-if="links">
-        <a v-if="error_message" v-text="next" :href="links.next"></a>
-        <a v-if="error_message" v-text="prev" :href="links.prev"></a>
-        <a v-if="error_message" v-text="self" :href="links.self"></a>
+        <a v-text="next" :href="links.next"></a>
+        <a v-text="prev" :href="links.prev"></a>
+        <a v-text="self" :href="links.self"></a>
       </div>
       <asteroids-of-the-day
-        v-bind:date="date"
-        v-bind:start_date="start_date"
-        v-bind:end_date="end_date"
         v-bind:items="items"
         v-bind:onchangedate="onchangedate"
-        v-bind:errored="errored"
-        v-bind:error="error"
       />
     </main>
     <aside>
@@ -98,20 +93,20 @@
             if (response.status==200) {
               response.json().then(data => {
                 this.near_earth_objects = data.near_earth_objects;
-                console.log(data)
-                console.log(this.$route.query.date)
                 Object.assign(this, data);
                 this.items = data.near_earth_objects[this.$route.query.date||0];
               })
             } else if(response.status==400) {
               response.json().then(data => {
-                this.error_message = data.error_message;
+                this.error = data.error_message;
+              })
+            } else if(response.status==403) {
+              response.json().then(data => {
+                Object.assign(this, data);
               })
             }
         })
         .catch(error => {
-          console.log(error)
-          this.errored = true
           this.error = error;
         })
         .finally(() => this.loading = false);
@@ -125,7 +120,6 @@
         date: new Date(),
         items: new Array(),
         loading: true,
-        errored: false,
         near_earth_objects: {}
       }
     },

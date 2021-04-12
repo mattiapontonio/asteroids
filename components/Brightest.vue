@@ -64,16 +64,11 @@
         },
         methods: {
             get() {
-                const formatted = Vue.filter('formatted');
-                const start = formatted(this.start);
-                const end = formatted(this.end);
-                const date = formatted(this.date);
                 const url = new URL("https://api.nasa.gov");
-                console.log(date, start, end);
                 url.pathname = 'neo/rest/v1/feed';
-                url.searchParams.set('start_date', date);
-                url.searchParams.set('end_date', date);
-                url.searchParams.set('api_key', api_key.value);
+                url.searchParams.set('start_date', this.$route.query.start_date);
+                url.searchParams.set('end_date', this.$route.query.end_date);
+                url.searchParams.set('api_key', this.$route.query.api_key);
                 this.loading = true;
                 this.errored = false;
                 fetch(url)

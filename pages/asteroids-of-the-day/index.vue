@@ -15,7 +15,7 @@
                     type="text" 
                     id="api_key" 
                     name="api_key"
-                    value="DEMO_KEY" 
+                    value="DEMO_KEY"
                     required>
                 <label for="start_date">start_date</label>
                 <input 

@@ -1,19 +1,32 @@
 <template>
-  <div style="
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    ">
-    <div style="display: flex;flex-wrap:wrap;">
-      <min-max />
+  <div>
+    <div>
+        <h3>Diameter</h3>
+        <span>
+            <bubble v-bind:d="0" />
+            <span>Min km</span>
+        </span>
+        <span>
+            <bubble
+                    v-bind:d="1"
+                    v-bind:style="{
+                            position: 'relative',
+                            transform: 'none'
+                        }"
+                />
+            <span>Max km</span>
+        </span>
     </div>
-    <scatter-plot
-      v-bind:date="date"
-      v-bind:items="items"
-      v-bind:errored="errored"
-      v-bind:error="error"
-    />
+    <scatter-plot v-bind:items="items"/>
     <table>
+      <caption>Legend</caption> 
+      <thead>
+        <tr>
+          <td>Direction</td>
+          <td>Data</td>
+          <td>Unit of measurement</td>
+        </tr>
+      </thead>
       <tbody>
         <tr>
           <td>⬆</td>
@@ -30,42 +43,18 @@
   </div>
 </template>
 <script>
-  import MinMax from './MinMax';
   import ScatterPlot from './ScatterPlot';
+  import Bubble from './Bubble.vue'
   export default {
     components: {
-      MinMax,
+      Bubble,
       ScatterPlot
     },
     name: 'asteroids-of-the-day',
-    computed: {
-      minD: function () {
-        return Math.min(this.items.map(e => e.diameter))
-      },
-      maxD: function () {
-        return Math.max(this.items.map(e => e.diameter))
-      }
-    },
     props: {
-      date: {
-        type: Date,
-        required: true
-      },
       items: {
         type: Array,
         default: () => new Array()
-      },
-      onchangedate: {
-        type: Function
-      },
-      loading: {
-        type: Boolean
-      },
-      errored: {
-        type: Boolean
-      },
-      error: {
-        type: Boolean
       }
     }
   }

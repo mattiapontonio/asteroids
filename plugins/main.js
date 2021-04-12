@@ -1,13 +1,5 @@
 import Vue from 'vue';
-import formatDate from '../formatDate.js';
 Vue.config.productionTip = false;
-Vue.filter('formatted', function (date = new Date()) {
-  return formatDate(date);
-});
-Vue.filter('lun_dom_day', function (d) {
-  const date = new Date(d);
-  return date.getDay() == 0 ? date.getDay() - 1 : 6
-});
 Vue.filter('scale', function (v = new Number(), min = new Number(), max = new Number()) {
   return (v - min) / (max - min)
 });
