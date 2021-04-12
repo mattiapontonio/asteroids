@@ -90,8 +90,16 @@
                                 e.scale = scale(e.absolute_magnitude_h, min(absolute_magnitude_hs), max(absolute_magnitude_hs));
                                 return e;
                             });
+                        });
+                    } else if(response.status==400) {
+                        response.json().then(data => {
+                            this.error = data.error_message;
                         })
-                    };
+                    } else if(response.status==403) {
+                        response.json().then(data => {
+                            Object.assign(this, data);
+                        })
+                    }
                 })
                 .catch(error => {
                     console.error(error);

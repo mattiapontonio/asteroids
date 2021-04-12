@@ -1,5 +1,6 @@
 <template>
   <div>
+    <scatter-plot v-bind:items="items"/>
     <div>
         <h3>Diameter</h3>
         <span>
@@ -17,7 +18,6 @@
             <span>Max km</span>
         </span>
     </div>
-    <scatter-plot v-bind:items="items"/>
     <table>
       <caption>Legend</caption> 
       <thead>
@@ -32,6 +32,11 @@
           <td>⬆</td>
           <td>Distance</td>
           <td>(au)</td>
+        </tr>
+        <tr>
+          <td>➡</td>
+          <td>Velocity</td>
+          <td>(km/s)</td>
         </tr>
         <tr>
           <td>➡</td>

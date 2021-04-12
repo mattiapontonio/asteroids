@@ -2,7 +2,7 @@
     <article>
         <loader v-if="loading" class="loading"></loader>
         <h2>Astronomy Picture of the Day</h2>
-        <div v-if="errored" class="errored">{{error}}</div>
+        <p class="error" v-if="error" v-text="error.message"></p>
         <div v-else>
             <div>
                 <p>{{date}}</p>
