@@ -167,9 +167,9 @@ table td {
   table {
     display: block;
   }
-footer{
-  background: white;
-  color:black;
+footer {
+    background: initial;
+    color: inherit;
 }
 .error {
   color: white;

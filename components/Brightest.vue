@@ -2,8 +2,8 @@
     <section>
         <h2>Brightest of the week</h2>
         <loader v-if="loading" class="loading"></loader>
-        <p class="error" v-if="error" v-text="error.message"></p>
-        <table v-if="items.length">
+        <div class="error" v-if="error" v-text="error.message"></div>
+        <table v-if="near_earth_objects">
             <tbody>
                 <tr>
                     <td>
@@ -37,7 +37,7 @@
                     <td>{{e.absolute_magnitude_h}}</td>
                 </tr>
             </tbody>
-            <tbody v-for="(e, i) in items" v-bind:key="i">
+            <tbody>
                 <tr>
                     <td>
                         <h3>Magnitude <span>(h)</span></h3>
@@ -66,6 +66,7 @@
                 items: new Array(),
                 loading: new Boolean(),
                 error: new Boolean(),
+                near_earth_objects: undefined
             }
         },
         methods: {
@@ -82,6 +83,7 @@
                     this.loading = false;
                     if(response.status==200){
                         response.json().then(data => {
+                            Object.assign(this, data);
                             this.items = Object.values(data.near_earth_objects)
                             .flat(1)
                             .sort((a, b) => a.absolute_magnitude_h - b.absolute_magnitude_h)

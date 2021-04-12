@@ -2,7 +2,7 @@
     <section>
         <h2>Astronomy Picture of the Day</h2>
         <loader v-if="loading" class="loading"></loader>
-        <p class="error" v-if="error" v-text="error.message"></p>
+        <div class="error" v-if="error" v-text="error.message"></div>
         <picture v-if="url">
             <source
                 media="(min-width:1680px)"

@@ -28,8 +28,9 @@
     <main>
       <section>
         <h2>Asteroids of the day</h2>
-        <p class="error" v-if="error" v-text="error.message"></p>
-        <svg class="scatter-plot" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet" v-if="items.length">
+        <div class="error" v-if="error" v-text="error.message"></div>
+        <loader v-if="loading" class="loading"></loader>
+        <svg class="scatter-plot" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet" v-if="near_earth_objects">
           <line x1="0" y1="0" x2="0" y2="100%" stroke-width=".5" />
           <line x1="0" y1="0" x2="100%" y2="0" stroke-width=".5" />
           <line v-for="i in 10" :key="i" :x1="i*10+'%'" y1="0" :x2="i*10+'%'" y2="100%" />
@@ -51,7 +52,7 @@
               <use :href="'#circle'+i" r="1" />
           </g>
         </svg>
-        <table v-if="items.length">
+        <table v-if="near_earth_objects">
           <caption>Legend</caption> 
           <thead>
             <tr>
@@ -158,8 +159,12 @@
   import {
     version
   } from '../package.json';
+  import Loader from './Loader.vue';
   export default {
     name: 'app',
+    components: {
+        Loader
+    },
     watch: {
       date: function () {
         this.get();
@@ -178,7 +183,6 @@
             this.response = response;
             if (response.status==200) {
               response.json().then(data => {
-                this.near_earth_objects = data.near_earth_objects;
                 Object.assign(this, data);
                 this.items = data.near_earth_objects[this.$route.query.date||0];
               })
@@ -208,7 +212,7 @@
         date: new Date(),
         items: new Array(),
         loading: true,
-        near_earth_objects: {},
+        near_earth_objects: undefined,
         error: undefined,
         element_count: undefined,
         links: undefined
