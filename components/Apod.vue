@@ -1,31 +1,43 @@
 <template>
-    <article>
-        <loader v-if="loading" class="loading"></loader>
+    <section>
         <h2>Astronomy Picture of the Day</h2>
+        <loader v-if="loading" class="loading"></loader>
         <p class="error" v-if="error" v-text="error.message"></p>
-        <div v-else>
-            <div>
-                <p>{{date}}</p>
-                <picture>
-                    <source
-                        media="(min-width:1680px)"
-                        v-bind:srcset="hdurl"
-                    >
-                    <source
-                        media="(min-width:465px)"
-                        v-bind:srcset="url"
-                    >
-                    <img
-                        loading="lazy"
-                        v-bind:src="url"
-                        v-bind:alt="title"
-                        v-bind:title="title"
-                    >
-                    <figcaption>{{ explanation }}</figcaption>
-                </picture>
-            </div>
-        </div>
-    </article>
+        <picture v-if="url">
+            <source
+                media="(min-width:1680px)"
+                v-bind:srcset="hdurl"
+            >
+            <source
+                media="(min-width:465px)"
+                v-bind:srcset="url"
+            >
+            <img
+                loading="lazy"
+                v-bind:src="url"
+                v-bind:alt="title"
+                v-bind:title="title"
+            >
+            <figcaption>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Title</th>
+                            <td v-text="title"></td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td v-text="date"></td>
+                        </tr>
+                        <tr>
+                            <th>Explanation</th>
+                            <td v-text="explanation"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </figcaption>
+        </picture>
+    </section>
 </template>
 <script>
     import Loader from './Loader.vue';
@@ -37,7 +49,7 @@
         data: function () {
             const date = new Date();
             return {
-                url: '/api/planetary/apod',
+                url: undefined,
                 date,
                 response: {},
                 loading: false,
@@ -50,7 +62,6 @@
         methods: {
             fetch() {
                 this.loading = true;
-                this.errored = false;
                 fetch(`https://api.nasa.gov/planetary/apod?api_key=${api_key.value}`)
                 .then(response => {
                     this.response = response;
@@ -61,7 +72,6 @@
                     this.loading = false;
                 })
                 .catch(error => {
-                    this.errored = true;
                     this.error = error;
                 });
             }

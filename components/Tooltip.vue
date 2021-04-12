@@ -40,29 +40,19 @@
             get: function() {
                 this.loading = true
                 this.error = false
-                fetch(this.url)
+                fetch(`https://api.nasa.gov/neo/rest/v1/neo/${this.id}`)
                 .then(response => {
                     this.response = response;
                     return response.json()
                 })
                 .then(data => {
-                    console.dir(data)
-                    this.data = data
+                    Object.assign(this, data);
                 })
                 .catch(error => {
-                    console.dir(error)
-                    this.errored = true
                     this.error = error
                 })
                 .finally(() => this.loading = false)
             }
-        },
-        computed: {
-            url: function(){
-                const url = new URL(location);
-                url.pathname = `neo/rest/v1/neo/${this.id}`;
-                return url;
-            },
         }
     }
 

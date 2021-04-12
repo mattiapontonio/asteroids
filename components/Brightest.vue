@@ -1,13 +1,9 @@
 <template>
-    <article>
-        <loader v-if="loading" class="loading"></loader>
-        <p v-if="errored" class="errored" v-text="error"></p>
+    <section>
         <h2>Brightest of the week</h2>
-        <h3>Magnitude <span>(h)</span></h3>
-        <p>{{start_date}}</p>
-        <p>{{end_date}}</p>
-        <p>{{items.length}}</p>
-        <table>
+        <loader v-if="loading" class="loading"></loader>
+        <p class="error" v-if="error" v-text="error.message"></p>
+        <table v-if="items.length">
             <tbody>
                 <tr>
                     <td>
@@ -41,8 +37,18 @@
                     <td>{{e.absolute_magnitude_h}}</td>
                 </tr>
             </tbody>
+            <tbody v-for="(e, i) in items" v-bind:key="i">
+                <tr>
+                    <td>
+                        <h3>Magnitude <span>(h)</span></h3>
+                        <p>{{start_date}}</p>
+                        <p>{{end_date}}</p>
+                        <p>{{items.length}}</p>
+                    </td>
+                </tr>
+            </tbody>
         </table>
-    </article>
+    </section>
 </template>
 <script>
     import Vue from 'vue';
@@ -59,7 +65,7 @@
                 data: new Array(),
                 items: new Array(),
                 loading: new Boolean(),
-                errored: new Boolean(),
+                error: new Boolean(),
             }
         },
         methods: {
@@ -70,7 +76,6 @@
                 url.searchParams.set('end_date', this.$route.query.end_date);
                 url.searchParams.set('api_key', this.$route.query.api_key);
                 this.loading = true;
-                this.errored = false;
                 fetch(url)
                 .then(response => {
                     this.response = response;
@@ -93,7 +98,9 @@
                         });
                     } else if(response.status==400) {
                         response.json().then(data => {
-                            this.error = data.error_message;
+                            this.error = {
+                            message: data.error_message
+                            };
                         })
                     } else if(response.status==403) {
                         response.json().then(data => {
@@ -103,7 +110,6 @@
                 })
                 .catch(error => {
                     console.error(error);
-                    this.errored = true;
                     this.error = error;
                 })
                 .finally(() => this.loading = false);
