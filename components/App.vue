@@ -5,7 +5,7 @@
       <h1>Asteroids</h1>
       <button onclick="history.back()">back</button>
       <button onclick="history.forward()">forward</button>
-      <form>
+      <form id=form>
         <fieldset>
           <legend>Legend</legend>
           <label for="api_key">API key</label>
@@ -15,23 +15,20 @@
           <label for="end_date">end_date</label>
           <input type="date" :value="this.$route.query.end_date" name="end_date" id="end_date">
         </fieldset>
-        <input type="submit" value="Submit">
+        <button type="submit">Submit</button>
       </form>
     </header>
     <main>
       <section>
         <h2>Asteroids of the day</h2>
         <div class="error" v-if="error" v-text="error.message"></div>
-        <form v-if="near_earth_objects">
-          <fieldset>
-            <legend>Date</legend>
-            <div v-for="(e, i) in Object.keys(near_earth_objects)" v-bind:key="i">
-              <input type="radio" :id="e" name="date" :value="e" :checked="$route.query.date==e"/>
-              <label :for="e">{{e}}</label>
-            </div>
-          </fieldset>
-          <input type="submit" value="Submit">
-        </form>
+        <fieldset form="form" onchange="this.form.submit()" v-if="near_earth_objects">
+          <legend>Date</legend>
+          <div v-for="(e, i) in Object.keys(near_earth_objects)" v-bind:key="i">
+            <input type="radio" :id="e" name="date" :value="e" :checked="$route.query.date==e" form="form"/>
+            <label :for="e" v-text="e"></label>
+          </div>
+        </fieldset>
         <loader v-if="loading" class="loading"></loader>
         <svg class="scatter-plot" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet" v-if="near_earth_objects" overflow="visible">
           <line x1="0" y1="0" x2="0" y2="100%" stroke-width=".5" />
@@ -103,21 +100,6 @@
                 <th>Element count</th>
                 <td v-text="element_count"></td>
               </tr>
-              <tr v-if="links">
-                <th rowspan="4">Links</th>
-                <td><a v-text="next" :href="links.next"></a></td>
-                <td><a v-text="prev" :href="links.prev"></a></td>
-                <td><a v-text="self" :href="links.self"></a></td>
-              </tr>
-              <tr v-if="links">
-                <td><a v-text="next" :href="links.next"></a></td>
-              </tr>
-              <tr v-if="links">
-                <td><a v-text="prev" :href="links.prev"></a></td>
-              </tr>
-              <tr v-if="links">
-                <td><a v-text="self" :href="links.self"></a></td>
-              </tr>
               <tr>
                 <th>start_date</th>
                 <td v-text="this.$route.query.start_date"></td>
@@ -129,6 +111,20 @@
               <tr>
                 <th>api_key</th>
                 <td v-text="this.$route.query.api_key"></td>
+              </tr>
+          </tbody>
+          <tbody v-if="links">
+            <tr>
+                <th rowspan="4">Links</th>
+              </tr>
+              <tr>
+                <td><a v-text="next" :href="links.next"></a></td>
+              </tr>
+              <tr>
+                <td><a v-text="prev" :href="links.prev"></a></td>
+              </tr>
+              <tr>
+                <td><a v-text="self" :href="links.self"></a></td>
               </tr>
           </tbody>
         </table>
@@ -181,6 +177,7 @@
         url.searchParams.set('end_date', this.$route.query.end_date);
         url.searchParams.set('api_key', this.$route.query.api_key);
         this.loading = true;
+        this.error=undefined;
         fetch(url)
         .then(response => {
             this.response = response;

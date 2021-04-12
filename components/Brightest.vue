@@ -77,6 +77,7 @@
                 url.searchParams.set('end_date', this.$route.query.end_date);
                 url.searchParams.set('api_key', this.$route.query.api_key);
                 this.loading = true;
+        this.error=undefined;
                 fetch(url)
                 .then(response => {
                     this.response = response;
@@ -101,7 +102,7 @@
                     } else if(response.status==400) {
                         response.json().then(data => {
                             this.error = {
-                            message: data.error_message
+                                message: data.error_message
                             };
                         })
                     } else if(response.status==403) {
@@ -111,7 +112,6 @@
                     }
                 })
                 .catch(error => {
-                    console.error(error);
                     this.error = error;
                 })
                 .finally(() => this.loading = false);
