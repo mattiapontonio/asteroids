@@ -15,13 +15,6 @@
           <label for="end_date">end_date</label>
           <input type="date" :value="this.$route.query.end_date" name="end_date" id="end_date">
         </fieldset>
-        <fieldset v-if="near_earth_objects">
-          <legend>Date</legend>
-          <div v-for="(e, i) in Object.keys(near_earth_objects)" v-bind:key="i">
-            <input type="radio" :id="e" name="date" :value="e" :checked="$route.query.date==e"/>
-            <label :for="e">{{e}}</label>
-          </div>
-        </fieldset>
         <input type="submit" value="Submit">
       </form>
     </header>
@@ -29,8 +22,18 @@
       <section>
         <h2>Asteroids of the day</h2>
         <div class="error" v-if="error" v-text="error.message"></div>
+        <form v-if="near_earth_objects">
+          <fieldset>
+            <legend>Date</legend>
+            <div v-for="(e, i) in Object.keys(near_earth_objects)" v-bind:key="i">
+              <input type="radio" :id="e" name="date" :value="e" :checked="$route.query.date==e"/>
+              <label :for="e">{{e}}</label>
+            </div>
+          </fieldset>
+          <input type="submit" value="Submit">
+        </form>
         <loader v-if="loading" class="loading"></loader>
-        <svg class="scatter-plot" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet" v-if="near_earth_objects">
+        <svg class="scatter-plot" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet" v-if="near_earth_objects" overflow="visible">
           <line x1="0" y1="0" x2="0" y2="100%" stroke-width=".5" />
           <line x1="0" y1="0" x2="100%" y2="0" stroke-width=".5" />
           <line v-for="i in 10" :key="i" :x1="i*10+'%'" y1="0" :x2="i*10+'%'" y2="100%" />

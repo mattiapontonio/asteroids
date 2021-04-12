@@ -1,9 +1,5 @@
 
-  main {
-    display: initial;
-    width: auto;
-    flex-wrap: nowrap;
-  }
+  
 
   @media (max-width: 800px) {
     main {
@@ -23,6 +19,9 @@
     margin-top: 0;
     padding: 1em;
     font-variant-ligatures: historical-ligatures;
+    grid-template-columns: 50vw auto;
+    grid-template-rows: auto;
+    grid-column-gap: 1em;
 }
 section {
     border: 1px solid;
@@ -38,6 +37,9 @@ table td {
     border: 1px solid white;
     background-color: transparent;
     padding:initial;
+  }
+  [type="radio"]{
+    display: none;
   }
   button {
     border: 1px solid white;
@@ -78,9 +80,7 @@ table td {
   h2 {
     text-decoration: none;
   }
-
-  /* Enter and leave animations can use different */
-  /* durations and timing functions.              */
+  
   .slide-fade-enter-active {
     transition: all .3s ease;
   }
@@ -91,18 +91,29 @@ table td {
 
   .slide-fade-enter,
   .slide-fade-leave-to
-
-  /* .slide-fade-leave-active below version 2.1.8 */
     {
     transform: translateX(10px);
     opacity: 0;
   }
-
-  aside {
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: calc(100%/3);
+  main {
+    grid-column-start: 1;
+    grid-column-end: 2;
   }
+  aside {
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+header {
+  border: 1px solid;
+}
+footer {
+  background: initial;
+  color: inherit;
+}
+footer, header {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
 
   .bubble {
     border: 1px solid aqua;
@@ -137,7 +148,7 @@ table td {
   }
 
 .scatter-plot {
-    position: relative;
+    position: initial;
     min-height: initial;
     width: auto;
     box-sizing: initial;
@@ -167,10 +178,7 @@ table td {
   table {
     display: block;
   }
-footer {
-    background: initial;
-    color: inherit;
-}
+
 .error {
   color: white;
   border: 1px solid red;
@@ -198,10 +206,6 @@ footer {
     left: 0;
     bottom: 0;
     transform: translateY(10px);
-}
-
-header {
-  border: 1px solid;
 }
 circle {
   stroke: aliceblue;
