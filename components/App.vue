@@ -30,27 +30,19 @@
           </div>
         </fieldset>
         <loader v-if="loading" class="loading"></loader>
-        <svg class="scatter-plot" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet" v-if="near_earth_objects" overflow="visible">
+        <svg class="scatter-plot" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet" v-if="items" overflow="visible">
           <line x1="0" y1="0" x2="0" y2="100%" stroke-width=".5" />
           <line x1="0" y1="0" x2="100%" y2="0" stroke-width=".5" />
           <line v-for="i in 10" :key="i" :x1="i*10+'%'" y1="0" :x2="i*10+'%'" y2="100%" />
           <line v-for="i in 10" :key="i" x1="0" :y1="i*10+'%'" x2="100%" :y2="i*10+'%'" />
-          <g v-for="(item, i) in items" v-bind:key="i">
-              <circle
-                  :id="'circle'+i"
-                  :cx="(()=>{
-                      const g = items.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second);
-                      return `${100*(g[i]-Math.min(...g))/(Math.max(...g)-Math.min(...g))}%`;
-                  })()"
-                  :cy="(()=>{
-                      const g = items.map(z=>z.close_approach_data[0].miss_distance.kilometers);
-                      return `${100*(g[i]-Math.min(...g))/(Math.max(...g)-Math.min(...g))}%`;
-                  })()"
-                  :r="10"
-                  class="bubble"
-              />
-              <use :href="'#circle'+i" r="1" />
-          </g>
+          <circle
+            v-for="(item, i) in items" 
+            v-bind:key="i"
+            :cx="`${100*(items.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second)[i]-Math.min(...items.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second)))/(Math.max(...items.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second))-Math.min(...items.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second)))}%`"
+            :cy="`${100*(items.map(z=>z.close_approach_data[0].miss_distance.kilometers)[i]-Math.min(...items.map(z=>z.close_approach_data[0].miss_distance.kilometers)))/(Math.max(...items.map(z=>z.close_approach_data[0].miss_distance.kilometers))-Math.min(...items.map(z=>z.close_approach_data[0].miss_distance.kilometers)))}%`"
+            :r="10"
+            class="bubble"
+          />
         </svg>
         <table v-if="near_earth_objects">
           <caption>Legend</caption> 
@@ -180,7 +172,7 @@
             if (response.status==200) {
               response.json().then(data => {
                 Object.assign(this, data);
-                this.near_earth_objects = data.near_earth_objects;
+                this.items=data.near_earth_objects[this.$route.query.date];
               })
             } else if(response.status==400) {
               response.json().then(data => {
