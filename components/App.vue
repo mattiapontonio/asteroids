@@ -20,7 +20,7 @@
     </header>
     <main>
       <section>
-        <h2>Asteroids of the day</h2>
+        <h2>Bubble chart</h2>
         <div class="error" v-if="error" v-text="error.message"></div>
         <fieldset form="form" onchange="this.form.submit()" v-if="near_earth_objects">
           <legend>Date</legend>
@@ -74,32 +74,20 @@
             </tr>
             <tr>
               <td>
-                <button class="bubble">
-                  <div class="point"></div>
-                </button>
+                <svg width="32" height="32" viewBox="0 0 10 10" preserveAspectRatio="xMidYMid meet"><circle r="5" cx="5" cy="5"></circle></svg>
               </td>
-              <th><h3>Diameter</h3></th>
-              <td>Min km</td>
+              <th>minimum diameter</th>
+              <td>km</td>
             </tr>
             <tr>
               <td>
-                <button class="bubble">
-                  <div class="point"></div>
-                </button>
+                <svg width="32" height="32" viewBox="0 0 10 10" preserveAspectRatio="xMidYMid meet"><circle r="5" cx="5" cy="5"></circle></svg> 
               </td>
-              <th><h3>Diameter</h3></th>
-              <td>Max km</td>
-            </tr>
-            <tr>
-              <th>date</th>
-              <td v-text="this.$route.query.date"></td>
+              <th>maximum diameter</th>
+              <td>km</td>
             </tr>
           </tbody>  
           <tbody>
-              <tr v-if="element_count">
-                <th>Element count</th>
-                <td v-text="element_count"></td>
-              </tr>
               <tr>
                 <th>start_date</th>
                 <td v-text="this.$route.query.start_date"></td>
@@ -112,19 +100,27 @@
                 <th>api_key</th>
                 <td v-text="this.$route.query.api_key"></td>
               </tr>
+              <tr>
+                <th>date</th>
+                <td v-text="this.$route.query.date"></td>
+              </tr>
           </tbody>
           <tbody v-if="links">
+              <tr v-if="element_count">
+                <th>Element count</th>
+                <td v-text="element_count"></td>
+              </tr>
             <tr>
                 <th rowspan="4">Links</th>
               </tr>
               <tr>
-                <td><a v-text="next" :href="links.next"></a></td>
+                <td><a :href="links.next">next</a></td>
               </tr>
               <tr>
-                <td><a v-text="prev" :href="links.prev"></a></td>
+                <td><a :href="links.prev">prev</a></td>
               </tr>
               <tr>
-                <td><a v-text="self" :href="links.self"></a></td>
+                <td><a :href="links.self">self</a></td>
               </tr>
           </tbody>
         </table>

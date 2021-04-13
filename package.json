@@ -45,6 +45,6 @@
     "not dead"
   ],
   "engines": {
-    "node": "10.x"
+    "node": "14.x"
   }
 }

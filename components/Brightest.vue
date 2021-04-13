@@ -23,7 +23,7 @@
             <tbody v-for="(e, i) in items" v-bind:key="i">
                 <tr>
                     <td rowspan="3">
-                        <rhombus v-bind:value="e.scale" />
+                        <svg width="32" height="32" viewBox="0 0 10 10" preserveAspectRatio="xMidYMid meet"><circle r="5" cx="5" cy="5"></circle></svg>
                     </td>
                     <th>Name</th>
                     <td>{{e.name}}</td>
