@@ -30,11 +30,13 @@
           </div>
         </fieldset>
         <loader v-if="loading" class="loading"></loader>
-        <svg class="scatter-plot" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet" v-if="items" overflow="visible">
+        <svg class="scatter-plot" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet" v-if="items" overflow="hidden">
           <line x1="0" y1="0" x2="0" y2="100%" stroke-width=".5" />
           <line x1="0" y1="0" x2="100%" y2="0" stroke-width=".5" />
           <line v-for="i in 10" :key="i" :x1="i*10+'%'" y1="0" :x2="i*10+'%'" y2="100%" />
           <line v-for="i in 10" :key="i" x1="0" :y1="i*10+'%'" x2="100%" :y2="i*10+'%'" />
+          <text v-for="i in 10" :key="i" x="2" :y="100-i*10+'%'" text-anchor="start" font-size="smaller">{{i}}</text>
+          <text v-for="i in 10" :key="i" :x="100-i*10+'%'" y="2" text-anchor="middle" font-size="smaller">{{i}}</text>
           <circle
             v-for="(item, i) in items" 
             v-bind:key="i"
@@ -68,14 +70,14 @@
               <td>
                 <svg width="32" height="32" viewBox="0 0 10 10" preserveAspectRatio="xMidYMid meet"><circle r="5" cx="5" cy="5"></circle></svg>
               </td>
-              <th>minimum diameter</th>
+              <td>minimum diameter</td>
               <td>km</td>
             </tr>
             <tr>
               <td>
                 <svg width="32" height="32" viewBox="0 0 10 10" preserveAspectRatio="xMidYMid meet"><circle r="5" cx="5" cy="5"></circle></svg> 
               </td>
-              <th>maximum diameter</th>
+              <td>maximum diameter</td>
               <td>km</td>
             </tr>
           </tbody>  

@@ -53,7 +53,7 @@ table td {
     padding:initial;
   }
   [type="radio"]{
-    display: none;
+    display: initial;
   }
   button {
     box-shadow:inset 0px 1px 0px 0px #ffffff;
