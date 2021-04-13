@@ -180,7 +180,7 @@
             if (response.status==200) {
               response.json().then(data => {
                 Object.assign(this, data);
-                this.items = data.near_earth_objects[this.$route.query.date||0];
+                this.near_earth_objects = data.near_earth_objects;
               })
             } else if(response.status==400) {
               response.json().then(data => {
