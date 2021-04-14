@@ -229,27 +229,69 @@
         <h2>Brightest of the week</h2>
         <loader v-if="loading" class="loading"></loader>
         <div class="error" v-if="error" v-text="error.message"></div>
-        <table v-if="near_earth_objects">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Diameter</th>
-              <th>Magnitude</th>
-            </tr>
-          </thead>
-          <tbody v-for="(e, k, i) in near_earth_objects" v-bind:key="i">
-            <tr>
-              <td colspan="3">{{k}}</td>
-            </tr>
-            <tr v-for="(e, i) in e" v-bind:key="i">
-              <td>{{e.name}}</td>
-              <td>
-                {{e.estimated_diameter.kilometers.estimated_diameter_max}}
-              </td>
-              <td>{{e.absolute_magnitude_h}}</td>
-            </tr>
-          </tbody>
-        </table>
+        <template v-for="(e, k, i) in near_earth_objects">
+          <table v-bind:key="i">
+            <thead>
+              <tr>
+                <th v-for="(e, k, i) in e" v-bind:key="i" v-text="k"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <template v-for="(e, k, i) in e">
+                  <td v-if="typeof e =='object'" v-bind:key="i">
+                    <table v-bind:key="i">
+            <thead>
+              <tr>
+                <th v-for="(e, k, i) in e" v-bind:key="i" v-text="k"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <template v-for="(e, k, i) in e">
+                  <td v-if="typeof e =='object'" v-bind:key="i">
+                    <table v-bind:key="i">
+            <thead>
+              <tr>
+                <th v-for="(e, k, i) in e" v-bind:key="i" v-text="k"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <template v-for="(e, k, i) in e">
+                  <td v-if="typeof e =='object'" v-bind:key="i">
+                    <table v-bind:key="i">
+            <thead>
+              <tr>
+                <th v-for="(e, k, i) in e" v-bind:key="i" v-text="k"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <template v-for="(e, k, i) in e">
+                  <td v-if="typeof e =='object'" v-bind:key="i">
+                    
+                  </td>
+                  <td v-else v-bind:key="i" v-text="e"></td>
+              </tr>
+            </tbody>
+          </table>
+                  </td>
+                  <td v-else v-bind:key="i" v-text="e"></td>
+              </tr>
+            </tbody>
+          </table>
+                  </td>
+                  <td v-else v-bind:key="i" v-text="e"></td>
+              </tr>
+            </tbody>
+          </table>
+                  </td>
+                  <td v-else v-bind:key="i" v-text="e"></td>
+              </tr>
+            </tbody>
+          </table>
+        </template>
       </section>
     </main>
     <aside>
@@ -262,7 +304,7 @@
             <th>GitHub</th>
             <td>
               <a href="https://github.com/mattiapontonio/asteroids"
-                >https://github.com/mattiapontonio/asteroids</a
+                >asteroids</a
               >
             </td>
           </tr>
