@@ -36,7 +36,7 @@
           <line v-for="i in 10" :key="i" :x1="i*10+'%'" y1="0" :x2="i*10+'%'" y2="100%" />
           <line v-for="i in 10" :key="i" x1="0" :y1="i*10+'%'" x2="100%" :y2="i*10+'%'" />
           <text v-for="i in 10" :key="i" x="2" :y="100-i*10+'%'" text-anchor="start" font-size="smaller">{{i}}</text>
-          <text v-for="i in 10" :key="i" :x="100-i*10+'%'" y="2" text-anchor="middle" font-size="smaller">{{i}}</text>
+          <text v-for="i in 10" :key="i" :x="i*10+'%'" y="98" text-anchor="middle" font-size="smaller">{{i}}</text>
           <circle
             v-for="(item, i) in items" 
             v-bind:key="i"
