@@ -31,12 +31,12 @@
         </fieldset>
         <loader v-if="loading" class="loading"></loader>
         <svg class="scatter-plot" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet" v-if="items" overflow="hidden">
-          <line x1="0" y1="0" x2="0" y2="100%" stroke-width=".5" />
-          <line x1="0" y1="0" x2="100%" y2="0" stroke-width=".5" />
-          <line v-for="i in 10" :key="i" :x1="i*10+'%'" y1="0" :x2="i*10+'%'" y2="100%" />
-          <line v-for="i in 10" :key="i" x1="0" :y1="i*10+'%'" x2="100%" :y2="i*10+'%'" />
-          <text v-for="i in 10" :key="i" x="2" :y="100-i*10+'%'" text-anchor="start" font-size="smaller">{{i}}</text>
-          <text v-for="i in 10" :key="i" :x="i*10+'%'" y="98" text-anchor="middle" font-size="smaller">{{i}}</text>
+          <line x1="0" y1="0" x2="0" y2="100%" stroke-width="4" stroke="aquamarine" />
+          <line x1="0" y1="100%" x2="100%" y2="100%" stroke-width="4" stroke="aquamarine"  />
+          <line v-for="i in 10" :key="i" :x1="i*10+'%'" y1="0" :x2="i*10+'%'" y2="100%" stroke-width="1" stroke="aquamarine" />
+          <line v-for="i in 10" :key="i" x1="0" :y1="i*10+'%'" x2="100%" :y2="i*10+'%'" stroke-width="1" stroke="aquamarine" />
+          <text v-for="i in 10" :key="i" x="4" :y="100-i*10+'%'" text-anchor="start" font-size="12px" fill="black">{{i}}</text>
+          <text v-for="i in 10" :key="i" :x="i*10+'%'" y="96" text-anchor="middle" font-size="12px" fill="black">{{i}}</text>
           <circle
             v-for="(item, i) in items" 
             v-bind:key="i"
