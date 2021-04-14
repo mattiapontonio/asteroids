@@ -121,7 +121,34 @@
       </section>
     </main>
     <aside>
-      <brightest />
+      <section>
+        <h2>Brightest of the week</h2>
+        <loader v-if="loading" class="loading"></loader>
+        <div class="error" v-if="error" v-text="error.message"></div>
+        <table v-if="near_earth_objects">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Diameter</th>
+                    <th>Magnitude</th>
+                </tr>
+            </thead>
+            <tbody
+                v-for="(e, k, i) in near_earth_objects" 
+                v-bind:key="i">
+                <tr>
+                  <td colspan="3">{{k}}</td>
+                </tr>
+                <tr 
+                  v-for="(e, i) in e" 
+                  v-bind:key="i">
+                    <td>{{e.name}}</td>
+                    <td>{{e.estimated_diameter.kilometers.estimated_diameter_max}}</td>
+                    <td>{{e.absolute_magnitude_h}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
       <apod />
     </aside>
     <footer>
@@ -175,6 +202,7 @@
               response.json().then(data => {
                 Object.assign(this, data);
                 this.items=data.near_earth_objects[this.$route.query.date];
+                this.near_earth_objects=data.near_earth_objects;
               })
             } else if(response.status==400) {
               response.json().then(data => {
