@@ -51,7 +51,7 @@
               :id="e"
               name="date"
               :value="e"
-              :checked="$route.query.date==e"
+              :checked="$route.query.date == e"
               form="form"
             />
             <label :for="e" v-text="e"></label>
@@ -84,9 +84,9 @@
           <line
             v-for="i in 10"
             :key="i"
-            :x1="i*10+'%'"
+            :x1="i * 10 + '%'"
             y1="0"
-            :x2="i*10+'%'"
+            :x2="i * 10 + '%'"
             y2="100%"
             stroke-width="1"
             stroke="aquamarine"
@@ -95,9 +95,9 @@
             v-for="i in 10"
             :key="i"
             x1="0"
-            :y1="i*10+'%'"
+            :y1="i * 10 + '%'"
             x2="100%"
-            :y2="i*10+'%'"
+            :y2="i * 10 + '%'"
             stroke-width="1"
             stroke="aquamarine"
           />
@@ -105,19 +105,19 @@
             v-for="i in 10"
             :key="i"
             x="4"
-            :y="100-i*10+'%'"
+            :y="100 - i * 10 + '%'"
             text-anchor="start"
             font-size="12px"
             font-weight="bold"
             fill="black"
             writing-mode="horizontal-tb"
           >
-            {{i}}
+            {{ i }}
           </text>
           <text
             v-for="i in 10"
             :key="i"
-            :x="i*10+'%'"
+            :x="i * 10 + '%'"
             y="96"
             text-anchor="end"
             font-size="12px"
@@ -125,13 +125,61 @@
             fill="black"
             writing-mode="vertical-lr"
           >
-            {{i}}
+            {{ i }}
           </text>
           <circle
             v-for="(item, i) in items"
             v-bind:key="i"
-            :cx="`${100*(items.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second)[i]-Math.min(...items.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second)))/(Math.max(...items.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second))-Math.min(...items.map(z=>z.close_approach_data[0].relative_velocity.kilometers_per_second)))}%`"
-            :cy="`${100*(items.map(z=>z.close_approach_data[0].miss_distance.kilometers)[i]-Math.min(...items.map(z=>z.close_approach_data[0].miss_distance.kilometers)))/(Math.max(...items.map(z=>z.close_approach_data[0].miss_distance.kilometers))-Math.min(...items.map(z=>z.close_approach_data[0].miss_distance.kilometers)))}%`"
+            :cx="
+              `${(100 *
+                (items.map(
+                  (z) =>
+                    z.close_approach_data[0].relative_velocity
+                      .kilometers_per_second
+                )[i] -
+                  Math.min(
+                    ...items.map(
+                      (z) =>
+                        z.close_approach_data[0].relative_velocity
+                          .kilometers_per_second
+                    )
+                  ))) /
+                (Math.max(
+                  ...items.map(
+                    (z) =>
+                      z.close_approach_data[0].relative_velocity
+                        .kilometers_per_second
+                  )
+                ) -
+                  Math.min(
+                    ...items.map(
+                      (z) =>
+                        z.close_approach_data[0].relative_velocity
+                          .kilometers_per_second
+                    )
+                  ))}%`
+            "
+            :cy="
+              `${(100 *
+                (items.map(
+                  (z) => z.close_approach_data[0].miss_distance.kilometers
+                )[i] -
+                  Math.min(
+                    ...items.map(
+                      (z) => z.close_approach_data[0].miss_distance.kilometers
+                    )
+                  ))) /
+                (Math.max(
+                  ...items.map(
+                    (z) => z.close_approach_data[0].miss_distance.kilometers
+                  )
+                ) -
+                  Math.min(
+                    ...items.map(
+                      (z) => z.close_approach_data[0].miss_distance.kilometers
+                    )
+                  ))}%`
+            "
             :r="10"
             class="bubble"
           />
@@ -229,69 +277,57 @@
         <h2>Brightest of the week</h2>
         <loader v-if="loading" class="loading"></loader>
         <div class="error" v-if="error" v-text="error.message"></div>
-        <template v-for="(e, k, i) in near_earth_objects">
-          <table v-bind:key="i">
-            <thead>
-              <tr>
-                <th v-for="(e, k, i) in e" v-bind:key="i" v-text="k"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <template v-for="(e, k, i) in e">
-                  <td v-if="typeof e =='object'" v-bind:key="i">
-                    <table v-bind:key="i">
-            <thead>
-              <tr>
-                <th v-for="(e, k, i) in e" v-bind:key="i" v-text="k"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <template v-for="(e, k, i) in e">
-                  <td v-if="typeof e =='object'" v-bind:key="i">
-                    <table v-bind:key="i">
-            <thead>
-              <tr>
-                <th v-for="(e, k, i) in e" v-bind:key="i" v-text="k"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <template v-for="(e, k, i) in e">
-                  <td v-if="typeof e =='object'" v-bind:key="i">
-                    <table v-bind:key="i">
-            <thead>
-              <tr>
-                <th v-for="(e, k, i) in e" v-bind:key="i" v-text="k"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <template v-for="(e, k, i) in e">
-                  <td v-if="typeof e =='object'" v-bind:key="i">
-                    
+        <table>
+          <tr v-for="(e, k, i) in near_earth_objects" v-bind:key="i">
+            <th v-text="k"></th>
+            <td v-if="typeof e == 'object'" v-bind:key="i">
+              <table>
+                <tr v-for="(e, k, i) in e" v-bind:key="i">
+                  <th v-text="k"></th>
+                  <td v-if="typeof e == 'object'" v-bind:key="i">
+                    <table>
+                      <tr
+                        v-for="(e, k, i) in e"
+                        v-bind:key="i"
+                      >
+                        <th v-text="k"></th>
+                        <td v-if="typeof e == 'object'" v-bind:key="i">
+                          <table>
+                            <tr
+                              v-for="(e, k, i) in e"
+                              v-bind:key="i"
+                            >
+                              <th v-text="k"></th>
+                              <td v-if="typeof e == 'object'" v-bind:key="i">
+                                <table>
+                                  <tr
+                                    v-for="(e, k, i) in e"
+                                    v-bind:key="i"
+                                  >
+                                    <th v-text="k"></th>
+                                    <td
+                                      v-if="typeof e == 'object'"
+                                      v-bind:key="i"
+                                    ></td>
+                                    <td v-else v-bind:key="i" v-text="e"></td>
+                                  </tr>
+                                </table>
+                              </td>
+                              <td v-else v-bind:key="i" v-text="e"></td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td v-else v-bind:key="i" v-text="e"></td>
+                      </tr>
+                    </table>
                   </td>
                   <td v-else v-bind:key="i" v-text="e"></td>
-              </tr>
-            </tbody>
-          </table>
-                  </td>
-                  <td v-else v-bind:key="i" v-text="e"></td>
-              </tr>
-            </tbody>
-          </table>
-                  </td>
-                  <td v-else v-bind:key="i" v-text="e"></td>
-              </tr>
-            </tbody>
-          </table>
-                  </td>
-                  <td v-else v-bind:key="i" v-text="e"></td>
-              </tr>
-            </tbody>
-          </table>
-        </template>
+                </tr>
+              </table>
+            </td>
+            <td v-else v-bind:key="i" v-text="e"></td>
+          </tr>
+        </table>
       </section>
     </main>
     <aside>
@@ -310,7 +346,7 @@
           </tr>
           <tr>
             <th>Version</th>
-            <td>{{version}}</td>
+            <td>{{ version }}</td>
           </tr>
           <tr>
             <th>Credits</th>
@@ -333,60 +369,58 @@
   </body>
 </template>
 <script>
-import {
-  version
-} from '../package.json';
-import Loader from './Loader.vue';
+import { version } from '../package.json'
+import Loader from './Loader.vue'
 export default {
   name: 'app',
   components: {
-      Loader
+    Loader,
   },
   watch: {
-    date: function () {
-      this.get();
-    }
+    date: function() {
+      this.get()
+    },
   },
   methods: {
     get() {
-      const url = new URL("https://api.nasa.gov");
-      url.pathname = 'neo/rest/v1/feed';
-      url.searchParams.set('start_date', this.$route.query.start_date);
-      url.searchParams.set('end_date', this.$route.query.end_date);
-      url.searchParams.set('api_key', this.$route.query.api_key);
-      this.loading = true;
-      this.error=undefined;
+      const url = new URL('https://api.nasa.gov')
+      url.pathname = 'neo/rest/v1/feed'
+      url.searchParams.set('start_date', this.$route.query.start_date)
+      url.searchParams.set('end_date', this.$route.query.end_date)
+      url.searchParams.set('api_key', this.$route.query.api_key)
+      this.loading = true
+      this.error = undefined
       fetch(url)
-      .then(response => {
-          this.response = response;
-          if (response.status==200) {
-            response.json().then(data => {
-              Object.assign(this, data);
-              this.items=data.near_earth_objects[this.$route.query.date];
-              this.near_earth_objects=data.near_earth_objects;
+        .then((response) => {
+          this.response = response
+          if (response.status == 200) {
+            response.json().then((data) => {
+              Object.assign(this, data)
+              this.items = data.near_earth_objects[this.$route.query.date]
+              this.near_earth_objects = data.near_earth_objects;
+              this.loading = false;
             })
-          } else if(response.status==400) {
-            response.json().then(data => {
+          } else if (response.status == 400) {
+            response.json().then((data) => {
               this.error = {
-                message: data.error_message
-              };
+                message: data.error_message,
+              }
             })
-          } else if(response.status==403) {
-            response.json().then(data => {
-              Object.assign(this, data);
+          } else if (response.status == 403) {
+            response.json().then((data) => {
+              Object.assign(this, data)
             })
           }
-      })
-      .catch(error => {
-        this.error = error;
-      })
-      .finally(() => this.loading = false);
+        })
+        .catch((error) => {
+          this.error = error
+        })
     },
     onchangedate(date = new Date()) {
-      this.date = date;
-    }
+      this.date = date
+    },
   },
-  data: function () {
+  data: function() {
     return {
       date: new Date(),
       items: new Array(),
@@ -394,16 +428,16 @@ export default {
       near_earth_objects: undefined,
       error: undefined,
       element_count: undefined,
-      links: undefined
+      links: undefined,
     }
   },
   mounted() {
-    this.get();
+    this.get()
   },
   computed: {
-    version: function () {
-      return version;
-    }
-  }
+    version: function() {
+      return version
+    },
+  },
 }
 </script>
