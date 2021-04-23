@@ -67,6 +67,14 @@ npm start
 npm run
 ```
 
+## pwa-asset-generator
+
+<https://www.npmjs.com/package/pwa-asset-generator>
+
+```shell
+npx pwa-asset-generator asteroid.svg -i ./app.html -m ./static/manifest.webmanifest
+```
+
 ## Screenshots
 
 [Screenshots](/screenshots/screenshots.md)

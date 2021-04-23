@@ -1,198 +1,203 @@
-
-  
-
-  @media (max-width: 800px) {
-    main {
-      flex-direction: column;
-    }
-  }
-
-  body {
-    background: initial;
-    color: initial;
-    font-family: sans-serif;
-    text-rendering: auto;
-    font-size: 12px;
-    font-weight: 400;
-    min-height: 100vh;
-    text-align: left;
-    margin-top: 0;
-    padding: 1em;
-    font-variant-ligatures: historical-ligatures;
-    grid-template-columns: 50vw auto;
-    grid-template-rows: auto;
-    grid-column-gap: 1em;
-    display: grid;
-  }
-  @media (prefers-color-scheme: dark) {
-    body {
-      background: black;
-      color: white;
-    }
-  }
-  
-  @media (prefers-color-scheme: light) {
-    body {
-      background: white;
-      color: black;
-    }
-  }
+body {
+  background: initial;
+  color: initial;
+  font-family: sans-serif;
+  text-rendering: auto;
+  font-size: 12px;
+  font-weight: 400;
+  min-height: 100vh;
+  text-align: left;
+  margin-top: 0;
+  padding: 1em;
+  font-variant-ligatures: historical-ligatures;
+  grid-template-columns: 50vw auto;
+  grid-template-rows: auto;
+  grid-column-gap: 1em;
+  display: grid;
+}
 section {
-    border: 1px solid;
+  border: thin solid lightgray;
 }
-table td {
-    border: 1px solid;
+img {
+  max-width: 100%;
 }
-  img {
-    max-width: 100%;
-  }
 
-  [type="radio"]+label {
-    border: 1px solid white;
-    background-color: transparent;
-    padding:initial;
-  }
-  [type="radio"]{
-    display: initial;
-  }
+[type='radio'] + label {
+  border: thin solid lightgray;
+  background-color: transparent;
+  padding: initial;
+}
+[type='radio'] {
+  display: initial;
+}
 
-  input+label:hover {
-    border-color: aqua;
-    color: aqua;
-  }
+input + label:hover {
+  border-color: aqua;
+  color: aqua;
+}
 
-  input:checked+label {
-    border: 1px solid aqua;
-    background-color: aqua;
-    color: rgb(10,30,26);
-  }
+input:checked + label {
+  border: thin solid lightgray;
+  background-color: aqua;
+  color: rgb(10, 30, 26);
+}
 
-  .radio {
-    border: 1px solid aqua;
-    background: transparent;
-    visibility: hidden;
-    position: absolute;
-  }
+.radio {
+  border: thin solid lightgray;
+  background: transparent;
+  visibility: hidden;
+  position: absolute;
+}
 
-  h2 {
-    text-decoration: none;
-  }
-  
-  .slide-fade-enter-active {
-    transition: all .3s ease;
-  }
+h2 {
+  text-decoration: none;
+}
 
-  .slide-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
 
-  .slide-fade-enter,
-  .slide-fade-leave-to
-    {
-    transform: translateX(10px);
-    opacity: 0;
-  }
-  main {
-    grid-column-start: 1;
-    grid-column-end: 2;
-  }
-  aside {
-    grid-column-start: 2;
-    grid-column-end: 3;
-  }
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+main {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+aside {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
 header {
-  border: 1px solid;
+  border: thin solid lightgray;
 }
 footer {
   background: initial;
   color: inherit;
 }
-footer, header {
-    grid-column-start: 1;
-    grid-column-end: 3;
+footer,
+header {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
-  .bubble {
-    border: 1px solid aqua;
-    box-sizing: border-box;
-    border-radius: 50%;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: inset 0 0 16px rgb(25, 67, 94),
-      0 0 16px aqua;
-    z-index: 0;
-  }
-
-  .bubble .point {
-    width: 4px;
-    height: 4px;
-    background: aqua;
-    border-radius: 50%;
-  }
-
-  .tooltip {
-    border: 1px solid white;
-    padding: 1.5em;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    line-height: 1.5;
-    white-space: nowrap;
-    z-index: 1;
-    position: absolute;
-  }
-
-  .scatter-plot {
-    position: initial;
-    min-height: initial;
-    width: initial;
-    box-sizing: initial;
-    display: initial;
-    justify-content: initial;
-    align-content: initial;
-    justify-items: initial;
-    height: auto;
-    padding: initial;
-    border: initial;
+.bubble {
+  border: thin solid lightgray;
+  box-sizing: border-box;
+  border-radius: 50%;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: inset 0 0 16px rgb(25, 67, 94), 0 0 16px aqua;
+  z-index: 0;
 }
 
-  th,
-  td {
-    padding: 0.25em;
-    text-align: left;
-  }
+.bubble .point {
+  width: 4px;
+  height: 4px;
+  background: aqua;
+  border-radius: 50%;
+}
 
-  table {
-    display: block;
-  }
+.tooltip {
+  border: thin solid lightgray;
+  padding: 1.5em;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  line-height: 1.5;
+  white-space: nowrap;
+  z-index: 1;
+  position: absolute;
+}
+
+.scatter-plot {
+  position: initial;
+  min-height: initial;
+  width: initial;
+  box-sizing: initial;
+  display: initial;
+  justify-content: initial;
+  align-content: initial;
+  justify-items: initial;
+  height: auto;
+  padding: initial;
+  border: thin solid lightgray;
+}
 
 .error {
   color: white;
-  border: 1px solid red;
+  border: thin solid lightgray;
   border-radius: 4px;
   padding: 1em;
   background: FireBrick;
 }
-.max[coordinate="x"]{
+.max[coordinate='x'] {
   position: absolute;
   left: 0;
   top: 0;
 }
-.min[coordinate="x"]{
+.min[coordinate='x'] {
   position: absolute;
   left: 0;
   bottom: 0;
 }
-.max[coordinate="y"]{
+.max[coordinate='y'] {
   position: absolute;
   right: 0;
   bottom: 0;
 }
-.min[coordinate="y"]{
+.min[coordinate='y'] {
   position: absolute;
-    left: 0;
-    bottom: 0;
-    transform: translateY(10px);
+  left: 0;
+  bottom: 0;
+  transform: translateY(10px);
+}
+table {
+  background-color: white;
+  color: black;
+  border: thin solid lightgray;
+  padding: 2px;
+}
+tr {
+  background-color: white;
+  color: black;
+  border: thin solid lightgray;
+  padding: 2px;
+}
+th {
+  background-color: lightgrey;
+  color: black;
+  border: thin solid lightgray;
+  padding: 2px;
+}
+td {
+  background-color: white;
+  color: black;
+  border: thin solid lightgray;
+  padding: 2px;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: black;
+    color: white;
+  }
+}
+@media (prefers-color-scheme: light) {
+  body {
+    background: white;
+    color: black;
+  }
+}
+@media (max-width: 800px) {
+  main {
+    flex-direction: column;
+  }
 }
