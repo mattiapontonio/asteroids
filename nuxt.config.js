@@ -19,4 +19,5 @@ module.exports = {
     bannerColor: 'yellow',
   },
   css: ['~/assets/css/main.css'],
+  loading: false
 }

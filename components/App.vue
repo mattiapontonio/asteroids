@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <div>
     <header>
       <img src="images/icon.png" alt="Icon" width="64" height="auto" />
       <h1>Asteroids</h1>
@@ -366,7 +366,7 @@
         </tbody>
       </table>
     </footer>
-  </body>
+  </div>
 </template>
 <script>
 import { version } from '../package.json'

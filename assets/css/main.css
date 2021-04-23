@@ -1,6 +1,4 @@
 body {
-  background: initial;
-  color: initial;
   font-family: sans-serif;
   text-rendering: auto;
   font-size: 12px;
@@ -8,11 +6,19 @@ body {
   min-height: 100vh;
   text-align: left;
   margin-top: 0;
-  padding: 1em;
+  font-feature-settings: "hlig";
   font-variant-ligatures: historical-ligatures;
-  grid-template-columns: 50vw auto;
-  grid-template-rows: auto;
-  grid-column-gap: 1em;
+  display: block;
+  margin: 0;
+  padding: 1em;
+}
+body > div > div > div {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: unset;
+  width: auto;
+  padding: 1em;
+  box-sizing: border-box;
+  gap: 1em;
   display: grid;
 }
 section {
