@@ -19,10 +19,8 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 ## Stack
 
 - [Node.js](https://nodejs.org/en/)
-- [npm](https://www.npmjs.com)
-- [Vue CLI](https://cli.vuejs.org/)
+- [Vue.js](https://v3.vuejs.org/)
 - [Git](https://git-scm.com/)
-- [Nuxt.js](https://nuxtjs.org/docs/2.x/get-started/installation)
 
 ### API
 
@@ -31,40 +29,10 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 
 ## Start
 
-### Node
-
-```shell
-export PORT=<port>
-export API_KEY=<key>
-```
-
-### Git
-
-```shell
+```sh
 git clone https://github.com/mattiapontonio/asteroids.git
 cd asteroids
-```
-
-### SSL
-
-```shell
-openssl genrsa -out key.pem
-openssl req -new -key key.pem -out csr.pem
-openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
-rm csr.pem
-```
-
-### npm
-
-```shell
-npm i
 npm start
-```
-
-#### Scripts
-
-```shell
-npm run
 ```
 
 ## pwa-asset-generator
@@ -74,10 +42,6 @@ npm run
 ```shell
 npx pwa-asset-generator asteroid.svg -i ./app.html -m ./static/manifest.webmanifest
 ```
-
-## Screenshots
-
-[Screenshots](/screenshots/screenshots.md)
 
 ## Related
 
