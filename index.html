@@ -172,7 +172,32 @@
         <div id="app"></div>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script type="module"> Vue.component('loader', {
+    <script type="module"> 
+    Vue.filter('formatted', function (date = new Date()) {
+  if (!date) return ''
+  let month = '' + (date.getMonth() + 1);
+  let day = '' + date.getDate();
+  let year = date.getFullYear();
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+  return [year, month, day].join('-');
+});
+Vue.filter('lun_dom_day', function (date = new Date()) {
+  return date.getDay() == 0 ? date.getDay() - 1 : 6
+});
+Vue.filter('scale', function (v = new Number(), min = new Number(), max = new Number()) {
+  return (v - min) / (max - min)
+});
+Vue.filter('min', function (values = new Array()) {
+  return Math.min(...values);
+});
+Vue.filter('max', function (values = new Array()) {
+  return Math.max(...values);
+});
+Vue.filter('DateTimeFormat', function (v = new Date()) {
+  return new Intl.DateTimeFormat('it-IT').format(v);
+});
+    Vue.component('loader', {
         template: `<svg version="1.1" 
         class="loader" 
         xmlns="http://www.w3.org/2000/svg" 
@@ -276,6 +301,186 @@
         </picture>
     </section>`
     });
+    Vue.component('scatter-plot', {
+  data() {
+    return {
+      asteroids: [],
+      error: {},
+      loading: {}
+    }
+  },
+  computed: {
+    items: function() {
+      const x = 'velocity_kilometers_per_second'
+      const y = 'distance'
+      const d = 'diameter'
+      const scale = Vue.filter('scale')
+      const min = Vue.filter('min')
+      const max = Vue.filter('max')
+      const items = this.asteroids
+      return items
+        .map((e, i, a) => {
+          const elements = a.map((e) => e[x])
+          e.x = scale(e[x], min(elements), max(elements))
+          return e
+        })
+        .map((e, i, a) => {
+          const elements = a.map((e) => e[y])
+          e.y = scale(e[y], min(elements), max(elements))
+          return e
+        })
+        .map((e, i, a) => {
+          const elements = a.map((e) => e[d])
+          e.d = scale(e[d], min(elements), max(elements))
+          return e
+        })
+    },
+  },
+  mounted() {
+    this.loading = true
+    this.error = false;
+    const date = new URLSearchParams(location.search).get('date')
+    fetch(
+      `https://api.nasa.gov/neo/rest/v1/feed?api_key=${new URLSearchParams(
+        location.search
+      ).get('api_key')}&start_date=${new URLSearchParams(location.search).get(
+        'start_date'
+      )}&end_date=${new URLSearchParams(location.search).get('end_date')}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.asteroids = data.near_earth_objects[date].map((e) => {
+          return {
+            id: e.id,
+            name: e.name,
+            diameter: e.estimated_diameter.kilometers.estimated_diameter_max,
+            magnitude: e.absolute_magnitude_h,
+            velocity_kilometers_per_hour:
+              e.close_approach_data[0].relative_velocity.kilometers_per_hour,
+            velocity_kilometers_per_second:
+              e.close_approach_data[0].relative_velocity.kilometers_per_second,
+            distance: e.close_approach_data[0].miss_distance.astronomical,
+          }
+        })
+      })
+      .catch((error) => (this.error = error))
+      .finally(() => (this.loading = false))
+  },
+        template: `<p v-if="error" class="error" v-text="error"></p>
+    <div
+      v-else-if="loading"
+      class="loading"
+      style="position:absolute; width:100%; height:100%;"
+    ></div>
+    <section class="MfPnrltCwM" v-else>
+      <asteroid
+        v-for="(item, i) in items"
+        v-bind:data="{
+          ...item,
+        }"
+        v-bind:key="i"
+        style="position: absolute;"
+        v-bind:x="item.x"
+        v-bind:y="item.y"
+        v-bind:d="item.d"
+      />
+    </section>`
+    });
+    
+    Vue.component('asteroid', {
+      props: ['data', 'x', 'y', 'd'],
+  data: function() {
+    return {
+      show: false,
+    }
+  },
+        template: `<div
+    class="lHUsmGLhth"
+    @mouseover="show = true"
+    @mouseleave="show = false"
+    :style="{
+      top: 100 - x * 100 + '%',
+      left: y * 100 + '%',
+    }"
+  >
+    <bubble class="IyTMAxUXOq" :d="d" />
+    <tooltip :show="show" :data="data" />
+  </div>`
+    });
+    
+    Vue.component('bubble', {
+  props: {
+    minD: {
+      type: Number,
+      default: function() {
+        return 30
+      },
+    },
+    maxD: {
+      type: Number,
+      default: function() {
+        return 100
+      },
+    },
+    d: {
+      type: Number,
+      default: function() {
+        return 0
+      },
+    },
+  },
+  computed: {
+    width: function() {
+      return this.d * (this.maxD - this.minD) + this.minD
+    },
+    height: function() {
+      return this.d * (this.maxD - this.minD) + this.minD
+    },
+  },
+        template: `<div
+    class="bubble"
+    :style="{
+      width: width + 'px',
+      height: height + 'px',
+    }"
+  >
+    <div class="point"></div>
+  </div>`
+    });
+    
+    Vue.component('tooltip', {
+  props: ['show', 'data'],
+        template: `<transition name="slide-fade">
+    <div v-if="show" class="tooltip">
+      <table>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>{{ data.name }}</td>
+          </tr>
+          <tr>
+            <td>Diameter</td>
+            <td>{{ data.diameter }} km</td>
+          </tr>
+          <tr>
+            <td>Magnitude</td>
+            <td>{{ data.magnitude }} h</td>
+          </tr>
+          <tr>
+            <td>Distance</td>
+            <td>{{ data.distance }} au</td>
+          </tr>
+          <tr>
+            <td>Velocity</td>
+            <td>{{ data.velocity_kilometers_per_hour }} km/h</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </transition>`
+    });
+    
+    
     
     var app = new Vue({
             el:"#app",
@@ -401,6 +606,8 @@
           </div>
         </fieldset>
         <loader v-if="loading" class="loading"></loader>
+        
+    <scatter-plot/>
         <svg
           class="scatter-plot"
           viewBox="0 0 200 100"

@@ -45,7 +45,6 @@ input + label:hover {
 input:checked + label {
   border: thin solid lightgray;
   background-color: aqua;
-  color: rgb(10, 30, 26);
 }
 
 .radio {
@@ -85,7 +84,6 @@ header {
 }
 footer {
   background: initial;
-  color: inherit;
 }
 footer,
 header {
@@ -125,11 +123,11 @@ header {
 }
 
 .scatter-plot {
-  position: initial;
-  min-height: initial;
-  width: initial;
-  box-sizing: initial;
-  display: initial;
+  position: static;
+  min-height: 300px;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
   justify-content: initial;
   align-content: initial;
   justify-items: initial;
@@ -137,9 +135,7 @@ header {
   padding: initial;
   border: thin solid lightgray;
 }
-
 .error {
-  color: white;
   border: thin solid lightgray;
   border-radius: 4px;
   padding: 1em;
@@ -168,42 +164,54 @@ header {
 }
 table {
   background-color: white;
-  color: black;
   border: thin solid lightgray;
   padding: 2px;
 }
 tr {
   background-color: white;
-  color: black;
   border: thin solid lightgray;
   padding: 2px;
 }
 th {
   background-color: lightgrey;
-  color: black;
   border: thin solid lightgray;
   padding: 2px;
 }
 td {
   background-color: white;
-  color: black;
   border: thin solid lightgray;
   padding: 2px;
 }
 @media (prefers-color-scheme: dark) {
   body {
-    background: black;
+    background: rgb(2, 0, 36);
     color: white;
   }
 }
 @media (prefers-color-scheme: light) {
   body {
     background: white;
-    color: black;
+    color: #2d1d40;
   }
 }
 @media (max-width: 800px) {
   main {
     flex-direction: column;
   }
+}
+.loading {
+  background: rgba(10, 30, 26, 0.5);
+  background-size: 400% 400%;
+  justify-self: stretch;
+  align-self: stretch;
+  flex-grow: 1;
+  left: 0;
+  top: 0;
+  min-height: 128px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.loading:before {
+  content: 'Loading...';
 }
