@@ -47,9 +47,7 @@ var app = new Vue({
         .catch((error) => {
           this.error = error
         })
-      fetch('./package.json')
-        .then((response) => response.json())
-        .then((body) => (this.version = body.version))
+        .finally(() => (this.loading = false))
     },
     onchangedate(date = new Date()) {
       this.date = date
@@ -63,7 +61,6 @@ var app = new Vue({
       error: undefined,
       element_count: undefined,
       links: undefined,
-      version: undefined,
     }
   },
   mounted() {
@@ -424,7 +421,7 @@ var app = new Vue({
       </tr>
       <tr>
         <th>Version</th>
-        <td>{{ version }}</td>
+        <td><package-version/></td>
       </tr>
       <tr>
         <th>Credits</th>
