@@ -136,10 +136,11 @@ header {
   border: thin solid lightgray;
 }
 .error {
-  border: thin solid lightgray;
+  border: 0;
   border-radius: 4px;
   padding: 1em;
-  background: FireBrick;
+  background: darkred;
+  color: white;
 }
 .max[coordinate='x'] {
   position: absolute;

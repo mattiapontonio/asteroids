@@ -30,7 +30,6 @@ var app = new Vue({
                   new URLSearchParams(location.search).get('date')
                 ]
               this.near_earth_objects = data.near_earth_objects
-              this.loading = false
             })
           } else if (response.status == 400) {
             response.json().then((data) => {
@@ -56,7 +55,7 @@ var app = new Vue({
   data: function () {
     return {
       items: new Array(),
-      loading: true,
+      loading: false,
       near_earth_objects: undefined,
       error: undefined,
       element_count: undefined,
@@ -111,7 +110,8 @@ var app = new Vue({
 <main>
   <section>
     <h2>Bubble chart</h2>
-    <div class="error" v-if="error" v-text="error.message"></div>
+    <loader v-if="loading" />
+    <p class="error" v-if="error" v-text="error.message"></p>
     <fieldset
       form="form"
       onchange="this.form.submit()"
@@ -130,9 +130,7 @@ var app = new Vue({
         <label :for="e" v-text="e"></label>
       </div>
     </fieldset>
-    <loader v-if="loading" class="loading"></loader>
-    
-<scatter-plot/>
+    <scatter-plot-vue/>
     <svg
       class="scatter-plot"
       viewBox="0 0 200 100"
@@ -350,8 +348,8 @@ var app = new Vue({
   </section>
   <section>
     <h2>Brightest of the week</h2>
-    <loader v-if="loading" class="loading"></loader>
-    <div class="error" v-if="error" v-text="error.message"></div>
+    <loader v-if="loading" />
+    <p class="error" v-if="error" v-text="error.message"></p>
     <table>
       <tr v-for="(e, k, i) in near_earth_objects" :key="'6'+i">
         <th v-text="k"></th>
