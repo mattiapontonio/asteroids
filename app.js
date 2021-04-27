@@ -3,32 +3,15 @@ var app = new Vue({
   name: 'app',
   methods: {
     get() {
-      const url = new URL('https://api.nasa.gov')
-      url.pathname = 'neo/rest/v1/feed'
-      url.searchParams.set(
-        'start_date',
-        new URLSearchParams(location.search).get('start_date')
-      )
-      url.searchParams.set(
-        'end_date',
-        new URLSearchParams(location.search).get('end_date')
-      )
-      url.searchParams.set(
-        'api_key',
-        new URLSearchParams(location.search).get('api_key')
-      )
       this.loading = true
       this.error = undefined
-      fetch(url)
+      fetch(`https://api.nasa.gov/neo/rest/v1/feed?api_key=${this.api_key}&start_date=${this.date}`)
         .then((response) => {
           this.response = response
           if (response.status == 200) {
             response.json().then((data) => {
               Object.assign(this, data)
-              this.items =
-                data.near_earth_objects[
-                  new URLSearchParams(location.search).get('date')
-                ]
+              this.items = data.near_earth_objects[0]
               this.near_earth_objects = data.near_earth_objects
             })
           } else if (response.status == 400) {
