@@ -29,7 +29,7 @@
       "url": "/domenica",
       "icons": [
         {
-          "src": "/images/icon.png",
+          "src": "/icon.png",
           "sizes": "192x192"
         }
       ]
@@ -41,7 +41,7 @@
       "url": "/lunedì",
       "icons": [
         {
-          "src": "/images/icon.png",
+          "src": "/icon.png",
           "sizes": "192x192"
         }
       ]
@@ -53,7 +53,7 @@
       "url": "/martedì",
       "icons": [
         {
-          "src": "/images/icon.png",
+          "src": "/icon.png",
           "sizes": "192x192"
         }
       ]
@@ -65,7 +65,7 @@
       "url": "/mercoledì",
       "icons": [
         {
-          "src": "/images/icon.png",
+          "src": "/icon.png",
           "sizes": "192x192"
         }
       ]
@@ -77,7 +77,7 @@
       "url": "/giovedì",
       "icons": [
         {
-          "src": "/images/icon.png",
+          "src": "/icon.png",
           "sizes": "192x192"
         }
       ]
@@ -89,7 +89,7 @@
       "url": "/venerdì",
       "icons": [
         {
-          "src": "/images/icon.png",
+          "src": "/icon.png",
           "sizes": "192x192"
         }
       ]
@@ -101,7 +101,7 @@
       "url": "/sabato",
       "icons": [
         {
-          "src": "/images/icon.png",
+          "src": "/icon.png",
           "sizes": "192x192"
         }
       ]
