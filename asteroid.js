@@ -102,7 +102,7 @@ Vue.component('asteroid', {
     left: y + '%',
   }"
 >
-  <bubble class="IyTMAxUXOq" :d="r" />
-  <tooltip :show="show" :data="data" />
+  <bubble :d="r" />
+  <tooltip :show="show" :id="item.id" />
 </div>`,
 })

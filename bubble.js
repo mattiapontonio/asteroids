@@ -28,7 +28,7 @@ Vue.component('bubble', {
     },
   },
   template: `<div
-      class="bubble"
+  class="IyTMAxUXOq"
       :style="{
         width: width + 'px',
         height: height + 'px',
