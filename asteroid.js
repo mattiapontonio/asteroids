@@ -8,7 +8,7 @@ Vue.component('asteroid', {
     return {
       show: false,
       items: [],
-      item: undefined
+      item: undefined,
     }
   },
   computed: {
@@ -77,20 +77,18 @@ Vue.component('asteroid', {
       })
       .catch((error) => (this.error = error))
       .finally(() => (this.loading = false))
-      fetch(
-        `http://www.neowsapp.com/rest/v1/neo/${this.id}?api_key=${this.api_key}`
-      )
-        .then((response) => {
-          if (response.status == 200) {
-            response
-              .json()
-              .then((data) => (this.item = data))
-          } else {
-            throw new Error(response.statusText)
-          }
-        })
-        .catch((error) => (this.error = error))
-        .finally(() => (this.loading = false))
+    fetch(
+      `http://www.neowsapp.com/rest/v1/neo/${this.id}?api_key=${this.api_key}`
+    )
+      .then((response) => {
+        if (response.status == 200) {
+          response.json().then((data) => (this.item = data))
+        } else {
+          throw new Error(response.statusText)
+        }
+      })
+      .catch((error) => (this.error = error))
+      .finally(() => (this.loading = false))
   },
   template: `<div
   class="lHUsmGLhth"
@@ -102,7 +100,15 @@ Vue.component('asteroid', {
     left: y + '%',
   }"
 >
-  <bubble :d="r" />
+<div
+  class="IyTMAxUXOq"
+    :style="{
+      width: r + 'px',
+      height: r + 'px',
+    }"
+  >
+    <div class="point"></div>
+  </div>
   <tooltip :show="show" :id="item.id" />
 </div>`,
 })

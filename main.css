@@ -58,6 +58,11 @@ h2 {
   text-decoration: none;
 }
 
+.MfPnrltCwM {
+  position: relative;
+  min-height: 300px;
+}
+
 .slide-fade-enter-active {
   transition: all 0.3s ease;
 }
@@ -91,7 +96,7 @@ header {
   grid-column-end: 3;
 }
 
-.bubble {
+.IyTMAxUXOq {
   border: thin solid lightgray;
   box-sizing: border-box;
   border-radius: 50%;
@@ -102,9 +107,10 @@ header {
   flex-shrink: 0;
   box-shadow: inset 0 0 16px rgb(25, 67, 94), 0 0 16px aqua;
   z-index: 0;
+  position: absolute;
 }
 
-.bubble .point {
+.IyTMAxUXOq .point {
   width: 4px;
   height: 4px;
   background: aqua;

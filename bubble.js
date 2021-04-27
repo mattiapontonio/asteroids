@@ -27,13 +27,5 @@ Vue.component('bubble', {
       return this.d * (this.maxD - this.minD) + this.minD
     },
   },
-  template: `<div
-  class="IyTMAxUXOq"
-      :style="{
-        width: width + 'px',
-        height: height + 'px',
-      }"
-    >
-      <div class="point"></div>
-    </div>`,
+  template: ``,
 })
