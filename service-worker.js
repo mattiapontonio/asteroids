@@ -23,10 +23,5 @@ self.addEventListener('notificationclose', function (e) {
   console.log('Closed notification: ' + primaryKey)
 })
 self.addEventListener('notificationclick', function (e) {
-  if (e.action === 'close') {
-    e.notification.close()
-  } else {
-    clients.openWindow('http://www.example.com')
-    e.notification.close()
-  }
+  clients.openWindow('/apod.html?api_key=DEMO_KEY')
 })
