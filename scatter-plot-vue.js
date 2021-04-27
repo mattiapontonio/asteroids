@@ -35,5 +35,6 @@ Vue.component('scatter-plot-vue', {
         :key="i"
         :id="item.id"
       />
-    </section>`,
+    </section>
+  `,
 })
