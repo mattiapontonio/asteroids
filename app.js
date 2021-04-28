@@ -1,60 +1,60 @@
 var app = new Vue({
-  el: '#app',
-  name: 'app',
-  methods: {
-    get() {
-      this.loading = true
-      this.error = undefined
-      fetch(`https://api.nasa.gov/neo/rest/v1/feed?api_key=${this.api_key}&start_date=${this.date}`)
-        .then((response) => {
-          this.response = response
-          if (response.status == 200) {
-            response.json().then((data) => {
-              Object.assign(this, data)
-              this.items = data.near_earth_objects[0]
-              this.near_earth_objects = data.near_earth_objects
-            })
-          } else if (response.status == 400) {
-            response.json().then((data) => {
-              this.error = {
-                message: data.error_message,
-              }
-            })
-          } else if (response.status == 403) {
-            response.json().then((data) => {
-              Object.assign(this, data)
-            })
-          }
-        })
-        .catch((error) => {
-          this.error = error
-        })
-        .finally(() => (this.loading = false))
+    el: '#app',
+    name: 'app',
+    methods: {
+        get() {
+            this.loading = true
+            this.error = undefined
+            fetch(`https://api.nasa.gov/neo/rest/v1/feed?api_key=${this.api_key}&start_date=${this.date}`)
+                .then((response) => {
+                    this.response = response
+                    if (response.status == 200) {
+                        response.json().then((data) => {
+                            Object.assign(this, data)
+                            this.items = data.near_earth_objects[0]
+                            this.near_earth_objects = data.near_earth_objects
+                        })
+                    } else if (response.status == 400) {
+                        response.json().then((data) => {
+                            this.error = {
+                                message: data.error_message,
+                            }
+                        })
+                    } else if (response.status == 403) {
+                        response.json().then((data) => {
+                            Object.assign(this, data)
+                        })
+                    }
+                })
+                .catch((error) => {
+                    this.error = error
+                })
+                .finally(() => (this.loading = false))
+        },
+        onchangedate(date = new Date()) {
+            this.date = date
+        },
     },
-    onchangedate(date = new Date()) {
-      this.date = date
+    data: function() {
+        return {
+            items: new Array(),
+            loading: false,
+            near_earth_objects: undefined,
+            error: undefined,
+            element_count: undefined,
+            links: undefined,
+        }
     },
-  },
-  data: function () {
-    return {
-      items: new Array(),
-      loading: false,
-      near_earth_objects: undefined,
-      error: undefined,
-      element_count: undefined,
-      links: undefined,
-    }
-  },
-  mounted() {
-    this.get()
-  },
-  computed: {
-    start_date: () => new URLSearchParams(location.search).get('start_date'),
-    end_date: () => new URLSearchParams(location.search).get('end_date'),
-    date: () => new URLSearchParams(location.search).get('date'),
-    api_key: () => new URLSearchParams(location.search).get('api_key'),
-  },
-  template: `<div>
+    mounted() {
+        this.get()
+    },
+    computed: {
+        start_date: () => new URLSearchParams(location.search).get('start_date'),
+        end_date: () => new URLSearchParams(location.search).get('end_date'),
+        date: () => new URLSearchParams(location.search).get('date'),
+        api_key: () => new URLSearchParams(location.search).get('api_key'),
+    },
+    template: `<div>
 <header>
   <img src="asteroid.svg" alt="Icon" width="64" height="auto" />
   <h1>Asteroids</h1>
@@ -67,24 +67,7 @@ var app = new Vue({
     <h2>Bubble chart</h2>
     <loader v-if="loading" />
     <p class="error" v-if="error" v-text="error.message"></p>
-    <fieldset
-      form="form"
-      onchange="this.form.submit()"
-      v-if="near_earth_objects"
-    >
-      <legend>Date</legend>
-      <div v-for="(e, i) in Object.keys(near_earth_objects)" :id="e.id">
-        <input
-          type="radio"
-          :id="e"
-          name="date"
-          :value="e"
-          :checked="date == e"
-          form="form"
-        />
-        <label :for="e" v-text="e"></label>
-      </div>
-    </fieldset>
+    <selector-wc></selector-wc>
     <scatter-plot-vue/>
     <svg
       class="scatter-plot"

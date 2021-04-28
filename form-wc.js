@@ -1,17 +1,17 @@
 customElements.define(
-  'form-wc',
-  class extends HTMLElement {
-    get api_key() {
-      return new URLSearchParams(location.search).get('api_key')
-    }
-    get start_date() {
-      return new URLSearchParams(location.search).get('start_date')
-    }
-    get end_date() {
-      return new URLSearchParams(location.search).get('end_date')
-    }
-    connectedCallback() {
-      this.innerHTML = `
+    'form-wc',
+    class extends HTMLElement {
+        get api_key() {
+            return new URLSearchParams(location.search).get('api_key')
+        }
+        get start_date() {
+            return new URLSearchParams(location.search).get('start_date')
+        }
+        get end_date() {
+            return new URLSearchParams(location.search).get('end_date')
+        }
+        connectedCallback() {
+            this.innerHTML = `
         <form id="form">
           <legend>Legend</legend>
           <label for="api_key">API key</label>
@@ -48,6 +48,6 @@ customElements.define(
           />
         <button type="submit">Submit</button>
       </form>`
+        }
     }
-  }
 )

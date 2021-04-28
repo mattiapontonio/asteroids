@@ -21,6 +21,7 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 - [Node.js](https://nodejs.org/en/)
 - [Vue.js](https://v3.vuejs.org/)
 - [Git](https://git-scm.com/)
+- [Web_Components](https://developer.mozilla.org/it/docs/Web/Web_Components)
 
 ### API
 
@@ -46,3 +47,8 @@ npx pwa-asset-generator asteroid.svg -i ./app.html -m ./static/manifest.webmanif
 ## Related
 
 - <https://nuxtjs.org/docs/2.x/deployment/heroku-deployment>
+
+## Example URLs
+
+- <http://localhost:8080?api_key=DEMO_KEY&start_date=2021-04-22&end_date=2021-04-15&date=2021-04-21>
+- <https://asteroids-nasa-develop.herokuapp.com?api_key=DEMO_KEY&start_date=2021-04-22&end_date=2021-04-15&date=2021-04-21>

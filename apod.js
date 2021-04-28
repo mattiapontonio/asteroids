@@ -1,31 +1,31 @@
 Vue.component('apod', {
-  data: function () {
-    const date = new Date()
-    return {
-      url: undefined,
-      date,
-      response: {},
-      loading: false,
-      error: false,
-      hdurl: undefined,
-    }
-  },
-  mounted() {
-    this.loading = true
-    fetch(`https://api.nasa.gov/planetary/apod?api_key=${api_key.value}`)
-      .then((response) => {
-        this.response = response
-        return response.json()
-      })
-      .then((data) => {
-        Object.assign(this, data)
-        this.loading = false
-      })
-      .catch((error) => {
-        this.error = error
-      })
-  },
-  template: `<section>
+    data: function() {
+        const date = new Date()
+        return {
+            url: undefined,
+            date,
+            response: {},
+            loading: false,
+            error: false,
+            hdurl: undefined,
+        }
+    },
+    mounted() {
+        this.loading = true
+        fetch(`https://api.nasa.gov/planetary/apod?api_key=${api_key.value}`)
+            .then((response) => {
+                this.response = response
+                return response.json()
+            })
+            .then((data) => {
+                Object.assign(this, data)
+                this.loading = false
+            })
+            .catch((error) => {
+                this.error = error
+            })
+    },
+    template: `<section>
     <h2>Astronomy Picture of the Day</h2>
     <loader v-if="loading" />
     <p class="error" v-if="error" v-text="error.message"></p>
