@@ -60,35 +60,7 @@ var app = new Vue({
   <h1>Asteroids</h1>
   <button onclick="history.back()">back</button>
   <button onclick="history.forward()">forward</button>
-  <form id="form">
-    <fieldset>
-      <legend>Legend</legend>
-      <label for="api_key">API key</label>
-      <input
-        type="text"
-        id="api_key"
-        name="api_key"
-        required
-        :value="api_key"
-      />
-      <label for="start_date">start_date</label>
-      <input
-        type="date"
-        :value="start_date"
-        name="start_date"
-        id="start_date"
-        required
-      />
-      <label for="end_date">end_date</label>
-      <input
-        type="date"
-        :value="end_date"
-        name="end_date"
-        id="end_date"
-      />
-    </fieldset>
-    <button type="submit">Submit</button>
-  </form>
+  <form-wc></form-wc>  
 </header>
 <main>
   <section>

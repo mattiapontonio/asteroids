@@ -223,3 +223,22 @@ td {
 .loading:before {
   content: 'Loading...';
 }
+input {
+  padding: .5em;
+  border: 1px solid;
+  border-color: black;
+  display: block;
+}
+input:invalid {
+  border-color: red;
+}
+input:out-of-range {
+  border-color: red;
+}
+input:required::after{
+  content: "*";
+}
+form {
+  border: 1px solid;
+  padding: 1em;
+}
