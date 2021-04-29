@@ -15,8 +15,7 @@ Vue.component('asteroid', {
         date: () => new URLSearchParams(location.search).get('date'),
         api_key: () => new URLSearchParams(location.search).get('api_key'),
         cx() {
-            const x = this.item.close_approach_data[0].relative_velocity
-                .kilometers_per_second
+            const x = this.item.close_approach_data[0].relative_velocity.kilometers_per_second
             const min = Math.min(
                 ...this.items.map(
                     (z) =>

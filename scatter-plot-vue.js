@@ -13,9 +13,7 @@ Vue.component('scatter-plot-vue', {
     mounted() {
         this.loading = true
         this.error = false
-        fetch(
-                `https://api.nasa.gov/neo/rest/v1/feed?api_key=${this.api_key}&start_date=${this.date}`
-            )
+        fetch(`https://api.nasa.gov/neo/rest/v1/feed?api_key=${this.api_key}&start_date=${this.date}`)
             .then((response) => {
                 if (response.status == 200) {
                     response.json().then((data) => this.items = data.near_earth_objects[this.date])

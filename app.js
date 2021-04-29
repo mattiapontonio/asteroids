@@ -65,6 +65,7 @@ var app = new Vue({
 <main>
   <section>
     <h2>Bubble chart</h2>
+    <a href="/bubble-chart.html">bubble-chart</a>
     <loader v-if="loading" />
     <p class="error" v-if="error" v-text="error.message"></p>
     <selector-date-wc></selector-date-wc>
