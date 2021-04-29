@@ -67,7 +67,7 @@ var app = new Vue({
     <h2>Bubble chart</h2>
     <loader v-if="loading" />
     <p class="error" v-if="error" v-text="error.message"></p>
-    <selector-wc></selector-wc>
+    <selector-date-wc></selector-date-wc>
     <scatter-plot-vue/>
     <svg
       class="scatter-plot"
