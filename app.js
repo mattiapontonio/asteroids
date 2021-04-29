@@ -55,14 +55,6 @@ var app = new Vue({
         api_key: () => new URLSearchParams(location.search).get('api_key'),
     },
     template: `<div>
-<header>
-  <img src="asteroid.svg" alt="Icon" width="64" height="auto" />
-  <h1>Asteroids</h1>
-  <button onclick="history.back()">back</button>
-  <button onclick="history.forward()">forward</button>
-  <form-wc></form-wc>  
-</header>
-<main>
   <section>
     <h2>Bubble chart</h2>
     <a href="/bubble-chart.html">bubble-chart</a>
@@ -341,7 +333,6 @@ var app = new Vue({
       </tr>
     </table>
   </section>
-</main>
 <aside>
   <apod />
 </aside>

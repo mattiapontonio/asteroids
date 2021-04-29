@@ -1,6 +1,10 @@
 customElements.define(
     'bubble-chart',
     class extends HTMLElement {
+        constructor() {
+            super();
+            addEventListener("popstate", this.connectedCallback);
+        }
         get api_key() {
             return new URLSearchParams(location.search).get('api_key')
         }
@@ -17,42 +21,85 @@ customElements.define(
                             'http://www.w3.org/2000/svg',
                             'svg'
                         )
+                        const items = data.near_earth_objects[this.date].map(function(e) {
+                            return {
+                                x: e.close_approach_data[0].relative_velocity
+                                    .kilometers_per_second,
+                                y: e.close_approach_data[0].miss_distance.kilometers,
+                                r: e.estimated_diameter.kilometers.estimated_diameter_max,
+                            }
+                        })
                         Object.assign(svg, {
                             id: 'svg',
                         })
-                        for (const iterator of data.near_earth_objects[this.date]) {
-                            const circle = document.createElementNS(
-                                'http://www.w3.org/2000/svg',
-                                'circle'
-                            );
+                        for (const iterator of items) {
+                            const circles = [
+                                document.createElementNS(
+                                    'http://www.w3.org/2000/svg',
+                                    'circle'
+                                ),
+                                document.createElementNS(
+                                    'http://www.w3.org/2000/svg',
+                                    'circle'
+                                ),
+                            ]
                             const a = document.createElementNS(
                                 'http://www.w3.org/2000/svg',
                                 'a'
-                            );
-                            circle.id = iterator.id;
-                            a.setAttribute("href", `/asteroid?id=${iterator.id}`);
-                            circle.setAttribute("cx", ((100 - 0) * (iterator.close_approach_data[0].relative_velocity.kilometers_per_second - Math.min.apply(this, data.near_earth_objects[this.date].map(function(z) {
-                                return z.close_approach_data[0].relative_velocity.kilometers_per_second
-                            })))) / (Math.max.apply(this, data.near_earth_objects[this.date].map(function(z) {
-                                return z.close_approach_data[0].relative_velocity.kilometers_per_second
-                            })) - Math.min.apply(this, data.near_earth_objects[this.date].map(function(z) {
-                                return z.close_approach_data[0].relative_velocity.kilometers_per_second
-                            }))) + '%');
-                            circle.setAttribute("cy", ((100 - 0) * (iterator.close_approach_data[0].miss_distance.kilometers - Math.min.apply(this, data.near_earth_objects[this.date].map(function(z) {
-                                return z.close_approach_data[0].miss_distance.kilometers
-                            })))) / (Math.max.apply(this, data.near_earth_objects[this.date].map(function(z) {
-                                return z.close_approach_data[0].miss_distance.kilometers
-                            })) - Math.min.apply(this, data.near_earth_objects[this.date].map(function(z) {
-                                return z.close_approach_data[0].miss_distance.kilometers
-                            }))) + '%')
-                            circle.setAttribute("r", ((10 - 5) * (iterator.estimated_diameter.kilometers.estimated_diameter_max - Math.min.apply(this, data.near_earth_objects[this.date].map(function(z) {
-                                return z.estimated_diameter.kilometers.estimated_diameter_max
-                            })))) / (Math.max.apply(this, data.near_earth_objects[this.date].map(function(z) {
-                                return z.estimated_diameter.kilometers.estimated_diameter_max
-                            })) - Math.min.apply(this, data.near_earth_objects[this.date].map(function(z) {
-                                return z.estimated_diameter.kilometers.estimated_diameter_max
-                            }))) + 5 + '%')
-                            a.append(circle)
+                            )
+                            const cx =
+                                ((100 - 0) *
+                                    (iterator.x - Math.min(...items.map(function(z) {
+                                        return z.x
+                                    })))) /
+                                (Math.max(...items.map(function(z) {
+                                        return z.x
+                                    })) -
+                                    Math.min(...items.map(function(z) {
+                                        return z.x
+                                    }))) +
+                                '%'
+                            const cy =
+                                ((100 - 0) *
+                                    (iterator.y - Math.min(...items.map(function(z) {
+                                        return z.y
+                                    })))) /
+                                (Math.max(...items.map(function(z) {
+                                        return z.y
+                                    })) -
+                                    Math.min(...items.map(function(z) {
+                                        return z.y
+                                    }))) +
+                                '%'
+                            const r =
+                                ((10 - 5) *
+                                    (iterator.r -
+                                        Math.min(
+                                            ...items.map(function(z) {
+                                                return z.r
+                                            })
+                                        ))) /
+                                (Math.max(
+                                        ...items.map(function(z) {
+                                            return z.r
+                                        })
+                                    ) -
+                                    Math.min(
+                                        ...items.map(function(z) {
+                                            return z.r
+                                        })
+                                    )) +
+                                5 +
+                                '%'
+                            circles[0].id = iterator.id
+                            a.setAttribute('href', `/asteroid?id=${iterator.id}`)
+                            circles[0].setAttribute('cx', cx)
+                            circles[0].setAttribute('cy', cy)
+                            circles[0].setAttribute('r', r)
+                            circles[1].setAttribute('cx', cx)
+                            circles[1].setAttribute('cy', cy)
+                            circles[1].setAttribute('r', 1)
+                            a.append(...circles)
                             svg.append(a)
                         }
                         this.append(svg)

@@ -104,6 +104,11 @@ bubble-chart circle {
     position: relative;
 }
 
+bubble-chart a:hover circle {
+    stroke: white;
+    fill: red;
+}
+
 bubble-chart circle .point {
     width: 4px;
     height: 4px;

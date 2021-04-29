@@ -7,25 +7,39 @@ customElements.define(
         get date() {
             return new URLSearchParams(location.search).get('date')
         }
+        get api_key() {
+            return new URLSearchParams(location.search).get('api_key')
+        }
         connectedCallback() {
-            const input = document.createElement('input')
+            const form = document.createElement('form')
+            const inputs = [
+                document.createElement('input'),
+                document.createElement('input')
+            ]
             const label = document.createElement('label')
-            Object.assign(input, {
+            Object.assign(inputs[0], {
+                id: 'form',
+            })
+            Object.assign(inputs[0], {
                 id: 'date',
                 type: 'date',
                 name: 'date',
                 value: this.date,
                 onchange: function() {
-                    const url = new URL(window.location)
-                    url.searchParams.set('date', this.value)
-                    window.history.pushState({}, '', url)
+                    this.form.submit()
                 },
+            })
+            Object.assign(inputs[1], {
+                type: 'hidden',
+                name: 'api_key',
+                value: this.api_key,
             })
             Object.assign(label, {
                 htmlFor: 'date',
                 innerText: 'Date',
             })
-            this.append(label, input)
+            form.append(label, ...inputs)
+            this.append(form)
         }
     }
 )
