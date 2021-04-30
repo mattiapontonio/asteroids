@@ -316,3 +316,14 @@ svg|a:hover,
 svg|a:active {
     outline: dotted 1px blue;
 }
+
+nav a {
+    border: 1px solid;
+    padding: 1em;
+    display: block;
+}
+
+nav a:hover {
+    background-color: #2d1d40;
+    color: white;
+}
