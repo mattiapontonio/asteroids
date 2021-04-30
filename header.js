@@ -1,4 +1,4 @@
-import nav from './nav.js'
+import './nav.js'
 customElements.define(
     'header-wc',
     class extends HTMLElement {

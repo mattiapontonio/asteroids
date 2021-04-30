@@ -335,38 +335,6 @@ var app = new Vue({
 <aside>
   <apod />
 </aside>
-<footer>
-  <table>
-    <tbody>
-      <tr>
-        <th>GitHub</th>
-        <td>
-          <a href="https://github.com/mattiapontonio/asteroids"
-            >asteroids</a
-          >
-        </td>
-      </tr>
-      <tr>
-        <th>Version</th>
-        <td><package-version/></td>
-      </tr>
-      <tr>
-        <th>Credits</th>
-        <td>
-          Icons made by
-          <a
-            href="https://www.flaticon.com/authors/good-ware"
-            title="Good Ware"
-            >Good Ware</a
-          >
-          from
-          <a href="https://www.flaticon.com/" title="Flaticon"
-            >www.flaticon.com</a
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</footer>
+
 </div>`,
 })

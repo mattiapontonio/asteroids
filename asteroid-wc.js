@@ -20,6 +20,8 @@ customElements.define(
                             })
                             this.append(table);
                         })
+                    } else {
+                        this.innerText = response.status
                     }
                 })
         }

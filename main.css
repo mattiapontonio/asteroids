@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antonio&family=Roboto&display=swap');
 body {
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     text-rendering: auto;
     font-size: 12px;
     font-weight: 400;
@@ -38,8 +40,35 @@ img {
     position: absolute;
 }
 
+h1 {
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
 h2 {
     text-decoration: none;
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
+h3 {
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
+h4 {
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
+h5 {
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
+h6 {
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
 }
 
 .slide-fade-enter-active {
