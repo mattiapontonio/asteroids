@@ -23,6 +23,7 @@ customElements.define(
                         )
                         const items = data.near_earth_objects[this.date].map(function(e) {
                             return {
+                                id: e.id,
                                 x: e.close_approach_data[0].relative_velocity
                                     .kilometers_per_second,
                                 y: e.close_approach_data[0].miss_distance.kilometers,
@@ -33,6 +34,7 @@ customElements.define(
                             id: 'svg',
                         })
                         for (const iterator of items) {
+                            const id = iterator.id;
                             const circles = [
                                 document.createElementNS(
                                     'http://www.w3.org/2000/svg',
@@ -91,8 +93,8 @@ customElements.define(
                                     )) +
                                 5 +
                                 '%'
-                            circles[0].id = iterator.id
-                            a.setAttribute('href', `/asteroid?id=${iterator.id}`)
+                            a.setAttribute('href', `/asteroid.html?id=${id}&api_key=${this.api_key}`)
+                            a.id = id
                             circles[0].setAttribute('cx', cx)
                             circles[0].setAttribute('cy', cy)
                             circles[0].setAttribute('r', r)
