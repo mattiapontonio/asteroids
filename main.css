@@ -3,7 +3,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     text-rendering: auto;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 400;
     min-height: 100vh;
     text-align: left;
@@ -349,7 +349,9 @@ svg|a:active {
 nav a {
     border: 1px solid;
     padding: 1em;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: .5em;
 }
 
 nav a:hover {
@@ -361,4 +363,22 @@ pre {
     background: whitesmoke;
     border: 1px solid lightgray;
     padding: .5em;
+}
+
+.JCdyiTmxPi {
+    font-size: 2rem;
+    text-align: center;
+    background-color: whitesmoke;
+    background-size: cover;
+    background-position: center;
+    padding: 1rem;
+    backdrop-filter: none;
+    color: black;
+}
+
+button {
+    background: purple;
+    color: white;
+    text-transform: uppercase;
+    padding: .5rem;
 }
