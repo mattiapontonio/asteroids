@@ -29,7 +29,7 @@ Vue.component('tooltip', {
       </foreignObject>
     </transition>`,
     computed: {
-        api_key: () => new URLSearchParams(location.search).get('api_key'),
+        api_key: () => sessionStorage.getItem('api_key'),
     },
     data: function() {
         return {

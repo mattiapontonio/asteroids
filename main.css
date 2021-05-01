@@ -26,7 +26,10 @@ body>div>div>div {
 }
 
 section {
-    border: thin solid lightgray;
+    border: thin solid;
+    padding: .5rem;
+    margin: 1rem 0;
+    box-shadow: 2px 2px 4px whitesmoke;
 }
 
 img {
@@ -34,7 +37,7 @@ img {
 }
 
 .radio {
-    border: thin solid lightgray;
+    border: thin solid;
     background: transparent;
     visibility: hidden;
     position: absolute;
@@ -85,28 +88,36 @@ h6 {
     opacity: 0;
 }
 
+header {
+    border: thin solid;
+    padding: .5rem;
+    margin: 1rem 0;
+    box-shadow: 2px 2px 4px whitesmoke;
+}
+
 main {
     grid-column-start: 1;
     grid-column-end: 2;
+    border: thin solid;
+    padding: .5rem;
+    margin: 1rem 0;
+    box-shadow: 2px 2px 4px whitesmoke;
 }
 
 aside {
     grid-column-start: 2;
     grid-column-end: 3;
-}
-
-header {
-    border: thin solid lightgray;
+    border: thin solid;
+    padding: .5rem;
+    margin: 0;
+    box-shadow: 2px 2px 4px whitesmoke;
 }
 
 footer {
-    background: initial;
-}
-
-footer,
-header {
-    grid-column-start: 1;
-    grid-column-end: 3;
+    border: thin solid;
+    padding: .5rem;
+    margin: 0;
+    box-shadow: 2px 2px 4px whitesmoke;
 }
 
 bubble-chart svg {
@@ -117,7 +128,7 @@ bubble-chart svg {
 }
 
 bubble-chart circle {
-    border: thin solid lightgray;
+    border: thin solid;
     box-sizing: border-box;
     border-radius: 50%;
     display: flex;
@@ -146,7 +157,7 @@ bubble-chart circle .point {
 }
 
 .tooltip {
-    border: thin solid lightgray;
+    border: thin solid;
     padding: 1.5em;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
@@ -167,11 +178,11 @@ bubble-chart circle .point {
     justify-items: initial;
     height: auto;
     padding: initial;
-    border: thin solid lightgray;
+    border: thin solid;
 }
 
 .error {
-    border: 0;
+    border: thin solid;
     border-radius: 4px;
     padding: 1em;
     background: darkred;
@@ -205,26 +216,26 @@ bubble-chart circle .point {
 
 table {
     background-color: transparent;
-    border: thin solid lightgray;
+    border: thin solid;
     padding: 0;
     border-collapse: collapse;
 }
 
 tr {
     background-color: transparent;
-    border: thin solid lightgray;
+    border: thin solid;
     padding: 2px;
 }
 
 th {
     background-color: lightgrey;
-    border: thin solid lightgray;
+    border: thin solid;
     padding: 2px;
 }
 
 td {
     background-color: transparent;
-    border: thin solid lightgray;
+    border: thin solid;
     padding: 2px;
 }
 
@@ -290,7 +301,7 @@ input:required::after {
 }
 
 form {
-    border: 1px solid;
+    border: thin solid;
     padding: 1em;
 }
 
@@ -347,7 +358,7 @@ svg|a:active {
 }
 
 nav a {
-    border: 1px solid;
+    border: thin solid;
     padding: 1em;
     display: flex;
     align-items: center;
@@ -361,7 +372,7 @@ nav a:hover {
 
 pre {
     background: whitesmoke;
-    border: 1px solid lightgray;
+    border: thin solid;
     padding: .5em;
 }
 
@@ -381,4 +392,27 @@ button {
     color: white;
     text-transform: uppercase;
     padding: .5rem;
+}
+
+picture {
+    display: block;
+    padding: 0;
+    border: thin solid;
+    flex-direction: column;
+}
+
+figcaption {
+    background: white;
+    padding: 1em;
+    display: block;
+}
+
+details {
+    border: thin solid;
+    padding: .5rem;
+}
+
+summary {
+    padding: 1em;
+    border: thin solid;
 }

@@ -8,7 +8,7 @@ Vue.component('scatter-plot-vue', {
     },
     computed: {
         date: () => new URLSearchParams(location.search).get('date'),
-        api_key: () => new URLSearchParams(location.search).get('api_key'),
+        api_key: () => sessionStorage.getItem('api_key'),
     },
     mounted() {
         this.loading = true

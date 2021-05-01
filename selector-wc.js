@@ -6,7 +6,7 @@ customElements.define(
             this.form = 'form'
         }
         get api_key() {
-            return new URLSearchParams(location.search).get('api_key')
+            return sessionStorage.getItem('api_key')
         }
         get start_date() {
             return new URLSearchParams(location.search).get('start_date')

@@ -1,14 +1,14 @@
 {
-  "name": "asteroids",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "node index.js"
-  },
-  "engines": {
-    "node": "14.x"
-  },
-  "dependencies": {
-    "node-static": "^0.7.11"
-  }
+    "name": "asteroids",
+    "version": "2",
+    "private": true,
+    "scripts": {
+        "start": "node index.js"
+    },
+    "engines": {
+        "node": "14.x"
+    },
+    "dependencies": {
+        "node-static": "^0.7.11"
+    }
 }

@@ -52,7 +52,7 @@ var app = new Vue({
         start_date: () => new URLSearchParams(location.search).get('start_date'),
         end_date: () => new URLSearchParams(location.search).get('end_date'),
         date: () => new URLSearchParams(location.search).get('date'),
-        api_key: () => new URLSearchParams(location.search).get('api_key'),
+        api_key: () => sessionStorage.getItem('api_key'),
     },
     template: `<div>
   <section>

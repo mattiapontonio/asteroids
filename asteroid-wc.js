@@ -2,7 +2,7 @@ customElements.define(
     'asteroid-wc',
     class extends HTMLElement {
         get api_key() {
-            return new URLSearchParams(location.search).get('api_key')
+            return sessionStorage.getItem('api_key')
         }
         get id() {
             return new URLSearchParams(location.search).get('id')

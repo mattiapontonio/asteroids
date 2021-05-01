@@ -3,7 +3,7 @@ customElements.define(
     'header-wc',
     class extends HTMLElement {
         get api_key() {
-            return new URLSearchParams(location.search).get('api_key')
+            return sessionStorage.getItem('api_key')
         }
         connectedCallback() {
             this.innerHTML = `<header>
@@ -14,7 +14,7 @@ customElements.define(
                 <button onclick="history.forward()">forward</button>
             </div>
                 <details>
-                    <summary>nav</summary>
+                    <summary>Navigation</summary>
                     <nav-wc></nav-wc>
                 </details>
         </header>`

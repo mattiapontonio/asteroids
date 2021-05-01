@@ -8,7 +8,7 @@ customElements.define(
             return new URLSearchParams(location.search).get('date')
         }
         get api_key() {
-            return new URLSearchParams(location.search).get('api_key')
+            return sessionStorage.getItem('api_key')
         }
         connectedCallback() {
             const form = document.createElement('form')
