@@ -1,0 +1,431 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antonio&family=Roboto&display=swap');
+body {
+    font-family: 'Roboto', sans-serif;
+    text-rendering: auto;
+    font-size: 16px;
+    font-weight: 400;
+    min-height: 100vh;
+    text-align: left;
+    margin-top: 0;
+    font-feature-settings: 'hlig';
+    font-variant-ligatures: historical-ligatures;
+    display: block;
+    margin: 0;
+    padding: 1em;
+}
+
+body>div>div>div {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: unset;
+    width: auto;
+    padding: 1em;
+    box-sizing: border-box;
+    gap: 1em;
+    display: grid;
+}
+
+section {
+    border: thin solid;
+    padding: .5rem;
+    margin: 1rem 0;
+    box-shadow: 2px 2px 4px whitesmoke;
+}
+
+img {
+    max-width: 100%;
+}
+
+.radio {
+    border: thin solid;
+    background: transparent;
+    visibility: hidden;
+    position: absolute;
+}
+
+h1 {
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
+h2 {
+    text-decoration: none;
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
+h3 {
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
+h4 {
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
+h5 {
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
+h6 {
+    color: #2d1d40;
+    font-family: 'Antonio', sans-serif;
+}
+
+.slide-fade-enter-active {
+    transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+}
+
+header {
+    border: thin solid;
+    padding: .5rem;
+    margin: 1rem 0;
+    display: flex;
+    box-shadow: 2px 2px 4px whitesmoke;
+    align-items: center;
+    justify-content: left;
+    overflow: auto;
+    gap: 1em;
+    flex-wrap: nowrap;
+}
+
+main {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    border: thin solid;
+    padding: .5rem;
+    margin: 1rem 0;
+    box-shadow: 2px 2px 4px whitesmoke;
+}
+
+aside {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    border: thin solid;
+    padding: .5rem;
+    margin: 0;
+    box-shadow: 2px 2px 4px whitesmoke;
+}
+
+footer {
+    border: thin solid;
+    padding: .5rem;
+    margin: 0;
+    box-shadow: 2px 2px 4px whitesmoke;
+}
+
+bubble-chart svg {
+    position: relative;
+    min-height: 300px;
+    background-color: rgb(45, 29, 64);
+    width: 100%;
+}
+
+bubble-chart circle {
+    border: thin solid;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 16px rgb(25, 67, 94), 0 0 16px aqua;
+    z-index: 0;
+    fill: rgba(0, 0, 0, 0.5);
+    stroke: #7d6599;
+    stroke-width: 2;
+    position: relative;
+}
+
+bubble-chart a:hover circle {
+    stroke: white;
+    fill: red;
+}
+
+bubble-chart circle .point {
+    width: 4px;
+    height: 4px;
+    background: aqua;
+    border-radius: 50%;
+}
+
+.tooltip {
+    border: thin solid;
+    padding: 1.5em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    line-height: 1.5;
+    white-space: nowrap;
+    z-index: 1;
+    position: absolute;
+}
+
+.scatter-plot {
+    position: static;
+    min-height: 300px;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    justify-content: initial;
+    align-content: initial;
+    justify-items: initial;
+    height: auto;
+    padding: initial;
+    border: thin solid;
+}
+
+.error {
+    border: thin solid;
+    border-radius: 4px;
+    padding: 1em;
+    background: darkred;
+    color: white;
+}
+
+.max[coordinate='x'] {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.min[coordinate='x'] {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.max[coordinate='y'] {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.min[coordinate='y'] {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(10px);
+}
+
+table {
+    background-color: transparent;
+    border: thin solid;
+    padding: 0;
+    border-collapse: collapse;
+    overflow-x: scroll;
+    max-width: 100%;
+    width: 100%;
+    display: block;
+    box-shadow: -4px 0px 10px whitesmoke inset;
+}
+
+tr {
+    background-color: transparent;
+    border: thin solid;
+    padding: 2px;
+}
+
+th {
+    background-color: lightgrey;
+    border: thin solid;
+    padding: 2px;
+}
+
+td {
+    background-color: transparent;
+    border: thin solid;
+    padding: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: rgb(2, 0, 36);
+        color: white;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background: white;
+        color: #2d1d40;
+    }
+}
+
+@media (max-width: 800px) {
+    main {
+        flex-direction: column;
+    }
+}
+
+.loading {
+    background: rgba(10, 30, 26, 0.5);
+    background-size: 400% 400%;
+    justify-self: stretch;
+    align-self: stretch;
+    flex-grow: 1;
+    left: 0;
+    top: 0;
+    min-height: 128px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.loading:before {
+    content: 'Loading...';
+}
+
+input {
+    padding: 0.5em;
+    border: 2px solid;
+    border-color: black;
+    display: block;
+    max-width: none;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+input:invalid {
+    border-color: red;
+}
+
+input:out-of-range {
+    border-color: red;
+}
+
+input:required::after {
+    content: '*';
+}
+
+form {
+    border: thin solid;
+    padding: 1em;
+}
+
+selector-wc {
+    display: flex;
+    border-collapse: collapse;
+    overflow-x: scroll;
+    width: auto;
+    line-break: unset;
+    overflow-wrap: normal;
+    flex-wrap: nowrap;
+}
+
+selector-wc input {
+    display: none;
+}
+
+selector-wc label {
+    background-color: transparent;
+    border: 2px solid #7d6599;
+    padding: 1em;
+    flex-shrink: 0;
+}
+
+selector-wc label:first-of-type {
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+selector-wc label:last-of-type {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+selector-wc label:hover {
+    background-color: #7d6599;
+    color: rgb(2, 0, 36);
+}
+
+selector-wc input:checked+label {
+    background-color: #7d6599;
+    color: rgb(2, 0, 36);
+}
+
+@namespace svg url(http://www.w3.org/2000/svg);
+svg|a:link,
+svg|a:visited {
+    cursor: pointer;
+}
+
+svg|a:hover,
+svg|a:active {
+    outline: dotted 1px blue;
+}
+
+nav a {
+    border: thin solid;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+
+nav a:hover {
+    background-color: #2d1d40;
+    color: white;
+}
+
+pre {
+    background: whitesmoke;
+    border: thin solid;
+    padding: .5em;
+    overflow: auto;
+}
+
+.JCdyiTmxPi {
+    font-size: 2rem;
+    text-align: center;
+    background-color: whitesmoke;
+    background-size: cover;
+    background-position: center;
+    padding: 1rem;
+    backdrop-filter: none;
+    color: black;
+}
+
+button {
+    background: purple;
+    color: white;
+    text-transform: uppercase;
+    padding: .5rem;
+    flex-shrink: 0;
+}
+
+picture {
+    display: block;
+    padding: 0;
+    border: thin solid;
+    flex-direction: column;
+}
+
+figcaption {
+    background: white;
+    padding: 1em;
+    display: block;
+}
+
+details {
+    border: thin solid;
+    padding: .5rem;
+}
+
+summary {
+    padding: 1em;
+    border: thin solid;
+}
