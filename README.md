@@ -13,7 +13,6 @@ A [progressive web app](https://developer.mozilla.org/en-US/docs/Web/Progressive
 |branch|uri|
 |-|-|
 |develop|<https://asteroids-nasa-develop.herokuapp.com/>|
-|||
 |main|<https://asteroids-nasa.herokuapp.com/>|
 
 ## Stack
