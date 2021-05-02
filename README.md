@@ -13,7 +13,7 @@ A [Vue.js](https://vuejs.org) Progressive Web App with Server Side Rendering and
 |branch|uri|
 |-|-|
 |develop|https://asteroids-nasa-develop.herokuapp.com/|
-|master|https://asteroids-nasa.herokuapp.com/|
+|main|https://asteroids-nasa.herokuapp.com/|
 
 ## Stack
 
