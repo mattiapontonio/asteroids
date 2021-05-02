@@ -13,8 +13,8 @@ A [progressive web app](https://developer.mozilla.org/en-US/docs/Web/Progressive
 |branch|uri|
 |-|-|
 |develop|<https://asteroids-nasa-develop.herokuapp.com/>|
-|develop-3|<https://aqueous-fortress-96371.herokuapp.com/>|
-|master|<https://asteroids-nasa.herokuapp.com/>|
+|||
+|main|<https://asteroids-nasa.herokuapp.com/>|
 
 ## Stack
 
