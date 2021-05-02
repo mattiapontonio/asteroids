@@ -1,6 +1,6 @@
 {
     "name": "asteroids",
-    "version": "2",
+    "version": "3",
     "private": true,
     "scripts": {
         "start": "node index.js"

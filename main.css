@@ -92,7 +92,13 @@ header {
     border: thin solid;
     padding: .5rem;
     margin: 1rem 0;
+    display: flex;
     box-shadow: 2px 2px 4px whitesmoke;
+    align-items: center;
+    justify-content: left;
+    overflow: auto;
+    gap: 1em;
+    flex-wrap: nowrap;
 }
 
 main {
@@ -219,6 +225,11 @@ table {
     border: thin solid;
     padding: 0;
     border-collapse: collapse;
+    overflow-x: scroll;
+    max-width: 100%;
+    width: 100%;
+    display: block;
+    box-shadow: -4px 0px 10px whitesmoke inset;
 }
 
 tr {
@@ -374,6 +385,7 @@ pre {
     background: whitesmoke;
     border: thin solid;
     padding: .5em;
+    overflow: auto;
 }
 
 .JCdyiTmxPi {
@@ -392,6 +404,7 @@ button {
     color: white;
     text-transform: uppercase;
     padding: .5rem;
+    flex-shrink: 0;
 }
 
 picture {

@@ -7,16 +7,14 @@ customElements.define(
         }
         connectedCallback() {
             this.innerHTML = `<header>
-            <img src="asteroid.svg" alt="Icon" width="64" height="auto" />
-            <h1>Asteroids</h1>
-            <div>
-                <button onclick="history.back()">back</button>
-                <button onclick="history.forward()">forward</button>
-            </div>
-                <details>
-                    <summary>Navigation</summary>
-                    <nav-wc></nav-wc>
-                </details>
+            <button onclick="history.back()" title="back"><img src="https://fonts.gstatic.com/s/i/materialiconsoutlined/arrow_back/v12/24px.svg"/></button>
+            <button onclick="history.forward()" title="forward"><img src="https://fonts.gstatic.com/s/i/materialiconsoutlined/arrow_forward/v11/24px.svg"/></button>
+            <img src="asteroid.svg" alt="Icon" width="32" height="auto" />
+            <details>
+                <summary>Navigation</summary>
+                <nav-wc></nav-wc>
+            </details>
+            <a href="/settings.html?api_key=${this.api_key}"><img src="https://fonts.gstatic.com/s/i/materialiconsoutlined/settings/v14/24px.svg"/>settings</a>
         </header>`
         }
     }
