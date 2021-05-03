@@ -15,6 +15,27 @@
 <body>
     <header-wc></header-wc>
     <main>
+        <h1>Astronomy Picture of the Day</h1>
+        <form>
+            <label for="api_key">api_key</label>
+            <input type="text" id="api_key" name="api_key">
+            <label for="date">date</label>
+            <input type="date" id="date" name="date" value="1995-06-16" min="1995-06-16">
+            <input type="checkbox" id="concept_tags" name="concept_tags" value="True">
+            <label for="concept_tags">concept_tags</label>
+            <input type="checkbox" id="hd" name="hd">
+            <label for="hd">hd</label>
+            <label for="count">count</label>
+            <input type="number" id="count" name="count" max="100" min="1">
+            <label for="start_date">start_date</label>
+            <input type="date" id="start_date" name="start_date">
+            <label for="end_date">end_date</label>
+            <input type="date" id="end_date" name="end_date">
+            <input type="checkbox" id="thumbs" name="thumbs" value="true" checked="false">
+            <label for="thumbs">thumbs</label>
+            <button type="submit">submit</button>
+            <button type="reset">reset</button>
+        </form>
         <apod-wc></apod-wc>
         <section>
             <h2>Links</h2>
@@ -22,9 +43,26 @@
                 <li><a href="https://apod.nasa.gov/apod/astropix.html">https://apod.nasa.gov/apod/astropix.html</a></li>
                 <li><a href="https://github.com/nasa/apod-api">https://github.com/nasa/apod-api</a></li>
             </ul>
+            <h2>Exaples</h2>
+            <ul>
+                <li><a href="?api_key=DEMO_KEY&date=2014-10-01&concept_tags=True">?api_key=DEMO_KEY&date=2014-10-01&concept_tags=True</a></li>
+                <li><a href="?api_key=DEMO_KEY&count=5">?api_key=DEMO_KEY&count=5</a></li>
+                <li><a href="?api_key=DEMO_KEY&start_date=2017-07-08&end_date=2017-07-10">?api_key=DEMO_KEY&start_date=2017-07-08&end_date=2017-07-10</a></li>
+            </ul>
         </section>
     </main>
     <footer-wc></footer-wc>
 </body>
+<script>
+    api_key.setAttribute("value", new URLSearchParams(window.location.search).get('api_key'))
+    date.setAttribute("value", new URLSearchParams(window.location.search).get('date'))
+    date.max = new Date().toISOString().split("T")[0];
+    concept_tags.checked = new URLSearchParams(window.location.search).has('concept_tags');
+    hd.checked = new URLSearchParams(window.location.search).has('hd');
+    count.value = new URLSearchParams(window.location.search).get('count');
+    start_date.value = new URLSearchParams(window.location.search).get('start_date');
+    end_date.value = new URLSearchParams(window.location.search).get('end_date');
+    thumbs.checked = new URLSearchParams(window.location.search).has('thumbs');
+</script>
 
 </html>
