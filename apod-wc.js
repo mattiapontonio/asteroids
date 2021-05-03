@@ -84,9 +84,9 @@ customElements.define(
                                                 copyright,
                                                 service_version,
                                             } = data;
+                                            const section = document.createElement("section");
                                             if (media_type == 'video') {
-                                                this.append(document.createElement("div").innerHTML = `
-                        <section>
+                                                section.innerHTML = `
                         <h1>Astronomy Picture of the Day</h1>
                             <iframe width="100%" height="auto" src="${url}"></iframe>
                             <h2>${title}</h2>
@@ -98,11 +98,9 @@ customElements.define(
                                     </tr>
                                 </tbody>
                             </table>
-                            <p>${explanation}</p>
-                        </section>`);
+                            <p>${explanation}</p>`;
                                             } else {
-                                                this.append(document.createElement("div").innerHTML = `
-                        <section>
+                                                section.innerHTML = `
                         <h1>Astronomy Picture of the Day</h1>
                         <table>
                         <caption>Response</caption>
@@ -177,9 +175,9 @@ customElements.define(
                                 <h2>${title}</h2>
                                 <p>${explanation}</p>
                             </figcaption>
-                        </picture>
-                        </section>`)
+                        </picture>`;
                                             }
+                                            this.append(section);
                                         }
                                     }
                                 );
@@ -196,5 +194,4 @@ customElements.define(
                 }
             )
         }
-    }
-)
+    })
