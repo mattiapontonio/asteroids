@@ -11,11 +11,64 @@ customElements.define(
                                 .then(
                                     (data) => {
                                         if (Array.isArray(data)) {
+                                            const section = document.createElement("section");
                                             const ul = document.createElement("ul");
                                             data.forEach(function(e) {
+                                                const {
+                                                    resource,
+                                                    concept_tags,
+                                                    title,
+                                                    date,
+                                                    url,
+                                                    hdurl,
+                                                    media_type,
+                                                    explanation,
+                                                    concepts,
+                                                    thumbnail_url,
+                                                    copyright,
+                                                    service_version,
+                                                } = e;
                                                 const li = document.createElement("li");
-                                                li.innerText = e.title;
-                                            })
+                                                switch (media_type) {
+                                                    case "image":
+                                                        const api_key = new URLSearchParams(location.search).get('api_key');
+                                                        const picture = document.createElement("picture");
+                                                        const figcaption = document.createElement("figcaption");
+                                                        const img = document.createElement("img");
+                                                        const h2 = document.createElement("h2");
+                                                        const a = document.createElement("a");
+                                                        const sources = [
+                                                            document.createElement("source"),
+                                                            document.createElement("source")
+                                                        ]
+                                                        sources[0].media = "(min-width:1680px)";
+                                                        sources[0].srcset = hdurl;
+                                                        sources[1].media = "(min-width:1680px)";
+                                                        sources[1].srcset = url;
+                                                        img.loading = "lazy";
+                                                        img.src = url;
+                                                        img.alt = title
+                                                        img.title = title
+                                                        h2.innerText = title;
+                                                        a.href = `?api_key=${api_key}&date=${date}`;
+                                                        a.innerText = "MORE"
+                                                        figcaption.append(h2, a);
+                                                        picture.append(
+                                                            ...sources,
+                                                            img,
+                                                            figcaption
+                                                        )
+                                                        li.append(picture)
+                                                        break;
+                                                    case "video":
+                                                        li.innerText = "video"
+                                                    default:
+                                                        break;
+                                                }
+                                                ul.append(li);
+                                            });
+                                            section.append(ul);
+                                            this.append(ul);
                                         } else {
                                             const {
                                                 resource,

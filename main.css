@@ -430,3 +430,41 @@ summary {
     padding: 1em;
     border: thin solid;
 }
+
+apod-wc ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    overflow: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+}
+
+pod-wc ul li {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+}
+
+pod-wc ul li h2 {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+}
+
+pod-wc ul li img {
+    max-width: 100%;
+    display: block;
+}
+
+pod-wc ul li h2 {
+    font-size: 1em;
+    margin: 0;
+}
+
+pod-wc picture {
+    display: block;
+    padding: 0;
+    border: thin solid;
+    flex-direction: column;
+}
