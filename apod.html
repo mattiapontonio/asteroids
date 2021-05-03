@@ -15,6 +15,7 @@
 <body>
     <header-wc></header-wc>
     <main>
+        <h1>Astronomy Picture of the Day</h1>
         <form>
             <label for="api_key">api_key</label>
             <input type="text" id="api_key" name="api_key">
@@ -25,14 +26,15 @@
             <input type="checkbox" id="hd" name="hd">
             <label for="hd">hd</label>
             <label for="count">count</label>
-            <input type="number" id="count" name="count" max="100" min="1" value="1">
+            <input type="number" id="count" name="count" max="100" min="1">
             <label for="start_date">start_date</label>
             <input type="date" id="start_date" name="start_date">
             <label for="end_date">end_date</label>
             <input type="date" id="end_date" name="end_date">
-            <input type="checkbox" id="thumbs" name="thumbs" value="true">
+            <input type="checkbox" id="thumbs" name="thumbs" value="true" checked="false">
             <label for="thumbs">thumbs</label>
             <button type="submit">submit</button>
+            <button type="reset">reset</button>
         </form>
         <apod-wc></apod-wc>
         <section>
@@ -52,8 +54,8 @@
     <footer-wc></footer-wc>
 </body>
 <script>
-    api_key.value = new URLSearchParams(window.location.search).get('api_key');
-    date.value = new URLSearchParams(window.location.search).get('date');
+    api_key.setAttribute("value", new URLSearchParams(window.location.search).get('api_key'))
+    date.setAttribute("value", new URLSearchParams(window.location.search).get('date'))
     date.max = new Date().toISOString().split("T")[0];
     concept_tags.checked = new URLSearchParams(window.location.search).has('concept_tags');
     hd.checked = new URLSearchParams(window.location.search).has('hd');
