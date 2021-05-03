@@ -193,6 +193,7 @@ bubble-chart circle .point {
     padding: 1em;
     background: darkred;
     color: white;
+    display: block;
 }
 
 .max[coordinate='x'] {
@@ -292,9 +293,9 @@ input {
     padding: 0.5em;
     border: 2px solid;
     border-color: black;
-    display: block;
+    display: initial;
     max-width: none;
-    width: 100%;
+    width: initial;
     box-sizing: border-box;
     border-radius: 4px;
 }
