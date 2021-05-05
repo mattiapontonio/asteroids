@@ -1,6 +1,6 @@
 {
     "name": "asteroids",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "private": true,
     "scripts": {
         "start": "node index.js"
@@ -9,6 +9,7 @@
         "node": "14.x"
     },
     "dependencies": {
+        "minimist": ">=0.2.1",
         "node-static": "^0.7.11"
     }
 }

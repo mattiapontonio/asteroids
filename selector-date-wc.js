@@ -14,31 +14,34 @@ customElements.define(
             const form = document.createElement('form')
             const inputs = [
                 document.createElement('input'),
-                document.createElement('input')
+                document.createElement('input'),
             ]
             const label = document.createElement('label')
             Object.assign(inputs[0], {
                 id: 'form',
             })
-            Object.assign(inputs[0], {
-                id: 'date',
-                type: 'date',
-                name: 'date',
-                value: this.date,
-                onchange: function() {
-                    this.form.submit()
-                },
-            })
-            Object.assign(inputs[1], {
-                type: 'hidden',
-                name: 'api_key',
-                value: this.api_key,
-            })
+
+
             Object.assign(label, {
                 htmlFor: 'date',
                 innerText: 'Date',
             })
-            form.append(label, ...inputs)
+            form.append(
+                Object.assign(document.createElement('input'), {
+                    id: 'date',
+                    type: 'date',
+                    name: 'date',
+                    value: this.date,
+                    onchange: function() {
+                        this.form.submit()
+                    },
+                }),
+                Object.assign(document.createElement('input'), {
+                    type: 'hidden',
+                    name: 'api_key',
+                    value: this.api_key,
+                })
+            )
             this.append(form)
         }
     }

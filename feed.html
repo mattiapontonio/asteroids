@@ -15,6 +15,19 @@
     <header-wc></header-wc>
     <main>
         <h1>Feed</h1>
+        <form>
+            <label for="api_key">API key</label>
+            <input type="text" id="api_key" name="api_key" required>
+            <script>
+                api_key.setAttribute("value", new URLSearchParams(location.search).get('api_key'));
+            </script>
+            <label for="start_date">date</label>
+            <input type="date" id="start_date" name="start_date" value="1995-06-16" min="1995-06-16">
+            <label for="end_date">date</label>
+            <input type="date" id="end_date" name="end_date" value="1995-06-16" min="1995-06-16">
+            <button type="submit">submit</button>
+            <button type="reset">reset</button>
+        </form>
         <div id="feed"></div>
     </main>
     <footer-wc></footer-wc>

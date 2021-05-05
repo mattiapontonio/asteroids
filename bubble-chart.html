@@ -14,11 +14,23 @@
 </head>
 
 <body>
-
     <header-wc></header-wc>
     <main>
         <h1>Bubble chart</h1>
-        <selector-date-wc></selector-date-wc>
+        <form>
+            <label for="api_key">API key</label>
+            <input type="text" id="api_key" name="api_key" required>
+            <script>
+                api_key.setAttribute("value", new URLSearchParams(location.search).get('api_key'));
+            </script>
+            <label for="date">date</label>
+            <input type="date" id="date" name="date" value="1995-06-16" min="1995-06-16">
+            <script>
+                date.value = new URLSearchParams(location.search).get('date');
+            </script>
+            <button type="submit">submit</button>
+            <button type="reset">reset</button>
+        </form>
         <bubble-chart></bubble-chart>
     </main>
     <footer-wc></footer-wc>

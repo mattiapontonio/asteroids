@@ -2,11 +2,8 @@
 
 A [progressive web app](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) consumes [NASA Open APIs](https://api.nasa.gov).
 
-![alt](https://img.shields.io/github/issues/mattiapontonio/asteroids)
 ![alt](https://img.shields.io/github/forks/mattiapontonio/asteroids)
 ![alt](https://img.shields.io/github/stars/mattiapontonio/asteroids)
-![alt](https://img.shields.io/github/license/mattiapontonio/asteroids)
-![alt](https://img.shields.io/github/issues/mattiapontonio/asteroids)
 
 ## Environments
 
