@@ -6,7 +6,7 @@ customElements.define(
             addEventListener("popstate", this.connectedCallback);
         }
         get api_key() {
-            return sessionStorage.getItem('api_key')
+            return new URLSearchParams(location.search).get('api_key')
         }
         get date() {
             return new URLSearchParams(location.search).get('date')
@@ -106,6 +106,8 @@ customElements.define(
                         }
                         this.append(svg)
                     })
+                } else {
+                    this.innerText = response.statusText
                 }
             })
         }

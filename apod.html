@@ -17,8 +17,11 @@
     <main>
         <h1>Astronomy Picture of the Day</h1>
         <form>
-            <label for="api_key">api_key</label>
-            <input type="text" id="api_key" name="api_key">
+            <label for="api_key">API key</label>
+            <input type="text" id="api_key" name="api_key" required>
+            <script>
+                api_key.setAttribute("value", new URLSearchParams(location.search).get('api_key'));
+            </script>
             <label for="date">date</label>
             <input type="date" id="date" name="date" value="1995-06-16" min="1995-06-16">
             <input type="checkbox" id="concept_tags" name="concept_tags" value="True">
