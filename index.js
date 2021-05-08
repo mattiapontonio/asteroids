@@ -6,7 +6,7 @@ webpush.setVapidDetails(
     vapidKeys.publicKey,
     vapidKeys.privateKey
 );
-new(require('cron').CronJob)('*/10 * * * * *', function() {
+new(require('cron').CronJob)('0 30 9 * * *', function() {
     subscriptions.forEach(function(e) {
         console.log(e);
         require('web-push').sendNotification(e, 'Notification')
