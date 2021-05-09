@@ -16,9 +16,9 @@ require('http')
     .createServer(function(request, response) {
         switch (request.url) {
             case '/subscriptions':
+                let data = ''
                 switch (request.method) {
                     case 'POST':
-                        let data = ''
                         request.on('data', chunk => data += chunk)
                         request.on('end', () => {
                             try {
@@ -32,7 +32,6 @@ require('http')
                         })
                         break
                     case 'DELETE':
-                        let data = ''
                         request.on('data', chunk => data += chunk)
                         request.on('end', () => {
                             try {
