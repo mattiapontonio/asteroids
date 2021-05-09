@@ -110,13 +110,6 @@ main {
     box-shadow: 2px 2px 4px whitesmoke;
 }
 
-main h1 {
-    background: rgb(45, 29, 64);
-    color: white;
-    padding: .5em;
-    margin: 0;
-}
-
 aside {
     grid-column-start: 2;
     grid-column-end: 3;
