@@ -370,7 +370,7 @@ svg|a:active {
 }
 
 nav a {
-    border: thin solid;
+    border: none;
     padding: 1em;
     display: flex;
     align-items: center;
@@ -378,8 +378,12 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #2d1d40;
-    color: white;
+    color: #2d1d40;
+}
+
+::grammar-error {
+    text-decoration: underline red;
+    color: red;
 }
 
 pre {
@@ -468,12 +472,13 @@ pod-wc picture {
     border: thin solid;
     flex-direction: column;
 }
+
 a {
     border: none;
     align-items: center;
     display: inline;
     gap: .5em;
-    text-transform: capitalize;
+    text-transform: inherit;
     text-decoration: underline;
     text-decoration-line: underline;
     text-decoration-thickness: from-font;

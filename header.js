@@ -14,7 +14,6 @@ customElements.define(
                 <summary>Navigation</summary>
                 <nav-wc></nav-wc>
             </details>
-            <a href="/settings.html?api_key=${this.api_key}"><img src="https://fonts.gstatic.com/s/i/materialiconsoutlined/settings/v14/24px.svg"/>settings</a>
         </header>`
         }
     }
