@@ -12,9 +12,12 @@ customElements.define(
             return new URLSearchParams(location.search).get('date')
         }
         connectedCallback() {
+            const progress = document.createElement("progress");
+            this.append(progress);
             fetch(
                 `https://api.nasa.gov/neo/rest/v1/feed?api_key=${this.api_key}&start_date=${this.date}`
             ).then((response) => {
+                progress.remove()
                 if (response.status == 200) {
                     response.json().then((data) => {
                         const svg = document.createElementNS(
