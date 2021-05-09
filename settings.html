@@ -15,8 +15,29 @@
     <header-wc></header-wc>
     <main>
         <h1>Settings</h1>
-        <button id="button">update</button>
-        <button id="clear">clear cache</button>
+        <section>
+            <h2>serviceWorker</h2>
+            <button id="button">update</button>
+            <h3>pushManager</h3>
+            <h4>subscription</h4>
+            <pre id="subscription"></pre>
+            <button id="subscribe">subscribe</button>
+            <button id="unsubscribe">unsubscribe</button>
+        </section>
+        <section>
+            <h2>Cache</h2>
+            <button id="clear">clear cache</button>
+        </section>
+        <section>
+            <h2>Notification</h2>
+            <table>
+                <tr>
+                    <td>permission</td>
+                    <td id="permission"></td>
+                </tr>
+            </table>
+            <button id="c">Notification.requestPermission</button>
+        </section>
     </main>
     <footer-wc></footer-wc>
 </body>
@@ -33,6 +54,36 @@
             console.log('Registration failed with ' + error);
         });
     };
+    subscribe.onclick = function() {
+        fetch("./publicKey").then(function(response) {
+            response.text().then(function(applicationServerKey) {
+                console.log(applicationServerKey)
+                navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+                    serviceWorkerRegistration.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: applicationServerKey
+                    }).then(function(pushSubscription) {
+                        fetch('/subscriptions', {
+                            method: 'POST',
+                            body: JSON.stringify(pushSubscription),
+                        })
+                    }, console.error);
+                });
+            })
+        })
+    }
+    unsubscribe.onclick = function() {
+        navigator.serviceWorker.ready.then(function(reg) {
+            reg.pushManager.getSubscription().then(function(subscription) {
+                subscription.unsubscribe().then(function() {
+                    fetch('/subscriptions', {
+                        method: 'DELETE',
+                        body: JSON.stringify(subscription),
+                    })
+                }).catch(console.error)
+            })
+        });
+    }
     clear.onclick = function() {
         caches.open('cache').then(function(cache) {
             cache.keys().then(function(keys) {
@@ -42,6 +93,32 @@
             });
         })
     }
+    c.onclick = function() {
+        Notification.requestPermission(function() {
+            permission.innerText = Notification.permission
+            permission.dataset.permission = Notification.permission
+        })
+    }
+    permission.innerText = Notification.permission
+    permission.dataset.permission = Notification.permission
+    navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+        serviceWorkerRegistration.pushManager.getSubscription().then(function(s) {
+            subscription.innerText = JSON.stringify(s)
+        })
+    });
 </script>
+<style>
+    [data-permission=denied] {
+        color: red
+    }
+    
+    [data-permission=granted] {
+        color: green
+    }
+    
+    [data-permission=default] {
+        color: yellow
+    }
+</style>
 
 </html>
