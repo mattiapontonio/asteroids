@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+    <script src="header.js" type="module"></script>
+    <script src="footer.js" type="module"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <header-wc></header-wc>
+    <main>
+        <h1>Feed</h1>
+        <form>
+            <label for="api_key">API key</label>
+            <input type="text" id="api_key" name="api_key" required>
+            <script>
+                api_key.setAttribute("value", new URLSearchParams(location.search).get('api_key'));
+            </script>
+            <label for="start_date">date</label>
+            <input type="date" id="start_date" name="start_date" value="1995-06-16" min="1995-06-16">
+            <label for="end_date">date</label>
+            <input type="date" id="end_date" name="end_date" value="1995-06-16" min="1995-06-16">
+            <button type="submit">submit</button>
+            <button type="reset">reset</button>
+        </form>
+        <div id="feed"></div>
+    </main>
+    <footer-wc></footer-wc>
+</body>
+<script>
+    fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY`)
+        .then((response) => {
+            if (response.status == 200) {
+                response.json().then((data) => {
+                    const pre = document.createElement("pre");
+                    pre.innerText = JSON.stringify(data, null, 2);
+                    feed.append(pre);
+                })
+            } else {
+                feed.append(document.createTextNode(response.status));
+            }
+        })
+</script>
+
+</html>

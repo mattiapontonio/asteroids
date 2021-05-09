@@ -21,5 +21,6 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
+tmp
 cert.pem
 key.pem

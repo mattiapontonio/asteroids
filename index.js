@@ -1,74 +1,66 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const https = require('https');
-const querystring = require('querystring');
-const port = process.env.PORT || 3000;
-app.use(express.static(path.join(__dirname, 'dist')));
-app.get('/planetary/apod', (oreq, ores) => {
-    const options = {
-        host: 'api.nasa.gov',
-        path: `/planetary/apod?api_key=${process.env.API_KEY}`,
-        method: 'GET'
-    };
-    const creq = https
-        .request(options, pres => {
-            pres.setEncoding('utf8');
-            ores.writeHead(pres.statusCode);
-            pres.on('data', chunk => {
-                ores.write(chunk);
-            });
-            pres.on('close', () => {
-                ores.end();
-            });
-            pres.on('end', () => {
-                ores.end();
-            });
-        })
-        .on('error', e => {
-            console.log(e.message);
-            try {
-                ores.writeHead(500);
-                ores.write(e.message);
-            } catch (e) {
-                // ignore
-            }
-            ores.end();
-        });
-    creq.end();
-});
-app.get('/neo/rest/v1/feed', (oreq, ores) => {
-    oreq.query.api_key=process.env.API_KEY;
-    const options = {
-        host: 'api.nasa.gov',
-        path: `/neo/rest/v1/feed?${querystring.stringify(oreq.query)}`,
-        method: 'GET'
-    };
-    const creq = https
-        .request(options, pres => {
-            pres.setEncoding('utf8');
-            ores.writeHead(pres.statusCode);
-            pres.on('data', chunk => {
-                ores.write(chunk);
-            });
-            pres.on('close', () => {
-                ores.end();
-            });
-            pres.on('end', () => {
-                ores.end();
-            });
-        })
-        .on('error', e => {
-            console.log(e.message);
-            try {
-                ores.writeHead(500);
-                ores.write(e.message);
-            } catch (e) {
-                // ignore
-            }
-            ores.end();
-        });
-    creq.end();
-});
-
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+const subscriptions = new Map();
+const webpush = require('web-push');
+const vapidKeys = webpush.generateVAPIDKeys();
+webpush.setVapidDetails(
+    'mailto:example@yourdomain.org',
+    vapidKeys.publicKey,
+    vapidKeys.privateKey
+);
+new(require('cron').CronJob)('0 30 9 * * *', function() {
+    subscriptions.forEach(function(e) {
+        console.log(e);
+        require('web-push').sendNotification(e, 'Notification')
+    })
+}, null, true, 'America/Los_Angeles').start();
+require('http')
+    .createServer(function(request, response) {
+        switch (request.url) {
+            case '/subscriptions':
+                let data = ''
+                switch (request.method) {
+                    case 'POST':
+                        request.on('data', chunk => data += chunk)
+                        request.on('end', () => {
+                            try {
+                                const subscription = JSON.parse(data);
+                                subscriptions.set(subscription.keys.auth, subscription)
+                            } catch (error) {
+                                console.error()
+                            }
+                            console.log(data)
+                            console.log(subscriptions)
+                        })
+                        break
+                    case 'DELETE':
+                        request.on('data', chunk => data += chunk)
+                        request.on('end', () => {
+                            try {
+                                const subscription = JSON.parse(data);
+                                subscriptions.delete(subscription.keys.auth)
+                            } catch (error) {
+                                console.error()
+                            }
+                            console.log(data)
+                            console.log(subscriptions)
+                        })
+                        break
+                    default:
+                        break
+                }
+                response.end()
+                break
+            case '/publicKey':
+                response.write(vapidKeys.publicKey)
+                response.end();
+                break
+            default:
+                const static = require('node-static')
+                new static.Server(__dirname, {
+                    cache: 0,
+                    headers: { 'Cache-Control': 'no-cache' },
+                    gzip: true,
+                }).serve(request, response)
+                break
+        }
+    })
+    .listen(process.env.PORT || 8080)

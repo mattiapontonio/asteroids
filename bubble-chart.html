@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>bubble-chart</title>
+    <meta name="theme-color" content="#7d6599">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="main.css">
+    <script src="header.js" type="module"></script>
+    <script src="footer.js" type="module"></script>
+    <script src="selector-date-wc.js"></script>
+    <script src="bubble-chart.js"></script>
+</head>
+
+<body>
+    <header-wc></header-wc>
+    <main>
+        <h1>Bubble chart</h1>
+        <form>
+            <label for="api_key">API key</label>
+            <input type="text" id="api_key" name="api_key" required>
+            <script>
+                api_key.setAttribute("value", new URLSearchParams(location.search).get('api_key'));
+            </script>
+            <label for="date">date</label>
+            <input type="date" id="date" name="date" value="1995-06-16" min="1995-06-16">
+            <script>
+                date.value = new URLSearchParams(location.search).get('date');
+            </script>
+            <button type="submit">submit</button>
+            <button type="reset">reset</button>
+        </form>
+        <bubble-chart></bubble-chart>
+    </main>
+    <footer-wc></footer-wc>
+</body>
+
+</html>
