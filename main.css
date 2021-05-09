@@ -475,3 +475,18 @@ pod-wc picture {
     border: thin solid;
     flex-direction: column;
 }
+a {
+    border: none;
+    align-items: center;
+    display: inline;
+    gap: .5em;
+    text-transform: capitalize;
+    text-decoration: underline;
+    text-decoration-line: underline;
+    text-decoration-thickness: from-font;
+    text-decoration-skip-ink: auto;
+    text-decoration-style: inherit;
+    text-underline-position: under;
+    font-weight: normal;
+    color: purple;
+}
