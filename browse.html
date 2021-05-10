@@ -9,36 +9,115 @@
     <script src="header.js" type="module"></script>
     <script src="footer.js" type="module"></script>
     <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Antonio&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header-wc></header-wc>
     <main>
         <h1>Browse</h1>
-        <form>
-            <label for="api_key">API key</label>
-            <input type="text" id="api_key" name="api_key" required>
-            <script>
-                api_key.setAttribute("value", new URLSearchParams(location.search).get('api_key'));
-            </script>
-            <button type="submit">submit</button>
-            <button type="reset">reset</button>
-        </form>
+        <section>
+            <h2>Form</h2>
+            <form>
+                <fieldset>
+                    <legend>Parameters</legend>
+                    <label for="api_key">API key</label><br>
+                    <input type="text" id="api_key" name="api_key" required><br>
+                    <label for="page">Page</label><br>
+                    <input type="number" id="page" name="page" required><br>
+                    <label for="size">Size</label><br>
+                    <input type="number" id="size" name="size" required><br>
+                </fieldset>
+                <button type="submit">submit</button>
+                <button type="reset">reset</button>
+            </form>
+        </section>
         <div id="browse"></div>
+        <section id="NWVQTTRYJK">
+            <h2>Page</h2>
+        </section>
+        <section id="GVCJXLGRIP">
+            <h2>Links</h2>
+            <ul>
+                <li><a id="AWRMUPRGYI">Self</a></li>
+                <li><a id="WAZQCQXGQO">Next</a></li>
+            </ul>
+        </section>
+        <section id="HDTJXBFJEW">
+            <h2>Near Earth objects</h2>
+            <ol id="GNMFBOGALN"></ol>
+        </section>
     </main>
     <footer-wc></footer-wc>
 </body>
 <script>
-    fetch(`https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=DEMO_KEY`)
+    api_key.setAttribute("value", new URLSearchParams(location.search).get("api_key"));
+    page.setAttribute("value", new URLSearchParams(location.search).get("page"));
+    size.setAttribute("value", new URLSearchParams(location.search).get("size"));
+    fetch(`https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=${new URLSearchParams(location.search).get("api_key")}&size=${new URLSearchParams(location.search).get("size")}&page=${new URLSearchParams(location.search).get("page")}`)
         .then((response) => {
             if (response.status == 200) {
-                response.json().then((data) => {
-                    const pre = document.createElement("pre");
-                    pre.innerText = JSON.stringify(data, null, 2);
-                    browse.append(pre);
+                response.json().then(({
+                    links: {
+                        self,
+                        next
+                    },
+                    near_earth_objects,
+                    page: {
+                        number,
+                        size,
+                        total_elements,
+                        total_pages
+                    }
+                }) => {
+                    let table = document.createElement("table");
+                    let h2 = document.createElement("h2");
+                    let row;
+                    let cell;
+                    let caption = table.createCaption();
+                    let url = new URL(location)
+                    let a;
+                    caption.innerText = "Page"
+                    row = table.insertRow()
+                    cell = row.insertCell()
+                    cell.innerText = "Number"
+                    cell = row.insertCell()
+                    cell.innerText = number
+                    row = table.insertRow()
+                    cell = row.insertCell()
+                    cell.innerText = "Size"
+                    cell = row.insertCell()
+                    cell.innerText = size
+                    row = table.insertRow()
+                    cell = row.insertCell()
+                    cell.innerText = "Total elements"
+                    cell = row.insertCell()
+                    cell.innerText = total_elements
+                    row = table.insertRow()
+                    cell = row.insertCell()
+                    cell.innerText = "Total pages"
+                    cell = row.insertCell()
+                    cell.innerText = total_pages
+                    NWVQTTRYJK.append(table);
+                    url.search = new URL(self).search
+                    AWRMUPRGYI.href = url;
+                    url.search = new URL(next).search
+                    WAZQCQXGQO.href = url;
+                    near_earth_objects.forEach(({
+                        name,
+                        id
+                    }) => {
+                        const li = document.createElement("li");
+                        const a = document.createElement("a");
+                        a.innerText = name
+                        a.href = `/asteroid.html?id=${id}&api_key=${api_key}`;
+                        li.append(a);
+                        GNMFBOGALN.append(li)
+                    });
                 })
             } else {
-                browse.append(document.createTextNode(response.status));
+                HDTJXBFJEW.append(document.createTextNode(response.status));
             }
         })
 </script>

@@ -7,8 +7,10 @@ customElements.define(
         }
         connectedCallback() {
             this.innerHTML = `<header>
-            <button onclick="history.back()" title="back"><img src="https://fonts.gstatic.com/s/i/materialiconsoutlined/arrow_back/v12/24px.svg"/></button>
-            <button onclick="history.forward()" title="forward"><img src="https://fonts.gstatic.com/s/i/materialiconsoutlined/arrow_forward/v11/24px.svg"/></button>
+            <div>
+            <button onclick="history.back()" title="back">Back</button>
+            <button onclick="history.forward()" title="forward">Forward</button>
+            </div>
             <img src="asteroid.svg" alt="Icon" width="32" height="auto" />
             <details>
                 <summary>Navigation</summary>

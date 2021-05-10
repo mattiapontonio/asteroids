@@ -37,7 +37,7 @@ customElements.define(
             );
             this.append(form);
             fetch(
-                `http://www.neowsapp.com/rest/v1/neo/${this.id}?api_key=${this.api_key}`
+                `https://api.nasa.gov/neo/rest/v1/neo/${this.id}?api_key=${this.api_key}`
             ).then((response) => {
                 if (response.status == 200) {
                     response.json().then((data) => {
