@@ -7,17 +7,18 @@ export default customElements.define(
         connectedCallback() {
             this.innerHTML = `
             <nav>
-                <h2>Navigation</h2> 
-                <a href="/index.html">Index</a>
-                <a href="/bubble-chart.html?&date=${new Date().toISOString().split("T")[0]}">Bubble chart</a>
-                <a href="/apod.html">Astronomy Picture of the Day</a>
-                <a href="/asteroid.html?&id=2408752">Asteroid</a>
-                <a href="/browse.html">Browse</a>
-                <a href="/feed.html">Feed</a>
-                <a href="https://api.nasa.gov/#signUp">Signup</a>
-                <a href="/login.html">Login</a>
-                <a href="/logout.html">Logout</a>
-                <a href="/settings.html">Settings</a>
+            <ul>
+                <li><a href="/index.html">Index</a></li>
+                <li><a href="/bubble-chart.html?&date=${new Date().toISOString().split("T")[0]}">Bubble chart</a></li>
+                <li><a href="/apod.html">Astronomy Picture of the Day</a></li>
+                <li><a href="/asteroid.html?&id=2408752">Asteroid</a></li>
+                <li><a href="/browse.html">Browse</a></li>
+                <li><a href="/feed.html">Feed</a></li>
+                <li><a href="https://api.nasa.gov/#signUp">Signup</a></li>
+                <li><a href="/login.html">Login</a></li>
+                <li><a href="/logout.html">Logout</a></li>
+                <li><a href="/settings.html">Settings</a></li>
+            </ul>
             </nav>`
         }
     }

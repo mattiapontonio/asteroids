@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Antonio&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antonio&display=swap');
 body {
     font-family: 'Roboto', sans-serif;
     text-rendering: auto;
@@ -26,10 +26,12 @@ body>div>div>div {
 }
 
 section {
-    border: thin solid;
-    padding: .5rem;
-    margin: 1rem 0;
-    box-shadow: 2px 2px 4px whitesmoke;
+    border-top: thin solid;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    background-color: snow;
+    border-color: lightgray;
 }
 
 img {
@@ -90,15 +92,16 @@ h6 {
 
 header {
     border: thin solid;
-    padding: .5rem;
+    padding: 0;
     margin: 1rem 0;
     display: flex;
     box-shadow: 2px 2px 4px whitesmoke;
-    align-items: center;
-    justify-content: left;
+    align-items: stretch;
+    justify-content: stretch;
     overflow: auto;
     gap: 1em;
     flex-wrap: nowrap;
+    justify-content: space-between;
 }
 
 main {
@@ -369,14 +372,6 @@ svg|a:active {
     outline: dotted 1px blue;
 }
 
-nav a {
-    border: none;
-    padding: 1em;
-    display: flex;
-    align-items: center;
-    gap: .5em;
-}
-
 nav a:hover {
     color: #2d1d40;
 }
@@ -405,7 +400,7 @@ pre {
 }
 
 button {
-    background: purple;
+    background: rgb(125, 101, 153);
     color: white;
     text-transform: uppercase;
     padding: .5rem;
@@ -427,7 +422,7 @@ figcaption {
 
 details {
     border: thin solid;
-    padding: .5rem;
+    padding: 0;
 }
 
 summary {
@@ -486,5 +481,14 @@ a {
     text-decoration-style: inherit;
     text-underline-position: under;
     font-weight: normal;
-    color: purple;
+    color: rgb(125, 101, 153);
+}
+
+header details[open] nav {
+    position: absolute;
+    width: 100%;
+    background: white;
+    left: 0;
+    border: thin solid;
+    box-sizing: border-box;
 }
