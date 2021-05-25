@@ -1,9 +1,6 @@
 # asteroids
 
-A [progressive web app](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) consumes [NASA Open APIs](https://api.nasa.gov).
-
-![alt](https://img.shields.io/github/forks/mattiapontonio/asteroids)
-![alt](https://img.shields.io/github/stars/mattiapontonio/asteroids)
+A [progressive web app](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) that consumes [NASA Open APIs](https://api.nasa.gov).
 
 ## Environments
 
@@ -15,13 +12,16 @@ A [progressive web app](https://developer.mozilla.org/en-US/docs/Web/Progressive
 ## Stack
 
 - [Node.js](https://nodejs.org/en/)
-- [Web_Components](https://developer.mozilla.org/it/docs/Web/Web_Components)
-- [Vue.js](https://v3.vuejs.org/)
+- [Web Components](https://developer.mozilla.org/it/docs/Web/Web_Components)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API)
+- [Progressive web applications](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
 
-### API
+### NASA Open APIs
 
 - [Generate API Key](https://api.nasa.gov/#apidatagov_signup)
 - [Asteroids - NeoWs](https://api.nasa.gov/#NeoWS)
+- [APOD](https://api.nasa.gov/#apod)
 
 ## Start
 
@@ -38,10 +38,6 @@ npm start
 ```shell
 npx pwa-asset-generator asteroid-d.svg -i ./index.html -m ./manifest.webmanifest --background "#2d1d40"
 ```
-
-## Related
-
-- <https://nuxtjs.org/docs/2.x/deployment/heroku-deployment>
 
 ## Example URLs
 
