@@ -53,11 +53,11 @@ customElements.define(
                 </tbody>
             </table>
 <button onclick="navigator.share({
-title:document.title,
-text:"text",
-url: document.URL
+  title: this.ownerDocument.title,
+  text: 'text',
+  url: this.ownerDocument.URL,
 })">Share</button>
-        </footer>`
+        </footer>`;
         }
     }
 )
